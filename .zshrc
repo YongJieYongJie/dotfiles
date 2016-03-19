@@ -44,6 +44,9 @@ alias c='clear'
 # needed because ruby is not installed under cygwin but natively to windows
 alias gem='D:/Ruby22/bin/gem'
 alias rspec='D:/Ruby22/bin/rspec'
+alias rails='D:/Ruby22/bin/rails'
+alias bundle='D:/Ruby22/bin/bundle'
 
 # miscellaneous
 alias grep='grep --color'
+export EDITOR='/usr/bin/vim'
