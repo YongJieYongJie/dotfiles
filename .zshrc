@@ -10,7 +10,14 @@ compinit
 # ========================
 
 # includes
+source ~/.antigen.zsh
 source ~/.git-prompt.sh
+
+# plugin management using antigen
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
 
 # zsh optionns
 setopt MENU_COMPLETE

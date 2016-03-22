@@ -5,12 +5,14 @@
 	default = simple
 [alias]
   a = add
+  aa = add --all
   b = branch
 	c = commit
   co = checkout
   d = diff
   ds = diff --staged
   ec = config --global --edit
+  f = fetch
 	l = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	ll = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
   prp = pull --rebase --prune
