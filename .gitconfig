@@ -5,6 +5,7 @@
 	default = simple
 [alias]
   a = add
+  aa = add --all
   b = branch
 	c = commit
   co = checkout
