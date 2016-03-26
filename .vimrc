@@ -78,6 +78,11 @@ set softtabstop=4
 set autoindent
 set smartindent
 
+" persistent undo
+silent !mkdir ~/.vim/undo_history -p > /dev/null 2>&1
+set undodir=~/.vim/undo_history
+set undofile
+
 "" VIEW
 syntax enable
 set background=dark
@@ -118,3 +123,5 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
+
+au BufRead,BufNewFile {Gemfile,Rakefile,*.rake,config.ru,*.rabl} setl ft=ruby tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
