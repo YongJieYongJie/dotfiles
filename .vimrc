@@ -6,6 +6,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
+" ruby stuff
+Plugin 'vim-ruby/vim-ruby'
+
 " fuzzy file openers
 Plugin 'wincent/command-t'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -123,5 +126,3 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
-
-au BufRead,BufNewFile {Gemfile,Rakefile,*.rake,config.ru,*.rabl} setl ft=ruby tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
