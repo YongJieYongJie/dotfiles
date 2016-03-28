@@ -24,7 +24,9 @@ Plugin 'tpope/vim-endwise'
 " Plugin 'tpope/vim-surround' " to learn
 
 call vundle#end()
-filetype plugin indent on
+filetype on
+filetype plugin on
+filetype indent on
 
 
 "" GENERAL
