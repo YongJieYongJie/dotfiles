@@ -55,5 +55,7 @@ alias rails='D:/Ruby22/bin/rails'
 alias bundle='D:/Ruby22/bin/bundle'
 
 # miscellaneous
-alias grep='grep --extended-regexp --color=always'
+alias egrep='grep --extended-regexp'
+alias fgrep='grep --fixed-strings --ignore-case'
+
 export EDITOR='/usr/bin/vim'
