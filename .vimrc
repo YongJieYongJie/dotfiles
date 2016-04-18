@@ -9,6 +9,9 @@ Plugin 'VundleVim/Vundle.vim'
 " ruby stuff
 Plugin 'vim-ruby/vim-ruby'
 
+" powershell stuff
+" Plugin 'PProvost/vim-ps1'
+
 " fuzzy file openers
 Plugin 'wincent/command-t'
 Plugin 'ctrlpvim/ctrlp.vim'
