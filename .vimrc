@@ -37,7 +37,7 @@ let mapleader = ','
 set lazyredraw " don't redraw while executing macros (for performance)
 set encoding=utf8
 set history=512 " number of commands to remember in history
-set ffs=unix,dos,mac " Use Unix as the standard file type
+set fileformats=unix,dos,mac " Use Unix as the standard file type
 set wildmenu
 set autoread    " automatically reads from file if modified outside of Vim
 set hidden      " allow unsaved background
@@ -77,11 +77,14 @@ set foldlevel=128 " don't autofold
 set backspace=eol,start,indent " allows backspacing through such characters
 set whichwrap+=<,>,h,l,[,] " allows wrapping to next/prev lines when moving left and right
 
-set expandtab " Use spaces instead of tabs
-set smarttab " Be smart when using tabs ;)
-set shiftwidth=4 "" 1 tab == 4 spaces
+noremap <silent> j gj " when lise are wrapped, moves by displaye line instead of actual lines
+noremap <silent> k gk
+
 set tabstop=4
 set softtabstop=4
+set shiftwidth=4 "" 1 tab == 4 spaces
+set expandtab " Use spaces instead of tabs
+set smarttab " Be smart when using tabs ;)
 
 set autoindent
 set smartindent
