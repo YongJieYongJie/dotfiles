@@ -77,9 +77,6 @@ set foldlevel=128 " don't autofold
 set backspace=eol,start,indent " allows backspacing through such characters
 set whichwrap+=<,>,h,l,[,] " allows wrapping to next/prev lines when moving left and right
 
-noremap <silent> j gj " when lise are wrapped, moves by displaye line instead of actual lines
-noremap <silent> k gk
-
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4 "" 1 tab == 4 spaces
@@ -123,6 +120,10 @@ let &t_EI = "\<Esc>[2 q"
 " Switch CWD to the directory of the open buffer
 map <silent> <leader><cr> :noh<cr>
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" when line are wrapped, moves by displaye line instead of actual lines
+map j gj
+map k gk
 
 "" AUTO COMMANDS
 " automatically save views to keep folding
