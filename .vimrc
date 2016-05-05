@@ -1,3 +1,7 @@
+"" Instructions for first run:
+"" - install vundle: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"" - install plugins: inside vim, run :PluginInstall
+
 set nocompatible              " be iMproved, required for vundle
 filetype off                  " required for vundle
 
