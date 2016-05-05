@@ -131,7 +131,7 @@ autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 
 " filetypes
-autocmd BufRead,BufNewFile {Gemfile,Rakefile,*.rake,config.ru,*.rabl} setlocal filetype=ruby tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
+autocmd BufRead,BufNewFile {Gemfile,Rakefile,*.rake,config.ru,*.rabl,*.rb} setlocal filetype=ruby tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
