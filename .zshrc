@@ -48,14 +48,13 @@ alias ..='cd ../'
 alias ...='cd ../../'
 alias c='clear'
 
-# needed because ruby is not installed under cygwin but natively to windows
-alias gem='D:/Ruby22/bin/gem'
-alias rspec='D:/Ruby22/bin/rspec'
-alias rails='D:/Ruby22/bin/rails'
-alias bundle='D:/Ruby22/bin/bundle'
-
 # miscellaneous
 alias egrep='grep --extended-regexp'
 alias fgrep='grep --fixed-strings --ignore-case'
 
 export EDITOR='/usr/bin/vim'
+
+# source machine specific stuff (i.e., not on github dotfiles)
+if [ -f "${HOME}/.profile" ]; then
+    source "${HOME}/.profile"
+fi
