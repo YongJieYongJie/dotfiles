@@ -22,6 +22,7 @@ antigen apply
 # zsh optionns
 setopt MENU_COMPLETE
 setopt NO_LIST_BEEP
+setopt NO_BEEP
 
 # prompt string
 setopt PROMPT_SUBST;
