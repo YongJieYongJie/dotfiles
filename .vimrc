@@ -99,6 +99,7 @@ set undofile
 syntax enable
 set background=dark
 colorscheme solarized
+se t_Co=16
 
 set number      " show line number
 set foldcolumn=1 " Add a bit extra margin to the left
