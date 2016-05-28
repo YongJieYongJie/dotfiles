@@ -32,9 +32,9 @@ PS1='
 $ '
 
 # asks before deleting/overwriting
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+alias rm='rm --interactive --verbose'
+alias cp='cp --interactive --verbose'
+alias mv='mv --interactive --verbose'
 
 # listing
 alias ls='ls -F --color=tty'
