@@ -13,6 +13,7 @@
     d = diff
     dlc = diff HEAD^..HEAD
     dn = diff --name-only
+    dm = diff master...
     ds = diff --staged
     dt = difftool
     ec = config --global --edit
