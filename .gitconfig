@@ -8,6 +8,7 @@
     aa = add --all
     b = branch
     c = commit
+    can = commit --amend --no-edit
     co = checkout
     com = checkout master
     d = diff
