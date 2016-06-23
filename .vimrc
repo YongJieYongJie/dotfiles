@@ -101,7 +101,7 @@ set background=dark
 colorscheme solarized
 se t_Co=16
 
-set number      " show line number
+set nonumber " hide the line number
 set foldcolumn=1 " Add a bit extra margin to the left
 
 set laststatus=2 " show airline
