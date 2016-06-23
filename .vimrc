@@ -74,9 +74,9 @@ set smartcase  " don't ignore case when searching if search term has uppercase
 set hlsearch   " highligh search terms
 set incsearch  " search while typing
 
-set foldenable
-set foldmethod=syntax
-set foldlevel=128 " don't autofold
+"set foldenable
+"set foldmethod=syntax
+"set foldlevel=128 " don't autofold
 
 set backspace=eol,start,indent " allows backspacing through such characters
 set whichwrap+=<,>,h,l,[,] " allows wrapping to next/prev lines when moving left and right
