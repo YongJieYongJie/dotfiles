@@ -73,7 +73,7 @@ set ignorecase " ignores case when searching
 set smartcase  " don't ignore case when searching if search term has uppercase
 set hlsearch   " highligh search terms
 set incsearch  " search while typing
-
+packadd! matchit
 "set foldenable
 "set foldmethod=syntax
 "set foldlevel=128 " don't autofold
