@@ -28,7 +28,7 @@ setopt NO_BEEP
 setopt PROMPT_SUBST;
 
 PS1='
-%F{green}%n@%m%f %F{yellow}%~%f%F{blue}$(__git_ps1)%f
+[%Th] %F{green}%n@%m%f %F{yellow}%~%f%F{blue}$(__git_ps1)%f
 $ '
 
 # asks before deleting/overwriting
