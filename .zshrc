@@ -52,6 +52,7 @@ alias c='clear'
 # miscellaneous
 alias egrep='grep --extended-regexp'
 alias fgrep='grep --fixed-strings --ignore-case'
+alias j='jobs'
 
 export EDITOR='/usr/bin/vim'
 
