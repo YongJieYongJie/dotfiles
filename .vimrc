@@ -81,9 +81,9 @@ packadd! matchit
 set backspace=eol,start,indent " allows backspacing through such characters
 set whichwrap+=<,>,h,l,[,] " allows wrapping to next/prev lines when moving left and right
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4 "" 1 tab == 4 spaces
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2 "" 1 tab == 2 spaces
 set expandtab " Use spaces instead of tabs
 set smarttab " Be smart when using tabs ;)
 
