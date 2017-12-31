@@ -130,6 +130,9 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 map j gj
 map k gk
 
+" toggle line wrapping
+map <silent> <leader>w :set wrap!<cr>
+
 "" AUTO COMMANDS
 " automatically save views to keep folding
 autocmd BufWinLeave *.* mkview
@@ -143,3 +146,4 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
+
