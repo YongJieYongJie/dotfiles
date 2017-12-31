@@ -19,6 +19,7 @@ Plugin 'vim-ruby/vim-ruby'
 " fuzzy file openers
 Plugin 'wincent/command-t'
 Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_custom_ignore = 'node_modules' " ignores 3rd party library codes
 
 " color theme  and status line
 Plugin 'altercation/vim-colors-solarized'
