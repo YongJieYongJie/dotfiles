@@ -31,6 +31,8 @@ Plugin 'powerline/fonts'
 Plugin 'tpope/vim-endwise'
 " Plugin 'tpope/vim-surround' " to learn
 
+Plugin 'google/vim-searchindex'
+
 call vundle#end()
 filetype on
 filetype plugin on
