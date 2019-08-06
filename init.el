@@ -42,6 +42,13 @@
 
 (add-hook 'prog-mode-hook #'hl-line-mode) ; highlight current line only in programming modes (this excludes shell and terminal modes)
 
+;; Display characters beyond column 80 in a different color
+(setq-default
+ whitespace-line-column 80
+ whitespace-style       '(face lines-tail))
+
+(add-hook 'prog-mode-hook #'whitespace-mode)
+
 ;; Keybindings
 
 ;;; Navigation
