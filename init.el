@@ -30,6 +30,9 @@
 
 (add-hook 'prog-mode-hook #'show-paren-mode)
 
+;;Treat CamelCaseSubWords as separate words in every programming mode.
+(add-hook 'prog-mode-hook #'subword-mode)
+
 ;; Look-and-Feel
 
 (use-package zenburn-theme
