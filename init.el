@@ -110,6 +110,8 @@
 (add-hook 'markdown-mode-hook' 'auto-fill-mode)
 (setq fill-column 80)
 
+(use-package typescript-mode
+  :ensure t)
 
 (use-package csharp-mode
   :ensure t)
@@ -161,7 +163,7 @@
 	("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
  '(package-selected-packages
    (quote
-	(csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme))))
+	(typescript-mode csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
