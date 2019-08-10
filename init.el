@@ -22,7 +22,7 @@
 (setq initial-scratch-message nil)
 (setq tab-stop-list (number-sequence 4 120 4))
 (setq-default tab-width 4)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq visible-bell 1)
 (setq save-interprogram-paste-before-kill t)
 (setq completion-ignore-case t)
