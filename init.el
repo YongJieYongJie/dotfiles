@@ -112,6 +112,11 @@
 
 (use-package typescript-mode
   :ensure t)
+(defun yj/typescript-mode-hook ()
+  (setq typescript-indent-level 2)
+  (setq tab-width 2)
+  (setq tab-stop-list (number-sequence 2 120 2)))
+(add-hook 'typescript-mode-hook #'yj/typescript-mode-hook)
 
 (use-package csharp-mode
   :ensure t)
