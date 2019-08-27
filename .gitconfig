@@ -31,6 +31,6 @@
 [core]
     autocrlf = input
 [diff]
-	tool = vimdiff
+    tool = vimdiff
 [difftool]
-	prompt = false
+    prompt = false
