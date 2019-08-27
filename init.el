@@ -27,6 +27,7 @@
 (setq save-interprogram-paste-before-kill t)
 (setq completion-ignore-case t)
 (setq complete-ignore-case t)
+(setq-default dired-listing-switches "-alh")
 
 (add-hook 'prog-mode-hook #'show-paren-mode)
 
@@ -165,10 +166,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-	("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
+    ("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
  '(package-selected-packages
    (quote
-	(typescript-mode csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme))))
+    (typescript-mode csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
