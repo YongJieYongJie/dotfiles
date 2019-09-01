@@ -1,3 +1,7 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
+
 ;; Emacs GUI-related
 (setq inhibit-startup-message t)
 
@@ -26,7 +30,6 @@
 (setq visible-bell 1)
 (setq save-interprogram-paste-before-kill t)
 (setq completion-ignore-case t)
-(setq complete-ignore-case t)
 (setq-default dired-listing-switches "-alh")
 
 (add-hook 'prog-mode-hook #'show-paren-mode)
@@ -100,6 +103,10 @@
 
 ;;; Other modes
 
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
@@ -114,6 +121,7 @@
 (use-package typescript-mode
   :ensure t)
 (defun yj/typescript-mode-hook ()
+  "Custom configurations for typescript-mode."
   (setq typescript-indent-level 2)
   (setq tab-width 2)
   (setq tab-stop-list (number-sequence 2 120 2)))
@@ -134,7 +142,7 @@
   :ensure t
   :config
   (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 3))
+  (setq company-minimum-prefix-length 2))
 
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "M-n") nil)
@@ -169,10 +177,13 @@
     ("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
  '(package-selected-packages
    (quote
-    (typescript-mode csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme))))
+    (flycheck typescript-mode csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(provide 'init)
+;;; init.el ends here
