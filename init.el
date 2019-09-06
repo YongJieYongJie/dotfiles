@@ -32,6 +32,8 @@
 (setq completion-ignore-case t)
 (setq-default dired-listing-switches "-alh")
 
+(column-number-mode 1)
+
 (add-hook 'prog-mode-hook #'show-paren-mode)
 
 ;;Treat CamelCaseSubWords as separate words in every programming mode.
