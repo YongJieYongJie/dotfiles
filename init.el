@@ -6,8 +6,9 @@
 (setq inhibit-startup-message t)
 
 (tool-bar-mode -1)
-(toggle-scroll-bar -1)
 (menu-bar-mode -1)
+(add-to-list 'default-frame-alist
+             '(vertical-scroll-bars . nil))
 
 ;; Initialize MELPA
 
