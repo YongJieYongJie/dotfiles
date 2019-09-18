@@ -83,6 +83,9 @@
 
 (add-hook 'org-mode-hook #'org-indent-mode)
 (add-hook 'org-mode-hook #'visual-line-mode)
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c a") #'org-agenda)))
 
 ;;; Recent files
 
@@ -170,6 +173,9 @@
 
 
 ;; Miscellaneous
+
+; Always save bookmark files (and not just on exit)
+(setq bookmark-save-flag 1)
 
 (use-package which-key
   :ensure t
