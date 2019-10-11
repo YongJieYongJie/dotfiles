@@ -83,6 +83,7 @@
 
 (add-hook 'org-mode-hook #'org-indent-mode)
 (add-hook 'org-mode-hook #'visual-line-mode)
+(add-hook 'org-mode-hook #'hl-line-mode)
 (add-hook 'org-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c a") #'org-agenda)))
