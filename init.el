@@ -48,7 +48,7 @@
 (use-package solarized-theme
   :ensure t
   :config
-  (load-theme 'solarized-light t))
+  (load-theme 'solarized-dark t))
 
 (add-hook 'prog-mode-hook #'hl-line-mode) ; highlight current line only in programming modes (this excludes shell and terminal modes)
 
