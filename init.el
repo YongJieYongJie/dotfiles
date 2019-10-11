@@ -113,11 +113,19 @@
 (use-package undo-tree
   :ensure t)
 
+;;; elpy
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+
 ;;; Other modes
 
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
+
+(setq flycheck-check-syntax-automatically '(mode-enabled save))
 
 (use-package markdown-mode
   :ensure t
@@ -190,9 +198,10 @@
  '(custom-safe-themes
    (quote
     ("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
+ '(elpy-rpc-virtualenv-path (quote current))
  '(package-selected-packages
    (quote
-    (flycheck typescript-mode csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme))))
+    (elpy flycheck typescript-mode csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
