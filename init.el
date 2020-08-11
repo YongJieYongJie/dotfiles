@@ -33,6 +33,25 @@
 (setq completion-ignore-case t)
 (setq-default dired-listing-switches "-alh")
 
+
+;; Back-up files
+
+(defvar --backup-directory (concat user-emacs-directory "backups"))
+(if (not (file-exists-p --backup-directory))
+    (make-directory --backup-directory))
+(setq backup-directory-alist `(("." . ,--backup-directory)))
+(setq make-backup-files t          ; backup of a file the first time it is saved
+      backup-by-copying t          ; don't clobber symlinks
+      version-control t            ; version numbers of backup files
+      delete-old-versions t        ; delete excess backup files silently
+      delete-by-moving-to-trash t
+      kept-old-versions 6          ; oldest versions to keep when a new numbered backup is made (default: 2)
+      kept-new-versions 9          ; newest versions to keep when a new numbered backup is made (default: 2)
+      auto-save-default t          ; auto-save every buffer that visits a file
+      auto-save-timeout 20         ; number of seconds idle time before auto-save (default: 30)
+      auto-save-interval 200       ; number of keystrokes between auto-saves (default 300)
+      )
+
 (column-number-mode 1)
 
 (add-hook 'prog-mode-hook #'show-paren-mode)
@@ -86,6 +105,9 @@
 (add-hook 'org-mode-hook #'hl-line-mode)
 (add-hook 'org-mode-hook
           (lambda ()
+            (setq fill-column 80)))
+(add-hook 'org-mode-hook
+          (lambda ()
             (local-set-key (kbd "C-c a") #'org-agenda)))
 
 ;;; Recent files
@@ -93,6 +115,7 @@
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 (recentf-mode 1)
+(run-at-time nil (* 5 60) 'recentf-save-list)
 
 ;;; IDO mode
 
@@ -199,9 +222,10 @@
    (quote
     ("d91ef4e714f05fff2070da7ca452980999f5361209e679ee988e3c432df24347" "0598c6a29e13e7112cfbc2f523e31927ab7dce56ebb2016b567e1eff6dc1fd4f" default)))
  '(elpy-rpc-virtualenv-path (quote current))
+ '(org-agenda-files (quote ("d:/GoogleDrive/rclone_sync/org/todo.org")))
  '(package-selected-packages
    (quote
-    (elpy flycheck typescript-mode csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme)))
+    (elpy flycheck typescript-mode csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

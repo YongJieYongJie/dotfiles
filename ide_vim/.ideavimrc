@@ -1,0 +1,6 @@
+set visualbell
+set ideajoin
+set hlsearch
+set ignorecase
+set incsearch
+set smartcase

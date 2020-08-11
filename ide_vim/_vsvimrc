@@ -1,0 +1,56 @@
+"" GENERAL
+let mapleader = ','
+set history=512 " number of commands to remember in history
+
+"" MOVEMENT AND EDITING
+set ignorecase " ignores case when searching
+set smartcase  " don't ignore case when searching if search term has uppercase
+set hlsearch   " highligh search terms
+set incsearch  " search while typing
+"set foldenable
+"set foldmethod=syntax
+"set foldlevel=128 " don't autofold
+
+set backspace=eol,start,indent " allows backspacing through such characters
+
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2 "" 1 tab == 2 spaces
+set expandtab " Use spaces instead of tabs
+
+set autoindent
+
+"" VIEW
+
+set nonumber " hide the line number
+
+set laststatus=2 " show airline
+set showcmd " shows incomplete command in status line
+set cursorline  " highlights current line
+
+set scrolloff=7 " keeps 7 line above and below current line when scrolling vertically
+
+set nowrap " don't wrap lines
+set textwidth=0 " disable auto line break
+
+"" CONVENIENCE MAPPING
+" Switch CWD to the directory of the open buffer
+map <leader><cr> :noh<cr>
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" when line are wrapped, moves by displaye line instead of actual lines
+map j gj
+map k gk
+
+" toggle line wrapping
+map <leader>w :set wrap!<cr>
+
+"" AUTO COMMANDS
+" automatically save views to keep folding
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
+
+" filetypes
+autocmd BufRead,BufNewFile {Gemfile,Rakefile,*.rake,config.ru,*.rabl,*.rb} setlocal filetype=ruby tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
+
+

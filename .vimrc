@@ -94,15 +94,16 @@ set autoindent
 set smartindent
 
 " persistent undo
-silent !mkdir ~/.vim/undo_history -p > /dev/null 2>&1
+silent !mkdir -p ~/.vim/undo_history > /dev/null 2>&1
 set undodir=~/.vim/undo_history
 set undofile
 
 "" VIEW
 syntax enable
-set background=dark
-colorscheme solarized
-se t_Co=16
+"set background=dark
+"colorscheme solarized
+colorscheme desert
+"se t_Co=16
 
 set nonumber " hide the line number
 set foldcolumn=1 " Add a bit extra margin to the left
