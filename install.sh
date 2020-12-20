@@ -3,6 +3,9 @@
 curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > ~/.git-prompt.sh
 curl -L git.io/antigen > ~/.antigen.zsh
 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 
 scriptDir=`dirname "$0"`
 absScriptDir=`cd $scriptDir;pwd`
@@ -25,3 +28,5 @@ done
 
 vim -c 'PluginInstall' -c 'qa!'
 
+# Install package manager for zsh: Zinit.
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)

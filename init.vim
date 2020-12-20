@@ -32,7 +32,7 @@ echo " ಠ_ಠ"
 " - The directory in the plug#begin function is where the plugins will be
 "   installed. This will very likely need to be changed for different
 "   operating system.
-call plug#begin('C:\Users\Yong Jie\AppData\Local\nvim\plugged')
+call plug#begin('C:\Users\yongjie\AppData\Local\nvim\plugged')
 
 " Enable running of Go commands directly from Vim (e.g., :GoRun, :GoBuild).
 " After installing the plugin, run :GoInstallBinaries to install the Go binaries.

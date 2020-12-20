@@ -55,6 +55,12 @@
 
 
 ;;;-----------------------------------------------------------------------------
+;;; Per-Machine Settings
+;;;-----------------------------------------------------------------------------
+
+(setq default-directory "/Users/yongjiekhoo/syncthing/macbook/org")
+
+;;;-----------------------------------------------------------------------------
 ;;; Vanilla Emacs Settings
 ;;;-----------------------------------------------------------------------------
 
@@ -76,10 +82,13 @@
 ;;
 ;; See GitHub issue:
 ;; https://github.com/company-mode/company-mode/issues/299
-(add-to-list 'default-frame-alist
-             '(font . "-outline-Courier New-normal-normal-normal-mono-31-*-*-*-c-*-iso8859-1"))
+;(add-to-list 'default-frame-alist
+;             '(font . "-outline-Courier New-normal-normal-normal-mono-23-*-*-*-c-*-iso8859-1"))
+(add-to-list 'default-frame-alist '(font . "Iosevka-24"))
 (add-to-list 'default-frame-alist '(height . 24))
-(add-to-list 'default-frame-alist '(width . 80))
+(add-to-list 'default-frame-alist '(width . 60))
+(set-face-attribute 'mode-line nil :font "Iosevka-19")
+;(set-frame-font "Iosevka 24" nil t)
 
 (setq initial-scratch-message nil)
 (setq tab-stop-list (number-sequence 4 120 4))
@@ -119,6 +128,19 @@
 
 (global-set-key "\M-Z" 'zap-up-to-char)
 (global-set-key (kbd "C-S-s") 'isearch-forward-symbol-at-point)
+
+
+;; Use ibuffer as the default buffer switching mode.
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(autoload 'ibuffer "ibuffer" "List buffers." t)
+
+;; Adapted from https://www.emacswiki.org/emacs/IbufferMode
+(setq-default ibuffer-saved-filter-groups
+      `(("default"
+               ("dired" (mode . dired-mode))
+               ("emacs" (or
+                         (name . "^\\*scratch\\*$")
+                         (name . "^\\*Messages\\*$"))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Look-and-Feel
@@ -203,28 +225,31 @@
   :ensure t
   :config (which-key-mode))
 
+(use-package protobuf-mode
+  :ensure t)
+
 ;;;-----------------------------------------------------------------------------
 ;;; Major Packages
 ;;;-----------------------------------------------------------------------------
 
 ;;; company-mode (http://company-mode.github.io/)
 ;;; Modular in-buffer completion framework for Emacs.
-; Yong Jie 2020.08.20: below doesn't seem to work.
-; Prevent suggestions from being triggered automatically. In particular,
-; this makes it so that:
-; - TAB will always complete the current selection.
-; - RET will only complete the current selection if the user has explicitly
-;   interacted with Company.
-; - SPC will never complete the current selection.
-;
-; Based on:
-; - https://github.com/company-mode/company-mode/issues/530#issuecomment-226566961
-; - https://emacs.stackexchange.com/a/13290/12534
-; - http://stackoverflow.com/a/22863701/3538165
-;
-; See also:
-; - https://emacs.stackexchange.com/a/24800/12534
-; - https://emacs.stackexchange.com/q/27459/12534
+;; Yong Jie 2020.08.20: below doesn't seem to work.
+;; Prevent suggestions from being triggered automatically. In particular,
+;; this makes it so that:
+;; - TAB will always complete the current selection.
+;; - RET will only complete the current selection if the user has explicitly
+;;   interacted with Company.
+;; - SPC will never complete the current selection.
+;;
+;; Based on:
+;; - https://github.com/company-mode/company-mode/issues/530#issuecomment-226566961
+;; - https://emacs.stackexchange.com/a/13290/12534
+;; - http://stackoverflow.com/a/22863701/3538165
+;;
+;; See also:
+;; - https://emacs.stackexchange.com/a/24800/12534
+;; - https://emacs.stackexchange.com/q/27459/12534
 (with-eval-after-load 'company
   ;; <return> is for windowed Emacs; RET is for terminal Emacs
   (dolist (key '("<return>" "RET"))
@@ -341,7 +366,10 @@
 ;;(add-to-list 'load-path "~/.emacs.d/ox-confluence")
 ;;(require 'ox-confluence)
 
+;; Add virtual spaces to indent org headings
 (add-hook 'org-mode-hook #'org-indent-mode)
+(setq org-indent-indentation-per-level 1) ; 1 virtual space per nesting level
+
 (add-hook 'org-mode-hook #'visual-line-mode)
 (add-hook 'org-mode-hook #'hl-line-mode)
 (add-hook 'org-mode-hook
@@ -363,10 +391,29 @@
       (quote (("t" "todo" entry (file+datetree "C:/syncthing/org/todo.org")
                "* TODO %?\nCreated %U\n")
               ("c" "chat_logs" entry (file+datetree "C:/syncthing/org/conversations.org")
-               "* Chat with %?\nCreated: %U\n"))))
+               "* Chat with %?\nCreated: %U\n")
+              ("t" "todo" entry (file+datetree "/Users/yongjiekhoo/syncthing/macbook/org/captured-todos.org")
+              "* TODO %?\nCreated %U\n"))))
 
-(setq org-agenda-files '("C:/syncthing/org/todo.org"))
+;; Recursively adds file ending with .org to the agenda files, required
+;; because newly created files are not automatically added.
+(setq org-agenda-files (directory-files-recursively
+                        "C:/syncthing/org/" "\\.org$"))
 
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "SUPERSEDED(s@)")))
+
+;; Based on comments to this reddit post on How do org-refile-targets work?
+;; https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/?utm_source=share&utm_medium=web2x&context=3
+(setq org-refile-targets '((nil :maxlevel . 4)
+                           (org-agenda-files :maxlevel . 4)))
+(setq org-outline-path-complete-in-steps nil)           ; Refile in a single go
+(setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+
+;; When showing clocked time in org-agenda using
+;; org-agenda-clockreport-mode (using =R=), skip 0 entries.  Taken
+;; from https://emacs.stackexchange.com/a/52691/23895.
+(setq org-agenda-clockreport-parameter-plist '(:stepskip0 t :link t :maxlevel 4 :fileskip0 t))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Text Mode: markdown-mode
@@ -434,13 +481,13 @@
 ;;(use-package csharp-mode
 ;;  :ensure t)
 ;;
-;; (use-package omnisharp
-;;   :ensure t)
+;;(use-package omnisharp
+;;  :ensure t)
 ;;
-;; (add-hook 'csharp-mode-hook #'omnisharp-mode)
-;; (add-hook 'omnisharp-mode #'company-mode)
-;; (eval-after-load 'company
-;;   '(add-to-list 'company-backends 'company-mode))
+;;(add-hook 'csharp-mode-hook #'omnisharp-mode)
+;;(add-hook 'omnisharp-mode #'company-mode)
+;;(eval-after-load 'company
+;;  '(add-to-list 'company-backends 'company-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; END
@@ -461,9 +508,9 @@
  '(magit-diff-use-overlays nil)
  '(package-selected-packages
    (quote
-    (color-theme-sanityinc-tomorrow go-mode elpy flycheck typescript-mode csharp-mode golden-ratio-scroll-screen solarized-theme yaml-mode expand-region company company-mode zenburn-theme which-key use-package org-bullets color-theme)))
+    (go-mode use-package org-bullets color-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838"))))
 
+(put 'upcase-region 'disabled nil)
 (provide 'init)
 ;;; init.el ends here
-
