@@ -1,6 +1,16 @@
+let mapleader=" "
+
 set visualbell
-set ideajoin
 set hlsearch
 set ignorecase
 set incsearch
 set smartcase
+set ideajoin
+
+map gr <Action>(ShowUsages)
+map gy <Action>(GotoTypeDeclaration)
+map gi <Action>(GotoImplementation)
+map <C-o> <Action>(Back)
+map <C-i> <Action>(Forward)
+map <leader>w <Action>(EditorToggleUseSoftWraps)
+map <S-h> <Action>(HideAllWindows)
