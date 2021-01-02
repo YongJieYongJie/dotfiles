@@ -1,20 +1,30 @@
-# Note: Generally, .profile is always load, and should contain things like
+# Note: Generally, .profile is always loaded, and should contain things like
 # environment variables and general aliases. The .zshrc and .bashrc should
 # contain shell-specific items; also, they may not be loaded by programs like
 # tmux, so we are sourcing it here.
 
-# Uncomment the relevant line as necessary.
-# source "${HOME}/.bashrc"
-source "${HOME}/.zshrc"
+# Uncomment the relevant line as necessary, depending on whether I'm using zsh
+# or bash.
+source "$HOME/.zshrc"
+#source "$HOME/.bashrc"
 
 # Source machine-specific profile if exists.
-if [ -f "${HOME}/.machine_specific_profile" ]; then
-  source "${HOME}/.machine_specific_profile"
+if [ -f "$HOME/.local/profile" ]; then
+  source "$HOME/.local/profile"
 fi
 
-# Search aliasing
-alias 'ag=ag --ignore="*min.js" --ignore="*js.map" --ignore="*uploadify.js" --ignore="*bundle"'
-alias rg='rg --smart-case'
+# Set PATH so it includes user's private bin if it exists.
+if [ -d "$HOME/bin" ]; then
+  PATH="$HOME/bin:$PATH"
+fi
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
+
+######################################
+# Sensible Defaults for Common Tools #
+######################################
 
 # Customize default behavior of less command.
 LESS='--ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --chop-long-lines'
@@ -24,24 +34,67 @@ alias rm='rm -i -v'
 alias cp='cp -i -v'
 alias mv='mv -i -v'
 
-# listing
-# alias ls='ls -F --color=tty'
-alias l='ls -G'
-alias la='ls -A'
-alias ll='ls -hls'
-alias lla='ll -Al'
+## Listing files
+alias ls='ls --classify --color=tty'
 
-# navigation related
+# Basic listing
+alias l='ls'
+alias la='l --almost-all'
+
+# Long listing
+alias ll='l -l --size --human-readable'
+alias lla='ll --almost-all'
+
+# Sort by size, time
+alias lls='ll --sort=size'
+alias llas='lla --sort=size'
+alias llt='ll --sort=time'
+alias llat='lla --sort=time'
+
+# Navigation
 alias p='pwd'
 alias ..='cd ../'
 alias ...='cd ../../'
 alias c='clear'
 
-# miscellaneous
+# Searching
 alias egrep='grep --extended-regexp'
 alias fgrep='grep --fixed-strings --ignore-case'
+
+# Misc
 alias j='jobs'
 alias n='nvim'
 
 export EDITOR='nvim'
 
+
+#################
+# Tools Related #
+#################
+
+## lf - Terminal File Manager (https://github.com/gokcehan/lf)
+# Enables lfcd alias that runs lf, but also changes directory upon exit.
+LFCD="$HOME/.config/lf/lfcd.sh"
+if [ -f "$LFCD" ]; then
+  source $LFCD
+fi
+
+## ripgrep (https://github.com/BurntSushi/ripgrep)
+# Default to using smart case.
+alias rg='rg --smart-case'
+
+
+#################################
+# Programming Lannguage Related #
+#################################
+
+## Go
+export GOROOT="/usr/local/go"
+export PATH="$GOROOT/bin:$PATH"
+export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
+export PATH="$GOBIN:$PATH"
+
+## Rust
+source "$HOME/.cargo/env"
+export PATH="$HOME/.cargo/bin:$PATH"
