@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # For a comprehensive overview of how to optimize start-up time, refer to
 # https://htr3n.github.io/2018/07/faster-zsh/.
 
@@ -25,6 +32,10 @@ export SAVEHIST=$HISTSIZE
 # Use emacs style keybindings
 bindkey -e
 
+# Binds shift-tab to traverse auto-completion in reverse
+bindkey '^[[Z' reverse-menu-complete
+
+
 # includes
 #source ~/.antigen.zsh
 #source ~/.git-prompt.sh
@@ -47,6 +58,7 @@ setopt NO_BEEP
 #[%Th] %F{green}%n@%m%f %F{yellow}%~%f%F{blue}$(__git_ps1)%f
 #$ '
 
+source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # configure fzf fuzzy finder to popup below
@@ -89,7 +101,8 @@ zinit wait lucid light-mode for \
 
 # Set the autosuggestion color, actual color depends on color scheme and may
 # need testing different number.
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=4'
+export TERM=xterm-256color
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
