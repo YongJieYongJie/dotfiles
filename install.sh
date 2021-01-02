@@ -6,16 +6,15 @@ homeDir=~
 
 echo "[*] Executing installation script located at `dirname "$0"`..."
 
-for dotfile in home/.gitconfig home/.profile home/.tmux.conf home/.vimrc \
-    home/.zshrc
+for dotfile in .gitconfig .profile .tmux.conf .vimrc .zshrc
 do
-    echo "[*] Creating a symlink at $homeDir/$dotfile pointing to $absScriptDir/$dotfile..."
+    echo "[*] Creating a symlink at $homeDir/$dotfile pointing to $absScriptDir/home/$dotfile..."
     if test -f "$homeDir/$dotfile" || test -L "$homeDir/$dotfile"; then
         backupFile=$dotfile.bak.`date +%Y%^b%d_%H%M`
         echo "[!] $dotfile already exist at $homeDir, backing up to $backupFile"
         mv "$homeDir/$dotfile" "$homeDir/$backupFile"
     fi
-    ln -s "$absScriptDir/$dotfile" "$homeDir/$dotfile"
+    ln -s "$absScriptDir/home/$dotfile" "$homeDir/$dotfile"
 done
 
 # Install Git prompt for Git-related information in prompt shell.
@@ -29,4 +28,4 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim -c 'PluginInstall' -c 'qa!'
 
 # Install package manager for zsh: Zinit.
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
