@@ -75,6 +75,15 @@
 ;; remember cursor position, for emacs 25.1 or later
 (save-place-mode 1)
 
+;; scroll line by line, instead of jumping half page at a time
+;; from https://www.emacswiki.org/emacs/SmoothScrolling
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+(setq scroll-step            1
+      scroll-conservatively  10000)
+
 ;; Increase font size by default, so there is no need to increase
 ;; everytime opening something; Also this is needed for company-mode's
 ;; overlay to behave nicely. Also needed to decrease the default frame size
@@ -399,9 +408,13 @@
 ;; because newly created files are not automatically added.
 (setq org-agenda-files (directory-files-recursively
                         "C:/syncthing/org/" "\\.org$"))
-
+(setq org-agenda-files (cl-remove-if
+                        (lambda (k)
+                          (or (string-match ".stversions" k) ; removes syncthing artefacts
+                              (string-match "sync-conflict" k))) ; removes syncthing artefacts
+                        org-agenda-files))
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "SUPERSEDED(s@)")))
+      '((sequence "NEXT(n)" "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "SUPERSEDED(s@)")))
 
 ;; Based on comments to this reddit post on How do org-refile-targets work?
 ;; https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/?utm_source=share&utm_medium=web2x&context=3
