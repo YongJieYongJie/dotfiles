@@ -1,4 +1,4 @@
-" Yong Jie's init.vim for Neovim, 2020.08.29
+" Yong Jie's init.vim for Neovim, 2021.05.01
 
 " For no particular reason.
 echo " ಠ_ಠ"
