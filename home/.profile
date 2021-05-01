@@ -5,7 +5,9 @@
 
 # Uncomment the relevant line as necessary, depending on whether I'm using zsh
 # or bash.
-source "$HOME/.zshrc"
+if [ -n "$ZSH_VERSION" ]; then
+  source "$HOME/.zshrc"
+fi
 #source "$HOME/.bashrc"
 
 # Source machine-specific profile if exists.
