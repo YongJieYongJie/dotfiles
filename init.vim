@@ -82,6 +82,7 @@ Plug 'airblade/vim-gitgutter'
 " For auto-closing of parens and related features
 Plug 'jiangmiao/auto-pairs'
 
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 call plug#end()
 
 
@@ -349,6 +350,9 @@ let g:crystalline_theme = 'default'
 " Mess
 " -----------------------------------------------------------------------------
 " Settings that haven't been put into any of the categories above.
+
+" Enable syntax highlight and code folding using nvim_treesitter.
+nnoremap<Leader>t :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
 
 set showtabline=1 " show tabline only when there are more than one tab
 set guioptions-=e " When in GUI mode, use GUI to add tabs
