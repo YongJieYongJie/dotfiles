@@ -66,6 +66,16 @@ Plug 'antoinemadec/coc-fzf'
 " source file remains.
 Plug 'tpope/vim-fugitive'
 
+" For easy toggling of comments (e.g., with keybinding gcc)
+Plug 'tpope/vim-commentary'
+
+" For easy manipulation of quotes / brackes (e.g., with ysiw')
+Plug 'tpope/vim-surround'
+
+" For sensible bracket-related key mappings (e.g., [a ]a to move around
+" argslist, [q ]q to move around quickfix list)
+Plug 'tpope/vim-unimpaired'
+
 call plug#end()
 
 
