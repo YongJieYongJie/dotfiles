@@ -76,6 +76,9 @@ Plug 'tpope/vim-surround'
 " argslist, [q ]q to move around quickfix list)
 Plug 'tpope/vim-unimpaired'
 
+" For showing changed lines based on git
+Plug 'airblade/vim-gitgutter'
+
 call plug#end()
 
 
