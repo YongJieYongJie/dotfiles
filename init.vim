@@ -79,6 +79,9 @@ Plug 'tpope/vim-unimpaired'
 " For showing changed lines based on git
 Plug 'airblade/vim-gitgutter'
 
+" For auto-closing of parens and related features
+Plug 'jiangmiao/auto-pairs'
+
 call plug#end()
 
 
