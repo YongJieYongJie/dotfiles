@@ -230,6 +230,9 @@ colorscheme onedark
 " Quality-of-Life
 " -----------------------------------------------------------------------------
 
+" Expand folds by default
+set foldlevel=99
+
 " Wrap only at word boundaries.
 set linebreak
 
@@ -313,6 +316,10 @@ nnoremap <Leader>fs :set foldmethod=syntax<CR>
 " Create folds by indent.
 nnoremap <Leader>fi :set foldmethod=indent<CR>
 
+" Open splits to the right (if horizontal) and to below (if vertical).
+set splitright
+set splitbelow
+
 
 " -------------------------------------------------------------------------------------------------
 " fzf.vim settings
@@ -362,6 +369,7 @@ let g:crystalline_statusline_fn = 'StatusLine'
 let g:crystalline_tabline_fn = 'TabLine'
 let g:crystalline_theme = 'default'
 
+
 " -----------------------------------------------------------------------------
 " Mess
 " -----------------------------------------------------------------------------
@@ -372,6 +380,9 @@ nnoremap<Leader>t :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=n
 
 " Enable history for fzf
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" Enable mouse (e.g., resizing splits).
+set mouse=a
 
 " Ignore minimised javascript files for various wildcard operations.
 set wildignore+=*.js.min
@@ -392,9 +403,6 @@ set cmdheight=1 " Use 1 line for command-line
 
 let g:netrw_preview=1 " netrw (:Lexplore) previews (p) open to the right
 let g:netrw_winsize=38 " netrw (:Lexplore) takes up 38% (golden ratio) of screen
-
-set relativenumber " shows relative number; trying this out for now
-set number " shows current line number when relative number mode is on
 
 " Jump to last known position in a file after opening it.
 autocmd BufReadPost *
