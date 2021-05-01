@@ -564,6 +564,8 @@
 
 ;; Recursively adds file ending with .org to the agenda files, required
 ;; because newly created files are not automatically added.
+;;(setq org-agenda-files (directory-files-recursively
+;;                        "C:/syncthing/org/" "\\.org$"))
 (setq org-agenda-files (directory-files-recursively
                         (concat org-directory "/") "\\.org$"))
 (setq org-agenda-files (cl-remove-if

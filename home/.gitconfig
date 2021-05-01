@@ -1,6 +1,6 @@
 [user]
-    name = YongJieYongJie
-    email = KhooYongJie@gmx.com
+    name = Yong Jie KHOO
+    email = yongjie.khoo@ninjavan.co
 [push]
     default = simple
 [alias]
@@ -37,9 +37,7 @@
 [core]
     autocrlf = input
 [diff]
-    tool = vimdiff
-[difftool]
-    prompt = false
+    tool = nvimdiff
 [delta]
     ; syntax-theme = 1337
     ; syntax-theme = Coldark-Dark
@@ -52,3 +50,11 @@
     line-numbers = true
 [interactive]
     diffFilter = delta --color-only
+[difftool]
+    prompt = true
+[difftool "nvimdiff"]
+    cmd = "/Users/yongjiekhoo/neovim/bin/nvim -d \"$LOCAL\" \"$REMOTE\""
+[url "ssh://git@git.ninjavan.co:7999/"]
+    insteadOf = https://bitbucket.ninjavan.co/scm/
+[merge]
+    conflictstyle = diff3

@@ -79,6 +79,7 @@ alias fgrep='grep --fixed-strings --ignore-case'
 # Misc
 alias j='jobs'
 alias n='nvim'
+alias nn="$HOME/neovim/bin/nvim" # neovim nightly
 
 # Set EDITOR to nvim if not already set
 [ -z "${EDITOR}" ] && export EDITOR='nvim'
@@ -105,7 +106,7 @@ alias rg='rg --smart-case'
 #################################
 
 ## Go
-export GOROOT="/usr/local/go"
+#export GOROOT="/usr/local/go"
 export PATH="$GOROOT/bin:$PATH"
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"

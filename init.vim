@@ -113,6 +113,21 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+
+Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
+" Modifies GBrowse command added by tpope/vim-fugitive to open bitbucket links
+Plug 'tommcdo/vim-fubitive'
+" For typescript development, based on excellent article at
+" https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim.
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
+" For using neovim to edit all textareas in browser.
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+
 call plug#end()
 
 
@@ -418,6 +433,23 @@ let g:crystalline_theme = 'default'
 " Mess
 " -----------------------------------------------------------------------------
 " Settings that haven't been put into any of the categories above.
+
+" Enablee opening of NinjaVan's internal Git repo using GBrowse
+let g:fubitive_domain_pattern = 'git\.ninjavan\.co'
+
+" Enable the :Lint command to lint Go source files
+set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
+
+" Configure font size for firenvim
+function! OnUIEnter(event)
+  let l:ui = nvim_get_chan_info(a:event.chan)
+  if has_key(l:ui, 'client') && has_key(l:ui.client, 'name')
+    if l:ui.client.name ==# 'Firenvim'
+      set guifont=Iosevka:h20
+    endif
+  endif
+endfunction
+autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 
 " Enable syntax highlight and code folding using nvim_treesitter.
 nnoremap <silent> <Leader>t :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
