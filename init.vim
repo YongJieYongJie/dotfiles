@@ -242,9 +242,6 @@ map k gk
 " Don't redraw while executing macros (for performance).
 set lazyredraw
 
-" Ignore minimised javascript files for various wildcard operations.
-set wildignore+=*.js.min
-
 " Enable undo even after file is closed.
 set undofile
 
@@ -370,6 +367,18 @@ nnoremap<Leader>t :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=n
 
 " Enable history for fzf
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" Ignore minimised javascript files for various wildcard operations.
+set wildignore+=*.js.min
+
+" Remave node_modules folder from wildcard (used in npm projects).
+set wildignore+=**/node_modules/**
+
+" Remave vendor folder from wildcard (used in Go projects).
+set wildignore+=**/vendor/**
+
+" Remave target folder from wildcard (used in Maven projects).
+set wildignore+=**/target/**
 
 set showtabline=1 " show tabline only when there are more than one tab
 set guioptions-=e " When in GUI mode, use GUI to add tabs
