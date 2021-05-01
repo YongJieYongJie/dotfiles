@@ -343,9 +343,11 @@ function! StatusLine(current, width)
   else
     let l:s .= '%#CrystallineInactive#'
   endif
-  let l:s .= ' %f%h%w%m%r '
+  let l:s .= ' %t%h%w%m%r '
   if a:current
-    let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#head()}'
+    let l:s .= crystalline#right_sep('', 'Fill') . ' %{len(fugitive#head())==0?"[Not in Git]":fugitive#head()}'
+    let l:s .= ' %{len(coc#status())==0?"":"| " . coc#status()} '
+    let l:s .= " %{len(get(b:,'coc_current_function',''))==0?'':'| ' . get(b:,'coc_current_function','')}"
   endif
 
   let l:s .= '%='
