@@ -312,6 +312,13 @@ nnoremap <Leader>fs :set foldmethod=syntax<CR>
 nnoremap <Leader>fi :set foldmethod=indent<CR>
 
 
+" -------------------------------------------------------------------------------------------------
+" fzf.vim settings
+" -------------------------------------------------------------------------------------------------
+" Open preview window to the top.
+let g:fzf_preview_window = 'up:77%'
+
+
 " -----------------------------------------------------------------------------
 " vim-crystalline settings
 " -----------------------------------------------------------------------------
@@ -360,6 +367,9 @@ let g:crystalline_theme = 'default'
 
 " Enable syntax highlight and code folding using nvim_treesitter.
 nnoremap<Leader>t :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
+
+" Enable history for fzf
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 set showtabline=1 " show tabline only when there are more than one tab
 set guioptions-=e " When in GUI mode, use GUI to add tabs
