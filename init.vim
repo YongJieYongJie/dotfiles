@@ -202,6 +202,9 @@ let g:go_def_mapping_enabled = 0
 " uses the LaunguageClient [LC]
 let g:go_doc_keywordprg_enabled = 0
 
+" configure vim-go to use goimports (instead of gofmt) to format Go files on
+" save
+let g:go_fmt_command = "goimports"
 
 " -------------------------------------------------------------------------------------------------
 " Colors and Theme
