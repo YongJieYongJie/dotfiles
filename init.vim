@@ -58,12 +58,20 @@ Plug 'google/vim-searchindex'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" Allow opening some of CocList in fzf
+Plug 'antoinemadec/coc-fzf' 
+
 " For better workflow when using Git in certain cases. For example, :Git blame
 " shows the output in two vertical splits, and the syntax highlight for the
 " source file remains.
 Plug 'tpope/vim-fugitive'
 
 call plug#end()
+
+
+" Use space as the leader key. Putting this at the top of file so it occurs
+" before any keymappings that uses <leader>.
+let mapleader=' '
 
 
 " -----------------------------------------------------------------------------
@@ -95,12 +103,22 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" Use `[g` and `]g` to navigate diagnostics (e.g., errors)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -118,13 +136,13 @@ nmap <leader>rn <Plug>(coc-rename)
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+"nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+"nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c  :<C-u>CocFzfList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
@@ -133,6 +151,23 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" Show code actions for current buffer
+nmap <leader>ac <Plug>(coc-codeaction)
+" Show code actions for current line
+nmap <leader>a. <Plug>(cco-codeaction-line)
+" Show code actions for current selection
+vmap <leader>a <Plug>(coc-codeaction-selected)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
@@ -200,17 +235,21 @@ set hidden
 " Keymappings
 " -----------------------------------------------------------------------------
 
-" Use space as the leader key.
-let mapleader=' '
+" Open file browser
+nnoremap <space>e  :<C-u>CocCommand explorer<cr>
 
 " Switch to previous buffer.
 nnoremap <Leader><Leader> :b#<CR>
 
 " List buffers (for switching).
-nnoremap <Leader>b :ls<CR>:b
+"nnoremap <Leader>b :ls<CR>:b
+" Start fuzzy search for opened buffers, requires vim-fzf plugin.
+nnoremap <Leader>b :Buffers!<CR>
 
 " List history (for searching).
-nnoremap <Leader>h :<C-f>?
+"nnoremap <Leader>h :<C-f>?
+" Start fuzzy search for command history, requires vim-fzf plugin.
+nnoremap <Leader>h :History!<CR>
 
 " Allow quick ad-hoc normal mode mapping.
 noremap <Leader>m :nnoremap<lt>Leader><lt>CR><Left><Left><Left><Left>
@@ -226,6 +265,27 @@ noremap <Leader>n :set relativenumber!<CR>
 
 " Change to directory of current file.
 noremap <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Start fuzzy search for files, requires vim-fzf plugin.
+nnoremap <Leader>z :Files!<CR>
+
+" Start fuzzy search for files not excluded by .gitignore, requires vim-fzf plugin.
+nnoremap <Leader>g :GFiles!<CR>
+
+" Start fuzzy search lines in the current buffer, requires vim-fzf plugin.
+nnoremap // :BLines!<CR>
+
+" Start fuzzy search for lines in all files, requires vim-fzf plugin.
+nnoremap ?? :Rg!<CR>
+
+" Start fuzzy search for lines in all files with words under cursor, requires vim-fzf plugin.
+nnoremap<Leader>* :Rg! \b<c-r><c-w>\b<CR>
+
+" Create folds by syntax.
+nnoremap <Leader>fs :set foldmethod=syntax<CR>
+
+" Create folds by indent.
+nnoremap <Leader>fi :set foldmethod=indent<CR>
 
 
 " -----------------------------------------------------------------------------
