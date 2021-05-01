@@ -14,7 +14,7 @@ preselect_border_color="2d74da"
 
 # ====== Tiling settings =======================
 
-yabai -m config layout                      bsp
+yabai -m config layout                      float
 
 #yabai -m config top_padding                 "${gaps_top}"
 #yabai -m config bottom_padding              "${gaps_bottom}"
@@ -65,8 +65,21 @@ yabai -m rule --add label="Transmission" app="^Transmission$" manage=off
 yabai -m rule --add label="VirtualBox" app="^VirtualBox$" manage=off
 
 yabai -m rule --add label="any preference dialogs" title="[Pp]reference" manage=off
-yabai -m rule --add label="Intellij Welcome" title="Welcome to (IntelliJ|GoLand)" manage=off
-yabai -m rule --add label="Intellij Welcome" title="Welcome to (IntelliJ|GoLand)" manage=off
-yabai -m rule --add label="GoLand dialogs" app="^GoLand$" title="Delete" manage=off
-yabai -m rule --add label="GoLand dialogs" app="^Pritunl$" manage=off
+
+# IntelliJ-related
+yabai -m rule --add label="IntelliJ Welcome Screen" title="Welcome to (IntelliJ IDEA|GoLand)" manage=off
+yabai -m rule --add label="IntelliJ dialog: Tip of the Day" title="^Tip of the Day$" manage=off
+yabai -m rule --add label="IntelliJ dialog: Project Structure" title="^Project Structure$" manage=off
+yabai -m rule --add label="IntelliJ dialog: Keymap" title="^Keymap$" manage=off
+yabai -m rule --add label="IntelliJ dialog: IDE and Plugin Updates" title="^IDE and Plugin Updates$" manage=off
+yabai -m rule --add label="IntelliJ dialog: Plugins" title="^Plugins$" manage=off
+yabai -m rule --add label="IntelliJ dialog: Run..." title="^Run - " manage=off
+yabai -m rule --add label="GoLand dialog: Delete" app="^GoLand$" title="Delete" manage=off
+
+# Other appplications
+yabai -m rule --add label="Pritunl" app="^Pritunl$" manage=off
+yabai -m rule --add label="MenuMeters" app="^MenuMeters$" manage=off
+yabai -m rule --add label="Karabiner-EventViewer" app="Karabiner-EventViewer" manage=off
+yabai -m rule --add label="Karabiner-Elements" app="Karabiner-Element" manage=off
+yabai -m rule --add label="Sourcetree dialogs" app="^Sourcetree$" title="^(General|Accounts|Commit|Diff|Git|Mercurial|Custom Actions|Update|Advanced)$" manage=off
 

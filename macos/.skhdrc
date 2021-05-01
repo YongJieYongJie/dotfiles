@@ -1,12 +1,71 @@
 #shift + alt - p : yabai -m space --create
 
 # Move to recent display / Focus recent display
-shift + alt - 9 : yabai -m window --display recent && yabai -m display --focus recent
-shift + alt - 8 : yabai -m display --focus recent
+shift + alt - 9 : yabai -m window --display next && yabai -m display --focus recent
+shift + alt - 8 : yabai -m display --focus next
 
-# Browse through spaces
-shift + alt - p : yabai -m space --focus prev
-shift + alt - n : yabai -m space --focus next
+# Switch to next space, moving it to current display if necessary
+#   Get current display index
+#   Switch to next space (or the first space if already at the end)
+#   Move space to saved display index
+shift + alt - n : i=$(yabai -m query --displays --display | jq .index) && \
+                  (yabai -m space --focus next || yabai -m space --focus 1) && \
+                  yabai -m space --display $i
+
+shift + alt - p : i=$(yabai -m query --displays --display | jq .index) && \
+                  (yabai -m space --focus prev || yabai -m space --focus 1) && \
+                  yabai -m space --display $i
+
+# Move space to next display (or the first display if already at the end)
+# NOTE: This doesn't work because index changes once things are move across
+# display. See alternative approach using labels below.
+#   Save previous space's index to variable
+#   Save current space's index to variable
+#   Move current space to next display
+#   Focus previous space using saved index (to show it on the display)
+#   Focus next space
+#ctrl + alt - n : yabai -m space --display next || yabai -m space --display 1
+#ctrl + alt - n : prevIdx=$(yabai -m query --spaces --space prev | jq .index) && \
+#                 (yabai -m space --display next || yabai -m space --display 1) && \
+#                 currIdx=$(yabai -m query --spaces --space | jq .index) && \
+#                 yabai -m space --focus $prevIdx && \
+#                 yabai -m space --focus $currIdx 
+
+                 #/usr/bin/env osascript <<< "display notification \"previous space: $prevIdx\" with title \"skhd\"" && \
+                 #/usr/bin/env osascript <<< "display notification \"previous space: $currIdx\" with title \"skhd\""
+
+# NOTE: For the below to work, the system preferences for mission control will
+# likely need to be set to "Automaticall rearrange Spaces based on most recent
+# use"
+# NOTE 2: It will not work nicely with Emacs, because it seems Emacs doesn't
+# play nice with macOS's mission control.
+# Move space to next display (or the first display if already at the end)
+#   Label previous space (first three lines)
+#   Label current space (second three lines)
+#   Move current space to next display
+#   Focus previous space using label
+#   Focus current space using label
+ctrl + alt - n : prevLabel="label_$RANDOM" && \
+                 prevIdx=$(yabai -m query --spaces --space prev | jq .index) && \
+                 yabai -m space $prevIdx --label $prevLabel && \
+                 currLabel="label_$RANDOM" && \
+                 currIdx=$(yabai -m query --spaces --space | jq .index) && \
+                 yabai -m space $currIdx --label $currLabel && \
+                 (yabai -m space --display next || yabai -m space --display 1) && \
+                 yabai -m space --focus $prevLabel && \
+                 yabai -m space --focus $currLabel 
+
+ctrl + alt - p : prevLabel="label_$RANDOM" && \
+                 prevIdx=$(yabai -m query --spaces --space prev | jq .index) && \
+                 yabai -m space $prevIdx --label $prevLabel && \
+                 currLabel="label_$RANDOM" && \
+                 currIdx=$(yabai -m query --spaces --space | jq .index) && \
+                 yabai -m space $currIdx --label $currLabel && \
+                 (yabai -m space --display prev || ( \
+                     numDisplays=$(yabai -m query --displays | grep index | cut -d':' -f2 | cut -d',' -f1 | sort | tail -n 1) && \
+                     yabai -m space --display $numDisplays)) && \
+                 yabai -m space --focus $prevLabel && \
+                 yabai -m space --focus $currLabel 
 
 # opens iTerm2
 #alt - return : "${HOME}"/.config/yabai/scripts/open_iterm2.sh
