@@ -1,0 +1,48 @@
+{
+  // Access this file from Vim by running :CocConfig
+
+    //////////////////////////
+   // General COC settings //
+  //////////////////////////
+  "coc.preferences.extensionUpdateCheck": "never",
+
+
+    //////////////////
+   // Java-related //
+  //////////////////
+  "java.home": "/usr/lib/jvm/java-14-openjdk-amd64",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-1.8",
+      "path": "/usr/lib/jvm/java-1.8.0-openjdk-amd64",
+      "default": true
+    },
+    {
+      "name": "JavaSE-14",
+      "path": "/usr/lib/jvm/java-14-openjdk-amd64"
+    }
+  ],
+  // Required for projects using Project Lombok.
+  "java.jdt.ls.vmargs": "-javaagent:/home/yongjie/lombok/lombok.jar",
+  "java.imports.gradle.wrapper.checksums": [
+    // The two checksums below relates to https://github.com/eclipse/eclipse.jdt.ls.
+    { "sha256": "41c8aa7a337a44af18d8cda0d632ebba469aef34f3041827624ef5c1a4e4419d", "allowed": true },
+    { "sha256": "28b330c20a9a73881dfe9702df78d4d78bf72368e8906c70080ab6932462fe9e", "allowed": true }
+  ],
+
+
+    //////////
+   // Misc //
+  //////////
+
+  // Use virtual text to display errors by default.
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.virtualTextPrefix": "❖ ",
+
+  // Enable auto-update of detecting current function, so
+  // get(b:,'coc_current_function','') correctly returns the current function
+  // for use in status line.
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true
+
+}
