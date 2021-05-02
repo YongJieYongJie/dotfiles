@@ -41,7 +41,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Add language server protocal support.
 " Individual language needs to be set up separately. Please google for the
 " instructions as appropriate.
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 
 " Basic modern theme.
 Plug 'joshdick/onedark.vim'
@@ -179,7 +179,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Show code actions for current buffer
 nmap <leader>ac <Plug>(coc-codeaction)
 " Show code actions for current line
-nmap <leader>a. <Plug>(cco-codeaction-line)
+nmap <leader>a. <Plug>(coc-codeaction-line)
 " Show code actions for current selection
 vmap <leader>a <Plug>(coc-codeaction-selected)
 
@@ -197,9 +197,9 @@ endfunction
 " this is handled by LanguageClient [LC]
 let g:go_def_mapping_enabled = 0
 
-" disable vim-go :GoDef short-cut
+" disable vim-go :GoDoc short-cut (K)
 " this is handled by the custom show_documentation() function below, which
-" uses the LaunguageClient [LC]
+" uses the LanguageClient [LC]
 let g:go_doc_keywordprg_enabled = 0
 
 " configure vim-go to use goimports (instead of gofmt) to format Go files on
