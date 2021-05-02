@@ -36,7 +36,7 @@ call plug#begin('C:\Users\yongjie\AppData\Local\nvim\plugged')
 
 " Enable running of Go commands directly from Vim (e.g., :GoRun, :GoBuild).
 " After installing the plugin, run :GoInstallBinaries to install the Go binaries.
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Add language server protocal support.
 " Individual language needs to be set up separately. Please google for the
