@@ -10,7 +10,7 @@ for dotfile in .gitconfig .profile .tmux.conf .vimrc .zshrc
 do
     echo "[*] Creating a symlink at $homeDir/$dotfile pointing to $absScriptDir/home/$dotfile..."
     if test -f "$homeDir/$dotfile" || test -L "$homeDir/$dotfile"; then
-        backupFile=$dotfile.bak.`date +%Y%^b%d_%H%M`
+        backupFile=$dotfile.bak.`date +%Y%m%d_%H%M`
         echo "[!] $dotfile already exist at $homeDir, backing up to $backupFile"
         mv "$homeDir/$dotfile" "$homeDir/$backupFile"
     fi
@@ -22,7 +22,7 @@ nvimConfigFilePath=$homeDir/.config/nvim/init.vim
 nvimConfigLinkTarget=$absScriptDir/init.vim
 echo "[*] Creating a symlink at $nvimConfigFilePath pointing to $nvimConfigLinkTarget"
 if test -f "$nvimConfigFilePath" || test -L "$nvimConfigLinkTarget"; then
-    backupFile=$nvimConfigFilePath.bak.`date +%Y%^b%d_%H%M`
+    backupFile=$nvimConfigFilePath.bak.`date +%Y%m%d_%H%M`
     echo "[!] $nvimConfigFilePath already exist, backing up to $backupFile"
     mv "$nvimConfigFilePath" "$backupFile"
 fi
