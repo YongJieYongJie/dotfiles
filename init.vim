@@ -32,7 +32,7 @@ echo " ಠ_ಠ"
 " - The directory in the plug#begin function is where the plugins will be
 "   installed. This will very likely need to be changed for different
 "   operating system.
-call plug#begin('C:\Users\yongjie\AppData\Local\nvim\plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Enable running of Go commands directly from Vim (e.g., :GoRun, :GoBuild).
 " After installing the plugin, run :GoInstallBinaries to install the Go binaries.
@@ -329,6 +329,29 @@ set splitbelow
 " -------------------------------------------------------------------------------------------------
 " Open preview window to the top.
 let g:fzf_preview_window = 'up:77%'
+
+
+
+" -------------------------------------------------------------------------------------------------
+"  nvim-treesitter settings, taken from https://github.com/nvim-treesitter/nvim-treesitter#modules
+" -------------------------------------------------------------------------------------------------
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+--  ignore_install = { "javascript" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+--    disable = { "c", "rust" },  -- list of language that will be disabled
+  },
+  indent = {
+    enable = true,
+  }
+}
+EOF
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 
 " -----------------------------------------------------------------------------

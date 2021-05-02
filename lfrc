@@ -1,0 +1,5 @@
+set previewer ~/go/bin/pistol
+map i $~/go/bin/pistol $f | less -iR
+set ratios 2:3
+set incsearch true
+
