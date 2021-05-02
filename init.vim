@@ -436,8 +436,8 @@ set smartindent
 " Disable automatic hard wrapping of lines.
 set textwidth=0
 
-" Display an angle bracket when wrapping lines.
-set showbreak=>\
+" Use '↪ ' to indicate soft-wrap
+set showbreak=↪\ 
 
 " Toggle "zen" mode by pressing <S-h>.
 " Taken from
