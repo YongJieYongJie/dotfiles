@@ -10,7 +10,7 @@ reside only on the applicable machines, and be loaded by the files in this
 repository (see for example how  `.profile` loads
 `~/.machine_specific_profile`.
 
-## Use tools
+## Useful tools
 
 Below are some of the useful tools I used (many of which are configured in the
 .dotfiles.
@@ -23,4 +23,5 @@ Below are some of the useful tools I used (many of which are configured in the
 - Karabiner-Elements (https://github.com/pqrs-org/Karabiner-Elements)
 - Keycastr (https://github.com/keycastr/keycastr)
 - Iosevka (https://github.com/be5invis/Iosevka)
+- Delta (https://github.com/dandavison/delta)
 

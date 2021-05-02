@@ -11,11 +11,13 @@
     can = commit --amend --no-edit
     co = checkout
     com = checkout master
-    d = diff
+    d = !git -c core.pager=delta diff
+    dd = !git -c core.pager=delta -c delta.side-by-side=true diff
     dlc = diff HEAD^..HEAD
     dn = diff --name-only
     dm = diff master...
-    ds = diff --staged
+    ds = !git -c core.pager=delta diff --staged
+    dds = !git -c core.pager=delta -c delta.side-by-side=true diff --staged
     dt = difftool
     dw = diff --word-diff=color
     ec = config --global --edit
@@ -34,3 +36,15 @@
     tool = vimdiff
 [difftool]
     prompt = false
+[delta]
+    ; syntax-theme = 1337
+    ; syntax-theme = Coldark-Dark
+    ; syntax-theme = Nord
+    ; syntax-theme = OneHalfDark
+    syntax-theme = TwoDark
+    ; syntax-theme = gruvbox-dark
+    ; syntax-theme = zenburn
+    navigate = true
+    line-numbers = true
+[interactive]
+    diffFilter = delta --color-only
