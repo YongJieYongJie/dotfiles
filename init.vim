@@ -483,3 +483,5 @@ function! ToggleHiddenAll()
 endfunction
 nnoremap <S-h> :call ToggleHiddenAll()<CR>
 
+" Show line numbers
+set number
