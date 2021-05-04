@@ -27,6 +27,16 @@ if [[ ${go_version##go1.} -lt 16 ]]; then
 fi
 
 
+to_back_up="${HOME}/.bashrc ${HOME}/.zshrc ${HOME}/.profile"
+for dot_file in $to_back_up
+do
+  if test -f "${dot_file}"; then
+      backupFile=${dot_file}.bak.`date +%Y%m%d_%H%M`
+      printf "\n[!] ${dot_file} already exist, backing up to $backupFile\n"
+      cp "${dot_file}" "$backupFile"
+  fi
+done
+
 ###################
 # Building Neovim #
 ###################
@@ -76,6 +86,7 @@ printf '\n[*] Setting up plugins and extensions for Neovim\n'
 # Refer to comments within the init.vim file for details on the
 # various plugins and extensions installed.
 printf '\n[1/5] Copying configuration file for Neovim: init.vim\n'
+mkdir -p ${HOME}/.config/nvim
 nvimConfigFilePath=${HOME}/.config/nvim/init.vim
 if test -f "$nvimConfigFilePath"; then
     backupFile=$nvimConfigFilePath.bak.`date +%Y%m%d_%H%M`
@@ -125,6 +136,7 @@ brew list fzf 2>/dev/null || brew install fzf
 # the quit using the ':qa!' command.
 printf '\n[5/5] Installing Neovim extensions\n'
 ${neovim_install_dir}/bin/nvim -c 'PlugInstall' -c 'qa!'
+${neovim_install_dir}/bin/nvim -c 'CocUpdateSync' -c 'qa!'
 
 
 ################################################
@@ -231,3 +243,8 @@ printf '\n[*] You might also want to enable running VSCode directly from the she
     first opening VSCode and select "Shell Command: install code command in
     PATH" from the Command Palette\n'
 
+printf "\n[*] To undo the changes done by this script, do the following:
+    - rm ${neovim_install_dir} ${neovim_git_repo_dir} ${HOME}/.local/share/nvim
+    - rm ${HOME}/.config/lf
+    - replace the .bashrc, .zshrc, and/or .profile at home directory with the
+      backups that were created"
