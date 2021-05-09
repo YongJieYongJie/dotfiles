@@ -69,7 +69,8 @@ alias fgrep='grep --fixed-strings --ignore-case'
 alias j='jobs'
 alias n='nvim'
 
-export EDITOR='nvim'
+# Set EDITOR to nvim if not already set
+[ -z "${EDITOR}" ] && export EDITOR='nvim'
 
 
 #################
