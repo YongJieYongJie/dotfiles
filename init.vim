@@ -79,6 +79,19 @@ Plug 'tpope/vim-unimpaired'
 " For showing changed lines based on git
 Plug 'airblade/vim-gitgutter'
 
+" For typescript development, based on excellent article at
+" https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim.
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
+
+" For Javascript syntax highlighting (reccommended by vim-jsx-pretty)
+Plug 'yuezk/vim-js'
+" For jsx indentation
+Plug 'maxmellon/vim-jsx-pretty'
+
 " For auto-closing of parens and related features
 Plug 'jiangmiao/auto-pairs'
 
