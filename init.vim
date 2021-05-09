@@ -1,5 +1,18 @@
 " Yong Jie's init.vim for Neovim, 2021.05.01
 
+" -----------------------------------------------------------------------------
+" Machine-Specific Configurations
+" -----------------------------------------------------------------------------
+
+" yjPluginDir is where the plugins will be installed.
+" E.g., "/home/yongjie/.local/share/nvim/plugged"
+let yjPluginDir=''
+
+
+" -----------------------------------------------------------------------------
+" init.vim
+" -----------------------------------------------------------------------------
+
 " For no particular reason.
 echo " ಠ_ಠ"
 
@@ -32,7 +45,7 @@ echo " ಠ_ಠ"
 " - The directory in the plug#begin function is where the plugins will be
 "   installed. This will very likely need to be changed for different
 "   operating system.
-call plug#begin('C:\Users\yongjie\AppData\Local\nvim\plugged')
+call plug#begin(yjPluginDir)
 
 " Enable running of Go commands directly from Vim (e.g., :GoRun, :GoBuild).
 " After installing the plugin, run :GoInstallBinaries to install the Go binaries.
