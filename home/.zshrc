@@ -54,9 +54,9 @@ setopt NO_BEEP
 # prompt string
 #setopt PROMPT_SUBST;
 #
-#PS1='
-#[%Th] %F{green}%n@%m%f %F{yellow}%~%f%F{blue}$(__git_ps1)%f
-#$ '
+PS1='
+[%Th] %F{green}%n@%m%f %F{yellow}%~%f%F{blue}$(__git_ps1)%f
+$ '
 
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
