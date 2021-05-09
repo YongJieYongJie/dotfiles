@@ -8,7 +8,9 @@
 if [ -n "$ZSH_VERSION" ]; then
   source "$HOME/.zshrc"
 fi
-#source "$HOME/.bashrc"
+if [ -n "$BASH" ]; then
+  source "$HOME/.bashrc"
+fi
 
 # Source machine-specific profile if exists.
 if [ -f "$HOME/.local/profile" ]; then
