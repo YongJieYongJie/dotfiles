@@ -1,0 +1,141 @@
+{
+    //#region Vim-related
+    "vim.leader": " ",
+    "vim.foldfix": true,
+    "vim.handleKeys": {
+        "<C-b>": false, // ctrl-b is used to toggle side bar visibility.
+        "<C-j>": false,
+        "<C-k>": false, // ctrl-k is used to kill right in terminal.
+        "<C-d>": true,
+        "<C-u>": true
+    },
+    "vim.visualModeKeyBindingsNonRecursive": [
+        { "before": ["j"], "after": ["g", "j"] },
+        { "before": ["k"], "after": ["g", "k"] }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        { "before": ["K"],             "commands": ["editor.action.showHover"] },
+        { "before": ["?", "?"],        "commands": ["workbench.action.findInFiles"] },
+        { "before": ["/", "/"],        "commands": ["actions.find"] },
+        { "before": ["<leader>", "w"], "commands": ["editor.action.toggleWordWrap"] },
+        { "before": ["<leader>", "o"], "commands": ["workbench.action.gotoSymbol"] },
+        { "before": ["<leader>", "b"], "commands": ["workbench.action.showAllEditorsByMostRecentlyUsed"] },
+        { "before": ["<leader>", "e"], "commands": ["workbench.view.explorer"] },
+        { "before": ["<leader>", "g"], "commands": ["workbench.action.quickOpen"] },
+        { "before": ["]", "g"],        "commands": ["editor.action.marker.next"] },
+        { "before": ["[", "g"],        "commands": ["editor.action.marker.prev"] },
+        { "before": ["g", "i"],        "commands": ["editor.action.peekImplementation"] },
+        { "before": ["g", "y"],        "commands": ["editor.action.peekTypeDefinition"] },
+        { "before": ["g", "r"],        "commands": ["editor.action.referenceSearch.trigger"] }
+    ],
+    "vscode-neovim.neovimPath": "C:\\tools\\neovim\\Neovim\\bin\\nvim.exe",
+    //#endregion
+
+    //#region Java-related
+    "java.home": "/usr/lib/jvm/java-14-openjdk-amd64",
+    "java.semanticHighlighting.enabled": true,
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/Users/yongjiekhoo/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-1.8",
+            "path": "/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home",
+            "default": true
+        },
+        {
+            "name": "JavaSE-14",
+            "path": "/Library/Java/JavaVirtualMachines/jdk-14.0.2.jdk/Contents/Home"
+        }
+    ],
+    "maven.executable.path": "/usr/local/bin/mvn",
+    "maven.terminal.customEnv": [
+        {
+            "environmentVariable": "JAVA_HOME",
+            "value": "/Library/Java/JavaVirtualMachines/jdk1.8.0_261.jdk/Contents/Home"
+        }
+    ],
+    //#endregion
+
+    //#region Go-related
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
+    //#endregion
+
+    //#region General Look-and-Feel
+    "editor.fontFamily": "Iosevka, Fira Code, Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.lineNumbers": "off",
+    "editor.minimap.enabled": false,
+    "editor.rulers": [ 80, 120 ],
+    "editor.tabSize": 2,
+
+    "workbench.activityBar.visible": false,
+    "workbench.statusBar.visible": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.tabCloseButton": "off",
+    "workbench.iconTheme": "material-icon-theme",
+
+    "breadcrumbs.enabled": true,
+    "liveshare.showInStatusBar": "whileCollaborating",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "window.zoomLevel": 1,
+    //#endregion
+
+    //#region Quality-of-Life Improvements
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.insertSpaces": true,
+    "editor.tabCompletion": "off",
+    "editor.suggestSelection": "first",
+    "explorer.confirmDelete": false,
+    //#endregion
+
+    //#region Other Programming Languages
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+
+    "[csharp]": { "editor.defaultFormatter": "ms-vscode.csharp" },
+    "[html]": { "editor.defaultFormatter": "HookyQR.beautify" },
+    //#endregion
+
+    //#region Python-related
+    "jupyter.askForKernelRestart": false,
+    "jupyter.useNotebookEditor": false,
+    "python.pythonPath": "C:\\Users\\Yong Jie\\.virtualenvs\\SupervisedLearningEngine-1SVfHGH6\\Scripts\\python.exe",
+    "python.languageServer": "Pylance",
+    "vsintellicode.python.completionsEnabled": false,
+
+    "[python]": { "editor.defaultFormatter": "ms-python.python" },
+    //#endregion
+
+    //#region Extension: GitLens
+    "git.path": "D:\\Program Files\\Git\\cmd\\git.exe",
+
+    "gitlens.advanced.telemetry.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.mode.active": "zen",
+    "gitlens.hovers.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "gitlens.statusBar.enabled": false,
+    "gitlens.views.repositories.files.layout": "list",
+    //#endregion
+
+    //#region Misc
+    "terminal.external.windowsExec": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+
+    "terminal.integrated.commandsToSkipShell": [
+        "-editor.action.toggleTabFocusMode",
+        "-workbench.action.quickOpen",
+        "-workbench.action.terminal.focusFindWidget"
+    ],
+
+    "workbench.editorAssociations": [
+        { "viewType": "jupyter.notebook.ipynb", "filenamePattern": "*.ipynb" }
+    ],
+
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false
+    //#endregion
+}
