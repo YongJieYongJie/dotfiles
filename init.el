@@ -25,11 +25,21 @@
 ;;     - http://endlessparentheses.com/get-in-the-habit-of-using-sharp-quote.html
 ;;   - Learn how folding works in Emacs, develop a workflow.
 
-;;; Code:
+
+;;;-----------------------------------------------------------------------------
+;;; Per-Machine Settings
+;;;-----------------------------------------------------------------------------
+
+;; Set yj-org-directory to the base directory for org-mode. E.g.,
+;; "/home/yongjie/syncthing/org".
+(defvar yj-org-directory "/home/yongjie/syncthing/org")
+(setq default-directory yj-org-directory)
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Emacs GUI-related
 ;;;-----------------------------------------------------------------------------
+
 (setq inhibit-startup-message t)
 
 (tool-bar-mode -1)
@@ -53,12 +63,6 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-
-;;;-----------------------------------------------------------------------------
-;;; Per-Machine Settings
-;;;-----------------------------------------------------------------------------
-
-(setq default-directory "/Users/yongjiekhoo/syncthing/macbook/org")
 
 ;;;-----------------------------------------------------------------------------
 ;;; Vanilla Emacs Settings
@@ -389,25 +393,23 @@
             (local-set-key (kbd "C-c a") #'org-agenda)))
 
 ;;; Org-capture
-(setq org-directory "C:/syncthing/org")
-(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-directory yj-org-directory)
+(setq org-default-notes-file (concat org-directory "/main.org"))
 
 ;; C-c c to start capture mode
 (global-set-key (kbd "C-c c") 'org-capture)
 
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 (setq org-capture-templates
-      (quote (("t" "todo" entry (file+datetree "C:/syncthing/org/todo.org")
-               "* TODO %?\nCreated %U\n")
-              ("c" "chat_logs" entry (file+datetree "C:/syncthing/org/conversations.org")
-               "* Chat with %?\nCreated: %U\n")
-              ("t" "todo" entry (file+datetree "/Users/yongjiekhoo/syncthing/macbook/org/captured-todos.org")
-              "* TODO %?\nCreated %U\n"))))
+      (quote (("t" "todo" entry (file+datetree (concat org-directory "/captured-todos.org"))
+              "* TODO %?\nCreated %U\n")
+              ("c" "chat_logs" entry (file+datetree (concat org-directory "/conversations.org"))
+               "* Chat with %?\nCreated: %U\n"))))
 
 ;; Recursively adds file ending with .org to the agenda files, required
 ;; because newly created files are not automatically added.
 (setq org-agenda-files (directory-files-recursively
-                        "C:/syncthing/org/" "\\.org$"))
+                        (concat org-directory "/") "\\.org$"))
 (setq org-agenda-files (cl-remove-if
                         (lambda (k)
                           (or (string-match ".stversions" k) ; removes syncthing artefacts
