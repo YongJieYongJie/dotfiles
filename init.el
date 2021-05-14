@@ -74,7 +74,14 @@
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 (recentf-mode 1)
-(run-at-time nil (* 5 60) 'recentf-save-list)
+;; Using a lambda to save silently; based on stackechange answer:
+;; https://emacs.stackexchange.com/a/45700/23895
+(run-at-time nil (* 5 60) (lambda ()
+                            (let ((save-silently t))
+                              (recentf-save-list))))
+
+;; don't print message when auto-saving
+(setq-default auto-save-no-message t)
 
 ;; remember cursor position, for emacs 25.1 or later
 (save-place-mode 1)
