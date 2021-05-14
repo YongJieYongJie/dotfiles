@@ -166,21 +166,13 @@
 ;;; Look-and-Feel
 ;;;-----------------------------------------------------------------------------
 
+;; Use the zenburn theme, which is the default for the Prelude
+;; distribution (https://github.com/bbatsov/prelude), which is the
+;; distribution that first made Emacs a true delight for me.
 (use-package zenburn-theme
   :ensure t
   :config
   (load-theme 'zenburn t))
-
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t)
-
-(use-package solarized-theme
-  :ensure t)
-;;(use-package solarized-theme
-;;  :ensure t
-;;  :config
-;;  (load-theme 'solarized-dark t))
-
 
 ;; Display characters beyond column 80 in a different color
 (setq-default
