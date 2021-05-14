@@ -470,6 +470,9 @@
 ;; Display white space characters.
 (add-hook 'prog-mode-hook #'whitespace-mode)
 
+;; Show verticle line at column 80.
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+
 ;; Highlight matching parenthesis in programming modes.
 (add-hook 'prog-mode-hook #'show-paren-mode)
 
