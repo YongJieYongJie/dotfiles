@@ -407,8 +407,11 @@
 (setq org-directory yj-org-directory)
 (setq org-default-notes-file (concat org-directory "/main.org"))
 
-;; C-c c to start capture mode
+;; C-c c to start org-capture
 (global-set-key (kbd "C-c c") 'org-capture)
+
+;; C-c a to start org-agenda
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 (setq org-capture-templates
