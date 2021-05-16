@@ -499,6 +499,9 @@
 (add-hook 'org-mode-hook #'visual-line-mode)
 (add-hook 'org-mode-hook #'hl-line-mode)
 
+;; Treat CamelCaseSubWords as separate words (affects keys like "M-b"/"M-f").
+(add-hook 'org-mode-hook #'subword-mode)
+
 ;;; Org-capture
 (setq org-directory yj-org-directory)
 (setq org-default-notes-file (concat org-directory "/main.org"))
