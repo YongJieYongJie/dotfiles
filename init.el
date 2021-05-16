@@ -546,7 +546,48 @@
 
 
 ;;;-----------------------------------------------------------------------------
-;;; Programming Mode: typescript
+;;; Programming Mode: lsp-mode
+;;;-----------------------------------------------------------------------------
+
+;; Adapted from lsp-mode official page:
+;; https://emacs-lsp.github.io/lsp-mode/page/installation/
+;;
+;; For details on how to configure the UI more, see
+;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+(use-package lsp-mode
+  :ensure t
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (go-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+;; optionally
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :config
+  (setq lsp-ui-doc-enable nil))
+;; if you are helm user
+;;(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+;; if you are ivy user
+;;(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs
+  :ensure t
+  :commands lsp-treemacs-errors-list
+  :config
+  (treemacs-resize-icons 16))
+
+;; optionally if you want to use debugger
+;;(use-package dap-mode)
+;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+
+
+;;;-----------------------------------------------------------------------------
+;;; Programming Mode: TypeScript
 ;;;-----------------------------------------------------------------------------
 
 (use-package typescript-mode
