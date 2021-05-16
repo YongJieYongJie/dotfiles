@@ -63,6 +63,15 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; delight allows us to hide major and minor modes from the mode-line. For
+;; built-in modes, the configuration will be located here; whereas for installed
+;; modes, they will be configured in the respective use-package section.
+(use-package delight
+  :ensure t
+  :config
+  (delight 'whitespace-mode nil "whitespace")
+  (delight 'subword-mode nil "subword"))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Vanilla Emacs Settings
@@ -267,6 +276,7 @@
 ;; which-key
 (use-package which-key
   :ensure t
+  :delight which-key-mode
   :config (which-key-mode))
 
 (use-package protobuf-mode
