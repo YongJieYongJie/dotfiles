@@ -182,6 +182,26 @@
  whitespace-line-column 80
  whitespace-style       '(face lines-tail))
 
+;; smart-mode-line provides a less ugly mode-line:
+;; (https://github.com/Malabarba/smart-mode-line)
+;; TODO: Continue evaluating this mode-line and make changes as necessary
+(use-package smart-mode-line
+  :ensure t
+  :defer 0.2
+  :config
+  (sml/setup)
+  (setq sml/mode-width 'full
+        sml/name-width 30))
+
+;; hide-mode-line-mode is a minor mode that hides the mode-line. We
+;; can use it to toggle the visibility of mode-line by
+;; enabling/disabling the minor mode.
+;; (https://github.com/hlissner/emacs-hide-mode-line)
+(use-package hide-mode-line
+  :ensure t
+  :commands hide-mode-line-mode)
+
+
 ;;;-----------------------------------------------------------------------------
 ;;; Miscellaneus / Minor Packages
 ;;;-----------------------------------------------------------------------------
