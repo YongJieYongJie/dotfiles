@@ -689,22 +689,6 @@
 
 
 ;;;-----------------------------------------------------------------------------
-;;; Programming Mode: C#
-;;;-----------------------------------------------------------------------------
-
-;;(use-package csharp-mode
-;;  :ensure t)
-;;
-;;(use-package omnisharp
-;;  :ensure t)
-;;
-;;(add-hook 'csharp-mode-hook #'omnisharp-mode)
-;;(add-hook 'omnisharp-mode #'company-mode)
-;;(eval-after-load 'company
-;;  '(add-to-list 'company-backends 'company-mode))
-
-
-;;;-----------------------------------------------------------------------------
 ;;; Tools: Docker
 ;;;-----------------------------------------------------------------------------
 
