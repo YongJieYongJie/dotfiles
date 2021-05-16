@@ -544,6 +544,13 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
+(use-package paredit
+  :ensure t
+  :delight
+  :commands paredit-mode
+  :init
+  (add-hook 'lisp-mode-hook #'paredit-mode))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Programming Mode: lsp-mode
@@ -605,6 +612,39 @@
 ;;;-----------------------------------------------------------------------------
 
 (add-hook 'python-mode-hook #'company-mode)
+
+
+;;;-----------------------------------------------------------------------------
+;;; Programming Mode: Clojure and other lisps
+;;;-----------------------------------------------------------------------------
+
+;;; Clojure
+(use-package clojure-mode
+  :ensure t
+  :commands clojure-mode
+  :config
+  (add-hook 'clojure-mode-hook #'eldoc-mode)
+  (add-hook 'clojure-mode-hook #'company-mode)
+  (add-hook 'clojure-mode-hook #'paredit-mode))
+
+;;; Emacs-lisp
+(add-hook 'emacs-lisp-mode-hook #'eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook #'company-mode)
+(add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+
+
+;;;-----------------------------------------------------------------------------
+;;; Programming Mode: Go
+;;;-----------------------------------------------------------------------------
+
+(use-package go-mode
+  :ensure t
+  :mode "\\.go\\'"
+  :config
+  (add-hook 'company-mode-hook #'yas-minor-mode)
+  (add-hook 'before-save-hook #'gofmt-before-save)
+  (setq gofmt-command "goimports")
+  )
 
 
 ;;;-----------------------------------------------------------------------------
