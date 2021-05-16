@@ -166,6 +166,7 @@
                          (name . "^\\*scratch\\*$")
                          (name . "^\\*Messages\\*$"))))))
 
+
 ;;;-----------------------------------------------------------------------------
 ;;; Look-and-Feel
 ;;;-----------------------------------------------------------------------------
@@ -219,7 +220,7 @@
   :ensure t)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;; golden-ration-scroll-screnn
+;; golden-ration-scroll-screen
 ;; (https://github.com/jixiuf/golden-ratio-scroll-screen)
 (use-package golden-ratio-scroll-screen
   :ensure t)
@@ -270,6 +271,7 @@
 
 (use-package protobuf-mode
   :ensure t)
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Major Packages
@@ -390,7 +392,6 @@
 ;;; Text Mode: General
 ;;;-----------------------------------------------------------------------------
 
-
 (use-package yaml-mode
   :ensure t)
 
@@ -484,9 +485,6 @@
 
 (add-hook 'org-mode-hook #'visual-line-mode)
 (add-hook 'org-mode-hook #'hl-line-mode)
-(add-hook 'org-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c a") #'org-agenda)))
 
 ;;; Org-capture
 (setq org-directory yj-org-directory)
@@ -528,6 +526,7 @@
 ;; org-agenda-clockreport-mode (using =R=), skip 0 entries.  Taken
 ;; from https://emacs.stackexchange.com/a/52691/23895.
 (setq org-agenda-clockreport-parameter-plist '(:stepskip0 t :link t :maxlevel 4 :fileskip0 t))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Text Mode: markdown-mode
