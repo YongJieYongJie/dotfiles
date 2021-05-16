@@ -107,7 +107,6 @@
 (add-to-list 'default-frame-alist '(font . "Iosevka-24"))
 (add-to-list 'default-frame-alist '(height . 24))
 (add-to-list 'default-frame-alist '(width . 60))
-(set-face-attribute 'mode-line nil :font "Iosevka-19")
 ;(set-frame-font "Iosevka 24" nil t)
 
 (setq initial-scratch-message nil)
@@ -172,7 +171,11 @@
 (use-package zenburn-theme
   :ensure t
   :config
-  (load-theme 'zenburn t))
+  (load-theme 'zenburn t)
+  ;; Make the mode-line and header-line fonts smaller. Note: This code is put
+  ;; here to prevent Zenburn from overwritting the font size.
+  (set-face-attribute 'mode-line nil :font "Iosevka-13")
+  (set-face-attribute 'header-line nil :font "Iosevka-13"))
 
 ;; Display characters beyond column 80 in a different color
 (setq-default
