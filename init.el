@@ -229,8 +229,8 @@
 
 ;; expand-region.el (https://github.com/magnars/expand-region.el)
 (use-package expand-region
-  :ensure t)
-(global-set-key (kbd "C-=") 'er/expand-region)
+  :ensure t
+  :bind ("C-=" . 'er/expand-region))
 
 ;; golden-ration-scroll-screen
 ;; (https://github.com/jixiuf/golden-ratio-scroll-screen)
@@ -258,7 +258,8 @@
 
 ;; undo-tree
 (use-package undo-tree
-  :ensure t)
+  :ensure t
+  :commands undo-tree)
 
 ;; elpy
 (use-package elpy
@@ -580,8 +581,7 @@
 
 (use-package web-mode
   :ensure t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+  :mode "\\.html?\\'")
 
 (use-package paredit
   :ensure t
@@ -637,13 +637,15 @@
 ;;;-----------------------------------------------------------------------------
 
 (use-package typescript-mode
-  :ensure t)
+  :ensure t
+  :mode "\\.ts\\'"
+  :config
+  (add-hook 'typescript-mode-hook #'yj/typescript-mode-hook))
 (defun yj/typescript-mode-hook ()
   "Custom configurations for typescript-mode."
   (setq typescript-indent-level 2)
   (setq tab-width 2)
   (setq tab-stop-list (number-sequence 2 120 2)))
-(add-hook 'typescript-mode-hook #'yj/typescript-mode-hook)
 
 
 ;;;-----------------------------------------------------------------------------
