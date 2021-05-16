@@ -70,6 +70,9 @@
 
 ;;; Some sensible defaults
 
+;; Wrap at 80 charactors by default when using "M-q"
+(setq-default fill-column 80)
+
 ;; Recent files
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
@@ -183,6 +186,9 @@
 (setq-default
  whitespace-line-column 80
  whitespace-style       '(face lines-tail))
+
+;; Display vertical line at column specified by fill-column variable
+(display-fill-column-indicator-mode)
 
 ;; smart-mode-line provides a less ugly mode-line:
 ;; (https://github.com/Malabarba/smart-mode-line)
@@ -480,9 +486,6 @@
 (add-hook 'org-mode-hook #'hl-line-mode)
 (add-hook 'org-mode-hook
           (lambda ()
-            (setq fill-column 80)))
-(add-hook 'org-mode-hook
-          (lambda ()
             (local-set-key (kbd "C-c a") #'org-agenda)))
 
 ;;; Org-capture
@@ -538,7 +541,6 @@
   :init (setq markdown-command "multimarkdown"))
 
 (add-hook 'markdown-mode-hook' 'auto-fill-mode)
-(setq fill-column 80)
 
 
 ;;;-----------------------------------------------------------------------------
