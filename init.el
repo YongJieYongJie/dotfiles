@@ -82,6 +82,9 @@
 ;; Wrap at 80 charactors by default when using "M-q"
 (setq-default fill-column 80)
 
+;; Show trailing whitespace by default
+(setq-default show-trailing-whitespace t)
+
 ;; Recent files
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
