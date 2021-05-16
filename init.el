@@ -74,7 +74,9 @@
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 (recentf-mode 1)
-;; Using a lambda to save silently; based on stackechange answer:
+;; Automatically save to the recent file list (in addition to the default
+;; behavior of saving on closing Emacs). Also using a lambda to save silently
+;; without printing a message to the minibuffer, based on stackechange answer:
 ;; https://emacs.stackexchange.com/a/45700/23895
 (run-at-time nil (* 5 60) (lambda ()
                             (let ((save-silently t))
