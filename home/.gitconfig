@@ -11,21 +11,25 @@
     can = commit --amend --no-edit
     co = checkout
     com = checkout master
-    d = !git -c core.pager=delta diff
-    dd = !git -c core.pager=delta -c delta.side-by-side=true diff
-    dlc = diff HEAD^..HEAD
+
+    d = -c core.pager=delta diff
+    dd = !git -c core.pager='delta --side-by-side' diff
+    dlc = !git d HEAD^..HEAD
     dn = diff --name-only
     dm = diff master...
     ds = !git -c core.pager=delta diff --staged
-    dds = !git -c core.pager=delta -c delta.side-by-side=true diff --staged
+    dds = !git -c core.pager='delta --side-by-side' diff --staged
     dt = difftool
     dw = diff --word-diff=color
+
     ec = config --global --edit
     f = fetch
+
     l = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
     la = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
     ll = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
     lla = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+
     mm = merge master
     prp = pull --rebase --prune
     pum = pull upstream master
