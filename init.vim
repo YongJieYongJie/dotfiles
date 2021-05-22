@@ -79,6 +79,9 @@ Plug 'antoinemadec/coc-fzf'
 " source file remains.
 Plug 'tpope/vim-fugitive'
 
+" For managing Git branches with FZF from within Vim.
+Plug 'stsewd/fzf-checkout.vim'
+
 " For easy toggling of comments (e.g., with keybinding gcc)
 Plug 'tpope/vim-commentary'
 
