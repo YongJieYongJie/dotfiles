@@ -1,9 +1,17 @@
 # -----------------Basic-------------------------------------------------------
 
-# TODO: Account for multiple display by bring the last recent space to current
-# display.
 # Toggles to last visited space (similar to Vim's b#)
-cmd + shift - t : yabai -m space --focus recent
+cmd + shift - s : yabai -m space --focus recent
+
+# TODO: Fix bug where sometimes it just doesn't work for multiple display by
+# bring the last recent space to current display.
+# Toggles to last visited space (similar to Vim's b#), if the last visited
+# space is on another display, brings it to the active display.
+cmd + shift - t : currSpaceDisplay=$(yabai -m query --displays --space | jq .index) && \
+                  recentSpaceDisplay=$(yabai -m query --displays --space recent | jq .index) && \
+                  ( [ ${currSpaceDisplay} == ${recentSpaceDisplay} ] || \
+                    yabai -m space recent --display ${currSpaceDisplay} ) && \
+                  yabai -m space --focus recent
 
 # Labelling and jumping to labelled spaces (something like the selection group
 # in Red Alert)
@@ -90,4 +98,12 @@ shift + lctrl + alt - r :
     /usr/bin/env osascript <<< \
         "display notification \"Restarting Yabai\" with title \"Yabai\""; \
     launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+
+# Print debug information
+cmd + shift - d : currSpaceIdx=$(yabai -m query --spaces --space | jq .index) && \
+                  recentSpaceIdx=$(yabai -m query --spaces --space recent | jq .index) && \
+                  currSpaceDisplay=$(yabai -m query --displays --space | jq .index) && \
+                  recentSpaceDisplay=$(yabai -m query --displays --space recent | jq .index) && \
+                  /usr/bin/env osascript <<< \
+                      "display notification \"- currSpaceIdx: $currSpaceIdx | recentSpaceIdx: $recentSpaceIdx\\n- currSpaceDisplay: $currSpaceDisplay | recentSpaceDisplay: $recentSpaceDisplay\""
 
