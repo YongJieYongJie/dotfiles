@@ -260,7 +260,8 @@
 ;; undo-tree
 (use-package undo-tree
   :ensure t
-  :commands undo-tree)
+  :config
+  (global-undo-tree-mode))
 
 ;; elpy
 (use-package elpy
