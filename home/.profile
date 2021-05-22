@@ -39,21 +39,32 @@ alias cp='cp -i -v'
 alias mv='mv -i -v'
 
 ## Listing files
-alias ls='ls --classify --color=tty'
+if [[ $(uname -s) == "Darwin" ]]; then
+  # Because macOS uses stupid BSD-based ls, and doesn't
+  # support meaningful long parameters.
+  alias ls='ls -hGF'
 
-# Basic listing
-alias l='ls'
-alias la='l --almost-all'
+  alias l='ls'
+  alias la='l -A'
+  alias ll='l -l '
+  alias lla='ll -A'
+else
+  alias ls='ls --classify --color=tty'
 
-# Long listing
-alias ll='l -l --size --human-readable'
-alias lla='ll --almost-all'
+  # Basic listing
+  alias l='ls'
+  alias la='l --almost-all'
 
-# Sort by size, time
-alias lls='ll --sort=size'
-alias llas='lla --sort=size'
-alias llt='ll --sort=time'
-alias llat='lla --sort=time'
+  # Long listing
+  alias ll='l -l --size --human-readable'
+  alias lla='ll --almost-all'
+
+  # Sort by size, time
+  alias lls='ll --sort=size'
+  alias llas='lla --sort=size'
+  alias llt='ll --sort=time'
+  alias llat='lla --sort=time'
+fi
 
 # Navigation
 alias p='pwd'
