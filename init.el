@@ -367,6 +367,20 @@
          ))
 
 
+;;; projectile
+(use-package projectile
+  :ensure t
+  :init
+  (setq projectile-completion-system 'ivy)
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map))
+  :config
+  (use-package treemacs-projectile
+    :ensure t))
+
+
 ;;;-----------------------------------------------------------------------------
 ;;; Text Mode: General
 ;;;-----------------------------------------------------------------------------
