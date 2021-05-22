@@ -291,56 +291,56 @@ set hidden
 " -----------------------------------------------------------------------------
 
 " Open file browser
-nnoremap <space>e  :<C-u>CocCommand explorer<cr>
+nnoremap <silent> <space>e  :<C-u>CocCommand explorer<cr>
 
 " Switch to previous buffer.
-nnoremap <Leader><Leader> :b#<CR>
+nnoremap <silent> <Leader><Leader> :b#<CR>
 
 " List buffers (for switching).
 "nnoremap <Leader>b :ls<CR>:b
 " Start fuzzy search for opened buffers, requires vim-fzf plugin.
-nnoremap <Leader>b :Buffers!<CR>
+nnoremap <silent> <Leader>b :Buffers!<CR>
 
 " List history (for searching).
 "nnoremap <Leader>h :<C-f>?
 " Start fuzzy search for command history, requires vim-fzf plugin.
-nnoremap <Leader>h :History!<CR>
+nnoremap <silent> <Leader>h :History!<CR>
 
 " Allow quick ad-hoc normal mode mapping.
 noremap <Leader>m :nnoremap<lt>Leader><lt>CR><Left><Left><Left><Left>
 
 " Clear search highlight.
-noremap <Leader><CR> :nohlsearch<CR>
+noremap <silent> <Leader><CR> :nohlsearch<CR>
 
 " Toggle word wrap.
-noremap <Leader>w :set wrap!<CR>
+noremap <silent> <Leader>w :set wrap!<CR>
 
 " Toggle relative number.
-noremap <Leader>n :set relativenumber!<CR>
+noremap <silent> <Leader>n :set relativenumber!<CR>
 
 " Change to directory of current file.
-noremap <leader>cd :cd %:p:h<cr>:pwd<cr>
+noremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Start fuzzy search for files, requires vim-fzf plugin.
-nnoremap <Leader>z :Files!<CR>
+nnoremap <silent> <Leader>z :Files!<CR>
 
 " Start fuzzy search for files not excluded by .gitignore, requires vim-fzf plugin.
-nnoremap <Leader>g :GFiles!<CR>
+nnoremap <silent> <Leader>g :GFiles!<CR>
 
 " Start fuzzy search lines in the current buffer, requires vim-fzf plugin.
-nnoremap // :BLines!<CR>
+nnoremap <silent> // :BLines!<CR>
 
 " Start fuzzy search for lines in all files, requires vim-fzf plugin.
-nnoremap ?? :Rg!<CR>
+nnoremap <silent> ?? :Rg!<CR>
 
 " Start fuzzy search for lines in all files with words under cursor, requires vim-fzf plugin.
-nnoremap<Leader>* :Rg! \b<c-r><c-w>\b<CR>
+nnoremap <silent> <Leader>* :Rg! \b<c-r><c-w>\b<CR>
 
 " Create folds by syntax.
-nnoremap <Leader>fs :set foldmethod=syntax<CR>
+nnoremap <silent> <Leader>fs :set foldmethod=syntax<CR>
 
 " Create folds by indent.
-nnoremap <Leader>fi :set foldmethod=indent<CR>
+nnoremap <silent> <Leader>fi :set foldmethod=indent<CR>
 
 " Open splits to the right (if horizontal) and to below (if vertical).
 set splitright
@@ -404,7 +404,7 @@ let g:crystalline_theme = 'default'
 " Settings that haven't been put into any of the categories above.
 
 " Enable syntax highlight and code folding using nvim_treesitter.
-nnoremap<Leader>t :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
+nnoremap <silent> <Leader>t :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
 
 " Enable history for fzf
 let g:fzf_history_dir = '~/.local/share/fzf-history'
@@ -481,5 +481,5 @@ function! ToggleHiddenAll()
         set showcmd
     endif
 endfunction
-nnoremap <S-h> :call ToggleHiddenAll()<CR>
+nnoremap <silent> <S-h> :call ToggleHiddenAll()<CR>
 
