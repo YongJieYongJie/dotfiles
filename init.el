@@ -74,6 +74,9 @@
 
 ;;; Some sensible defaults
 
+;; Show total number of occurence when using isearch
+(setq isearch-lazy-count t)
+
 ;; Wrap at 80 charactors by default when using "M-q"
 (setq-default fill-column 80)
 
