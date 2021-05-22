@@ -317,12 +317,13 @@
 (use-package counsel
   :ensure t
   :delight ivy-mode
-  :config
-  (ivy-mode 1)
-
+  :init
   ;; Basic customization as recommended on official documentation
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format " (%d/%d) ")
+
+  :config
+  (ivy-mode 1)
 
   ;; Below are the key bindings as listed on the official documentation.
   ;; TODO: Uncomment them out as I explore new functionalities.
@@ -338,7 +339,7 @@
          ;;("<f2> i" . counsel-info-lookup-symbol)
          ;;("<f2> u" . counsel-unicode-char)
          ;;("<f2> j" . counsel-set-variable)
-         ;;("C-x b" . ivy-switch-buffer)
+         ("C-x b" . ivy-switch-buffer)
          ;;("C-c v" . ivy-push-view)
          ;;("C-c V" . ivy-pop-view)
 
