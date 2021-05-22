@@ -82,6 +82,9 @@
 
 ;; Show trailing whitespace by default
 (setq-default show-trailing-whitespace t)
+;; Except when it doesn't make sense
+(add-hook 'eshell-mode-hook
+          (lambda () (setq-local show-trailing-whitespace nil)))
 
 ;; Recent files
 (setq recentf-max-menu-items 25)
