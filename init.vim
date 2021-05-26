@@ -86,6 +86,8 @@ Plug 'antoinemadec/coc-fzf'
 " source file remains.
 Plug 'tpope/vim-fugitive'
 
+" Add to the GBrowse command from vim-fugitive ability to open GitLab links.
+Plug 'shumphrey/fugitive-gitlab.vim'
 " For managing Git branches with FZF from within Vim.
 Plug 'stsewd/fzf-checkout.vim'
 
@@ -119,6 +121,10 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+
+Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
+" Modifies GBrowse command added by tpope/vim-fugitive to open bitbucket links
+Plug 'tommcdo/vim-fubitive'
 call plug#end()
 
 
