@@ -125,6 +125,13 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
 " Modifies GBrowse command added by tpope/vim-fugitive to open bitbucket links
 Plug 'tommcdo/vim-fubitive'
+" For typescript development, based on excellent article at
+" https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim.
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
 call plug#end()
 
 
