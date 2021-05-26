@@ -151,6 +151,16 @@
       auto-save-interval 200       ; number of keystrokes between auto-saves (default 300)
       )
 
+;; Auto-save files
+(defvar --auto-save-directory (concat user-emacs-directory "auto-saves"))
+(if (not (file-exists-p --auto-save-directory))
+    (make-directory --auto-save-directory t))
+;;https://stackoverflow.com/a/15303598/5821101
+(add-to-list
+ 'auto-save-file-name-transforms
+ (list "\\(.+/\\)*\\(.*?\\)" (expand-file-name "\\2" --auto-save-directory))
+ t)
+
 
 ;; Display column number in mode line.
 (column-number-mode 1)
