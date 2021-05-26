@@ -132,6 +132,10 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
+" For using neovim to edit all textareas in browser.
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+
 call plug#end()
 
 
@@ -438,6 +442,17 @@ let g:crystalline_theme = 'default'
 " Mess
 " -----------------------------------------------------------------------------
 " Settings that haven't been put into any of the categories above.
+
+" Configure font size for firenvim
+function! OnUIEnter(event)
+  let l:ui = nvim_get_chan_info(a:event.chan)
+  if has_key(l:ui, 'client') && has_key(l:ui.client, 'name')
+    if l:ui.client.name ==# 'Firenvim'
+      set guifont=Iosevka:h20
+    endif
+  endif
+endfunction
+autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 
 " Enable syntax highlight and code folding using nvim_treesitter.
 nnoremap <silent> <Leader>t :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
