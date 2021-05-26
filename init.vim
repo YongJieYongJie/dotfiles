@@ -60,6 +60,12 @@ Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 " Basic modern theme.
 Plug 'joshdick/onedark.vim'
 
+" IntelliJ's default dark theme (Darcula), so people think I'm using IntelliJ.
+" TODO: Use lightline with darcula theme as recommended by the "doumns/darcula"
+" author: https://github.com/doums/darcula
+Plug 'doums/darcula'
+
+
 " Show a status line to clearly delineates vertical splits.
 Plug 'rbong/vim-crystalline'
 
@@ -253,7 +259,8 @@ if (empty($TMUX))
   endif
 endif
 
-colorscheme onedark
+" colorscheme onedark
+colorscheme darcula
 
 
 " -----------------------------------------------------------------------------
