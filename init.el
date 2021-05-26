@@ -223,7 +223,9 @@
 ;; (https://github.com/hlissner/emacs-hide-mode-line)
 (use-package hide-mode-line
   :ensure t
-  :commands hide-mode-line-mode)
+  :defer 0.2
+  :config
+  (global-hide-mode-line-mode))
 
 
 ;;;-----------------------------------------------------------------------------
