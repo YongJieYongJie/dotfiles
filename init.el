@@ -355,7 +355,7 @@
   :bind (;;("C-s" . swiper-isearch)
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("M-y" . counsel-yank-pop)
+         ;;("M-y" . counsel-yank-pop) ;; tried and did not like
          ;;("<f1> f" . counsel-describe-function)
          ;;("<f1> v" . counsel-describe-variable)
          ;;("<f1> l" . counsel-find-library)
