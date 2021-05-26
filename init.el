@@ -310,16 +310,25 @@
 
 (use-package company
   :ensure t
+  :commands company-mode
   :config
 
   ;; Immediately show completions after two characters are typed
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
 
+  (setq company-show-numbers t)
+
   ;; Enable company-tng-mode, which uses tab key for navigating through
   ;; suggestions, and inserting into the buffer the currently suggestion as we
   ;; are tabbing through. For more, details, see the comany-tng.el file.
   (add-hook 'after-init-hook 'company-tng-mode)
+
+  ;; Use "c-n" and "c-p" to navigate lines in the file (as opposed to
+  ;; company-mode's suggestions) as I already use tab to navigate the
+  ;; suggestions.
+  (define-key company-active-map (kbd "C-n") #'next-line)
+  (define-key company-active-map (kbd "C-p") #'previous-line)
   )
 
 
