@@ -661,7 +661,8 @@
   :ensure t
   :commands lsp-ui-mode
   :config
-  (setq lsp-ui-doc-enable nil))
+  (setq lsp-ui-doc-enable nil)
+  (setq lsp-headerline-breadcrumb-enable nil))
 ;; if you are helm user
 ;;(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 ;; if you are ivy user
