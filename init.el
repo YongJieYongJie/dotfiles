@@ -587,7 +587,7 @@
 (add-hook 'prog-mode-hook #'yj/show-whitespace-local)
 
 ;; Treat CamelCaseSubWords as separate words in every programming mode.
-(add-hook 'prog-mode-hook #'subword-mode)
+;;(add-hook 'prog-mode-hook #'subword-mode)
 
 (use-package web-mode
   :ensure t
