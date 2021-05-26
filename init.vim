@@ -15,6 +15,7 @@ let yjPluginDir=''
 
 " For no particular reason.
 echo " ಠ_ಠ"
+nnoremap <space>( :echo " ಠ_ಠ"<cr>
 
 
 " -----------------------------------------------------------------------------
@@ -292,6 +293,9 @@ set hidden
 " -----------------------------------------------------------------------------
 " Keymappings
 " -----------------------------------------------------------------------------
+
+" Copy file path to clipboard
+nnoremap <silent> <leader>yf :let @* = expand("%:p")<cr>
 
 " Open file browser
 nnoremap <silent> <space>e  :<C-u>CocCommand explorer<cr>
