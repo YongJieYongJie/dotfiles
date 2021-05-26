@@ -3,8 +3,6 @@
 # contain shell-specific items; also, they may not be loaded by programs like
 # tmux, so we are sourcing it here.
 
-# Uncomment the relevant line as necessary, depending on whether I'm using zsh
-# or bash.
 if [ -n "$ZSH_VERSION" ]; then
   source "$HOME/.zshrc"
 fi
@@ -105,12 +103,12 @@ alias rg='rg --smart-case'
 #################################
 
 ## Go
-export GOROOT="/usr/local/go"
-export PATH="$GOROOT/bin:$PATH"
-export GOPATH="$HOME/go"
-export GOBIN="$GOPATH/bin"
-export PATH="$GOBIN:$PATH"
+#export GOROOT="/usr/local/go"
+#export PATH="$GOROOT/bin:$PATH"
+#export GOPATH="$HOME/go"
+#export GOBIN="$GOPATH/bin"
+#export PATH="$GOBIN:$PATH"
 
 ## Rust
-source "$HOME/.cargo/env"
-export PATH="$HOME/.cargo/bin:$PATH"
+#source "$HOME/.cargo/env"
+#export PATH="$HOME/.cargo/bin:$PATH"
