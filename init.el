@@ -401,6 +401,8 @@
               ("C-c p" . projectile-command-map))
   :config
   (use-package treemacs-projectile
+    :ensure t)
+  (use-package projectile-ripgrep
     :ensure t))
 
 
