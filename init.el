@@ -232,6 +232,16 @@
 ;;; Miscellaneus / Minor Packages
 ;;;-----------------------------------------------------------------------------
 
+;; git-gutter mode is used to disable in the left gutter indicators showing
+;; whether the current line is added / modified.
+;; (https://github.com/emacsorphanage/git-gutter)
+(use-package git-gutter
+  :ensure t
+  :config
+  (global-git-gutter-mode)
+  :bind (("M-n" . git-gutter:next-hunk)
+         ("M-p" . git-gutter:previous-hunk)))
+
 ;; expand-region.el (https://github.com/magnars/expand-region.el)
 (use-package expand-region
   :ensure t
