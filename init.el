@@ -80,12 +80,6 @@
 ;; Wrap at 80 charactors by default when using "M-q"
 (setq-default fill-column 80)
 
-;; Show trailing whitespace by default
-(setq-default show-trailing-whitespace t)
-;; Except when it doesn't make sense
-(add-hook 'eshell-mode-hook
-          (lambda () (setq-local show-trailing-whitespace nil)))
-
 ;; Recent files
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
@@ -198,7 +192,7 @@
 
 ;; Display characters beyond column 80 in a different color
 (setq-default
- whitespace-line-column 80
+ whitespace-line-column 100
  whitespace-style       '(face lines-tail))
 
 ;; Display vertical line at column specified by fill-column variable
@@ -388,12 +382,12 @@
 (use-package yaml-mode
   :ensure t)
 
-;; Adapted from http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html
 ;; "text-mode" is a major mode for editing files of text in a human language
 ;; most major modes for non-programmers inherit from text-mode.
 (add-hook 'text-mode-hook 'text-mode-hook-setup)
-(add-hook 'text-mode-hook #'whitespace-mode)
 (add-hook 'text-mode-hook #'company-mode)
+
+;; Adapted from http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html
 (defun text-mode-hook-setup ()
   ;; make `company-backends' local is critcal
   ;; or else, you will have completion in every major mode, that's very annoying!
@@ -401,6 +395,11 @@
 
   ;; company-ispell is the plugin to complete words
   (add-to-list 'company-backends 'company-ispell))
+
+(defun yj/show-whitespace-local ()
+  ;; Show trailing white spaces
+  (setq-local show-trailing-whitespace t))
+(add-hook 'text-mode-hook #'yj/show-whitespace-local)
 
 (defun toggle-company-ispell ()
   (interactive)
@@ -546,14 +545,14 @@
 ;; shell and terminal modes).
 (add-hook 'prog-mode-hook #'hl-line-mode)
 
-;; Display white space characters.
-(add-hook 'prog-mode-hook #'whitespace-mode)
-
 ;; Show verticle line at column 80.
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
 
 ;; Highlight matching parenthesis in programming modes.
 (add-hook 'prog-mode-hook #'show-paren-mode)
+
+;; Display white space characters.
+(add-hook 'prog-mode-hook #'yj/show-whitespace-local)
 
 ;; Treat CamelCaseSubWords as separate words in every programming mode.
 (add-hook 'prog-mode-hook #'subword-mode)
