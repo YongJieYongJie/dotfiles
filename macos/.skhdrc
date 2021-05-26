@@ -55,7 +55,7 @@ shift + alt - 8 : yabai -m display --focus next
 # NOTE 2: It will not work nicely with Emacs, because it seems Emacs doesn't
 # play nice with macOS's mission control.
 #
-cmd + shift - right : prevLabel="label_$RANDOM" && \
+ctrl + shift - right : prevLabel="label_$RANDOM" && \
                       prevIdx=$(yabai -m query --spaces --space prev | jq .index) && \
                       yabai -m space $prevIdx --label $prevLabel && \
                       currLabel="label_$RANDOM" && \
@@ -65,7 +65,7 @@ cmd + shift - right : prevLabel="label_$RANDOM" && \
                       yabai -m space --focus $prevLabel && \
                       yabai -m space --focus $currLabel 
 
-cmd + shift - left : prevLabel="label_$RANDOM" && \
+ctrl + shift - left : prevLabel="label_$RANDOM" && \
                      prevIdx=$(yabai -m query --spaces --space prev | jq .index) && \
                      yabai -m space $prevIdx --label $prevLabel && \
                      currLabel="label_$RANDOM" && \
