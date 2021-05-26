@@ -189,10 +189,33 @@
 ;; Use the zenburn theme, which is the default for the Prelude
 ;; distribution (https://github.com/bbatsov/prelude), which is the
 ;; distribution that first made Emacs a true delight for me.
-(use-package zenburn-theme
+;; (use-package zenburn-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'zenburn t)
+;;   ;; Make the mode-line and header-line fonts smaller. Note: This code is put
+;;   ;; here to prevent Zenburn from overwritting the font size.
+;;   (set-face-attribute 'mode-line nil :font "Iosevka-17")
+;;   (set-face-attribute 'header-line nil :font "Iosevka-17"))
+
+;; Use Visual Studio's default Dark+ theme, so people think you are a VSCode
+;; user.
+(use-package solaire-mode
   :ensure t
+  :hook ((change-major-mode . turn-on-solaire-mode)
+         (after-revert . turn-on-solaire-mode)
+         (ediff-prepare-buffer . solaire-mode)
+         (minibuffer-setup . solaire-mode-in-minibuffer))
   :config
-  (load-theme 'zenburn t)
+  (add-to-list 'solaire-mode-themes-to-face-swap '"vscode-dark-plus")
+  (setq solaire-mode-auto-swap-bg t)
+  (solaire-global-mode +1))
+
+(use-package vscode-dark-plus-theme
+  :ensure t
+  :after solaire-mode
+  :config
+  (load-theme 'vscode-dark-plus t)
   ;; Make the mode-line and header-line fonts smaller. Note: This code is put
   ;; here to prevent Zenburn from overwritting the font size.
   (set-face-attribute 'mode-line nil :font "Iosevka-13")
