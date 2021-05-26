@@ -580,6 +580,9 @@
 ;; Highlight matching parenthesis in programming modes.
 (add-hook 'prog-mode-hook #'show-paren-mode)
 
+;; Automatically close parentheses, brackets, quotes, etc.
+(add-hook 'prog-mode-hook #'electric-pair-local-mode)
+
 ;; Display white space characters.
 (add-hook 'prog-mode-hook #'yj/show-whitespace-local)
 
