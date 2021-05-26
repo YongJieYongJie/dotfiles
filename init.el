@@ -713,7 +713,9 @@
 
 (use-package magit
   :ensure t
-  :commands magit-status)
+  :commands magit-status
+  :config
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
 
 ;;;-----------------------------------------------------------------------------
