@@ -364,6 +364,10 @@
   (define-key company-active-map (kbd "C-p") #'previous-line)
   )
 
+(use-package company-quickhelp
+  :after company
+  :config
+  (company-quickhelp-mode 1))
 
 ;;; Counsel (includes the dependencies Ivy and Swiper)
 ;;; (https://oremacs.com/swiper/)
