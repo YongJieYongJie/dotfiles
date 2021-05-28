@@ -65,9 +65,8 @@ Plug 'joshdick/onedark.vim'
 " author: https://github.com/doums/darcula
 Plug 'doums/darcula'
 
-
-" Show a status line to clearly delineates vertical splits.
-Plug 'rbong/vim-crystalline'
+" Use a mode line that matches the Darcula theme just above.
+Plug 'itchyny/lightline.vim'
 
 " Show number of matches and current match index for operations like *.
 Plug 'google/vim-searchindex'
@@ -166,6 +165,9 @@ set updatetime=300
 set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
+" Remove the "-- INSERT --" text in the command area because the status line
+" already shows this information.
+set noshowmode
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -386,56 +388,40 @@ let g:fzf_preview_window = 'up:77%'
 
 
 " -----------------------------------------------------------------------------
-" vim-crystalline settings
+" lightline.vim settings
 " -----------------------------------------------------------------------------
 
-" Use single character to indicate the current mode.
-let g:crystalline_mode_labels = {
-			\ 'n': ' N ',
-			\ 'i': ' I ',
-			\ 'v': ' V ',
-			\ 'R': ' R ',
-			\ '': '',
-			\ }
-
-function! StatusLine(current, width)
-  let l:s = ''
-
-  if a:current
-    let l:s .= crystalline#mode() . crystalline#right_mode_sep('')
-  else
-    let l:s .= '%#CrystallineInactive#'
-  endif
-  let l:s .= ' %t%h%w%m%r '
-  if a:current
-    let l:s .= crystalline#right_sep('', 'Fill') . ' %{len(fugitive#head())==0?"[No Branch]":fugitive#head()}'
-    let l:s .= ' %{len(coc#status())==0?"":"| " . coc#status()}'
-    let l:s .= "%{len(get(b:,'coc_current_function',''))==0?'':'| ' . get(b:,'coc_current_function','')}"
-  endif
-
-  let l:s .= '%='
-  if a:current
-    let l:s .= crystalline#left_sep('', 'Fill') . ' %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""}'
-    let l:s .= crystalline#left_mode_sep('')
-  endif
-  if a:width > 80
-    let l:s .= ' %{&ft}[%{&fenc!=#""?&fenc:&enc}][%{&ff}] %l/%L %c%V %P '
-  else
-    let l:s .= ' '
-  endif
-
-  return l:s
+function! CocCurrentFunction()
+  return get(b:,'coc_current_function','')
 endfunction
 
-function! TabLine()
-  let l:vimlabel = has('nvim') ?  ' NVIM ' : ' VIM '
-  return crystalline#bufferline(2, len(l:vimlabel), 1) . '%=%#CrystallineTab# ' . l:vimlabel
-endfunction
-
-let g:crystalline_enable_sep = 1
-let g:crystalline_statusline_fn = 'StatusLine'
-let g:crystalline_tabline_fn = 'TabLine'
-let g:crystalline_theme = 'default'
+let g:lightline = {
+     \ 'colorscheme': 'darculaOriginal',
+     \ 'active': {
+       \ 'left': [ [ 'mode', 'paste' ],
+                 \ [ 'gitBranch', 'readonly', 'filename', 'modified' ],
+                 \ [ 'currentFunction' ]],
+       \ 'right': [ [ 'lineinfo' ], [ 'cocStatus' ] ],
+     \ },
+     \ 'component_function': {
+       \ 'gitBranch': 'FugitiveHead',
+       \ 'currentFunction': 'CocCurrentFunction',
+       \ 'cocStatus': 'coc#status'
+     \ },
+     \ 'mode_map': {
+       \ 'n' : 'N',
+       \ 'i' : 'I',
+       \ 'R' : 'R',
+       \ 'v' : 'V',
+       \ 'V' : 'VL',
+       \ "\<C-v>": 'VB',
+       \ 'c' : 'C',
+       \ 's' : 'S',
+       \ 'S' : 'SL',
+       \ "\<C-s>": 'SB',
+       \ 't': 'T'
+     \ },
+   \ }
 
 
 " -----------------------------------------------------------------------------
