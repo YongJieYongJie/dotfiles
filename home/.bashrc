@@ -57,4 +57,4 @@ ${YELLOW}[\t]${RESET} ${CYAN}\W${RESET}${GREEN}\$(__git_ps1 \" (%s)\")${RESET}
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
 [ -f ~/.git-completion.bash ] && source ~/.git-completion.bash
-
+command -v kubectl >> /dev/null && source <(kubectl completion bash)
