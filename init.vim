@@ -84,6 +84,10 @@ Plug 'antoinemadec/coc-fzf'
 " shows the output in two vertical splits, and the syntax highlight for the
 " source file remains.
 Plug 'tpope/vim-fugitive'
+" An extension to vim-fugitive for better viewing of branches (something like
+" git log --pretty=one-line --graph).
+Plug 'rbong/vim-flog'
+let g:flog_permanent_default_arguments = { 'date': 'short' }
 
 " Add to the GBrowse command from vim-fugitive ability to open GitLab links.
 Plug 'shumphrey/fugitive-gitlab.vim'
