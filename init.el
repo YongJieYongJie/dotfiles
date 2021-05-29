@@ -67,6 +67,15 @@
   (delight 'whitespace-mode nil "whitespace")
   (delight 'subword-mode nil "subword"))
 
+;; exec-path-from-shell makes Emacs use the $PATH environment variable as set up
+;; by the user's shell, so that it can find the necessary binaries (e.g.,
+;; language servers) more easily.
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Vanilla Emacs Settings
