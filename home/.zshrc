@@ -62,7 +62,7 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # configure fzf fuzzy finder to popup below
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse
 --bind=ctrl-alt-f:page-down,ctrl-alt-b:page-up,ctrl-alt-n:preview-page-down,ctrl-alt-p:preview-page-up'
 
 ### Added by Zinit's installer
