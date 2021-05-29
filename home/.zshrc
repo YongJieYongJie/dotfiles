@@ -115,3 +115,11 @@ WORDCHARS=${WORDCHARS//[\/-]}
 # Case-insensitve completion. Copied from
 # https://stackoverflow.com/a/24237590/5821101.
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# Use LS_COLORS from https://github.com/trapd00r/LS_COLORS. Take note however
+# that the script from within that repository generates the code for bash and
+# csh only, and have to be tweak for zsh (by removing quotation marks etc.).
+if [[ -f ~/.local/share/lscolors ]]; then
+  export LS_COLORS=$(cat ~/.local/share/lscolors)
+  zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+fi
