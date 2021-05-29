@@ -210,6 +210,11 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+" Modify coc.nvim's four commands above to use FZF using antoinemadec/coc-fzf,
+" and configuring the FZF to be fullscreen
+let g:coc_fzf_preview_fullscreen = 1
+let g:coc_fzf_preview = 'up:77%'
+let g:coc_fzf_opts = ['--layout=reverse']
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
