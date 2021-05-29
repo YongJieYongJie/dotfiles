@@ -373,10 +373,39 @@
   (define-key company-active-map (kbd "C-p") #'previous-line)
   )
 
-(use-package company-quickhelp
-  :after company
-  :config
-  (company-quickhelp-mode 1))
+;; TODO: Find a way to get company-mode to also show documentation in a
+;; user-friendly manner. Currently, when selecting a completion candidate, I can
+;; press "C-d" to show the documentation in is buffer that'll take up half the
+;; screen; this is horrible. I have also tried various other packages:
+;;
+;;  - company-posframe: seems to be a little too heavy. Current complaints:
+;;    1. still need to find a way to reconfigure bindings to use tab to navigate
+;;       through completion candidates,
+;;    2. the documentation takes a while to show; and
+;;    3. there is screen flicker when it shows the documentation for the first
+;;       time.
+;;(use-package company-posframe
+;;  :ensure t
+;;  :after company
+;;  :config
+;;  (company-posframe-mode 1))
+;;
+;;  - company-box: Seems nice. Current complaints:
+;;    1. documentation are shown to far to the right; I'll need to find a way to
+;;       perhaps show the annotations (i.e., the function signature) in the echo
+;;       area, leaving enough space for the documentation; alternatively, I have
+;;       need to find a way to show the function signature + documentation
+;;       together
+;; (use-package company-box
+;;   :ensure t
+;;   :hook (company-mode . company-box-mode))
+;;
+;;  - company-quickhelp
+;;(use-package company-quickhelp
+;;  :after company
+;;  :config
+;;  (company-quickhelp-mode 1))
+
 
 ;;; Counsel (includes the dependencies Ivy and Swiper)
 ;;; (https://oremacs.com/swiper/)
