@@ -10,11 +10,6 @@ if [ -n "$BASH" ]; then
   source "$HOME/.bashrc"
 fi
 
-# Source machine-specific profile if exists.
-if [ -f "$HOME/.local/profile" ]; then
-  source "$HOME/.local/profile"
-fi
-
 # Set PATH so it includes user's private bin if it exists.
 if [ -d "$HOME/bin" ]; then
   PATH="$HOME/bin:$PATH"
@@ -112,3 +107,14 @@ alias rg='rg --smart-case'
 ## Rust
 #source "$HOME/.cargo/env"
 #export PATH="$HOME/.cargo/bin:$PATH"
+
+
+###################
+# Local Overrides #
+###################
+
+# Source machine-specific profile if exists.
+if [ -f "$HOME/.local/profile" ]; then
+  source "$HOME/.local/profile"
+fi
+
