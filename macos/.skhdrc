@@ -34,11 +34,12 @@ cmd + ctrl - 5 : yabai -m space --focus five
 # -----------------Multi-Display-----------------------------------------------
 
 # Move window to recent display
-shift + alt - 9 : yabai -m window --display next && \
-                  yabai -m display --focus recent
+# Commenting out for now because conflicts with "M-(" in Emacs.
+#shift + alt - 9 : yabai -m window --display next && \
+#                  yabai -m display --focus recent
 
 # Focus recent display
-shift + alt - 8 : yabai -m display --focus next
+#shift + alt - 8 : yabai -m display --focus next
 
 # Move space to next display (or the first display if already at the end). The
 # script works roughly as follows:
