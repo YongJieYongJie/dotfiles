@@ -294,6 +294,7 @@
 ;; (https://github.com/emacsorphanage/git-gutter)
 (use-package git-gutter
   :ensure t
+  :delight git-gutter-mode
   :config
   (global-git-gutter-mode)
   :bind (("M-n" . git-gutter:next-hunk)
@@ -331,6 +332,7 @@
 ;; undo-tree
 (use-package undo-tree
   :ensure t
+  :delight undo-tree-mode
   :config
   (global-undo-tree-mode))
 
@@ -343,6 +345,7 @@
 ;; flycheck
 (use-package flycheck
   :ensure t
+  :delight flycheck-mode
   :init (global-flycheck-mode))
 
 (setq flycheck-check-syntax-automatically '(mode-enabled save))
@@ -483,6 +486,7 @@
 ;;; projectile
 (use-package projectile
   :ensure t
+  :delight projectile-mode
   :init
   (setq projectile-completion-system 'ivy)
   (projectile-mode +1)
