@@ -275,6 +275,14 @@
 ;;; Miscellaneus / Minor Packages
 ;;;-----------------------------------------------------------------------------
 
+;; deadgrep is used for dwim grepping. Grepping is static (as opposed to live),
+;; and the results are presented in a user-friendly buffer. Depending on use
+;; case, I might choose between using this or counsel-rg.
+;; (https://github.com/Wilfred/deadgrep)
+(use-package deadgrep
+  :ensure t
+  :commands deadgrep)
+
 ;; git-gutter mode is used to disable in the left gutter indicators showing
 ;; whether the current line is added / modified.
 ;; (https://github.com/emacsorphanage/git-gutter)
@@ -477,8 +485,6 @@
               ("C-c p" . projectile-command-map))
   :config
   (use-package treemacs-projectile
-    :ensure t)
-  (use-package projectile-ripgrep
     :ensure t))
 
 
