@@ -275,6 +275,12 @@
 ;;; Miscellaneus / Minor Packages
 ;;;-----------------------------------------------------------------------------
 
+;; git-link is used to copy the URL to GitHub, GitLab, Bitbucket, etc.
+;; (https://github.com/sshaw/git-link)
+(use-package git-link
+  :ensure t
+  :commands git-link)
+
 ;; deadgrep is used for dwim grepping. Grepping is static (as opposed to live),
 ;; and the results are presented in a user-friendly buffer. Depending on use
 ;; case, I might choose between using this or counsel-rg.
