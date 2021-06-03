@@ -205,18 +205,6 @@
 ;;; Look-and-Feel
 ;;;-----------------------------------------------------------------------------
 
-;; Use the zenburn theme, which is the default for the Prelude
-;; distribution (https://github.com/bbatsov/prelude), which is the
-;; distribution that first made Emacs a true delight for me.
-;; (use-package zenburn-theme
-;;   :ensure t
-;;   :config
-;;   (load-theme 'zenburn t)
-;;   ;; Make the mode-line and header-line fonts smaller. Note: This code is put
-;;   ;; here to prevent Zenburn from overwritting the font size.
-;;   (set-face-attribute 'mode-line nil :font "Iosevka-17")
-;;   (set-face-attribute 'header-line nil :font "Iosevka-17"))
-
 ;; Use Visual Studio's default Dark+ theme, so people think you are a VSCode
 ;; user.
 (use-package solaire-mode
@@ -226,19 +214,32 @@
          (ediff-prepare-buffer . solaire-mode)
          (minibuffer-setup . solaire-mode-in-minibuffer))
   :config
-  (add-to-list 'solaire-mode-themes-to-face-swap '"vscode-dark-plus")
+  ;; (add-to-list 'solaire-mode-themes-to-face-swap '"vscode-dark-plus")
+  (add-to-list 'solaire-mode-themes-to-face-swap 'zenburn)
   (setq solaire-mode-auto-swap-bg t)
   (solaire-global-mode +1))
 
-(use-package vscode-dark-plus-theme
+;; Use the zenburn theme, which is the default for the Prelude
+;; distribution (https://github.com/bbatsov/prelude), which is the
+;; distribution that first made Emacs a true delight for me.
+(use-package zenburn-theme
   :ensure t
-  :after solaire-mode
   :config
-  (load-theme 'vscode-dark-plus t)
+  (load-theme 'zenburn t)
   ;; Make the mode-line and header-line fonts smaller. Note: This code is put
   ;; here to prevent Zenburn from overwritting the font size.
-  (set-face-attribute 'mode-line nil :font "Iosevka-13")
-  (set-face-attribute 'header-line nil :font "Iosevka-13"))
+  (set-face-attribute 'mode-line nil :font "Iosevka-17")
+  (set-face-attribute 'header-line nil :font "Iosevka-17"))
+
+;; (use-package vscode-dark-plus-theme
+;;   :ensure t
+;;   :after solaire-mode
+;;   :config
+;;   (load-theme 'vscode-dark-plus t)
+;;   ;; Make the mode-line and header-line fonts smaller. Note: This code is put
+;;   ;; here to prevent Zenburn from overwritting the font size.
+;;   (set-face-attribute 'mode-line nil :font "Iosevka-17")
+;;   (set-face-attribute 'header-line nil :font "Iosevka-17"))
 
 ;; Display characters beyond column 80 in a different color
 (setq-default
@@ -251,13 +252,13 @@
 ;; smart-mode-line provides a less ugly mode-line:
 ;; (https://github.com/Malabarba/smart-mode-line)
 ;; TODO: Continue evaluating this mode-line and make changes as necessary
-;; (use-package smart-mode-line
-;;   :ensure t
-;;   :defer 0.2
-;;   :config
-;;   (sml/setup)
-;;   (setq sml/mode-width 'full
-;;         sml/name-width 30))
+(use-package smart-mode-line
+  :ensure t
+  :defer 0.2
+  :config
+  (sml/setup)
+  (setq sml/mode-width 'full
+        sml/name-width 30))
 
 ;; hide-mode-line-mode is a minor mode that hides the mode-line. We
 ;; can use it to toggle the visibility of mode-line by
@@ -265,7 +266,7 @@
 ;; (https://github.com/hlissner/emacs-hide-mode-line)
 (use-package hide-mode-line
   :ensure t
-  :defer 0.2
+  :defer 0.3
   :config
   (global-hide-mode-line-mode))
 
@@ -703,8 +704,7 @@
   :ensure t
   :commands lsp-ui-mode
   :config
-  (setq lsp-ui-doc-enable nil)
-  (setq lsp-headerline-breadcrumb-enable nil))
+  (setq lsp-ui-doc-enable nil))
 ;; if you are helm user
 ;;(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 ;; if you are ivy user
