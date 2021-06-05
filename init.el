@@ -32,6 +32,40 @@
 
 
 ;;;-----------------------------------------------------------------------------
+;;; My Custom Functions
+;;;-----------------------------------------------------------------------------
+
+
+;;; For shrinking infomation-displaying (as opposed to text-editing) windows
+;;; containing buffers like *Help* and *xref*, which shouldn't always take up
+;;; half the frame.
+
+(defvar yj/info-window-buffer-name '("*Help*" "*xref*" "*company-documentation*")
+  "List of buffer names (string) representing informational buffers.
+Such informational buffers might contain help content, documentation,
+references, and may contain only a few lines of text.")
+
+(defun yj/shrink-info-window (&optional window)
+  "Shrinks WINDOW to fit buffer size if it is a info-window.
+Info-window is defined in the list `yj/info-window-buffer-name'."
+  (if window (let* ((b (window-buffer window))
+                    (bname (buffer-name b)))
+               (if (member bname yj/info-window-buffer-name)
+                   (shrink-window-if-larger-than-buffer window)))
+    (shrink-window-if-larger-than-buffer (selected-window))))
+
+(defun yj/shrink-info-windows (&rest _)
+  (mapc 'yj/shrink-info-window (window-list)))
+
+(defvar yj/info-window-creating-fns
+  (list 'describe-variable 'company-show-doc-buffer 'lsp-show-xrefs)
+  "List of symbols represent functions that creates infomational windows.")
+
+(mapc (lambda (fn) (advice-add fn :after 'yj/shrink-info-windows))
+      yj/info-window-creating-fns)
+
+
+;;;-----------------------------------------------------------------------------
 ;;; Emacs GUI-related
 ;;;-----------------------------------------------------------------------------
 
