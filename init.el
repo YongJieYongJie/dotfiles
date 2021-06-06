@@ -215,8 +215,35 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 
 ;;; Keybindings
 
+;; Text editing.
 (global-set-key "\M-Z" 'zap-up-to-char)
 (global-set-key (kbd "C-S-s") 'isearch-forward-symbol-at-point)
+
+;; Easier windows navigation and manipulation.
+(global-set-key (kbd "C-1") 'delete-other-windows)
+(global-set-key (kbd "C-0") 'delete-window)
+(defun yj/toggle-buffer ()
+  (interactive)
+  (switch-to-buffer (other-buffer)))
+(global-set-key (kbd "C-3") 'yj/toggle-buffer)
+(global-set-key (kbd "M-o") 'other-window)
+
+;; Adapted from reddit answer:
+;; https://www.reddit.com/r/emacs/comments/gtfxg4/zoommonocle_a_buffer/fsbe7da?utm_source=share&utm_medium=web2x&context=3
+(defun my/toggle-maximize-buffer ()
+  "Maximize current buffer"
+  (interactive)
+  (let ((cb (current-buffer)))
+    ;; Keep a reference to current buffer in case the previous minimize was
+    ;; trigger while in another buffer
+    (if (one-window-p)
+        (progn
+          (jump-to-register '_)
+          (switch-to-buffer cb))
+      (window-configuration-to-register '_)
+      (delete-other-windows))))
+;; Bound to "C-z" because tmux uses prefix-z for similar functionality.
+(global-set-key (kbd "C-z") 'my/toggle-maximize-buffer)
 
 ;; Use "C-`" to toggle back-and-forth between eshell.
 (global-set-key (kbd "C-`") 'eshell)
