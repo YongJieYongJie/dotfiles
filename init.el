@@ -230,6 +230,46 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
             (ibuffer-switch-to-saved-filter-groups "default")))
 
 
+;; Copied From https://gist.github.com/fspeech/6004949
+(defun hs-cycle (&optional arg)
+  "Visibility cycling for hs-minor-mode, inspired by outline-cycle from
+outline-magic.el (https://github.com/tj64/outline-magic).
+When repeatedly called we cycle through three states:
+ 1. HIDE: Show only headlines in the current context.
+ 2. OVERVIEW: Expand one level below HIDE to show more details.
+ 3. SHOW: Show everything in the current context."
+  (interactive "P")
+  (setq deactivate-mark t)
+  (cond
+   ((eq last-command 'hs-cycle-hide)
+    ;; current state is HIDE, next OVERVIEW
+    (hs-hide-level 2)
+    (message "OVERVIEW...")
+    (setq this-command 'hs-cycle-overview))
+   ((eq last-command 'hs-cycle-overview)
+    ;; current state is OVERVIEW, next SHOW
+    (hs-life-goes-on
+     (message "SHOWING...")
+     ;; we could (hs-hide-level A_LARGE_NUMBER) but that would be inefficient
+     (let ((minp (point-min))
+           (maxp (point-max)))
+       (save-excursion
+	     (when (hs-find-block-beginning)
+	       (setq minp (1+ (point)))
+	       (funcall hs-forward-sexp-func 1)
+	       (setq maxp (1- (point))))
+	     (hs-discard-overlays minp maxp)))
+     (setq this-command 'hs-cycle-show)))
+   (t
+    ;; Default: HIDE
+    (hs-hide-level 1)
+    (message "HIDING...")
+    (setq this-command 'hs-cycle-hide))))
+
+(add-hook 'hs-minor-mode-hook
+          (lambda () (define-key hs-minor-mode-map (kbd "C-<tab>") 'hs-cycle)))
+
+
 ;;; eshell-related
 
 (setq eshell-cmpl-ignore-case t)
@@ -824,6 +864,7 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
   (add-hook 'before-save-hook #'gofmt-before-save)
   (setq gofmt-command "goimports")
   )
+(add-hook 'go-mode-hook #'hs-minor-mode)
 
 
 ;;;-----------------------------------------------------------------------------
