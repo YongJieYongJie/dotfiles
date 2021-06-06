@@ -478,7 +478,6 @@ When repeatedly called we cycle through three states:
 ;;; Major Packages
 ;;;-----------------------------------------------------------------------------
 
-
 (use-package company
   :ensure t
   :commands company-mode
@@ -489,18 +488,23 @@ When repeatedly called we cycle through three states:
   (setq company-minimum-prefix-length 2)
 
   (setq company-show-numbers t)
+  (setq company-selection-wrap-around t)
 
   ;; Enable company-tng-mode, which uses tab key for navigating through
   ;; suggestions, and inserting into the buffer the currently suggestion as we
   ;; are tabbing through. For more, details, see the comany-tng.el file.
   (add-hook 'after-init-hook 'company-tng-mode)
 
-  ;; Use "c-n" and "c-p" to navigate lines in the file (as opposed to
+  ;; Use "C-n" and "C-p" to navigate lines in the file (as opposed to
   ;; company-mode's suggestions) as I already use tab to navigate the
   ;; suggestions.
-  (define-key company-active-map (kbd "C-n") #'next-line)
-  (define-key company-active-map (kbd "C-p") #'previous-line)
-  )
+  (define-key company-active-map (kbd "C-n") nil)
+  (define-key company-active-map (kbd "C-p") nil)
+
+  ;; Unbind "C-d" to re-enable its default behavior instead of calling
+  ;; `company-show-doc-buffer', which is already bound to "C-h".
+  (define-key company-active-map (kbd "C-d") nil)
+)
 
 ;; TODO: Find a way to get company-mode to also show documentation in a
 ;; user-friendly manner. Currently, when selecting a completion candidate, I can
