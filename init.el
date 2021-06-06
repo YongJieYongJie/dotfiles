@@ -218,6 +218,11 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 (global-set-key "\M-Z" 'zap-up-to-char)
 (global-set-key (kbd "C-S-s") 'isearch-forward-symbol-at-point)
 
+;; Use "C-`" to toggle back-and-forth between eshell.
+(global-set-key (kbd "C-`") 'eshell)
+(defun yj/eshell-custom-keymap ()
+  (local-set-key (kbd "C-`") 'previous-buffer))
+(add-hook 'eshell-mode-hook 'yj/eshell-custom-keymap)
 
 ;; Use ibuffer as the default buffer switching mode.
 (global-set-key (kbd "C-x C-b") 'ibuffer)
