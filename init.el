@@ -117,6 +117,11 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 
 ;;; Some sensible defaults
 
+;; Call push-mark before moving large distances so we return to the postion by
+;; popping the mark.
+(advice-add 'beginning-of-defun :before 'push-mark)
+(advice-add 'end-of-defun :before 'push-mark)
+
 ;; Show total number of occurence when using isearch
 (setq isearch-lazy-count t)
 
