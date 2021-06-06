@@ -316,18 +316,13 @@ When repeatedly called we cycle through three states:
 ;;; Look-and-Feel
 ;;;-----------------------------------------------------------------------------
 
-;; Use Visual Studio's default Dark+ theme, so people think you are a VSCode
-;; user.
+;; solaire mode slightly changes the background colors of "editable" buffers as
+;; compare to "non-editable" buffers like the minibuffer, treemacs side window
+;; etc.
 (use-package solaire-mode
   :ensure t
-  :hook ((change-major-mode . turn-on-solaire-mode)
-         (after-revert . turn-on-solaire-mode)
-         (ediff-prepare-buffer . solaire-mode)
-         (minibuffer-setup . solaire-mode-in-minibuffer))
   :config
-  ;; (add-to-list 'solaire-mode-themes-to-face-swap '"vscode-dark-plus")
   (add-to-list 'solaire-mode-themes-to-face-swap 'zenburn)
-  (setq solaire-mode-auto-swap-bg t)
   (solaire-global-mode +1))
 
 ;; Use the zenburn theme, which is the default for the Prelude
@@ -341,16 +336,6 @@ When repeatedly called we cycle through three states:
   ;; here to prevent Zenburn from overwritting the font size.
   (set-face-attribute 'mode-line nil :font "Iosevka-17")
   (set-face-attribute 'header-line nil :font "Iosevka-17"))
-
-;; (use-package vscode-dark-plus-theme
-;;   :ensure t
-;;   :after solaire-mode
-;;   :config
-;;   (load-theme 'vscode-dark-plus t)
-;;   ;; Make the mode-line and header-line fonts smaller. Note: This code is put
-;;   ;; here to prevent Zenburn from overwritting the font size.
-;;   (set-face-attribute 'mode-line nil :font "Iosevka-17")
-;;   (set-face-attribute 'header-line nil :font "Iosevka-17"))
 
 ;; Display characters beyond column 80 in a different color
 (setq-default
