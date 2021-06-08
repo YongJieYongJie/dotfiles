@@ -232,6 +232,10 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
   (switch-to-buffer (other-buffer)))
 (global-set-key (kbd "C-3") 'yj/toggle-buffer)
 (global-set-key (kbd "M-o") 'other-window)
+(defun yj/other-window-reversed ()
+  (interactive)
+  (other-window -1))
+(global-set-key (kbd "M-O") 'yj/other-window-reversed)
 
 ;; Adapted from reddit answer:
 ;; https://www.reddit.com/r/emacs/comments/gtfxg4/zoommonocle_a_buffer/fsbe7da?utm_source=share&utm_medium=web2x&context=3
