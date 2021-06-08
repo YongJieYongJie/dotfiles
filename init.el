@@ -40,7 +40,7 @@
 ;;; containing buffers like *Help* and *xref*, which shouldn't always take up
 ;;; half the frame.
 
-(defvar yj/info-window-buffer-name '("*Help*" "*xref*" "*company-documentation*")
+(defvar yj/info-window-buffer-name '("*Help*" "*xref*" "*company-documentation*" "*Occur*")
   "List of buffer names (string) representing informational buffers.
 Such informational buffers might contain help content, documentation,
 references, and may contain only a few lines of text.")
@@ -58,7 +58,7 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
   (mapc 'yj/shrink-info-window (window-list)))
 
 (defvar yj/info-window-creating-fns
-  (list 'describe-variable 'company-show-doc-buffer 'lsp-show-xrefs)
+  (list 'describe-variable 'company-show-doc-buffer 'lsp-show-xrefs 'occur)
   "List of symbols represent functions that creates infomational windows.")
 
 (mapc (lambda (fn) (advice-add fn :after 'yj/shrink-info-windows))
