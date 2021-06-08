@@ -828,9 +828,10 @@ When repeatedly called we cycle through three states:
 (use-package lsp-treemacs
   :ensure t
   :commands lsp-treemacs-errors-list
+  :init
+  (setq treemacs-no-delete-other-windows nil)
   :config
-  (treemacs-resize-icons 16)
-  (setq treemacs-no-delete-other-windows nil))
+  (treemacs-resize-icons 16))
 
 ;; optionally if you want to use debugger
 ;;(use-package dap-mode)
