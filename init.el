@@ -246,9 +246,15 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
     ;; Keep a reference to current buffer in case the previous minimize was
     ;; trigger while in another buffer
     (if (one-window-p)
-        (progn
+        (let ((ws (window-start))
+              (wp (window-point)))
+          ;; Keep a reference to the position of the window in the buffer, and
+          ;; the point in the window, so we can restore the position (and
+          ;; avoiding going back to the state when the minimize was called).
           (jump-to-register '_)
-          (switch-to-buffer cb))
+          (switch-to-buffer cb)
+          (set-window-start (selected-window) ws)
+          (set-window-point (selected-window) wp))
       (window-configuration-to-register '_)
       (delete-other-windows))))
 ;; Bound to "C-z" because tmux uses prefix-z for similar functionality.
