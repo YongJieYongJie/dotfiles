@@ -221,7 +221,12 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 
 ;; Easier windows navigation and manipulation.
 (global-set-key (kbd "C-1") 'delete-other-windows)
-(global-set-key (kbd "C-0") 'delete-window)
+(defun yj/delete-window-or-kill-buffer ()
+  (interactive)
+  (if (= (length (window-list)) 1)
+      (kill-buffer)
+    (delete-window)))
+(global-set-key (kbd "C-0") 'yj/delete-window-or-kill-buffer)
 (defun yj/toggle-buffer ()
   (interactive)
   (switch-to-buffer (other-buffer)))
