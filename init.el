@@ -843,7 +843,13 @@ When repeatedly called we cycle through three states:
          (go-mode . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
+  :commands lsp
+  :config
+  ;; A better highlight color when highlighting occurences of symbol under
+  ;; cursor.
+  (set-face-attribute 'lsp-face-highlight-textual nil
+                      :inherit 'nobreak-hyphen
+                      :slant 'italic))
 
 ;; optionally
 (use-package lsp-ui
