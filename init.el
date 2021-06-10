@@ -507,6 +507,10 @@ This means that buffers like magit will be excluded."
 ;; Adapted from https://www.emacswiki.org/emacs/IbufferMode
 (setq-default ibuffer-saved-filter-groups
       `(("default"
+               ("tasks" (filename . "org/tasks"))
+               ("matrixport-spot" (filename . "nvwa/spot"))
+               ("matrixport-nvwa" (filename . "nvwa/nvwa"))
+               ("matrixport-ugo" (filename . "nvwa/ugo"))
                ("dired" (mode . dired-mode))
                ("emacs" (or
                          (name . "^\\*scratch\\*$")
