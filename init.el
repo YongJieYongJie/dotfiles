@@ -29,7 +29,7 @@
 ;; "/home/yongjie/syncthing/org".
 (cond
  ((eq system-type 'darwin)
-  (defvar yj-org-directory "~/syncthing/org"))
+  (defvar yj-org-directory "~/syncthing/matrixport/org"))
  ((eq system-type 'windows-nt)
   (defvar yj-org-directory "c:/syncthing/org"))
  ((or (eq system-type 'gnu) (eq system-type 'gun/linux) (eq system-type 'cygwin))
