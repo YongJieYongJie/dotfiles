@@ -63,12 +63,10 @@
     //#region General Look-and-Feel
     "editor.fontFamily": "Iosevka, Fira Code, Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
-    "editor.lineNumbers": "off",
+    "editor.lineNumbers": "on",
     "editor.minimap.enabled": false,
     "editor.rulers": [ 80, 120 ],
-    "editor.tabSize": 2,
-
-    "workbench.activityBar.visible": false,
+    "editor.tabSize": 8,
     "workbench.statusBar.visible": true,
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.tabCloseButton": "off",
@@ -77,12 +75,11 @@
     "breadcrumbs.enabled": true,
     "liveshare.showInStatusBar": "whileCollaborating",
     "diffEditor.ignoreTrimWhitespace": false,
-    "window.zoomLevel": 1,
     //#endregion
 
     //#region Quality-of-Life Improvements
     "editor.acceptSuggestionOnCommitCharacter": false,
-    "editor.insertSpaces": true,
+    "editor.insertSpaces": false,
     "editor.tabCompletion": "off",
     "editor.suggestSelection": "first",
     "explorer.confirmDelete": false,
@@ -131,11 +128,17 @@
         "-workbench.action.terminal.focusFindWidget"
     ],
 
-    "workbench.editorAssociations": [
-        { "viewType": "jupyter.notebook.ipynb", "filenamePattern": "*.ipynb" }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
 
     "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false
+    "telemetry.enableCrashReporter": false,
+    "editor.cursorStyle": "line",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.wordWrap": "off",
+    "workbench.activityBar.visible": false,
+    "window.zoomLevel": 4,
+    "redhat.telemetry.enabled": false
     //#endregion
 }
