@@ -637,8 +637,8 @@ When repeatedly called we cycle through three states:
 
 ;; "text-mode" is a major mode for editing files of text in a human language
 ;; most major modes for non-programmers inherit from text-mode.
-(add-hook 'text-mode-hook 'text-mode-hook-setup)
-(add-hook 'text-mode-hook #'company-mode)
+;; (add-hook 'text-mode-hook 'text-mode-hook-setup)
+;; (add-hook 'text-mode-hook #'company-mode)
 
 ;; Adapted from http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html
 (defun text-mode-hook-setup ()
