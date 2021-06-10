@@ -12,10 +12,23 @@
   "coc.preferences.extensionUpdateCheck": "never",
   "explorer.icon.enableNerdfont": true,
 
-    ///////////////
-   // C-related //
-  ///////////////
   "languageserver": {
+
+      //////////
+     // Perl //
+    //////////
+    "Perl-LanguageServer": {
+      "command": "perl",
+      "args": [
+        "-MPerl::LanguageServer", "-e",
+        "Perl::LanguageServer::run"
+      ],
+      "filetypes": ["perl"]
+    },
+
+      ///////
+     // C //
+    ///////
     "ccls": {
       "command": "ccls",
       "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
@@ -30,7 +43,6 @@
       }
     }
   },
-
 
     //////////
    // Misc //
