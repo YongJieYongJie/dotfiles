@@ -154,6 +154,8 @@ nnoremap <silent> <expr> <Leader>1 empty(get(t:, 'goyo_dim', '')) ? ':Goyo 62%<C
 " Allow opening some of CocList in fzf
 Plug 'antoinemadec/coc-fzf' 
 
+let g:coc_fzf_preview = 'up:77%'
+
 " For better workflow when using Git in certain cases. For example, :Git blame
 " shows the output in two vertical splits, and the syntax highlight for the
 " source file remains.
