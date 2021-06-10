@@ -1084,11 +1084,20 @@ save it in `ffap-file-at-point-line-number' variable."
 
 
 ;;; projectile
+(defun yj/ends-with-one-or-two-dots (str)
+  (string-match "/\\.\\.?" str))
+(defun yj/list-dir-contents (dirname)
+  (seq-filter (lambda (dirname) (not (yj/ends-with-one-or-two-dots dirname)))
+            (mapcar 'car (directory-files-and-attributes dirname t))))
 (use-package projectile
   :ensure t
   :delight projectile-mode
   :init
   (setq projectile-completion-system 'ivy)
+  ;; (setq projectile-project-search-path
+  ;;       (yj/list-dir-contents "/Users/yongjie/git-repos/matrixport/nvwa"))
+  ;; (setq projectile-project-search-path
+  ;;       '("/Users/yongjie/git-repos/matrixport/nvwa/spot"))
   (projectile-mode +1)
   :bind (:map projectile-mode-map
               ("s-p" . projectile-command-map)
