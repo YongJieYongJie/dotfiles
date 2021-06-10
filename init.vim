@@ -166,6 +166,8 @@ let g:flog_permanent_default_arguments = { 'date': 'short' }
 
 " Add to the GBrowse command from vim-fugitive ability to open GitLab links.
 Plug 'shumphrey/fugitive-gitlab.vim'
+let g:fugitive_gitlab_domains = ['https://gitlab.matrixport.com']
+
 " For managing Git branches with FZF from within Vim.
 Plug 'stsewd/fzf-checkout.vim'
 
