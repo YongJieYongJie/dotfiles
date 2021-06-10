@@ -54,6 +54,9 @@
 ;;; containing buffers like *Help* and *xref*, which shouldn't always take up
 ;;; half the frame.
 
+;; TODO:
+;;  - Add support for *lsp-install: /usr/local/bin/npm* (command: 'lsp-install-server)
+;;  - Add support for *Gofmt Errors*
 (defvar yj/info-window-buffer-name '("*Help*" "*xref*" "*company-documentation*" "*Occur*")
   "List of buffer names (string) representing informational buffers.
 Such informational buffers might contain help content, documentation,
