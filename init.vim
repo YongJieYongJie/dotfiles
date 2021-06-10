@@ -14,7 +14,7 @@ endif
 
 " yjPluginDir is where the plugins will be installed.
 " E.g., "/home/yongjie/.local/share/nvim/plugged/"
-let yjPluginDir=''
+let yjPluginDir='/Users/yongjie/.local/share/nvim/plugged/'
 
 " yjBackupDir is where the backups will be stored.
 " E.g., "/home/yongjie/.local/share/nvim/backup/"
