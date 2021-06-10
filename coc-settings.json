@@ -4,11 +4,13 @@
   // Disable auto-complete from COC to avoid interfering with nvim-cmp.
   "suggest.autoTrigger": "none",
 
+  "explorer.file.autoReveal": true,
+
     //////////////////////////
    // General COC settings //
   //////////////////////////
   "coc.preferences.extensionUpdateCheck": "never",
-  // "explorer.icon.enableNerdfont": true,
+  "explorer.icon.enableNerdfont": true,
 
     ///////////////
    // C-related //
