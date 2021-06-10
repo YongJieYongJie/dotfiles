@@ -1,6 +1,6 @@
 [user]
-    name = YongJieYongJie
-    email = KhooYongJie@gmx.com
+    name = 邱勇捷 (Yongjie Khoo)
+    email = yongjie.khoo@matrixport.com
 [push]
     default = simple
 [alias]
@@ -54,3 +54,6 @@
     diffFilter = delta --color-only
 [merge]
     conflictstyle = diff3
+[url "git@gitlab.matrixport.com:"]
+    insteadOf = https://gitlab.matrixport.com/
+
