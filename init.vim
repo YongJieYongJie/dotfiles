@@ -292,6 +292,12 @@ endif
 " colorscheme onedark
 colorscheme darcula
 
+" Link the CocHighlightText highlight group to the built-in DiffAdd highlight
+" group. CocHighlightText group is used by coc.nvim for, among other things,
+" highlight occurrences of symbol under cursor. See :help coc-highlight for
+" more details.
+highlight link CocHighlightText  DiffAdd
+
 
 " -----------------------------------------------------------------------------
 " Quality-of-Life
