@@ -8,6 +8,10 @@
 " E.g., "/home/yongjie/.local/share/nvim/plugged"
 let yjPluginDir=''
 
+" yjBackupDir is where the backups will be stored.
+" E.g., "/home/yongjie/.local/share/nvim/backup/"
+let yjBackupDir=''
+
 
 " -----------------------------------------------------------------------------
 " init.vim
@@ -537,3 +541,10 @@ function! ToggleHiddenAll()
 endfunction
 nnoremap <silent> <S-h> :call ToggleHiddenAll()<CR>
 
+
+" Backups
+set backup
+set writebackup
+call mkdir(yjBackupDir, "p", 0700)
+" See :help :let-& for details on the syntax below
+let &backupdir = yjBackupDir . '/'
