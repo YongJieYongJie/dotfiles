@@ -1487,6 +1487,9 @@ save it in `ffap-file-at-point-line-number' variable."
     (set (make-local-variable 'company-frontends) new-company-frontends)))
 (add-hook 'go-mode-hook 'yj/go-mode-hook)
 
+(setenv "PATH" (concat (getenv "PATH") ":/Users/yongjie/go/bin"))
+(setq exec-path (append exec-path (list "/Users/yongjie/go/bin")))
+
 
 (defvar previous-before-save-hooks nil)
 (defun yj/toggle-before-save-hook () ;; Useful for turning of gofmt before saving
