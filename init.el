@@ -325,6 +325,18 @@ When repeatedly called we cycle through three states:
           (lambda () (define-key hs-minor-mode-map (kbd "C-<tab>") 'hs-cycle)))
 
 
+;;; Experiment keybindngs
+;; These are keybindngs that I am trying out find now
+
+;; TODO: Bind to "C-9" (9 == nine == mnemonic for notes) to toggle open the last
+;; org buffer / or a tagged buffer. OR add a feature to set "control group" to
+;; buffer.
+
+(global-set-key (kbd "C-<return>") 'treemacs)
+(global-set-key (kbd "C-RET") 'treemacs)
+(global-set-key (kbd "C-S-t") 'toggle-truncate-lines)
+
+
 ;;; eshell-related
 
 (setq eshell-cmpl-ignore-case t)
