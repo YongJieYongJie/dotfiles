@@ -223,6 +223,11 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 (global-set-key (kbd "C-S-s") 'isearch-forward-symbol-at-point)
 
 ;; Easier windows navigation and manipulation.
+
+;; TODO: Update "C-1" behavior to the following: when there are three
+;; windows---treemacs, two other windows---it'll close only the other window (or
+;; the bottom window if the focus is on the treemacs window); when there are two
+;; windows, it'll always close the non-treemacs window.
 (global-set-key (kbd "C-1") 'delete-other-windows)
 (defun yj/delete-window-or-kill-buffer ()
   (interactive)
