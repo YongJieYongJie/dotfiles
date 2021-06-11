@@ -81,6 +81,9 @@ Plug 'google/vim-searchindex'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" For "zen" mode
+Plug 'junegunn/goyo.vim'
+
 " Allow opening some of CocList in fzf
 Plug 'antoinemadec/coc-fzf' 
 
