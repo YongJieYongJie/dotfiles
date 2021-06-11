@@ -334,6 +334,10 @@ When repeatedly called we cycle through three states:
 ;;; Look-and-Feel
 ;;;-----------------------------------------------------------------------------
 
+;; split-width-threshold affects how Emacs decide whether to create a split to
+;; the right (horizontally) or to the bottom (vertically).
+;;(setq split-width-threshold 150)
+
 ;; solaire mode slightly changes the background colors of "editable" buffers as
 ;; compare to "non-editable" buffers like the minibuffer, treemacs side window
 ;; etc.
