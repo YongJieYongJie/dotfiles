@@ -117,6 +117,9 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 
 ;;; Some sensible defaults
 
+;; Enable repeating popping of mark using "C-SPC".
+(setq set-mark-command-repeat-pop t)
+
 ;; Call push-mark before moving large distances so we return to the postion by
 ;; popping the mark.
 (advice-add 'beginning-of-defun :before 'push-mark)
