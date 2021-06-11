@@ -18,7 +18,7 @@ let yjPluginDir='/Users/yongjie/.local/share/nvim/plugged/'
 
 " yjBackupDir is where the backups will be stored.
 " E.g., "/home/yongjie/.local/share/nvim/backup/"
-let yjBackupDir=''
+let yjBackupDir='/Users/yongjie/.local/share/nvim/backup/'
 
 if g:os == "Windows"
   let yjPluginDir='C:\\Users\\yongjie\\AppData\\Local\\nvim\\plugged\\'
