@@ -628,7 +628,13 @@ When repeatedly called we cycle through three states:
               ("C-c p" . projectile-command-map))
   :config
   (use-package treemacs-projectile
-    :ensure t))
+    ;; Properly configure treemacs as a standalone dependency since I'm relying
+    ;; on it. Also harmonize with how lsp-treemacs is configured. Sidenote: the
+    ;; documentation is also rather good
+    ;; https://github.com/Alexander-Miller/treemacs#installation
+    :ensure t
+    :config
+    (treemacs-fringe-indicator-mode 'only-when-focused)))
 
 
 ;;;-----------------------------------------------------------------------------
