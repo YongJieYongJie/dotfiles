@@ -338,6 +338,12 @@ When repeatedly called we cycle through three states:
 ;; the right (horizontally) or to the bottom (vertically).
 ;;(setq split-width-threshold 150)
 
+;; writeroom-mode provides an experience much like VSCode's zen mode, centering
+;; the single window, with blank areas on both side. A very clean and enjoyable
+;; view.
+(use-package writeroom-mode
+  :ensure t)
+
 ;; solaire mode slightly changes the background colors of "editable" buffers as
 ;; compare to "non-editable" buffers like the minibuffer, treemacs side window
 ;; etc.
