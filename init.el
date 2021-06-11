@@ -735,7 +735,23 @@ When repeatedly called we cycle through three states:
   (setcar (nthcdr 4 org-emphasis-regexp-components) 20) ;Up to 20 lines, default is just 1
   ;; Below is needed to apply the modified `org-emphasis-regexp-components'
   ;; settings from above.
-  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components))
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+
+  ;; https://emacs-china.org/t/orgmode/9740/12
+  ;; 让中文也可以不加空格就使用行内格式
+  ;;(setcar (nthcdr 0 org-emphasis-regexp-components) " \t('\"{[:nonascii:]")
+  ;;(setcar (nthcdr 1 org-emphasis-regexp-components) "- \t.,:!?;'\")}\\[[:nonascii:]")
+  ;;(org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+  ;;(org-element-update-syntax)
+  ;; 规定上下标必须加 {}，否则中文使用下划线时它会以为是两个连着的下标
+  ;;(setq org-use-sub-superscripts "{}")
+
+
+  ;; https://emacs-china.org/t/orgmode/9740/18
+  (setq org-emphasis-regexp-components '("-[:multibyte:][:space:]('\"{" "-[:multibyte:][:space:].,:!?;'\")}\\[" "[:space:]" "." 20))
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+  (org-element-update-syntax)
+  )
 
 (add-hook 'org-mode-hook #'visual-line-mode)
 (add-hook 'org-mode-hook #'hl-line-mode)
