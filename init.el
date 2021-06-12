@@ -210,7 +210,11 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 ;;https://stackoverflow.com/a/15303598/5821101
 (add-to-list
  'auto-save-file-name-transforms
- (list "\\(.+/\\)*\\(.*?\\)" (expand-file-name "\\2" --auto-save-directory))
+ ;; Note: We cannot use 'expand-file-name below to construct the file because on
+ ;; windows, the double backslashes will be converted to the root of the
+ ;; drive. But for this, using 'expand-file-name might have been the "more
+ ;; correct" way.
+ (list "\\(.+/\\)*\\(.*?\\)" (concat --auto-save-directory "\\2"))
  t)
 
 ;; Display column number in mode line.
