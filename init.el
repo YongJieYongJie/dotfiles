@@ -228,27 +228,72 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 
 ;; Easier windows navigation and manipulation.
 
-;; TODO: Update "C-1" behavior to the following: when there are three
-;; windows---treemacs, two other windows---it'll close only the other window (or
-;; the bottom window if the focus is on the treemacs window); when there are two
-;; windows, it'll always close the non-treemacs window.
-(global-set-key (kbd "C-1") 'delete-other-windows)
-(defun yj/delete-window-or-kill-buffer ()
+(defun yj/num-side-windows ()
+  "Return the number of side windows in the selected frame."
+  (seq-count (lambda (w) (window-parameter w 'window-side)) (window-list)))
+
+(defun yj/side-window-p (w)
+  "Return non-nil if W is a side window."
+  (window-parameter w 'window-side))
+
+(defun yj/delete-other-windows-dwim ()
+  "Delete other windows based on what windows are open and which is focused.
+
+Case 0 (only 1 window) - calls 'writeroom--enable' if the function is bound.
+
+Case 1 (only 1 window or no side windows) - passthrough to
+'delete-other-windows'
+
+Case 2 (only 1 non-side window) - passthrough
+to'window-toggle-side-windows'
+
+Default case (has at least 1 side window and 2 non-side window) -
+close other non-side window such that only one is left; next call
+to this function will result in Case 2"
   (interactive)
-  (if (= (length (window-list)) 1)
-      (kill-buffer)
-    (delete-window)))
-(global-set-key (kbd "C-0") 'yj/delete-window-or-kill-buffer)
+  (let* ((num-windows (length (window-list)))
+         (num-side-windows (yj/num-side-windows))
+         (num-main-windows (- num-windows num-side-windows)))
+    (cond
+     ((= num-windows 1)
+      (when (fboundp 'writeroom-mode)
+        (writeroom-mode 'toggle)))
+     ((zerop num-side-windows)
+      (delete-other-windows))
+     ((= num-main-windows 1)
+      (window-toggle-side-windows))
+     (t
+      (progn
+        (when (yj/side-window-p (selected-window)) (select-window (get-lru-window)))
+        (window-toggle-side-windows)
+        (delete-other-windows)
+        (window-toggle-side-windows))))))
+
+(defun yj/window-buffer-names ()
+  "Return a list of strings of names of buffers in the displayed windows."
+  (let ((bufs (mapcar 'window-buffer (window-list))))
+    (mapcar 'buffer-name bufs)))
+
+(defun yj/delete-window-or-kill-buffer ()
+  "Delete the selected window or kill the buffer, depending on window state.
+If there is only one non-side window, calls 'kill-buffer',
+otherwise calls 'delete-window'."
+  (interactive)
+  (let ((num-non-side-window (- (length (window-list)) (yj/num-side-windows))))
+   (if (= num-non-side-window 1)
+       (kill-buffer)
+     (delete-window))))
+
 (defun yj/toggle-buffer ()
   (interactive)
   (switch-to-buffer (other-buffer)))
-(global-set-key (kbd "C-3") 'yj/toggle-buffer)
+
 (defun yj/other-window-dwim ()
   (interactive)
   (if (= (length (window-list)) 1)
       (switch-to-buffer-other-window nil t)
     (other-window 1)))
-(global-set-key (kbd "M-o") 'yj/other-window-dwim)
+
 (defun yj/other-window-reversed ()
   (interactive)
   (if (= (length (window-list)) 1)
@@ -257,11 +302,10 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
         (switch-to-buffer (other-buffer))
         (other-window 1))
     (other-window -1)))
-(global-set-key (kbd "M-O") 'yj/other-window-reversed)
 
 ;; Adapted from reddit answer:
 ;; https://www.reddit.com/r/emacs/comments/gtfxg4/zoommonocle_a_buffer/fsbe7da?utm_source=share&utm_medium=web2x&context=3
-(defun my/toggle-maximize-buffer ()
+(defun yj/toggle-maximize-buffer ()
   "Maximize current buffer"
   (interactive)
   (let ((cb (current-buffer)))
@@ -279,8 +323,15 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
           (set-window-point (selected-window) wp))
       (window-configuration-to-register '_)
       (delete-other-windows))))
+
+(global-set-key (kbd "C-1") 'yj/delete-other-windows-dwim)
+(global-set-key (kbd "C-0") 'yj/delete-window-or-kill-buffer)
+(global-set-key (kbd "C-3") 'yj/toggle-buffer)
+(global-set-key (kbd "M-o") 'yj/other-window-dwim)
+(global-set-key (kbd "M-O") 'yj/other-window-reversed)
+
 ;; Bound to "C-z" because tmux uses prefix-z for similar functionality.
-(global-set-key (kbd "C-z") 'my/toggle-maximize-buffer)
+(global-set-key (kbd "C-z") 'yj/toggle-maximize-buffer)
 
 ;; Use "C-`" to toggle back-and-forth between eshell.
 (global-set-key (kbd "C-`") 'eshell)
@@ -351,8 +402,7 @@ When repeatedly called we cycle through three states:
 ;; org buffer / or a tagged buffer. OR add a feature to set "control group" to
 ;; buffer.
 
-(global-set-key (kbd "C-<return>") 'treemacs)
-(global-set-key (kbd "C-RET") 'treemacs)
+(global-set-key (kbd "C-4") 'treemacs)
 (global-set-key (kbd "C-S-t") 'toggle-truncate-lines)
 
 
