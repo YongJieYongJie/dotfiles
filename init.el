@@ -1072,5 +1072,9 @@ When repeatedly called we cycle through three states:
 ;;; END
 ;;;-----------------------------------------------------------------------------
 
+;; Move the irritating custom-set-* to a seperate file outside of source
+;; control.
+(setq custom-file (expand-file-name "custom-file.el" user-emacs-directory))
+
 (provide 'init)
 ;;; init.el ends here
