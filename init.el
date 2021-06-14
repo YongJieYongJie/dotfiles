@@ -277,7 +277,8 @@ to this function will result in Case 2"
         (when (yj/side-window-p (selected-window)) (select-window (get-lru-window)))
         (window-toggle-side-windows)
         (delete-other-windows)
-        (window-toggle-side-windows))))))
+        (window-toggle-side-windows)))))
+  (yj/window-divider-mode))
 
 (defun yj/window-buffer-names ()
   "Return a list of strings of names of buffers in the displayed windows."
@@ -292,7 +293,8 @@ otherwise calls 'delete-window'."
   (let ((num-non-side-window (- (length (window-list)) (yj/num-side-windows))))
    (if (= num-non-side-window 1)
        (kill-buffer)
-     (delete-window))))
+     (delete-window)))
+  (yj/window-divider-mode))
 
 (defun yj/toggle-buffer ()
   (interactive)
@@ -302,16 +304,17 @@ otherwise calls 'delete-window'."
   (interactive)
   (if (= (length (window-list)) 1)
       (switch-to-buffer-other-window nil t)
-    (other-window 1)))
+    (other-window 1))
+  (yj/window-divider-mode))
 
 (defun yj/other-window-reversed ()
   (interactive)
   (if (= (length (window-list)) 1)
       (progn
         (split-window-sensibly)
-        (switch-to-buffer (other-buffer))
-        (other-window 1))
-    (other-window -1)))
+        (switch-to-buffer (other-buffer)))
+    (other-window -1))
+  (yj/window-divider-mode))
 
 ;; Adapted from reddit answer:
 ;; https://www.reddit.com/r/emacs/comments/gtfxg4/zoommonocle_a_buffer/fsbe7da?utm_source=share&utm_medium=web2x&context=3
@@ -332,7 +335,16 @@ otherwise calls 'delete-window'."
           (set-window-start (selected-window) ws)
           (set-window-point (selected-window) wp))
       (window-configuration-to-register '_)
-      (delete-other-windows))))
+      (delete-other-windows)))
+  (yj/window-divider-mode))
+
+(defun yj/window-divider-mode ()
+  "Enable and disable window-divider-mode sensibly"
+  (interactive)
+  (let ((num-windows (length (window-list))))
+    (if (> num-windows 1)
+        (window-divider-mode 1)
+      (window-divider-mode -1))))
 
 (global-set-key (kbd "C-1") 'yj/delete-other-windows-dwim)
 (global-set-key (kbd "C-0") 'yj/delete-window-or-kill-buffer)
@@ -424,6 +436,10 @@ When repeatedly called we cycle through three states:
 ;;;-----------------------------------------------------------------------------
 ;;; Look-and-Feel
 ;;;-----------------------------------------------------------------------------
+
+(setq window-divider-default-bottom-width 1)
+(setq window-divider-default-right-width 1)
+(setq window-divider-default-places t)
 
 ;; split-width-threshold affects how Emacs decide whether to create a split to
 ;; the right (horizontally) or to the bottom (vertically).
