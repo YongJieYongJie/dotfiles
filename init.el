@@ -737,7 +737,7 @@ save it in `ffap-file-at-point-line-number' variable."
 
 ;; split-width-threshold affects how Emacs decide whether to create a split to
 ;; the right (horizontally) or to the bottom (vertically).
-;;(setq split-width-threshold 150)
+(setq split-width-threshold 150)
 
 ;; writeroom-mode provides an experience much like VSCode's zen mode, centering
 ;; the single window, with blank areas on both side. A very clean and enjoyable
