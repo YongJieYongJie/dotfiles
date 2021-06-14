@@ -35,6 +35,11 @@
 ;;; My Custom Functions
 ;;;-----------------------------------------------------------------------------
 
+(defun yj/file-location-at-point ()
+  "Return full file path with line number at point"
+  (interactive)
+  (let ((line-number (substring (what-line) 5 nil)))
+   (kill-new (concat (buffer-file-name) "::" line-number))))
 
 ;;; For shrinking infomation-displaying (as opposed to text-editing) windows
 ;;; containing buffers like *Help* and *xref*, which shouldn't always take up
