@@ -111,6 +111,10 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 ;; language servers) more easily.
 (use-package exec-path-from-shell
   :ensure t
+  :init
+  (setq exec-path-from-shell-variables
+        '("PATH" "MANPATH"
+          "GONOPROXY" "GONOSUMDB" "GOPRIVATE" "GOPATH"))
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
