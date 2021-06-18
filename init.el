@@ -301,6 +301,28 @@ otherwise calls 'delete-window'."
      (delete-window)))
   (yj/window-divider-mode))
 
+
+(defvar yj/non-editing-buffer-regexp '("magit" "*Minibuf-" "*eshell*"))
+
+(defun yj/is-editing-buffer (buffer)
+  "Return non-nil if BUFFER is an editing buffer."
+  (not (seq-some (lambda (regexp) (string-match regexp (buffer-name buffer)))
+             yj/non-editing-buffer-regexp)))
+
+(defun yj/other-editing-buffer ()
+  "Return the most recently used \"editing\" buffer.
+This means that buffers like magit will be excluded."
+  (let ((order-buffer-list (cdr (buffer-list (selected-frame)))))
+    (seq-find 'yj/is-editing-buffer order-buffer-list (other-buffer))))
+
+;; We need to unboudn "C-[" from ESC first, before we can bind it to anything
+;; else. From https://emacs.stackexchange.com/a/10273/23895
+(define-key input-decode-map [?\C-\[] (kbd "<C-[>"))
+(global-set-key (kbd "<C-[>") 'magit)
+;; Bind same key in magit to toggle back to an "editing" buffer
+
+;; TODO: Bind C-` C-1 C-2 ... C-0 C-[ C-]
+
 (defun yj/toggle-buffer ()
   (interactive)
   (switch-to-buffer (other-buffer)))
@@ -365,7 +387,8 @@ otherwise calls 'delete-window'."
 ;; Use "C-`" to toggle back-and-forth between eshell.
 (global-set-key (kbd "C-`") 'eshell)
 (defun yj/eshell-custom-keymap ()
-  (local-set-key (kbd "C-`") 'previous-buffer))
+  ;; (local-set-key (kbd "C-`") 'previous-buffer)
+  (local-set-key (kbd "C-`") 'yj/switch-to-previous-editing-buffer))
 (add-hook 'eshell-mode-hook 'yj/eshell-custom-keymap)
 
 ;; Use ibuffer as the default buffer switching mode.
@@ -1130,10 +1153,15 @@ When repeatedly called we cycle through three states:
 ;;; Tools: Magit
 ;;;-----------------------------------------------------------------------------
 
+(defun yj/switch-to-previous-editing-buffer ()
+  (interactive)
+  (switch-to-buffer (yj/other-editing-buffer)))
+
 (use-package magit
   :ensure t
   :commands magit-status
   :config
+  (define-key magit-mode-map (kbd "<C-[>") 'yj/switch-to-previous-editing-buffer)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
 
