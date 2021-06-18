@@ -350,6 +350,8 @@ otherwise calls 'delete-window'."
 (global-set-key (kbd "C-0") 'yj/delete-window-or-kill-buffer)
 (global-set-key (kbd "C-3") 'yj/toggle-buffer)
 (global-set-key (kbd "M-o") 'yj/other-window-dwim)
+(add-hook 'ibuffer-mode-hook
+          (lambda () (define-key ibuffer-mode-map (kbd "M-o") nil)))
 (global-set-key (kbd "M-O") 'yj/other-window-reversed)
 
 ;; Bound to "C-z" because tmux uses prefix-z for similar functionality.
