@@ -1009,6 +1009,27 @@ When repeatedly called we cycle through three states:
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
   :config
+  (setq lsp-completion-show-detail t)
+  (setq lsp-completion-show-kind nil)
+
+  (defun yj/lsp-hide-doc ()
+    (interactive)
+    (lsp-ui-doc-unfocus-frame)
+    (lsp-ui-doc-hide))
+
+  (defun yj/bind-lsp-ui-doc-frame-hook-map (&rest _)
+    (define-key lsp-ui-doc-frame-mode-map (kbd "q") 'yj/lsp-hide-doc))
+  (add-hook 'lsp-ui-doc-frame-hook #'yj/bind-lsp-ui-doc-frame-hook-map)
+
+  (defun yj/lsp-show-doc ()
+    (interactive)
+    (lsp-ui-doc-show)
+    (lsp-ui-doc-focus-frame))
+
+  (define-key lsp-mode-map (kbd "M-?") 'lsp-find-references) ; Replaces `xref-find-local'
+  (define-key lsp-mode-map (kbd "M-Y") 'lsp-goto-type-definition) ; Using T for tYpe
+  (define-key lsp-mode-map (kbd "C-h l") 'yj/lsp-show-doc)
+
   ;; A better highlight color when highlighting occurences of symbol under
   ;; cursor.
   (set-face-attribute 'lsp-face-highlight-textual nil
