@@ -126,6 +126,11 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 
 ;;; Some sensible defaults
 
+;; Show the same line wrapping indicators when using visual-line-mode. Note:
+;; visual-line-mode does word-level (as opposed to character-level) wrapping at
+;; window boundaries.
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
+
 ;; Enable repeating popping of mark using "C-SPC".
 (setq set-mark-command-repeat-pop t)
 
@@ -452,7 +457,10 @@ When repeatedly called we cycle through three states:
 ;; the single window, with blank areas on both side. A very clean and enjoyable
 ;; view.
 (use-package writeroom-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq writeroom-width 100)
+  (setq writeroom-header-line t))
 
 ;; solaire mode slightly changes the background colors of "editable" buffers as
 ;; compare to "non-editable" buffers like the minibuffer, treemacs side window
