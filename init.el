@@ -372,9 +372,10 @@ otherwise calls 'delete-window'."
                ("emacs" (or
                          (name . "^\\*scratch\\*$")
                          (name . "^\\*Messages\\*$"))))))
-(add-hook 'ibuffer-mode-hook
-          (lambda ()
-            (ibuffer-switch-to-saved-filter-groups "default")))
+(defun yj/ibuffer-switch-to-default ()
+  (interactive)
+  (ibuffer-switch-to-saved-filter-groups "default"))
+(add-hook 'ibuffer-mode-hook 'yj/ibuffer-switch-to-default)
 
 
 ;; Copied From https://gist.github.com/fspeech/6004949
