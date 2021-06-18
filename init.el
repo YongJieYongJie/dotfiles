@@ -188,7 +188,7 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 (setq visible-bell 1)
 (setq save-interprogram-paste-before-kill t)
 (setq completion-ignore-case t)
-(setq-default dired-listing-switches "-alh")
+(setq-default dired-listing-switches "-alhF")
 (add-hook 'dired-mode-hook 'dired-hide-details-mode) ;; Hide details by default, redisplay using "("
 
 ;; Back-up files
