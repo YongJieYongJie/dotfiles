@@ -647,6 +647,22 @@ When repeatedly called we cycle through three states:
 ;;; Major Packages
 ;;;-----------------------------------------------------------------------------
 
+(defun yj/company-echo-doc-as-metadata-frontend (command)
+  "Adapted from company-echo-metadata-frontend; COMMAND must be `post-command'."
+  (pcase command
+    (`post-command (company-echo-show-soon 'yj/company-fetch-doc))
+    (`unhide (company-echo-show))
+    (`hide (company-echo-hide))))
+
+(defun yj/company-fetch-doc ()
+  "Adapted from company-fetch-metadata and company-show-doc-buffer."
+  (let ((selected (nth (or company-selection 0) company-candidates)))
+    (unless (eq selected (car company-last-metadata))
+      (setq company-last-metadata
+            (cons selected (company-call-backend 'doc-buffer selected))))
+    (with-current-buffer (cdr company-last-metadata)
+      (buffer-string))))
+
 (use-package company
   :ensure t
   :commands company-mode
@@ -1138,6 +1154,12 @@ When repeatedly called we cycle through three states:
   (setq gofmt-command "goimports")
   )
 (add-hook 'go-mode-hook #'hs-minor-mode)
+
+(defun yj/go-mode-hook ()
+  (let* ((trimmed (remove 'company-echo-metadata-frontend company-frontends))
+         (new-company-frontends (push 'yj/company-echo-doc-as-metadata-frontend trimmed)))
+    (set (make-local-variable 'company-frontends) new-company-frontends)))
+(add-hook 'go-mode-hook 'yj/go-mode-hook)
 
 
 ;;;-----------------------------------------------------------------------------
