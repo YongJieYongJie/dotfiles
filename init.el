@@ -655,9 +655,28 @@ When repeatedly called we cycle through three states:
 ;; distribution (https://github.com/bbatsov/prelude), which is the
 ;; distribution that first made Emacs a true delight for me.
 (use-package zenburn-theme
+  :disabled
   :ensure t
   :config
-  ;;(load-theme 'zenburn t)
+  (load-theme 'zenburn t)
+  (yj/update-font-sizes))
+
+;; Use the Dark+ theme from Visual Code. Note the this theme current lacks good
+;; support for org-mode (e.g., different colors for different heading levels,
+;; different colors for inline verbatim vs code).
+(use-package vscode-dark-plus-theme
+  ;; :disabled
+  :ensure t
+  :config
+  (load-theme 'vscode-dark-plus t)
+  (yj/update-font-sizes))
+
+;; Use the Darcula theme from JetBrains.
+(use-package jetbrains-darcula-theme
+  :disabled
+  :ensure t
+  :config
+  (load-theme 'jetbrains-darcula t)
   (yj/update-font-sizes))
 
 ;; Use the dracula theme, which provides visually- distinct colors for the
@@ -666,6 +685,7 @@ When repeatedly called we cycle through three states:
 ;;  - text selection
 ;;  - highlight of symbol at point
 (use-package dracula-theme
+  :disabled
   :ensure t
   :config
   (load-theme 'dracula t)
@@ -1248,8 +1268,10 @@ When repeatedly called we cycle through three states:
   ;; A better highlight color when highlighting occurences of symbol under
   ;; cursor.
   (set-face-attribute 'lsp-face-highlight-textual nil
-                      :inherit 'nobreak-hyphen
-                      :slant 'italic))
+                      ;; :inherit 'nobreak-hyphen
+                      :slant 'italic
+                      :underline t
+                      :overline nil))
 
 ;; optionally
 (use-package lsp-ui
