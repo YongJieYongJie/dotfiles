@@ -302,7 +302,7 @@ otherwise calls 'delete-window'."
   (yj/window-divider-mode))
 
 
-(defvar yj/non-editing-buffer-regexp '("magit" "*Minibuf-" "*eshell*"))
+(defvar yj/non-editing-buffer-regexp '("magit" "*Minibuf-" "*eshell*" "*treemacs"))
 
 (defun yj/is-editing-buffer (buffer)
   "Return non-nil if BUFFER is an editing buffer."
