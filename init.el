@@ -762,6 +762,8 @@ When repeatedly called we cycle through three states:
   ;; Basic customization as recommended on official documentation
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format " (%d/%d) ")
+  (setq ivy-re-builders-alist
+        '((t . ivy--regex-ignore-order)))
 
   :config
   (ivy-mode 1)
