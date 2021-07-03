@@ -965,9 +965,9 @@ When repeatedly called we cycle through three states:
 
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 (setq org-capture-templates
-      (quote (("t" "todo" entry (file+datetree (concat org-directory "/captured-todos.org"))
+      (quote (("t" "todo" entry (file+datetree (lambda () (concat org-directory "/captured-todos.org")))
               "* TODO %?\nCreated %U\n")
-              ("c" "chat_logs" entry (file+datetree (concat org-directory "/conversations.org"))
+              ("c" "chat_logs" entry (file+datetree (lambda () (concat org-directory "/conversations.org")))
                "* Chat with %?\nCreated: %U\n"))))
 
 ;; Recursively adds file ending with .org to the agenda files, required
