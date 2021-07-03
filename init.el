@@ -748,7 +748,7 @@ save it in `ffap-file-at-point-line-number' variable."
 (use-package writeroom-mode
   :ensure t
   :config
-  (setq writeroom-width 100)
+  (setq writeroom-width 101)
   (setq writeroom-header-line t))
 
 ;; solaire mode slightly changes the background colors of "editable" buffers as
