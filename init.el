@@ -375,7 +375,11 @@ This means that buffers like magit will be excluded."
 
 (global-set-key (kbd "C-1") 'yj/delete-other-windows-dwim)
 (global-set-key (kbd "C-0") 'yj/delete-window-or-kill-buffer)
-(global-set-key (kbd "C-3") 'yj/toggle-buffer)
+(global-set-key (kbd "C-3") 'yj/switch-to-previous-editing-buffer)
+(global-set-key (kbd "C-2") 'counsel-rg)
+(global-set-key (kbd "C-9") 'projectile-find-file-dwim)
+(global-set-key (kbd "C-8") 'imenu)
+(global-set-key (kbd "C-7") 'swiper)
 (global-set-key (kbd "M-o") 'yj/other-window-dwim)
 (add-hook 'ibuffer-mode-hook
           (lambda () (define-key ibuffer-mode-map (kbd "M-o") nil)))
@@ -1082,7 +1086,8 @@ When repeatedly called we cycle through three states:
     (lsp-ui-doc-focus-frame))
 
   (define-key lsp-mode-map (kbd "M-?") 'lsp-find-references) ; Replaces `xref-find-local'
-  (define-key lsp-mode-map (kbd "M-Y") 'lsp-goto-type-definition) ; Using T for tYpe
+  (define-key lsp-mode-map (kbd "M-Y") 'lsp-goto-type-definition) ; Using Y for tYpe
+  (define-key lsp-mode-map (kbd "M-I") 'lsp-find-implementation)
   (define-key lsp-mode-map (kbd "C-h l") 'yj/lsp-show-doc)
 
   ;; A better highlight color when highlighting occurences of symbol under
