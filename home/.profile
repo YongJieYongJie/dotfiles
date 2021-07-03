@@ -121,10 +121,6 @@ alias rg='rg --smart-case'
 #export GOBIN="$GOPATH/bin"
 #export PATH="$GOBIN:$PATH"
 
-## Rust
-#source "$HOME/.cargo/env"
-#export PATH="$HOME/.cargo/bin:$PATH"
-
 
 ###################
 # Local Overrides #
@@ -134,4 +130,3 @@ alias rg='rg --smart-case'
 if [ -f "$HOME/.local/profile" ]; then
   source "$HOME/.local/profile"
 fi
-
