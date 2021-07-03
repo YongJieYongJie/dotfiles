@@ -511,6 +511,9 @@ This means that buffers like magit will be excluded."
                ("matrixport-spot" (filename . "nvwa/spot"))
                ("matrixport-nvwa" (filename . "nvwa/nvwa"))
                ("matrixport-ugo" (filename . "nvwa/ugo"))
+               ("playground/go" (filename . "playground/go"))
+               ("playground/mysql" (filename . "playground/mysql"))
+               ("org" (mode . org-mode))
                ("dired" (mode . dired-mode))
                ("emacs" (or
                          (name . "^\\*scratch\\*$")
