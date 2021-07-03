@@ -463,6 +463,20 @@ When repeatedly called we cycle through three states:
 
 (setq eshell-cmpl-ignore-case t)
 
+(defun with-face (str &rest face-plist)
+  (propertize str 'face face-plist))
+
+(defun yj/eshell-prompt ()
+  (concat
+   "\n"
+   (with-face (format-time-string "[%Y-%m-%d %H:%M] " (current-time)) :foreground "#888")
+   (with-face (concat (eshell/pwd) " "))
+   (with-face "\n")
+   "> "))
+(setq eshell-prompt-function 'yj/eshell-prompt)
+(setq eshell-prompt-regexp "^> ")
+(setq eshell-highlight-prompt nil)
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Look-and-Feel
