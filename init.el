@@ -19,7 +19,9 @@
 ;;     - https://www.gnu.org/software/emacs/manual/html_node/elisp/Index.html
 ;;     - http://endlessparentheses.com/get-in-the-habit-of-using-sharp-quote.html
 ;;   - Learn how folding works in Emacs, develop a workflow.
-
+;;
+;; - Make electric-pair work with backticks:
+;;   - https://emacs.stackexchange.com/questions/2538/how-to-define-additional-mode-specific-pairs-for-electric-pair-mode
 
 ;;;-----------------------------------------------------------------------------
 ;;; Per-Machine Settings
