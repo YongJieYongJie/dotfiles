@@ -1361,6 +1361,16 @@ When repeatedly called we cycle through three states:
 
 
 ;;;-----------------------------------------------------------------------------
+;;; Programming Mode: Rust
+;;;-----------------------------------------------------------------------------
+
+;; rustic is recommended by article at
+;; https://robert.kra.hn/posts/2021-02-07_rust-with-emacs/
+(use-package rustic
+  :ensure t)
+
+
+;;;-----------------------------------------------------------------------------
 ;;; Programming Mode: C
 ;;;-----------------------------------------------------------------------------
 
