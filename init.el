@@ -233,10 +233,10 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 ;; https://github.com/company-mode/company-mode/issues/299
 ;(add-to-list 'default-frame-alist
 ;             '(font . "-outline-Courier New-normal-normal-normal-mono-23-*-*-*-c-*-iso8859-1"))
-(add-to-list 'default-frame-alist '(font . "Iosevka-24"))
-(add-to-list 'default-frame-alist '(height . 24))
+(add-to-list 'default-frame-alist '(font . "Iosevka-21:weight=light"))
+(add-to-list 'default-frame-alist '(height . 17))
 (add-to-list 'default-frame-alist '(width . 60))
-;(set-frame-font "Iosevka 24" nil t)
+;; (set-frame-font "Iosevka-21:weight=light" nil t)
 
 (defun yj/change-font-size (p)
   "Change font size for all buffers, windows and frames, based on prefix P."
