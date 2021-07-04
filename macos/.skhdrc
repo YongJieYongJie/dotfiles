@@ -3,33 +3,32 @@
 # Toggles to last visited space (similar to Vim's b#)
 cmd + shift - s : yabai -m space --focus recent
 
-# TODO: Fix bug where sometimes it just doesn't work for multiple display by
-# bring the last recent space to current display.
 # Toggles to last visited space (similar to Vim's b#), if the last visited
 # space is on another display, brings it to the active display.
-cmd + shift - t : currSpaceDisplay=$(yabai -m query --displays --space | jq .index) && \
-                  recentSpaceDisplay=$(yabai -m query --displays --space recent | jq .index) && \
-                  ( [ ${currSpaceDisplay} == ${recentSpaceDisplay} ] || \
-                    yabai -m space recent --display ${currSpaceDisplay} ) && \
-                  yabai -m space --focus recent
+cmd + shift - t : $HOME/.local/scripts/yabai-toggle.sh
 
-# Labelling and jumping to labelled spaces (something like the selection group
+# Hardcoded quick toggels (much like <windows-key> + <number> on Windowns)
+cmd + ctrl - 1 : $HOME/.local/scripts/yabai-switch-to-app.sh "Emacs"
+cmd + ctrl - 2 : $HOME/.local/scripts/yabai-switch-to-app.sh "iTerm2"
+cmd + ctrl - 3 : $HOME/.local/scripts/yabai-switch-to-app.sh "Microsoft Edge"
+cmd + ctrl - 4 : $HOME/.local/scripts/yabai-switch-to-app.sh "Slack"
+
+# labelling and jumping to labelled spaces (something like the selection group
 # in Red Alert)
 #
 # Usage:
 #  - Press command + option + 1/2/3/4/5 to label
 #  - Press command + conrol + 1/2/3/4/5 to jump
-cmd + alt - 1 : yabai -m space --label one
-cmd + alt - 2 : yabai -m space --label two
-cmd + alt - 3 : yabai -m space --label three
-cmd + alt - 4 : yabai -m space --label four
-cmd + alt - 5 : yabai -m space --label five
-cmd + ctrl - 1 : yabai -m space --focus one
-cmd + ctrl - 2 : yabai -m space --focus two
-cmd + ctrl - 3 : yabai -m space --focus three
-cmd + ctrl - 4 : yabai -m space --focus four
-cmd + ctrl - 5 : yabai -m space --focus five
-
+#cmd + alt - 1 : yabai -m space --label one
+#cmd + alt - 2 : yabai -m space --label two
+#cmd + alt - 3 : yabai -m space --label three
+#cmd + alt - 4 : yabai -m space --label four
+#cmd + alt - 5 : yabai -m space --label five
+#cmd + ctrl - 1 : yabai -m space --focus one
+#cmd + ctrl - 2 : yabai -m space --focus two
+#cmd + ctrl - 3 : yabai -m space --focus three
+#cmd + ctrl - 4 : yabai -m space --focus four
+#cmd + ctrl - 5 : yabai -m space --focus five
 
 # -----------------Multi-Display-----------------------------------------------
 
@@ -41,55 +40,24 @@ cmd + ctrl - 5 : yabai -m space --focus five
 # Focus recent display
 #shift + alt - 8 : yabai -m display --focus next
 
-# Move space to next display (or the first display if already at the end). The
-# script works roughly as follows:
-#  1. Label previous space (first three lines)
-#  2. Label current space (second three lines)
-#  3. Move current space to next display
-#  4. Focus previous space using label
-#  5. Focus current space using label
+# Move space to next display (or the first display if already at the end).
 #
 # NOTE: For the below to work, the system preferences for mission control will
 # likely need to be set to "Automatically rearrange Spaces based on most recent
 # use"
 #
-# NOTE 2: It will not work nicely with Emacs, because it seems Emacs doesn't
+# NOTE 2: It may not work nicely with Emacs, because it seems Emacs doesn't
 # play nice with macOS's mission control.
-#
-ctrl + shift - right : prevLabel="label_$RANDOM" && \
-                      prevIdx=$(yabai -m query --spaces --space prev | jq .index) && \
-                      yabai -m space $prevIdx --label $prevLabel && \
-                      currLabel="label_$RANDOM" && \
-                      currIdx=$(yabai -m query --spaces --space | jq .index) && \
-                      yabai -m space $currIdx --label $currLabel && \
-                      (yabai -m space --display next || yabai -m space --display first) && \
-                      yabai -m space --focus $prevLabel && \
-                      yabai -m space --focus $currLabel 
 
-ctrl + shift - left : prevLabel="label_$RANDOM" && \
-                     prevIdx=$(yabai -m query --spaces --space prev | jq .index) && \
-                     yabai -m space $prevIdx --label $prevLabel && \
-                     currLabel="label_$RANDOM" && \
-                     currIdx=$(yabai -m query --spaces --space | jq .index) && \
-                     yabai -m space $currIdx --label $currLabel && \
-                     (yabai -m space --display prev || yabai -m space --display last) && \
-                     yabai -m space --focus $prevLabel && \
-                     yabai -m space --focus $currLabel 
+ctrl + shift - right : $HOME/.local/scripts/yabai-move-space.sh "right"
+ctrl + shift - left  : $HOME/.local/scripts/yabai-move-space.sh "left"
 
 # TODO: Fix up when we land on a space that can't be moved across displays
 # (e.g., the space representing the "desktop" for each particular display)
 #
 # Switch to next/previous space, moving it to current display if necessary
-#   Get current display index
-#   Switch to next space (or the first space if already at the end)
-#   Move space to saved display index
-cmd + shift - down : i=$(yabai -m query --displays --display | jq .index) && \
-                     (yabai -m space --focus next || yabai -m space --focus first) && \
-                     yabai -m space --display $i
-
-cmd + shift - up : i=$(yabai -m query --displays --display | jq .index) && \
-                   (yabai -m space --focus prev || yabai -m space --focus last) && \
-                   yabai -m space --display $i
+cmd + shift - down : $HOME/.local/scripts/yabai-switch-to-space.sh "next"
+cmd + shift - up   : $HOME/.local/scripts/yabai-switch-to-space.sh "prev"
 
 
 # -----------------Utility-----------------------------------------------------
@@ -101,10 +69,5 @@ shift + lctrl + alt - r :
     launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 # Print debug information
-cmd + shift - d : currSpaceIdx=$(yabai -m query --spaces --space | jq .index) && \
-                  recentSpaceIdx=$(yabai -m query --spaces --space recent | jq .index) && \
-                  currSpaceDisplay=$(yabai -m query --displays --space | jq .index) && \
-                  recentSpaceDisplay=$(yabai -m query --displays --space recent | jq .index) && \
-                  /usr/bin/env osascript <<< \
-                      "display notification \"- currSpaceIdx: $currSpaceIdx | recentSpaceIdx: $recentSpaceIdx\\n- currSpaceDisplay: $currSpaceDisplay | recentSpaceDisplay: $recentSpaceDisplay\""
+cmd + shift - d : $HOME/.local/scripts/yabai-debug-notification.sh
 
