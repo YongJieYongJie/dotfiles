@@ -16,12 +16,12 @@
 #    a. If already focused, focus next window with higher index (wrapping around)
 #    b. Otherwise, focus first in windows list
 focusNext() {
-    appName=$1
+    appName=$(echo "$1" | tr '[:upper:]' '[:lower:]')
 
     # Select windows with the `app` field matching `appName` (after projecting
     # only the `app`, `id`, `space` and `focused` fields to make the JSON
     # smaller)
-    windowsWithApp=$(yabai -m query --windows | jq --compact-output \
+    windowsWithApp=$(yabai -m query --windows | tr '[:upper:]' '[:lower:]' | jq --compact-output \
         'map({app, id, space, focused} | select( .app | contains("'"$appName"'")))')
     # echo "[D] windowsWithApp: $windowsWithApp"
     # Check if the output is empty JSON array (i.e., "[]") by checking length
