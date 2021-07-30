@@ -1118,6 +1118,19 @@ When repeatedly called we cycle through three states:
                           (or (string-match ".stversions" k) ; removes syncthing artefacts
                               (string-match "sync-conflict" k))) ; removes syncthing artefacts
                         org-agenda-files))
+
+(defun yj/update-org-agenda-files ()
+  (interactive)
+  ;; Recursively adds file ending with .org to the agenda files, required
+  ;; because newly created files are not automatically added.
+  (setq org-agenda-files (directory-files-recursively
+                          (concat org-directory "/") "\\.org$"))
+  (setq org-agenda-files (cl-remove-if
+                          (lambda (k)
+                            (or (string-match ".stversions" k) ; removes syncthing artefacts
+                                (string-match "sync-conflict" k))) ; removes syncthing artefacts
+                          org-agenda-files)))
+
 (setq org-todo-keywords
       '((sequence "NEXT(n)" "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "SUPERSEDED(s@)")))
 
