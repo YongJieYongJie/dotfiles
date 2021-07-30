@@ -761,6 +761,7 @@ When repeatedly called we cycle through three states:
 
 ;; undo-tree
 (use-package undo-tree
+  :disabled
   :ensure t
   :delight undo-tree-mode
   :config
