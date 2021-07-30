@@ -3,6 +3,8 @@
 # contain shell-specific items; also, they may not be loaded by programs like
 # tmux, so we are sourcing it here.
 
+PROFILE_LOADED=true
+
 if [ -n "$ZSH_VERSION" ]; then
   source "$HOME/.zshrc"
 fi
@@ -41,6 +43,15 @@ if [[ $(uname -s) == "Darwin" ]]; then
   alias la='l -A'
   alias ll='l -l '
   alias lla='ll -A'
+
+  # Sort by size, time
+  alias lss='ls -s'
+  alias lst='ls -t'
+
+  alias lls='ll -s'
+  alias llas='lla -s'
+  alias llt='ll -t'
+  alias llat='lla -t'
 else
   alias ls='ls --classify --color=tty'
 
