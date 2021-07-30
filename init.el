@@ -186,6 +186,13 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 (add-to-list 'default-frame-alist '(width . 60))
 ;(set-frame-font "Iosevka 24" nil t)
 
+(defun yj/change-font-size (p)
+  "Change font size for all buffers, windows and frames, based on prefix P."
+  (interactive "p")
+  (let* ((current-font-size 20)
+         (new-font-size (+ current-font-size p)))
+   (set-frame-font (concat "Iosevka-" (number-to-string new-font-size) ":weight=light") nil t)))
+
 (setq initial-scratch-message nil)
 (setq tab-stop-list (number-sequence 4 120 4))
 (setq-default tab-width 4)
