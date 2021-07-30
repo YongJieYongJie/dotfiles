@@ -394,13 +394,32 @@ This means that buffers like magit will be excluded."
         (window-divider-mode 1)
       (window-divider-mode -1))))
 
-(global-set-key (kbd "C-1") 'yj/delete-other-windows-dwim)
+(defun yj/highlight (prefix)
+  (interactive "P")
+  (let* ((highlighted-regexps (mapcar 'car hi-lock-interactive-patterns))
+         (symbol-highlighted (seq-find
+                              (lambda (pat) (string-match (symbol-name (symbol-at-point)) pat))
+                              highlighted-regexps)))
+    (cond
+     (prefix (unhighlight-regexp t)) ;; unhighlight all if prefix argument passed in
+     (symbol-highlighted (unhighlight-regexp symbol-highlighted)) ;; if symbol at point is already highlighted, remove it
+     (t (hi-lock-face-symbol-at-point))))) ;; else, highlight the symbol
+
+(defun yj/counsel-rg (prefix)
+  (interactive "P")
+  (let ((symbol-name-at-point (symbol-name (symbol-at-point))))
+    (if (and prefix symbol-name-at-point)
+        (counsel-rg symbol-name-at-point (counsel--git-root) nil nil)
+      (counsel-rg))))
+
 (global-set-key (kbd "C-0") 'yj/delete-window-or-kill-buffer)
+(global-set-key (kbd "C-1") 'yj/delete-other-windows-dwim)
+(global-set-key (kbd "C-2") 'yj/counsel-rg)
 (global-set-key (kbd "C-3") 'yj/switch-to-previous-editing-buffer)
-(global-set-key (kbd "C-2") 'counsel-rg)
-(global-set-key (kbd "C-9") 'projectile-find-file-dwim)
-(global-set-key (kbd "C-8") 'imenu)
+(global-set-key (kbd "C-5") 'yj/highlight)
 (global-set-key (kbd "C-7") 'swiper)
+(global-set-key (kbd "C-8") 'imenu)
+(global-set-key (kbd "C-9") 'projectile-find-file-dwim)
 (global-set-key (kbd "M-o") 'yj/other-window-dwim)
 (add-hook 'ibuffer-mode-hook
           (lambda () (define-key ibuffer-mode-map (kbd "M-o") nil)))
