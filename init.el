@@ -903,7 +903,7 @@ When repeatedly called we cycle through three states:
   (setq ivy-count-format " (%d/%d) ")
   (setq ivy-re-builders-alist
         '((t . ivy--regex-ignore-order)))
-
+  (setq ivy-initial-inputs-alist nil) ;; Disable the caret (^) in all ivy prompts
   :config
   (ivy-mode 1)
 
