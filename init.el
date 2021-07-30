@@ -1358,6 +1358,10 @@ When repeatedly called we cycle through three states:
   (define-key magit-mode-map (kbd "<C-[>") 'yj/switch-to-previous-editing-buffer)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
+;; Configure ediff, which I usually only use from Magit
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain) ; avoid creating new frame
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; END
