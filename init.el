@@ -777,7 +777,9 @@ When repeatedly called we cycle through three states:
 (use-package flycheck
   :ensure t
   :delight flycheck-mode
-  :init (global-flycheck-mode))
+  :init (global-flycheck-mode)
+  :bind (("M-N" . flycheck-next-error)
+         ("M-P" . flycheck-previous-error)))
 
 (setq flycheck-check-syntax-automatically '(mode-enabled save))
 
