@@ -239,7 +239,7 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 (add-to-list 'default-frame-alist '(font . "Iosevka-24:weight=light"))
 (add-to-list 'default-frame-alist '(height . 24))
 (add-to-list 'default-frame-alist '(width . 60))
-(set-frame-font "Iosevka-24:weight=light" nil t)
+(set-frame-font "Iosevka-19:weight=light" nil t)
 
 (defun yj/change-font-size (p)
   "Change font size for all buffers, windows and frames, based on prefix P."
@@ -508,11 +508,13 @@ This means that buffers like magit will be excluded."
 (setq-default ibuffer-saved-filter-groups
       `(("default"
                ("tasks" (filename . "org/tasks"))
-               ("matrixport-spot" (filename . "nvwa/spot"))
-               ("matrixport-nvwa" (filename . "nvwa/nvwa"))
-               ("matrixport-ugo" (filename . "nvwa/ugo"))
-               ("playground/go" (filename . "playground/go"))
-               ("playground/mysql" (filename . "playground/mysql"))
+               ("matrixport-spot" (filename . "nvwa/spot/"))
+               ("matrixport-nvwa" (filename . "nvwa/nvwa/"))
+               ("matrixport-um" (filename . "nvwa/um/"))
+               ("matrixport-base" (filename . "nvwa/base/"))
+               ("matrixport-ugo" (filename . "nvwa/ugo/"))
+               ("playground/go" (filename . "playground/go/"))
+               ("playground/mysql" (filename . "playground/mysql/"))
                ("org" (mode . org-mode))
                ("dired" (mode . dired-mode))
                ("emacs" (or
