@@ -1373,3 +1373,6 @@ When repeatedly called we cycle through three states:
 
 (provide 'init)
 ;;; init.el ends here
+
+(message "(￣^￣ )ゞ") ;; Emacs reporting for duty
+
