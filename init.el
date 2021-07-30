@@ -430,11 +430,7 @@ This means that buffers like magit will be excluded."
 (global-set-key (kbd "C-z") 'yj/toggle-maximize-buffer)
 
 ;; Use "C-`" to toggle back-and-forth between eshell.
-(global-set-key (kbd "C-`") 'eshell)
-(defun yj/eshell-custom-keymap ()
-  ;; (local-set-key (kbd "C-`") 'previous-buffer)
-  (local-set-key (kbd "C-`") 'yj/switch-to-previous-editing-buffer))
-(add-hook 'eshell-mode-hook 'yj/eshell-custom-keymap)
+(global-set-key (kbd "C-`") 'yj/eshell-or-vterm)
 
 ;; Use ibuffer as the default buffer switching mode.
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -504,9 +500,50 @@ When repeatedly called we cycle through three states:
 (global-set-key (kbd "C-S-t") 'toggle-truncate-lines)
 
 
-;;; eshell-related
 
-(setq eshell-cmpl-ignore-case t)
+;;;-----------------------------------------------------------------------------
+;;; Terminal-related
+;;;-----------------------------------------------------------------------------
+
+(use-package eshell
+  :init
+  (setq eshell-prompt-function 'yj/eshell-prompt)
+  (setq eshell-prompt-regexp "^[^#$<]*[$#>] ")
+  (setq eshell-highlight-prompt nil)
+
+  (setq eshell-cmpl-ignore-case t)
+  (setq eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
+  (setq eshell-save-history-on-exit t)
+  (setq eshell-hist-ignoredups t)
+  (setq eshell-cmpl-cycle-completions t)
+  (setq eshell-hist-match-partial nil)
+  (setq eshell-history-size 65536) ;; default is 128
+
+  :config
+  (add-hook 'eshell-mode-hook 'yj/eshell-custom-keymap)
+  (add-hook 'eshell-mode-hook 'yj/eshell-max-proess-read)
+  (add-hook 'eshell-mode-hook 'hl-line-mode)
+  (add-hook 'eshell-mode-hook 'company-mode)
+  (add-hook 'eshell-mode-hook (lambda () (setenv "PAGER" "cat"))) ;; avoid paging with less
+  ;; (add-to-list 'company-backends 'company-eshell-history)
+  )
+
+(defun yj/eshell-max-proess-read ()
+    (make-local-variable 'read-process-output-max)
+    (setq read-process-output-max 4096)) ;; Keep this value to default so we don't buffer too much
+
+(defun yj/eshell-custom-keymap ()
+  ;; (local-set-key (kbd "C-`") 'previous-buffer)
+  (local-set-key (kbd "C-`") 'yj/switch-to-previous-editing-buffer)
+  (local-set-key (kbd "C-<tab>") 'yj/next-or-new-eshell)
+  (local-set-key (kbd "M-R") 'eshell-insert-history))
+
+(defun eshell-insert-history ()
+  "Displays the eshell history to select and insert back into your eshell."
+  (interactive)
+  (insert (completing-read "Eshell history: "
+                               (delete-dups
+                                (ring-elements eshell-history-ring)))))
 
 (defun with-face (str &rest face-plist)
   (propertize str 'face face-plist))
@@ -518,9 +555,63 @@ When repeatedly called we cycle through three states:
    (with-face (concat (eshell/pwd) " "))
    (with-face "\n")
    "> "))
-(setq eshell-prompt-function 'yj/eshell-prompt)
-(setq eshell-prompt-regexp "^> ")
-(setq eshell-highlight-prompt nil)
+
+(defun company-eshell-history (command &optional arg &rest ignored)
+  "Prompt user with a list of eshell history."
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'company-eshell-history))
+    (prefix (and (eq major-mode 'eshell-mode)
+                 (let ((word (company-grab-word)))
+                   (save-excursion
+                     (eshell-bol)
+                     (and (looking-at-p (s-concat word "$")) word)))))
+    (candidates (delete-dups
+                 (->> (ring-elements eshell-history-ring)
+                      (seq-filter (lambda (item) (s-prefix-p arg item)))
+                      (mapcar 's-trim))
+                 ))
+    (sorted t)))
+
+
+
+(use-package vterm
+  :ensure t
+  :config
+  (defun yj/vterm-custom-keymap ()
+    (local-set-key (kbd "C-`") 'yj/switch-to-previous-editing-buffer)
+    (local-set-key (kbd "C-<tab>") 'yj/next-or-new-eshell))
+  (add-hook 'vterm-mode-hook 'yj/vterm-custom-keymap))
+
+
+(defun yj/eshell-or-vterm (prefix)
+  "Switch the last recently used eshell, or create one if none; vterm if PREFIX."
+  (interactive "P")
+  (if prefix
+      (vterm)
+    (yj/mru-shell)))
+
+(defun yj/mru-shell ()
+  "Switch to most recently used shell, or create one if none."
+  (interactive)
+  (let* ((buffers (buffer-list))
+        (is-shell-p (lambda (b) (string-match "\*eshell.*\\|\*vterm\*" (buffer-name b))))
+        (shell-buffers (seq-filter is-shell-p buffers))
+        (recent-shell-buffer (car shell-buffers)))
+    (if recent-shell-buffer
+        (switch-to-buffer recent-shell-buffer)
+      (eshell))))
+
+(defun yj/next-or-new-eshell (prefix)
+  "Switch to the next eshell or vterm; with PREFIX, create a new eshell."
+  (interactive "P")
+  (let* ((other-buffers (reverse (cdr (buffer-list))))
+         (is-eshell-p (lambda (b) (string-match "\*eshell.*\\|\*vterm\*" (buffer-name b))))
+         (other-eshell-buffers (seq-filter is-eshell-p other-buffers)))
+    (cond
+     (prefix (eshell t))
+     ((zerop (length other-eshell-buffers)) (eshell t))
+     (t (switch-to-buffer (car other-eshell-buffers))))))
 
 
 ;;;-----------------------------------------------------------------------------
