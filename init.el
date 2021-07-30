@@ -321,6 +321,21 @@ This means that buffers like magit will be excluded."
   (let ((order-buffer-list (cdr (buffer-list (selected-frame)))))
     (seq-find 'yj/is-editing-buffer order-buffer-list (other-buffer))))
 
+(defun yj/other-org-buffer ()
+  "Return the most recently used `org-mode' buffer.
+This means that buffers like magit will be excluded."
+  (let ((order-buffer-list (cdr (buffer-list (selected-frame)))))
+    (seq-find
+     (lambda (buffer) (string-match "\.org$" (buffer-name buffer)))
+     order-buffer-list
+     (other-buffer))))
+
+(defun yj/switch-to-previous-editing-buffer (prefix)
+  (interactive "P")
+  (if prefix
+      (switch-to-buffer (yj/other-org-buffer))
+    (switch-to-buffer (yj/other-editing-buffer))))
+
 ;; We need to unboudn "C-[" from ESC first, before we can bind it to anything
 ;; else. From https://emacs.stackexchange.com/a/10273/23895
 (define-key input-decode-map [?\C-\[] (kbd "<C-[>"))
@@ -1201,10 +1216,6 @@ When repeatedly called we cycle through three states:
 ;;;-----------------------------------------------------------------------------
 ;;; Tools: Magit
 ;;;-----------------------------------------------------------------------------
-
-(defun yj/switch-to-previous-editing-buffer ()
-  (interactive)
-  (switch-to-buffer (yj/other-editing-buffer)))
 
 (use-package magit
   :ensure t
