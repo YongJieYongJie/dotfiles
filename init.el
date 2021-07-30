@@ -420,6 +420,7 @@ This means that buffers like magit will be excluded."
 (global-set-key (kbd "C-7") 'swiper)
 (global-set-key (kbd "C-8") 'imenu)
 (global-set-key (kbd "C-9") 'projectile-find-file-dwim)
+(global-set-key (kbd "C-x C-j") 'dired-jump)
 (global-set-key (kbd "M-o") 'yj/other-window-dwim)
 (add-hook 'ibuffer-mode-hook
           (lambda () (define-key ibuffer-mode-map (kbd "M-o") nil)))
