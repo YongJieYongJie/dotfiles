@@ -1208,6 +1208,10 @@ When repeatedly called we cycle through three states:
 (use-package lsp-mode
   :ensure t
   :init
+  ;; performance tuning, see https://github.com/emacs-lsp/lsp-mode/blob/master/docs/page/performance.md for details
+  (setq gc-cons-threshold (* 800000 128)) ;; default is 800000, now is around 100 MB
+  (setq read-process-output-max (* 1024 1024)) ;; default is 4096, now 1 MB
+
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-c l")
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
@@ -1218,6 +1222,9 @@ When repeatedly called we cycle through three states:
   :config
   (setq lsp-completion-show-detail t)
   (setq lsp-completion-show-kind nil)
+
+  ;; more performance tuning: avoid watching vendor directory
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\vendor\\'")
 
   (defun yj/lsp-hide-doc ()
     (interactive)
