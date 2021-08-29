@@ -487,6 +487,7 @@ When repeatedly called we cycle through three states:
 
 (add-hook 'hs-minor-mode-hook
           (lambda () (define-key hs-minor-mode-map (kbd "C-<tab>") 'hs-cycle)))
+(setq hs-isearch-open t) ;; automatically unfolds when searching
 
 
 ;;; Experiment keybindngs
