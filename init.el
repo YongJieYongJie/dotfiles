@@ -1361,6 +1361,18 @@ When repeatedly called we cycle through three states:
 (add-hook 'go-mode-hook 'yj/go-mode-hook)
 
 
+(defvar previous-before-save-hooks nil)
+(defun yj/toggle-before-save-hook () ;; Useful for turning of gofmt before saving
+  (interactive)
+  (if before-save-hook
+      (progn
+        (setq previous-before-save-hooks before-save-hook)
+        (setq before-save-hook nil))
+    (progn
+      (setq before-save-hook previous-before-save-hooks)
+      (setq previous-before-save-hooks nil))))
+
+
 ;;;-----------------------------------------------------------------------------
 ;;; Programming Mode: Rust
 ;;;-----------------------------------------------------------------------------
