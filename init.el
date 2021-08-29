@@ -242,6 +242,15 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 ;; Display column number in mode line.
 (column-number-mode 1)
 
+;; Make sure certain buffers are always created with a bottom split, and shrank
+;; as necessary.
+(customize-set-variable
+ 'display-buffer-alist
+ '(("\\*Gofmt Errors\\*\\|\\*xref\\*"
+    (display-buffer-below-selected display-buffer-at-bottom)
+    (inhibit-same-window . t)
+    (window-height . shrink-window-if-larger-than-buffer))))
+
 ;;; Keybindings
 
 ;; Text editing.
