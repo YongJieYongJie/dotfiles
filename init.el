@@ -533,10 +533,22 @@ When repeatedly called we cycle through three states:
     (make-local-variable 'read-process-output-max)
     (setq read-process-output-max 4096)) ;; Keep this value to default so we don't buffer too much
 
+
+(defun yj/next-go-source-file-name ()
+  (interactive)
+  (forward-word) ;; to avoid searching current word
+  (search-forward-regexp "\\w+\\.go" nil t 1)
+  (backward-word 2))
+(defun yj/prev-go-source-file-name ()
+  (interactive)
+  (search-backward-regexp "\\W\\w+\\.go" nil t nil)
+  (forward-char))
 (defun yj/eshell-custom-keymap ()
   ;; (local-set-key (kbd "C-`") 'previous-buffer)
   (local-set-key (kbd "C-`") 'yj/switch-to-previous-editing-buffer)
   (local-set-key (kbd "C-<tab>") 'yj/next-or-new-eshell)
+  (local-set-key (kbd "M-N") 'yj/next-go-source-file-name)
+  (local-set-key (kbd "M-P") 'yj/prev-go-source-file-name)
   (local-set-key (kbd "M-R") 'eshell-insert-history))
 
 (defun eshell-insert-history ()
