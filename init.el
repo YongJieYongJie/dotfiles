@@ -1011,6 +1011,10 @@ When repeatedly called we cycle through three states:
     :config
     (treemacs-fringe-indicator-mode 'only-when-focused)))
 
+(def-projectile-commander-method ?2
+  "Call counsel-rg in project."
+  (counsel-rg nil (projectile-project-root) nil nil))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Text Mode: General
