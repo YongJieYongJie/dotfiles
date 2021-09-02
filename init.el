@@ -441,6 +441,9 @@ This means that buffers like magit will be excluded."
 ;; Use "C-`" to toggle back-and-forth between eshell.
 (global-set-key (kbd "C-`") 'yj/eshell-or-vterm)
 
+(global-set-key (kbd "C-S-w") 'global-subword-mode)
+(global-set-key (kbd "C-S-l") 'global-hide-mode-line-mode)
+
 ;; Use ibuffer as the default buffer switching mode.
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
