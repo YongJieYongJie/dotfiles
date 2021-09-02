@@ -26,7 +26,7 @@ if test -f "$nvimConfigFilePath" || test -L "$nvimConfigLinkTarget"; then
     echo "[!] $nvimConfigFilePath already exist, backing up to $backupFile"
     mv "$nvimConfigFilePath" "$backupFile"
 fi
-ln -s "$nvimConfigFilePath" "$nvimConfigLinkTarget"
+ln -s "$nvimConfigLinkTarget" "$nvimConfigFilePath"
 
 nvimCocSettingsFilePath=$homeDir/.config/nvim/coc-settings.json
 nvimCocSettingsLinkTarget=$absScriptDir/coc-settings.json
@@ -36,7 +36,7 @@ if test -f "$nvimCocSettingsFilePath" || test -L "$nvimCocSettingsLinkTarget"; t
     echo "[!] $nvimCocSettingsFilePath already exist, backing up to $backupFile"
     mv "$nvimCocSettingsFilePath" "$backupFile"
 fi
-ln -s "$nvimCocSettingsFilePath" "$nvimCocSettingsLinkTarget"
+ln -s "$nvimCocSettingsLinkTarget" "$nvimCocSettingsFilePath"
 
 # Install plugin manager for Neovim.
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
