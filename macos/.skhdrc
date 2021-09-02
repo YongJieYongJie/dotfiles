@@ -69,5 +69,5 @@ shift + lctrl + alt - r :
     launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 # Print debug information
-cmd + shift - d : $HOME/.local/scripts/yabai-debug-notification.sh
+# cmd + shift - d : $HOME/.local/scripts/yabai-debug-notification.sh
 
