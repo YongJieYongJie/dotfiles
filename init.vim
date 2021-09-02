@@ -551,3 +551,9 @@ set writebackup
 call mkdir(yjBackupDir, "p", 0700)
 " See :help :let-& for details on the syntax below
 let &backupdir = yjBackupDir . '/'
+
+if exists('+termguicolors') && ($TERM == "st-256color" || $TERM == "xterm-256color" || $TERM == "tmux-256color")
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
