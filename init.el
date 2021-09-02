@@ -1348,6 +1348,7 @@ When repeatedly called we cycle through three states:
   :ensure t
   :commands lsp-ui-mode
   :config
+  (setq lsp-ui-sideline-enable nil)
   (setq lsp-ui-doc-enable nil))
 ;; if you are helm user
 ;;(use-package helm-lsp :commands helm-lsp-workspace-symbol)
