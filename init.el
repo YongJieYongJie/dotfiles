@@ -1578,3 +1578,22 @@ save it in `ffap-file-at-point-line-number' variable."
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
   (setq LaTeX-electric-left-right-brace t))
+
+(use-package dap-mode
+  :ensure t
+  :config
+  (dap-mode 1)
+  (require 'dap-go)
+  (dap-go-setup)
+  (add-hook 'dap-stopped-hook
+            (lambda (arg) (call-interactively #'dap-hydra))))
+
+(dap-register-debug-template "Matrixport Go Debug"
+                             (list :type "go"
+                                   :request "launch"
+                                   :name "Matrixport Go Debug Name"
+                                   :mode "exec"
+                                   :program nil
+                                   :args "--runner=fleet --basedir=/Users/yongjie/git-repos/matrixport/nvwa/um/integration --cfgfile=test_config.yml -v trade/broker"
+                                   :env nil
+                                   :envFile nil))
