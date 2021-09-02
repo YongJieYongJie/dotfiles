@@ -1248,7 +1248,7 @@ When repeatedly called we cycle through three states:
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
-(add-hook 'markdown-mode-hook #'auto-fill-mode)
+;; (add-hook 'markdown-mode-hook #'auto-fill-mode)
 
 
 ;;;-----------------------------------------------------------------------------
