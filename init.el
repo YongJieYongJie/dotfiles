@@ -69,6 +69,48 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 (mapc (lambda (fn) (advice-add fn :after 'yj/shrink-info-windows))
       yj/info-window-creating-fns)
 
+;; yj/find-file-at-point improves on projectile-find-file-dwim by handling
+;; filenames with row and column indication like "main.go:69:420". To use this
+;; defun, we'll also need to edit projectile-select-files in projectile.el to
+;; look something like the following:
+;;
+;;(defun projectile-select-files (project-files &optional invalidate-cache)
+;;   "Select a list of files based on filename at point.
+;;
+;;With a prefix arg INVALIDATE-CACHE invalidates the cache first."
+;;  (projectile-maybe-invalidate-cache invalidate-cache)
+;;  (let* ((file (if (region-active-p)
+;;                   (buffer-substring (region-beginning) (region-end))
+;;                 (or (thing-at-point 'filename) "")))
+;;         (file (if (string-match "\\.?\\./" file)
+;;                   (file-relative-name (file-truename file) (projectile-project-root))
+;;                 file))
+;;         (file (if (string-match "\\([^:]+\\)\\(:[0-9]\\)+" file) ; Added to remove things like the trailing ":420:69" in "main.go:420:69"
+;;                   (match-string 1 file)                          ;
+;;                 file))                                           ;
+;;         (file (if (string-match "\\./\\(.*\\)" file)
+;;                   (match-string 1 file)
+;;                 file))
+;;         (files (if file
+;;                    (cl-remove-if-not
+;;                     (lambda (project-file)
+;;                       (string-match file project-file))
+;;                     project-files)
+;;                  nil)))
+;;    files)
+(defun yj/find-file-at-point ()
+  (interactive)
+  (let* ((filename-at-point (or (thing-at-point 'filename) ""))
+         (line-no (if (string-match "\\w:\\([0-9]+\\)" filename-at-point)
+                      (match-string 1 filename-at-point)))
+         (col-no (if (string-match "\\w:[0-9]+:\\([0-9]+\\)" filename-at-point)
+                      (match-string 1 filename-at-point))))
+    (projectile-find-file-dwim)
+    (if line-no
+        (forward-line (- (string-to-number line-no) (line-number-at-pos))))
+    (if col-no
+        (move-to-column (string-to-number col-no)))))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Emacs GUI-related
@@ -428,7 +470,8 @@ This means that buffers like magit will be excluded."
 (global-set-key (kbd "C-5") 'yj/highlight)
 (global-set-key (kbd "C-7") 'swiper)
 (global-set-key (kbd "C-8") 'imenu)
-(global-set-key (kbd "C-9") 'projectile-find-file-dwim)
+;; (global-set-key (kbd "C-9") 'projectile-find-file-dwim)
+(global-set-key (kbd "C-9") 'yj/find-file-at-point)
 (global-set-key (kbd "C-x C-j") 'dired-jump)
 (global-set-key (kbd "M-o") 'yj/other-window-dwim)
 (add-hook 'ibuffer-mode-hook
@@ -511,7 +554,6 @@ When repeatedly called we cycle through three states:
 
 (global-set-key (kbd "C-4") 'treemacs)
 (global-set-key (kbd "C-S-t") 'toggle-truncate-lines)
-
 
 
 ;;;-----------------------------------------------------------------------------
@@ -597,7 +639,6 @@ When repeatedly called we cycle through three states:
                       (mapcar 's-trim))
                  ))
     (sorted t)))
-
 
 
 (use-package vterm
