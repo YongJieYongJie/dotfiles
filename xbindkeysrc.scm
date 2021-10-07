@@ -185,6 +185,8 @@
 ;; Inspired by the code on ArchWiki:
 ;; https://wiki.archlinux.org/title/Xbindkeys#Mouse_Chording
 
+(define chord-command-activate #f)
+
 (define (first-in-inner list-of-lists)
   ;; first-in-inner returns a list containing the first element in the list of
   ;; lists passed in as argument. For example, given:
@@ -200,11 +202,13 @@
   ;;     (bind-all
   ;;      '((list '(release "b:1") "xdotool key a")
   ;;        (list '(release "b:3") "xdotool key b")))
-    (for-each (lambda (definition)
-                (let ((key (list-ref definition 0))
-                      (binding (list-ref definition 1)))
-                  (xbindkey-function key (lambda () (run-command binding)))))
-              definitions))
+  (for-each (lambda (definition)
+              (let ((key (list-ref definition 0))
+                    (binding (list-ref definition 1)))
+                (xbindkey-function key (lambda ()
+                                         (run-command binding)
+                                         (set! chord-command-activate #t)))))
+            definitions))
 
 (define (unbind-all keys)
   ;; unbind-all accepts a list of keys, and bind each key.
@@ -215,7 +219,7 @@
   ;;       '(release "b:3")))
   (for-each (lambda (key) (remove-xbindkey key)) keys))
 
-(define (define-mouse-modifiers chord-key . definitions)
+(define (define-mouse-modifiers chord-key unchorded-action . definitions)
   ;; define-mouse-modifiers defines chord actions, such that the chord-key acts
   ;; like a modifier key that changes the behavior of the other keys as per the
   ;; definitions.
@@ -227,17 +231,22 @@
   ;;       (list '(release "b:3") "xdotool key ctrl+v"))
   (define (start-mouse-chord)
     (bind-all definitions)
+    (set! chord-command-activate #f)
     (xbindkey-function `(release ,chord-key)
                        (lambda ()
+                         (if (not chord-command-activate)
+                             (run-command unchorded-action))
                          (remove-xbindkey `(release ,chord-key))
                          (unbind-all (first-in-inner definitions)))))
   (xbindkey-function chord-key start-mouse-chord))
 
 (define-mouse-modifiers "b:9"
+  "xdotool keydown alt key Tab; sleep 0.01; xdotool key Right; sleep 0.01; xdotool keyup alt" ; alt-tab next
   (list '(release "b:1") "xdotool key ctrl+c") ; "forward" + left mouse button -> copy
   (list '(release "b:3") "xdotool key ctrl+v")) ; "backward" + right mouse button -> paste
 
 (define-mouse-modifiers "b:8"
+  "xdotool keydown alt key Tab; sleep 0.01; xdotool keyup alt" ; alt-tab cycle
   (list '(release "b:1") "xdotool key ctrl+z") ; "forward" + left mouse button -> undo
   (list '(release "b:3") "xdotool key ctrl+y")) ; "backward" + right mouse button -> redo
 
