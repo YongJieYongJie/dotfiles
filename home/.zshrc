@@ -1,3 +1,5 @@
+ZSHRC_LOADED=true
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -102,10 +104,4 @@ WORDCHARS=${WORDCHARS//[\/-]}
 # https://stackoverflow.com/a/24237590/5821101.
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# Use LS_COLORS from https://github.com/trapd00r/LS_COLORS. Take note however
-# that the script from within that repository generates the code for bash and
-# csh only, and have to be tweak for zsh (by removing quotation marks etc.).
-if [[ -f ~/.local/share/lscolors ]]; then
-  export LS_COLORS=$(cat ~/.local/share/lscolors)
-  zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-fi
+[ -f ~/.profile ] && [ -z $PROFILE_LOADED ] && source ~/.profile

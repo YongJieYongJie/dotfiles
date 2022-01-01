@@ -56,3 +56,11 @@ curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-
 # Install package manager for zsh: Zinit. Instructions from
 # https://github.com/zdharma-continuum/zinit#automatic-installation-recommended.
 sh -c "$(curl -fsSL https://git.io/zinit-install)"
+
+# Install lscolors so different filetypes have different color in output of
+# commands like ls and lf. Based on instructions at
+# https://github.com/trapd00r/LS_COLORS#installation.
+mkdir /tmp/LS_COLORS \
+  && curl -L https://api.github.com/repos/trapd00r/LS_COLORS/tarball/master \
+  | tar xzf - --directory=/tmp/LS_COLORS --strip=1
+( cd /tmp/LS_COLORS && sh install.sh )

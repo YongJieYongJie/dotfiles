@@ -5,10 +5,10 @@
 
 PROFILE_LOADED=true
 
-if [ -n "$ZSH_VERSION" ]; then
+if [ -n "$ZSH_VERSION" ] && [ -z $ZSHRC_LOADED ]; then
   source "$HOME/.zshrc"
 fi
-if [ -n "$BASH" ]; then
+if [ -n "$BASH" ] && [ -z $BASHRC_LOADED ]; then
   source "$HOME/.bashrc"
 fi
 
@@ -103,6 +103,9 @@ fi
 # Default to using smart case.
 alias rg='rg --smart-case'
 
+# Load lscolors so different filetypes have different color in output of
+# commands like ls and lf
+[ -f ~/.local/share/lscolors.sh ] && source ~/.local/share/lscolors.sh
 
 #################################
 # Programming Lannguage Related #
