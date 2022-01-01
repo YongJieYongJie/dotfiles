@@ -352,6 +352,7 @@ set lazyredraw
 set undofile
 
 " Highilght current line.
+highlight CursorLine guifg=NONE guibg=#393939
 set cursorline
 
 " Allow buffer containing modified file to be hidden.
