@@ -53,5 +53,6 @@ vim -c 'PluginInstall' -c 'qa!'
 # Install Git prompt for Git-related information in prompt shell.
 curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > ~/.git-prompt.sh
 
-# Install package manager for zsh: Zinit.
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+# Install package manager for zsh: Zinit. Instructions from
+# https://github.com/zdharma-continuum/zinit#automatic-installation-recommended.
+sh -c "$(curl -fsSL https://git.io/zinit-install)"
