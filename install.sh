@@ -6,6 +6,67 @@ homeDir=~
 
 echo "[*] Executing installation script located at `dirname "$0"`..."
 
+# --------------------------------------- Install commonly-used binaries -------
+
+os=$(uname | tr '[:upper:]' '[:lower:]')
+
+if [ "$os" = "linux" ]; then
+  # ------------------------------------------- Install apt-related tools ------
+  # Assume it's a distribution that uses apt for package management (i.e.,
+  # Debian-based distribution).
+  sudo apt-get update
+  # sudo apt-get upgrade
+  sudo apt-get install -y \
+    zsh \
+    tmux \
+    git \
+    vim \
+    neovim \
+    emacs \
+    fzf \
+    bat \
+    xclip \
+    xdotool \
+    xmodmap
+
+  # -------------------------------------------- Install Go-related tools ------
+
+  "$absScriptDir"/install-go.sh
+
+  command -v go && hasGo="true"
+  if [ -z "$hasGo" ]; then
+    printf "[!] Go binary not found/installed. Skipping installation that"
+    printf "    requires Go."
+  else
+    # Based on instructions at https://github.com/gokcehan/lf#installation
+    env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
+  fi
+
+  # ------------------------------------------- Install npm-related tools ------
+  # Install nvm, as recommended by npm (at
+  # https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), and
+  # following instructions from nvm (at
+  # https://github.com/nvm-sh/nvm#manual-install)
+  export NVM_DIR="$HOME/.nvm" && (
+    git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+    cd "$NVM_DIR"
+    git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" \
+      $(git rev-list --tags --max-count=1)`
+  ) && \. "$NVM_DIR/nvm.sh"
+
+  nvm install node && nvm use node
+  npm install -g yarn
+
+  # TODO: Add installation commands for Darwin
+  # elif [ "$os" = "darwin" ]; then
+
+else
+  printf "[!] Install script does not work on $os"
+  exit 1
+fi
+
+# ------------------------------------------------- Set up configurations ------
+
 for dotfile in .gitconfig .profile .tmux.conf .vimrc .zshrc
 do
     echo "[*] Creating a symlink at $homeDir/$dotfile pointing to $absScriptDir/home/$dotfile..."
@@ -18,6 +79,7 @@ do
 done
 
 # Symlinking Neovim's configuration and coc's settings
+mkdir -p $homeDir/.config/nvim
 nvimConfigFilePath=$homeDir/.config/nvim/init.vim
 nvimConfigLinkTarget=$absScriptDir/init.vim
 echo "[*] Creating a symlink at $nvimConfigFilePath pointing to $nvimConfigLinkTarget"
@@ -49,6 +111,18 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # Install plugins for Vim.
 vim -c 'PluginInstall' -c 'qa!'
+
+# Symlinking Emacs's configuration
+mkdir -p $homeDir/.emacs.d
+emacsConfigFilePath=$homeDir/.emacs.d/init.el
+emacsConfigLinkTarget=$absScriptDir/init.el
+echo "[*] Creating a symlink at $emacsConfigFilePath pointing to $emacsConfigLinkTarget"
+if test -f "$emacsConfigFilePath" || test -L "$emacsConfigLinkTarget"; then
+    backupFile=$emacsConfigFilePath.bak.`date +%Y%m%d_%H%M`
+    echo "[!] $emacsConfigFilePath already exist, backing up to $backupFile"
+    mv "$emacsConfigFilePath" "$backupFile"
+fi
+ln -s "$emacsConfigLinkTarget" "$emacsConfigFilePath"
 
 # Install Git prompt for Git-related information in prompt shell.
 curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > ~/.git-prompt.sh
