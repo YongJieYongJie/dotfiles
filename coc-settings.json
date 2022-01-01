@@ -5,6 +5,7 @@
    // General COC settings //
   //////////////////////////
   "coc.preferences.extensionUpdateCheck": "never",
+  // "explorer.icon.enableNerdfont": true,
 
     ///////////////
    // C-related //
