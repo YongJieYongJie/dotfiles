@@ -1,24 +1,42 @@
 " Yong Jie's init.vim for Neovim, 2021.05.01
 
+if !exists("g:os")
+  if has("win64") || has("win32") || has("win16")
+    let g:os = "Windows"
+  else
+    let g:os = substitute(system('uname'), '\n', '', '')
+  endif
+endif
+
 " -----------------------------------------------------------------------------
 " Machine-Specific Configurations
 " -----------------------------------------------------------------------------
 
 " yjPluginDir is where the plugins will be installed.
-" E.g., "/home/yongjie/.local/share/nvim/plugged"
+" E.g., "/home/yongjie/.local/share/nvim/plugged/"
 let yjPluginDir=''
 
 " yjBackupDir is where the backups will be stored.
 " E.g., "/home/yongjie/.local/share/nvim/backup/"
 let yjBackupDir=''
 
+if g:os == "Windows"
+  let yjPluginDir='C:\\Users\\yongjie\\AppData\\Local\\nvim\\plugged\\'
+  let yjBackupDir='C:\\Users\\yongjie\\AppData\\Local\\nvim\\backup\\'
+elseif g:os == "Linux"
+  let yjPluginDir='/home/yongjie/.local/share/nvim/plugged/'
+  let yjBackupDir='/home/yongjie/.local/share/nvim/backup/'
+elseif g:os == "Darwin"
+  let yjPluginDir='/Users/yongjie/.local/share/nvim/plugged/'
+  let yjBackupDir='/Users/yongjie/.local/share/nvim/backup/'
+endif
 
 " -----------------------------------------------------------------------------
 " init.vim
 " -----------------------------------------------------------------------------
 
 " For no particular reason.
-echo " ಠ_ಠ"
+" echo " ಠ_ಠ"
 nnoremap <space>( :echo " ಠ_ಠ"<cr>
 
 
