@@ -35,18 +35,7 @@ bindkey -e
 # Binds shift-tab to traverse auto-completion in reverse
 bindkey '^[[Z' reverse-menu-complete
 
-
-# includes
-#source ~/.antigen.zsh
-#source ~/.git-prompt.sh
-
-# plugin management using antigen
-# Load the oh-my-zsh's library.
-#antigen use oh-my-zsh
-#antigen bundle zsh-users/zsh-syntax-highlighting
-#antigen apply
-
-# zsh optionns
+# zsh options
 setopt MENU_COMPLETE
 setopt NO_LIST_BEEP
 setopt NO_BEEP
@@ -58,7 +47,8 @@ PS1='
 [%Th] %F{green}%n@%m%f %F{yellow}%~%f%F{blue}$(__git_ps1)%f
 $ '
 
-source /usr/share/doc/fzf/examples/key-bindings.zsh
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] \
+  && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # configure fzf fuzzy finder to popup below
