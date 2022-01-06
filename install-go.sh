@@ -2,6 +2,9 @@
 
 set -e
 
+scriptDir=`dirname "$0"`
+absScriptDir=`cd $scriptDir;pwd`
+
 command -v go > /dev/null && alreadyInstalled="true"
 if [ "$alreadyInstalled" = "true" ]; then
   printf "[*] Go already installed at: $(command -v go)\n"
@@ -34,13 +37,24 @@ else
     Please manually install from tarball at $(pwd)/$tarballFilename\n"
   else
 
-    tarballFilename=$(echo $tarballUrl | grep --only-matching -E "go.*\.tar\.gz")
+    tarballFilename=${tarballUrl##*/}
     if [ -z $tarballFilename ]; then
       printf "[!] Invalid filename for Go tarball: $tarballFilename\n"
     else
       printf "[*] Extracting Go from tarball: $(pwd)/$tarballFilename\n"
+      sudo mkdir -p /usr/local
+      printf "[!] Here 1\n"
       sudo rm -rf /usr/local/go \
         && sudo tar -C /usr/local -xzf $tarballFilename
+      printf "[!] Here 2\n"
+
+      export GOROOT="/usr/local/go"
+      export PATH="$GOROOT/bin:$PATH"
+      export GOPATH="$HOME/go"
+      export GOBIN="$GOPATH/bin"
+      export PATH="$GOBIN:$PATH"
+
+      printf "[!] Here 3\n"
     fi
 
   fi
