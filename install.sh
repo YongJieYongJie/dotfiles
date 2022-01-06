@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
 
 scriptDir=`dirname "$0"`
-absScriptDir=`cd $scriptDir;pwd`
+DOTFILES_INSTALLERS_DIR=`cd $scriptDir;pwd`
 homeDir=${HOME:-~}
 
-echo "[*] Executing installation script located at $absScriptDir..."
+echo "[*] Executing installation script located at ${DOTFILES_INSTALLERS_DIR}..."
 
 # --------------------------------------- Install commonly-used binaries -------
 
@@ -15,7 +15,6 @@ if [ "$os" = "Linux" ]; then
   sudo apt-get update
   # sudo apt-get upgrade
   sudo apt-get install -y \
-    zsh \
     tmux \
     git \
     curl \
@@ -56,7 +55,7 @@ if [ "$os" = "Linux" ]; then
 
   # -------------------------------------------- Install Go-related tools ------
 
-  . "$absScriptDir"/install-go.sh
+  . "${DOTFILES_INSTALLERS_DIR}"/install-go.sh
 
   command -v go && hasGo="true"
   if [ -z "$hasGo" ]; then
@@ -94,7 +93,7 @@ if [ "$os" = "Linux" ]; then
 elif [ "$os" = "Darwin" ]; then
 
   PASSWORD="$1"
-  xcode-select --print-path || $absScriptDir/install-xcode.sh "$PASSWORD"
+  xcode-select --print-path || ${DOTFILES_INSTALLERS_DIR}/install-xcode.sh "$PASSWORD"
 
   command -v brew > /dev/null && hasBrew="true"
   if [ -z "$hasBrew" ]; then
@@ -192,19 +191,19 @@ fi
 
 for dotfile in .gitconfig .profile .tmux.conf .vimrc .zshrc .bashrc
 do
-    echo "[*] Creating a symlink at $homeDir/$dotfile pointing to $absScriptDir/home/$dotfile..."
+    echo "[*] Creating a symlink at $homeDir/$dotfile pointing to ${DOTFILES_INSTALLERS_DIR}/home/$dotfile..."
     if test -f "$homeDir/$dotfile" || test -L "$homeDir/$dotfile"; then
         backupFile=$dotfile.bak.`date +%Y%m%d_%H%M`
         echo "[!] $dotfile already exist at $homeDir, backing up to $backupFile"
         mv "$homeDir/$dotfile" "$homeDir/$backupFile"
     fi
-    ln -s "$absScriptDir/home/$dotfile" "$homeDir/$dotfile"
+    ln -s "${DOTFILES_INSTALLERS_DIR}/home/$dotfile" "$homeDir/$dotfile"
 done
 
 # Symlinking Neovim's configuration and coc's settings
 mkdir -p $homeDir/.config/nvim
 nvimConfigFilePath=$homeDir/.config/nvim/init.vim
-nvimConfigLinkTarget=$absScriptDir/init.vim
+nvimConfigLinkTarget=${DOTFILES_INSTALLERS_DIR}/init.vim
 echo "[*] Creating a symlink at $nvimConfigFilePath pointing to $nvimConfigLinkTarget"
 if test -f "$nvimConfigFilePath" || test -L "$nvimConfigLinkTarget"; then
     backupFile=$nvimConfigFilePath.bak.`date +%Y%m%d_%H%M`
@@ -214,7 +213,7 @@ fi
 ln -s "$nvimConfigLinkTarget" "$nvimConfigFilePath"
 
 nvimCocSettingsFilePath=$homeDir/.config/nvim/coc-settings.json
-nvimCocSettingsLinkTarget=$absScriptDir/coc-settings.json
+nvimCocSettingsLinkTarget=${DOTFILES_INSTALLERS_DIR}/coc-settings.json
 echo "[*] Creating a symlink at $nvimCocSettingsFilePath pointing to $nvimCocSettingsLinkTarget"
 if test -f "$nvimCocSettingsFilePath" || test -L "$nvimCocSettingsLinkTarget"; then
     backupFile=$nvimCocSettingsFilePath.bak.`date +%Y%^b%d_%H%M`
@@ -232,7 +231,7 @@ curl -fLo $homeDir/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 # Symlinking Emacs's configuration
 mkdir -p $homeDir/.emacs.d
 emacsConfigFilePath=$homeDir/.emacs.d/init.el
-emacsConfigLinkTarget=$absScriptDir/init.el
+emacsConfigLinkTarget=${DOTFILES_INSTALLERS_DIR}/init.el
 echo "[*] Creating a symlink at $emacsConfigFilePath pointing to $emacsConfigLinkTarget"
 if test -f "$emacsConfigFilePath" || test -L "$emacsConfigLinkTarget"; then
     backupFile=$emacsConfigFilePath.bak.`date +%Y%m%d_%H%M`
@@ -243,8 +242,4 @@ ln -s "$emacsConfigLinkTarget" "$emacsConfigFilePath"
 
 # Install Git prompt for Git-related information in prompt shell.
 curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > ~/.git-prompt.sh
-
-# Install package manager for zsh: Zinit. Instructions from
-# https://github.com/zdharma-continuum/zinit#automatic-installation-recommended.
-echo "n" | sh -c "$(curl -fsSL https://git.io/zinit-install)"
 
