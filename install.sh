@@ -8,9 +8,7 @@ echo "[*] Executing installation script located at $absScriptDir..."
 
 # --------------------------------------- Install commonly-used binaries -------
 
-os=$(uname | tr '[:upper:]' '[:lower:]')
-
-if [ "$os" = "linux" ]; then
+if [ "$os" = "Linux" ]; then
   # ------------------------------------------- Install apt-related tools ------
   # Assume it's a distribution that uses apt for package management (i.e.,
   # Debian-based distribution).
@@ -93,7 +91,7 @@ if [ "$os" = "linux" ]; then
           npm install -g yarn
   fi
 
-elif [ "$os" = "darwin" ]; then
+elif [ "$os" = "Darwin" ]; then
 
   PASSWORD="$1"
   xcode-select --print-path || $absScriptDir/install-xcode.sh "$PASSWORD"
@@ -250,14 +248,3 @@ curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-
 # https://github.com/zdharma-continuum/zinit#automatic-installation-recommended.
 echo "n" | sh -c "$(curl -fsSL https://git.io/zinit-install)"
 
-# Install lscolors so different filetypes have different color in output of
-# commands like ls and lf. Based on instructions at
-# https://github.com/trapd00r/LS_COLORS#installation.
-mkdir -p $homeDir/LS_COLORS \
-  && curl -L https://api.github.com/repos/trapd00r/LS_COLORS/tarball/master \
-  | tar xzf - --directory=$homeDir/LS_COLORS --strip=1
-
-if [ "$os" = "darwin" ]; then
-  gsed -i -e 's/\<dircolors\>/gdircolors/g ; s/\<mv\>/gmv/g' $homeDir/LS_COLORS/install.sh
-fi
-(cd $homeDir && $homeDir/LS_COLORS/install.sh && rm -rf $homeDir/LS_COLORS)
