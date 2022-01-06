@@ -20,7 +20,6 @@ if [ "$os" = "Linux" ]; then
     curl \
     vim \
     neovim \
-    emacs \
     fzf \
     bat
     # xclip \
@@ -157,7 +156,6 @@ elif [ "$os" = "Darwin" ]; then
   command -v curl      > /dev/null || brew install curl
   command -v vim       > /dev/null || brew install vim
   command -v neovim    > /dev/null || brew install neovim
-  command -v emacs     > /dev/null || brew install emacs
   command -v fzf       > /dev/null || brew install fzf
   command -v bat       > /dev/null || brew install bat
   command -v lf        > /dev/null || brew install lf
@@ -189,7 +187,7 @@ fi
 
 # ------------------------------------------------- Set up configurations ------
 
-for dotfile in .gitconfig .profile .tmux.conf .vimrc .zshrc .bashrc
+for dotfile in .gitconfig .profile .tmux.conf .vimrc .bashrc
 do
     echo "[*] Creating a symlink at $homeDir/$dotfile pointing to ${DOTFILES_INSTALLERS_DIR}/home/$dotfile..."
     if test -f "$homeDir/$dotfile" || test -L "$homeDir/$dotfile"; then
@@ -227,18 +225,6 @@ curl -fLo $homeDir/.local/share/nvim/site/autoload/plug.vim --create-dirs \
      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # Install plugins for Neovim.
 (cd $homeDir && nvim --headless -c 'PlugInstall' -c 'qa!')
-
-# Symlinking Emacs's configuration
-mkdir -p $homeDir/.emacs.d
-emacsConfigFilePath=$homeDir/.emacs.d/init.el
-emacsConfigLinkTarget=${DOTFILES_INSTALLERS_DIR}/init.el
-echo "[*] Creating a symlink at $emacsConfigFilePath pointing to $emacsConfigLinkTarget"
-if test -f "$emacsConfigFilePath" || test -L "$emacsConfigLinkTarget"; then
-    backupFile=$emacsConfigFilePath.bak.`date +%Y%m%d_%H%M`
-    echo "[!] $emacsConfigFilePath already exist, backing up to $backupFile"
-    mv "$emacsConfigFilePath" "$backupFile"
-fi
-ln -s "$emacsConfigLinkTarget" "$emacsConfigFilePath"
 
 # Install Git prompt for Git-related information in prompt shell.
 curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > ~/.git-prompt.sh
