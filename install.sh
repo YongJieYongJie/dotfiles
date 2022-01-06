@@ -18,8 +18,6 @@ if [ "$os" = "Linux" ]; then
     tmux \
     git \
     curl \
-    vim \
-    neovim \
     fzf \
     bat
     # xclip \
@@ -154,8 +152,6 @@ elif [ "$os" = "Darwin" ]; then
   command -v tmux      > /dev/null || brew install tmux
   command -v git       > /dev/null || brew install git
   command -v curl      > /dev/null || brew install curl
-  command -v vim       > /dev/null || brew install vim
-  command -v neovim    > /dev/null || brew install neovim
   command -v fzf       > /dev/null || brew install fzf
   command -v bat       > /dev/null || brew install bat
   command -v lf        > /dev/null || brew install lf
@@ -187,7 +183,7 @@ fi
 
 # ------------------------------------------------- Set up configurations ------
 
-for dotfile in .gitconfig .profile .tmux.conf .vimrc .bashrc
+for dotfile in .gitconfig .profile .tmux.conf .bashrc
 do
     echo "[*] Creating a symlink at $homeDir/$dotfile pointing to ${DOTFILES_INSTALLERS_DIR}/home/$dotfile..."
     if test -f "$homeDir/$dotfile" || test -L "$homeDir/$dotfile"; then
@@ -197,34 +193,6 @@ do
     fi
     ln -s "${DOTFILES_INSTALLERS_DIR}/home/$dotfile" "$homeDir/$dotfile"
 done
-
-# Symlinking Neovim's configuration and coc's settings
-mkdir -p $homeDir/.config/nvim
-nvimConfigFilePath=$homeDir/.config/nvim/init.vim
-nvimConfigLinkTarget=${DOTFILES_INSTALLERS_DIR}/init.vim
-echo "[*] Creating a symlink at $nvimConfigFilePath pointing to $nvimConfigLinkTarget"
-if test -f "$nvimConfigFilePath" || test -L "$nvimConfigLinkTarget"; then
-    backupFile=$nvimConfigFilePath.bak.`date +%Y%m%d_%H%M`
-    echo "[!] $nvimConfigFilePath already exist, backing up to $backupFile"
-    mv "$nvimConfigFilePath" "$backupFile"
-fi
-ln -s "$nvimConfigLinkTarget" "$nvimConfigFilePath"
-
-nvimCocSettingsFilePath=$homeDir/.config/nvim/coc-settings.json
-nvimCocSettingsLinkTarget=${DOTFILES_INSTALLERS_DIR}/coc-settings.json
-echo "[*] Creating a symlink at $nvimCocSettingsFilePath pointing to $nvimCocSettingsLinkTarget"
-if test -f "$nvimCocSettingsFilePath" || test -L "$nvimCocSettingsLinkTarget"; then
-    backupFile=$nvimCocSettingsFilePath.bak.`date +%Y%^b%d_%H%M`
-    echo "[!] $nvimCocSettingsFilePath already exist, backing up to $backupFile"
-    mv "$nvimCocSettingsFilePath" "$backupFile"
-fi
-ln -s "$nvimCocSettingsLinkTarget" "$nvimCocSettingsFilePath"
-
-# Install plugin manager for Neovim.
-curl -fLo $homeDir/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-# Install plugins for Neovim.
-(cd $homeDir && nvim --headless -c 'PlugInstall' -c 'qa!')
 
 # Install Git prompt for Git-related information in prompt shell.
 curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > ~/.git-prompt.sh
