@@ -35,19 +35,6 @@ if [ "$os" = "Linux" ]; then
 
   . "${DOTFILES_INSTALLERS_DIR}"/install-go.sh
 
-  command -v go && hasGo="true"
-  if [ -z "$hasGo" ]; then
-
-    printf "[!] Go binary not found/installed. Skipping installation that\n"
-    printf "    requires Go."
-  else
-
-    # Based on instructions at env CGO_ENABLED=1 GO111MODULE=on go get -u
-    # github.com/doronbehar/pistol/cmd/pistol.
-    command -v apt-get && sudo apt-get install -y gcc libmagic-dev
-    env CGO_ENABLED=1 GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
-  fi
-
 elif [ "$os" = "Darwin" ]; then
 
   PASSWORD="$1"
