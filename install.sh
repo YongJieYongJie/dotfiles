@@ -69,24 +69,6 @@ if [ "$os" = "Linux" ]; then
     env CGO_ENABLED=1 GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
   fi
 
-  # ------------------------------------------- Install npm-related tools ------
-  # Install nvm, as recommended by npm (at
-  # https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), and
-  # following instructions from nvm (at
-  # https://github.com/nvm-sh/nvm#manual-install)
-  [ -d $homeDir/.nvm ] && hasNvm="true"
-  if [ -z "$hasNvm" ]; then
-    export NVM_DIR="$HOME/.nvm" && (
-    git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
-    cd "$NVM_DIR"
-    git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" \
-      $(git rev-list --tags --max-count=1)`
-          ) && \. "$NVM_DIR/nvm.sh"
-
-          nvm install node && nvm use node
-          npm install -g yarn
-  fi
-
 elif [ "$os" = "Darwin" ]; then
 
   PASSWORD="$1"
@@ -159,22 +141,6 @@ elif [ "$os" = "Darwin" ]; then
 
   command -v gdircolors > /dev/null || brew install coreutils
   command -v gsed       > /dev/null || brew install gnu-sed
-
-  # ------------------------------------------- Install npm-related tools ------
-  # Install nvm, as recommended by npm (at
-  # https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), and
-  # following instructions from nvm (at
-  # https://github.com/nvm-sh/nvm#manual-install)
-  export NVM_DIR="$HOME/.nvm" && (
-    cd "$HOME"
-    git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
-    cd "$NVM_DIR"
-    git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" \
-      $(git rev-list --tags --max-count=1)`
-  ) && \. "$NVM_DIR/nvm.sh"
-
-  nvm install node && nvm use node
-  npm install -g yarn
 
 else
   printf "[!] Install script does not work on $os"
