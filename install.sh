@@ -15,7 +15,6 @@ if [ "$os" = "Linux" ]; then
   sudo apt-get update
   # sudo apt-get upgrade
   sudo apt-get install -y \
-    tmux \
     git \
     curl \
     fzf
@@ -42,7 +41,6 @@ elif [ "$os" = "Darwin" ]; then
 
   brew update
   export HOMEBREW_NO_AUTO_UPDATE=1
-  command -v tmux      > /dev/null || brew install tmux
   command -v git       > /dev/null || brew install git
   command -v curl      > /dev/null || brew install curl
   command -v fzf       > /dev/null || brew install fzf
@@ -57,7 +55,7 @@ fi
 
 # ------------------------------------------------- Set up configurations ------
 
-for dotfile in .gitconfig .profile .tmux.conf .bashrc
+for dotfile in .gitconfig .profile .bashrc
 do
     echo "[*] Creating a symlink at $homeDir/$dotfile pointing to ${DOTFILES_INSTALLERS_DIR}/home/$dotfile..."
     if test -f "$homeDir/$dotfile" || test -L "$homeDir/$dotfile"; then
