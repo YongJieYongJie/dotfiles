@@ -27,15 +27,6 @@ if [ "$os" = "Linux" ]; then
 
   # ------------------------------------------ Install dpkg-related tools ------
 
-  deltaUrl=$(curl -s https://api.github.com/repos/dandavison/delta/releases/latest \
-    | grep -E 'browser_download_url.*amd64\.deb' \
-    | grep -v musl \
-    | cut -d\" -f4)
-  curl -LO $deltaUrl
-  deltaFilename=${deltaUrl##*/}
-  sudo dpkg -i $deltaFilename
-  rm $deltaFilename
-
   batUrl=$(curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
     | grep -E 'browser_download_url.*amd64\.deb' \
     | grep -v musl \
@@ -82,7 +73,6 @@ elif [ "$os" = "Darwin" ]; then
   command -v fzf       > /dev/null || brew install fzf
   command -v bat       > /dev/null || brew install bat
   command -v lf        > /dev/null || brew install lf
-  command -v git-delta > /dev/null || brew install git-delta
 
   command -v gdircolors > /dev/null || brew install coreutils
   command -v gsed       > /dev/null || brew install gnu-sed
