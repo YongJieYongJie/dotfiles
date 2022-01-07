@@ -1,62 +1,48 @@
 #!/usr/bin/env sh
 
-set -e
+command -v go > /dev/null && hasGo="true"
+if [ -n "$hasGo" ]; then
+    # Note: Not using exit 0 because this script may be sourced instead of
+    # executed.
 
-scriptDir=`dirname "$0"`
-absScriptDir=`cd $scriptDir;pwd`
-
-command -v go > /dev/null && alreadyInstalled="true"
-if [ "$alreadyInstalled" = "true" ]; then
-  printf "[*] Go already installed at: $(command -v go)\n"
+    : # no-op
 else
+    if [ "$os" = "Linux" ]; then
 
-  # ------------------------------------------------------ Downloading Go ------
+        # ------------------------------------------------ Downloading Go ------
 
-  os=$(uname | tr '[:upper:]' '[:lower:]')
-  printf "[*] Detected OS: $os\n"
+        osLower=$(uname | tr '[:upper:]' '[:lower:]')
+        printf "[*] Detected OS: $osLower\n"
 
-  uname -m | grep 64 > /dev/null \
-    && arch="amd64" \
-    || arch="386"
-  printf "[*] Detected architecture: $arch\n"
+        uname -m | grep 64 > /dev/null \
+            && arch="amd64" \
+                || arch="386"
+        printf "[*] Detected architecture: $arch\n"
 
-  goDownloadUrl='https://go.dev/dl/'
-  tarballUrl=$(curl -L --silent $goDownloadUrl |\
-    grep --only-matching -E 'dl/go.*\.src\.tar\.gz' |\
-    sed -E "s#src#$os-$arch# ; s#(.*)#https://go.dev/\1#" |\
-    head -n 1)
-  printf "[>] Downloading latest Go binaries from: $tarballUrl\n"
-  curl -L -O $tarballUrl
+        goDownloadUrl='https://go.dev/dl/'
+        tarballUrl=$(curl -L --silent $goDownloadUrl \
+                         | grep --only-matching -E 'dl/go.*\.src\.tar\.gz' \
+                         | sed -E "s#src#$osLower-$arch# ; s#(.*)#https://go.dev/\1#" \
+                         | head -n 1)
+        printf "[>] Downloading latest Go binaries from: $tarballUrl\n"
+        (cd "${DOTFILES_INSTALLERS_DIR}" && curl -L -O $tarballUrl)
 
-  # ------------------------------------------------------- Installing Go ------
+        # ------------------------------------------------- Installing Go ------
 
-  tarballFilename=$(echo $tarballUrl | grep --only-matching -E "go.*\.tar\.gz")
+        tarballFilename="${DOTFILES_INSTALLERS_DIR}/${tarballUrl##*/}"
+        sudo mkdir -p /usr/local
+        sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $tarballFilename
 
-  if [ "$os" != "linux" ]; then
-    printf "[!] Unable to automatically install for unless OS is linux.\n\
-    Please manually install from tarball at $(pwd)/$tarballFilename\n"
-  else
+        export GOROOT="/usr/local/go"
+        export PATH="$GOROOT/bin:$PATH"
+        export GOPATH="$HOME/go"
+        export GOBIN="$GOPATH/bin"
+        export PATH="$GOBIN:$PATH"
 
-    tarballFilename=${tarballUrl##*/}
-    if [ -z $tarballFilename ]; then
-      printf "[!] Invalid filename for Go tarball: $tarballFilename\n"
-    else
-      printf "[*] Extracting Go from tarball: $(pwd)/$tarballFilename\n"
-      sudo mkdir -p /usr/local
-      printf "[!] Here 1\n"
-      sudo rm -rf /usr/local/go \
-        && sudo tar -C /usr/local -xzf $tarballFilename
-      printf "[!] Here 2\n"
+    elif [ "$os" = "Darwin" ]; then
+        # TODO: Consider manual installation to get latest version.
+        brew install go
 
-      export GOROOT="/usr/local/go"
-      export PATH="$GOROOT/bin:$PATH"
-      export GOPATH="$HOME/go"
-      export GOBIN="$GOPATH/bin"
-      export PATH="$GOBIN:$PATH"
-
-      printf "[!] Here 3\n"
+        # TODO: Consider whether need to set up Go environment variables.
     fi
-
-  fi
-
 fi

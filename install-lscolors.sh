@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+[ -d ${HOME}/LS_COLORS ] && exit 0
+
 # Install lscolors so different filetypes have different color in output of
 # commands like ls and lf. Based on instructions at
 # https://github.com/trapd00r/LS_COLORS#installation.

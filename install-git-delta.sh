@@ -2,7 +2,7 @@
 
 command -v git-delta > /dev/null && exit 0
 
-if [ "$os" = "Linux"]; then
+if [ "$os" = "Linux" ]; then
     deltaUrl=$(curl -s https://api.github.com/repos/dandavison/delta/releases/latest \
                    | grep -E 'browser_download_url.*amd64\.deb' \
                    | grep -v musl \
