@@ -18,23 +18,13 @@ if [ "$os" = "Linux" ]; then
     tmux \
     git \
     curl \
-    fzf \
-    bat
+    fzf
     # xclip \
     # x11-xserver-utils \
     # xdotool
     # xmodmap
 
   # ------------------------------------------ Install dpkg-related tools ------
-
-  batUrl=$(curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
-    | grep -E 'browser_download_url.*amd64\.deb' \
-    | grep -v musl \
-    | cut -d\" -f4)
-  curl -LO $batUrl
-  batFilename=${batUrl##*/}
-  sudo dpkg -i $batFilename
-  rm $batFilename
 
   # ------------------------------------------ Install Rust-related tools ------
   # Install rustup using instructions from
@@ -71,7 +61,6 @@ elif [ "$os" = "Darwin" ]; then
   command -v git       > /dev/null || brew install git
   command -v curl      > /dev/null || brew install curl
   command -v fzf       > /dev/null || brew install fzf
-  command -v bat       > /dev/null || brew install bat
   command -v lf        > /dev/null || brew install lf
 
   command -v gdircolors > /dev/null || brew install coreutils
