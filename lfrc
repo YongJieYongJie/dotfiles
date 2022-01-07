@@ -1,0 +1,16 @@
+# Show hidden files by default.
+set hidden
+
+# Jump to search matches incrementally.
+set incsearch
+
+# Use smartcase when searching (i.e., ignore case if search term is all in
+# lowercase).
+set smartcase
+
+# Use two-pane mode.
+set ratios 2:3
+
+# Use pistol as previewer.
+set previewer ~/go/bin/pistol
+

@@ -41,8 +41,6 @@ if [ "$os" = "Linux" ]; then
     printf "[!] Go binary not found/installed. Skipping installation that\n"
     printf "    requires Go."
   else
-    # Based on instructions at https://github.com/gokcehan/lf#installation.
-    env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 
     # Based on instructions at env CGO_ENABLED=1 GO111MODULE=on go get -u
     # github.com/doronbehar/pistol/cmd/pistol.
@@ -61,7 +59,6 @@ elif [ "$os" = "Darwin" ]; then
   command -v git       > /dev/null || brew install git
   command -v curl      > /dev/null || brew install curl
   command -v fzf       > /dev/null || brew install fzf
-  command -v lf        > /dev/null || brew install lf
 
   command -v gdircolors > /dev/null || brew install coreutils
   command -v gsed       > /dev/null || brew install gnu-sed
