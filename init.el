@@ -29,13 +29,14 @@
 ;; "/home/yongjie/syncthing/org".
 (cond
  ((eq system-type 'darwin)
-  (defvar yj-org-directory "/Users/yongjie/syncthing/org"))
+  (defvar yj-org-directory "~/syncthing/org"))
  ((eq system-type 'windows-nt)
   (defvar yj-org-directory "c:/syncthing/org"))
  ((or (eq system-type 'gnu) (eq system-type 'gun/linux) (eq system-type 'cygwin))
   (defvar yj-org-directory "/home/yongjie/syncthing/org"))
  (t (defvar yj-org-directory "/home/yongjie/syncthing/org")))
 
+(make-directory yj-org-directory t)
 (setq default-directory yj-org-directory)
 
 

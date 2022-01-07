@@ -27,8 +27,8 @@ elseif g:os == "Linux"
   let yjPluginDir='/home/yongjie/.local/share/nvim/plugged/'
   let yjBackupDir='/home/yongjie/.local/share/nvim/backup/'
 elseif g:os == "Darwin"
-  let yjPluginDir='/Users/yongjie/.local/share/nvim/plugged/'
-  let yjBackupDir='/Users/yongjie/.local/share/nvim/backup/'
+  let yjPluginDir=fnamemodify('~', ':p') . '.local/share/nvim/plugged/'
+  let yjBackupDir=fnamemodify('~', ':p') . '.local/share/nvim/backup/'
 endif
 
 " -----------------------------------------------------------------------------
