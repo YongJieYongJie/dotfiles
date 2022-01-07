@@ -127,7 +127,8 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 
 (setq inhibit-startup-message t)
 
-(tool-bar-mode -1)
+(if (display-graphic-p)
+  (tool-bar-mode -1))
 (menu-bar-mode -1)
 (add-to-list 'default-frame-alist
              '(vertical-scroll-bars . nil))
@@ -772,7 +773,8 @@ When repeatedly called we cycle through three states:
  whitespace-style       '(face lines-tail))
 
 ;; Display vertical line at column specified by fill-column variable
-(display-fill-column-indicator-mode)
+(when (boundp 'display-fill-column-indicator-mode)
+  (display-fill-column-indicator-mode))
 
 ;; smart-mode-line provides a less ugly mode-line:
 ;; (https://github.com/Malabarba/smart-mode-line)
