@@ -74,61 +74,6 @@ elif [ "$os" = "Darwin" ]; then
   PASSWORD="$1"
   xcode-select --print-path || ${DOTFILES_INSTALLERS_DIR}/install-xcode.sh "$PASSWORD"
 
-  command -v brew > /dev/null && hasBrew="true"
-  if [ -z "$hasBrew" ]; then
-		# HOMEBREW_PREFIX="/usr/local"
-		# HOMEBREW_REPOSITORY="${HOMEBREW_PREFIX}/Homebrew"
-		# HOMEBREW_CORE="${HOMEBREW_REPOSITORY}/Library/Taps/homebrew/homebrew-core"
-
-		# HOMEBREW_BREW_DEFAULT_GIT_REMOTE="https://github.com/Homebrew/brew"
-		# HOMEBREW_CORE_DEFAULT_GIT_REMOTE="https://github.com/Homebrew/homebrew-core"
-
-    # printf "[*] creating HOMEBREW_REPOSITORY\n"
-    # echo "$PASSWORD\n" | sudo -S rm -rf ${HOMEBREW_REPOSITORY}
-    # echo "$PASSWORD\n" | sudo -S mkdir -p ${HOMEBREW_REPOSITORY}
-    # echo "$PASSWORD\n" | sudo -S chown -R $(id -u):$(id -g) ${HOMEBREW_REPOSITORY}
-    # printf "[*] cloning HOMEBREW_REPOSITORY\n"
-		# [ -d "${HOMEBREW_REPOSITORY}/.git" ] || git clone ${HOMEBREW_BREW_DEFAULT_GIT_REMOTE} ${HOMEBREW_REPOSITORY}
-    # printf "[*] ls HOMEBREW_REPOSITORY\n"
-    # ls -lA ${HOMEBREW_REPOSITORY}
-
-    # printf "[*] creating HOMEBREW_CORE\n"
-    # echo "$PASSWORD\n" | sudo -S mkdir -p ${HOMEBREW_CORE}
-    # echo "$PASSWORD\n" | sudo -S chown -R $(id -u):$(id -g) ${HOMEBREW_CORE}
-    # printf "[*] cloning HOMEBREW_CORE\n"
-		# [ -d "${HOMEBREW_CORE}/.git" ] || git clone ${HOMEBREW_CORE_DEFAULT_GIT_REMOTE} ${HOMEBREW_CORE}
-    # printf "[*] ls HOMEBREW_CORE\n"
-    # ls -lA ${HOMEBREW_CORE}
-
-		# echo "$PASSWORD\n" | sudo -S mkdir -p ${HOMEBREW_PREFIX}/bin
-    # echo "$PASSWORD\n" | sudo -S chown -R $(id -u):$(id -g) ${HOMEBREW_PREFIX}/bin
-		# echo "$PASSWORD\n" | sudo -S ln -sf ${HOMEBREW_REPOSITORY}/bin/brew ${HOMEBREW_PREFIX}/bin/brew
-		# export PATH=${PATH}:${HOMEBREW_REPOSITORY}/bin
-
-    # echo "$PASSWORD\n" | sudo -S mkdir -p /usr/local/var/homebrew/locks
-    # echo "$PASSWORD\n" | sudo -S chown -R $(id -u):$(id -g) /usr/local/var/homebrew
-    # "${HOMEBREW_PREFIX}/bin/brew" "update" "--force" "--quiet"
-
-    echo "$PASSWORD" | sudo -S touch ~/echo_password
-    echo "$PASSWORD" | sudo -S sh -c "echo '#!/usr/bin/env sh\necho $PASSWORD' > ~/echo_password"
-
-    echo "$PASSWORD" | sudo -S chown $(id -u):$(id -g) ~/echo_password
-    cat ~/echo_password
-    echo "$PASSWORD" | chmod +x ~/echo_password
-    export SUDO_ASKPASS=~/echo_password
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    # script "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    # curl -fsSLO https://raw.githubusercontent.com/Homebrew/install/master/install.sh
-    # printf "[*] ls -ls $(pwd):\n"
-    # ls -lh
-    # chmod +x ./install.sh
-    # echo "alpine" | sudo -l
-    # ./test-brew-bash.sh
-		# sudo -n -l mkdir
-		#TODO try sudo -n -l mkdir within ./test-brew-bash.sh to see whether works. if doesn't it is consistent with the brew install script. also try running it in this script, just before calling the test-brew-bash.sh
-    # ./install.sh
-  fi
-
   brew update
   export HOMEBREW_NO_AUTO_UPDATE=1
   command -v tmux      > /dev/null || brew install tmux
