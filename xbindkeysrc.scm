@@ -241,7 +241,7 @@
   (xbindkey-function chord-key start-mouse-chord))
 
 (define-mouse-modifiers "b:9"
-  "xdotool keydown alt key Tab; sleep 0.01; xdotool key Right; sleep 0.01; xdotool keyup alt" ; alt-tab next
+  "xdotool keydown alt key Tab Left; sleep 2; xdotool keyup alt" ; alt-tab and wait 2 sec for mouse
   (list '(release "b:1") "xdotool key ctrl+c") ; "forward" + left mouse button -> copy
   (list '(release "b:3") "xdotool key ctrl+v")) ; "backward" + right mouse button -> paste
 
