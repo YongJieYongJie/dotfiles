@@ -82,6 +82,8 @@ Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 " Basic modern theme.
 Plug 'joshdick/onedark.vim'
 
+Plug 'NovaDev94/lightline-onedark'
+
 " IntelliJ's default dark theme (Darcula), so people think I'm using IntelliJ.
 " TODO: Use lightline with darcula theme as recommended by the "doumns/darcula"
 " author: https://github.com/doums/darcula
@@ -314,8 +316,8 @@ if (empty($TMUX))
   endif
 endif
 
-" colorscheme onedark
-colorscheme darcula
+colorscheme onedark
+" colorscheme darcula
 
 " Link the CocHighlightText highlight group to the built-in DiffAdd highlight
 " group. CocHighlightText group is used by coc.nvim for, among other things,
@@ -352,7 +354,7 @@ set lazyredraw
 set undofile
 
 " Highilght current line.
-highlight CursorLine guifg=NONE guibg=#393939
+highlight CursorLine cterm=NONE guifg=NONE
 set cursorline
 
 " Allow buffer containing modified file to be hidden.
@@ -438,8 +440,11 @@ function! CocCurrentFunction()
   return get(b:,'coc_current_function','')
 endfunction
 
+" To switch back to darcula, change the colorscheme config back to the
+" following:
+     " \ 'colorscheme': 'darculaOriginal',
 let g:lightline = {
-     \ 'colorscheme': 'darculaOriginal',
+     \ 'colorscheme': 'onedark',
      \ 'active': {
        \ 'left': [ [ 'mode', 'paste' ],
                  \ [ 'gitBranch', 'readonly', 'filename', 'modified' ],
