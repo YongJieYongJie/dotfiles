@@ -1514,3 +1514,13 @@ When repeatedly called we cycle through three states:
 
 (message "(￣^￣ )ゞ") ;; Emacs reporting for duty
 
+(put 'dired-find-alternate-file 'disabled nil)
+
+(use-package auctex
+  :defer t
+  :ensure t
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (setq LaTeX-electric-left-right-brace t))
