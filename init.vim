@@ -39,6 +39,10 @@ endif
 " echo " ಠ_ಠ"
 nnoremap <space>( :echo " ಠ_ಠ"<cr>
 
+" Use space as the leader key. Putting this at the top of file so it occurs
+" before any keymappings that uses <leader>.
+let mapleader=' '
+
 
 " -----------------------------------------------------------------------------
 " Plugins
@@ -165,13 +169,14 @@ Plug 'jparise/vim-graphql'
 " For using neovim to edit all textareas in browser.
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
-
+" For setting persistent highlight on different words. Similar to
+" M-x highlight-regexp on Emacs. 
+Plug 'inkarkat/vim-mark'
+Plug 'inkarkat/vim-ingo-library' " dependency of vim-mark
+let g:mw_no_mappings=1
+nnoremap <leader>m :Mark =expand('<cword>')<cr><cr>
+nnoremap <leader>M :MarkClear<cr>
 call plug#end()
-
-
-" Use space as the leader key. Putting this at the top of file so it occurs
-" before any keymappings that uses <leader>.
-let mapleader=' '
 
 
 " -------------------------------------------------------------------------------------------------
@@ -385,7 +390,7 @@ nnoremap <silent> <Leader>b :Buffers!<CR>
 nnoremap <silent> <Leader>h :History!<CR>
 
 " Allow quick ad-hoc normal mode mapping.
-noremap <Leader>m :nnoremap<lt>Leader><lt>CR><Left><Left><Left><Left>
+" noremap <Leader>m :nnoremap<lt>Leader><lt>CR><Left><Left><Left><Left>
 
 " Clear search highlight.
 noremap <silent> <Leader><CR> :nohlsearch<CR>
