@@ -77,6 +77,7 @@ call plug#begin(yjPluginDir)
 " Enable running of Go commands directly from Vim (e.g., :GoRun, :GoBuild).
 " After installing the plugin, run :GoInstallBinaries to install the Go binaries.
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+let g:go_gopls_enabled = 1 " Disable gopls because we are using Neovim's builtin LSP.
 
 " Add language server protocal support.
 " Individual language needs to be set up separately. Please google for the
@@ -92,6 +93,9 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " Directory-based project management using telescope.nvim.
 Plug 'nvim-telescope/telescope-project.nvim'
+
+Plug 'neovim/nvim-lspconfig'
+
 
 " Basic modern theme.
 Plug 'joshdick/onedark.vim'
@@ -269,8 +273,8 @@ endif
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use `[g` and `]g` to navigate diagnostics (e.g., errors)
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 " nmap <silent> gd <Plug>(coc-definition)
@@ -284,7 +288,7 @@ let g:coc_fzf_preview = 'up:77%'
 let g:coc_fzf_opts = ['--layout=reverse']
 
 " Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+" nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
 vmap <leader>f  <Plug>(coc-format-selected)
