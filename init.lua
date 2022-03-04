@@ -193,5 +193,16 @@ require('lspconfig').clangd.setup({
   },
 })
 
+-- From https://github.com/neovim/nvim-lspconfig/blob/cdc2ec53e028d32f06c51ef8b2837ebb8460ef45/doc/server_configurations.md#rust_analyzer
+require('lspconfig').rust_analyzer.setup({
+  capabilities = capabilities,
+
+  on_attach = on_attach,
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
+})
+
 ------------------------------------------------------------- nvim-lspconfig ---}}}
 -- vim:fdm=marker
