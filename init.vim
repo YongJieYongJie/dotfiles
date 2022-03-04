@@ -90,6 +90,9 @@ Plug 'nvim-lua/plenary.nvim' " Dependency of telescope.nvim
 " Use FZF as telescope.nvim's fuzzy finder.
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
+" Directory-based project management using telescope.nvim.
+Plug 'nvim-telescope/telescope-project.nvim'
+
 " Basic modern theme.
 Plug 'joshdick/onedark.vim'
 
@@ -208,6 +211,8 @@ nnoremap <leader>ac <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
 nnoremap <space>o <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
 nnoremap <space>O <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
 
+nnoremap <space>p <cmd>lua require('telescope').extensions.project.project{}<cr>
+
 
 " -------------------------------------------------------------------------------------------------
 " Additional coc extensions
@@ -299,7 +304,7 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Show code actions for current buffer
 " nmap <leader>ac <Plug>(coc-codeaction)
