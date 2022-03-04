@@ -87,6 +87,9 @@ Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/plenary.nvim' " Dependency of telescope.nvim
 
+" Use FZF as telescope.nvim's fuzzy finder.
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
 " Basic modern theme.
 Plug 'joshdick/onedark.vim'
 
