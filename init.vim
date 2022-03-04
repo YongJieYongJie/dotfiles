@@ -83,6 +83,10 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " instructions as appropriate.
 Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 
+" General fuzzy finder with preview.
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-lua/plenary.nvim' " Dependency of telescope.nvim
+
 " Basic modern theme.
 Plug 'joshdick/onedark.vim'
 
@@ -180,6 +184,29 @@ call plug#end()
 
 
 " -------------------------------------------------------------------------------------------------
+" Telescope
+" -------------------------------------------------------------------------------------------------
+
+nnoremap <leader>tb <cmd>lua require('telescope.builtin').builtin()<cr>
+
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').oldfiles()<cr>
+nnoremap <leader>z <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>g <cmd>lua require('telescope.builtin').git_files()<cr>
+nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap // <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+nnoremap <leader>?? <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>h <cmd>lua require('telescope.builtin').command_history()<cr>
+
+nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+nnoremap gd <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
+nnoremap gy <cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>
+nnoremap gi <cmd>lua require('telescope.builtin').lsp_implementations()<cr>
+nnoremap <leader>ac <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
+nnoremap <space>o <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
+nnoremap <space>O <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
+
+
+" -------------------------------------------------------------------------------------------------
 " Additional coc extensions
 " -------------------------------------------------------------------------------------------------
 
@@ -238,10 +265,10 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
 " Modify coc.nvim's four commands above to use FZF using antoinemadec/coc-fzf,
 " and configuring the FZF to be fullscreen
 let g:coc_fzf_preview_fullscreen = 1
@@ -261,7 +288,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 " Show commands
 nnoremap <silent> <space>c  :<C-u>CocFzfList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
+" nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
@@ -272,7 +299,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Show code actions for current buffer
-nmap <leader>ac <Plug>(coc-codeaction)
+" nmap <leader>ac <Plug>(coc-codeaction)
 " Show code actions for current line
 nmap <leader>a. <Plug>(coc-codeaction-line)
 " Show code actions for current selection
@@ -382,12 +409,12 @@ nnoremap <silent> <Leader><Leader> :b#<CR>
 " List buffers (for switching).
 "nnoremap <Leader>b :ls<CR>:b
 " Start fuzzy search for opened buffers, requires vim-fzf plugin.
-nnoremap <silent> <Leader>b :Buffers!<CR>
+" nnoremap <silent> <Leader>b :Buffers!<CR>
 
 " List history (for searching).
 "nnoremap <Leader>h :<C-f>?
 " Start fuzzy search for command history, requires vim-fzf plugin.
-nnoremap <silent> <Leader>h :History!<CR>
+" nnoremap <silent> <Leader>h :History!<CR>
 
 " Allow quick ad-hoc normal mode mapping.
 " noremap <Leader>m :nnoremap<lt>Leader><lt>CR><Left><Left><Left><Left>
@@ -405,16 +432,16 @@ noremap <silent> <Leader>n :set relativenumber!<CR>
 noremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Start fuzzy search for files, requires vim-fzf plugin.
-nnoremap <silent> <Leader>z :Files!<CR>
+" nnoremap <silent> <Leader>z :Files!<CR>
 
 " Start fuzzy search for files not excluded by .gitignore, requires vim-fzf plugin.
-nnoremap <silent> <Leader>g :GFiles!<CR>
+" nnoremap <silent> <Leader>g :GFiles!<CR>
 
 " Start fuzzy search lines in the current buffer, requires vim-fzf plugin.
-nnoremap <silent> // :BLines!<CR>
+" nnoremap <silent> // :BLines!<CR>
 
 " Start fuzzy search for lines in all files, requires vim-fzf plugin.
-nnoremap <silent> ?? :Rg!<CR>
+" nnoremap <silent> ?? :Rg!<CR>
 
 " Start fuzzy search for lines in all files with words under cursor, requires vim-fzf plugin.
 nnoremap <silent> <Leader>* :Rg! \b<c-r><c-w>\b<CR>
@@ -586,3 +613,5 @@ if exists('+termguicolors') && ($TERM == "st-256color" || $TERM == "xterm-256col
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
+
+lua require('init')
