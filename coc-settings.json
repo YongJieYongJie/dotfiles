@@ -1,6 +1,9 @@
 {
   // Access this file from Vim by running :CocConfig
 
+  // Disable auto-complete from COC to avoid interfering with nvim-cmp.
+  "suggest.autoTrigger": "none",
+
     //////////////////////////
    // General COC settings //
   //////////////////////////
