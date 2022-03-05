@@ -41,6 +41,12 @@
           "snippetSupport": true
         }
       }
+    },
+    "solc": {
+      "command": "solc",
+      "args": ["--lsp"],
+      "filetypes": ["solidity", "sol"],
+      "rootPatterns": [".git"]
     }
   },
 
