@@ -231,7 +231,7 @@ nnoremap <leader>z <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>g <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap // <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-nnoremap <leader>?? <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap ?? <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>h <cmd>lua require('telescope.builtin').command_history()<cr>
 
 nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
