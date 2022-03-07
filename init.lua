@@ -172,6 +172,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
+------------------------------------------------------------------------- go ---{{{
 -- From https://github.com/neovim/nvim-lspconfig/blob/cdc2ec53e028d32f06c51ef8b2837ebb8460ef45/doc/server_configurations.md#gopls
 require('lspconfig').gopls.setup({
   capabilities = capabilities,
@@ -182,7 +183,9 @@ require('lspconfig').gopls.setup({
     debounce_text_changes = 150,
   },
 })
+------------------------------------------------------------------------- go ---}}}
 
+---------------------------------------------------------------------- c/c++ ---{{{
 -- From https://github.com/neovim/nvim-lspconfig/blob/cdc2ec53e028d32f06c51ef8b2837ebb8460ef45/doc/server_configurations.md#clangd
 require('lspconfig').clangd.setup({
   capabilities = capabilities,
@@ -193,7 +196,9 @@ require('lspconfig').clangd.setup({
     debounce_text_changes = 150,
   },
 })
+---------------------------------------------------------------------- c/c++ ---}}}
 
+----------------------------------------------------------------------- rust ---{{{
 -- From https://github.com/neovim/nvim-lspconfig/blob/cdc2ec53e028d32f06c51ef8b2837ebb8460ef45/doc/server_configurations.md#rust_analyzer
 require('lspconfig').rust_analyzer.setup({
   capabilities = capabilities,
@@ -204,6 +209,47 @@ require('lspconfig').rust_analyzer.setup({
     debounce_text_changes = 150,
   },
 })
+----------------------------------------------------------------------- rust ---}}}
+
+------------------------------------------------------------------------ lua ---{{{
+-- From https://github.com/neovim/nvim-lspconfig/blob/b01782a673f52f68762b2f910e97a186c16af01c/doc/server_configurations.md#sumneko_lua
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+require'lspconfig'.sumneko_lua.setup {
+	capabilities = capabilities,
+
+  on_attach = on_attach,
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
+
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = runtime_path,
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
+------------------------------------------------------------------------ lua ---}}}
 
 ------------------------------------------------------------- nvim-lspconfig ---}}}
 -- vim:fdm=marker
