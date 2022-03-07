@@ -34,7 +34,9 @@ alias cp='cp -i -v'
 alias mv='mv -i -v'
 
 ## Listing files
-if [[ $(uname -s) == "Darwin" ]]; then
+command -v gls >> /dev/null
+has_gls=$?
+if [[ $(uname -s) == "Darwin" && $has_gls -ne 0 ]]; then
   # Because macOS uses stupid BSD-based ls, and doesn't
   # support meaningful long parameters.
   alias ls='ls -hGF'
@@ -52,8 +54,14 @@ if [[ $(uname -s) == "Darwin" ]]; then
   alias llas='lla -s'
   alias llt='ll -t'
   alias llat='lla -t'
+
+  alias datet='date +%Y-%m-%dT%H-%M-%S%z'
 else
-  alias ls='ls --classify --color=tty'
+  if [[ $has_gls -eq 0 ]]; then
+    alias ls='gls --classify --color=tty'
+  else
+    alias ls='ls --classify --color=tty'
+  fi
 
   # Basic listing
   alias l='ls'

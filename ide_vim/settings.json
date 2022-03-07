@@ -138,7 +138,6 @@
     "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
     "editor.wordWrap": "off",
     "workbench.activityBar.visible": false,
-    "window.zoomLevel": 4,
     "redhat.telemetry.enabled": false
     //#endregion
 }

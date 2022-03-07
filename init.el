@@ -508,6 +508,7 @@ This means that buffers like magit will be excluded."
 (setq-default ibuffer-saved-filter-groups
       `(("default"
                ("tasks" (filename . "org/tasks"))
+               ("matrixport-usdx" (filename . "nvwa/usdx/"))
                ("matrixport-spot" (filename . "nvwa/spot/"))
                ("matrixport-nvwa" (filename . "nvwa/nvwa/"))
                ("matrixport-um" (filename . "nvwa/um/"))
@@ -1597,3 +1598,16 @@ save it in `ffap-file-at-point-line-number' variable."
                                    :args "--runner=fleet --basedir=/Users/yongjie/git-repos/matrixport/nvwa/um/integration --cfgfile=test_config.yml -v trade/broker"
                                    :env nil
                                    :envFile nil))
+
+(global-hl-line-mode 1)
+(global-hi-lock-mode 1)
+(put 'dired-find-alternate-file 'disabled nil)
+
+(use-package elfeed
+  :ensure t
+  :config
+  (setq elfeed-feeds
+        '("https://gitlab.matrixport.com/nvwa/um.atom?feed_token=BGk_VKPyZjk9agWfUL-i"
+          "https://gitlab.matrixport.com/nvwa/spot.atom?feed_token=BGk_VKPyZjk9agWfUL-i"
+          "https://gitlab.matrixport.com/nvwa/nvwa.atom?feed_token=BGk_VKPyZjk9agWfUL-i"))
+  (setq elfeed-search-date-format '("%Y-%m-%d %H:%M" 16 :left)))

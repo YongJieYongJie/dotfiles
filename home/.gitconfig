@@ -55,5 +55,5 @@
 [merge]
     conflictstyle = diff3
 [url "git@gitlab.matrixport.com:"]
-    insteadOf = https://gitlab.matrixport.com/
+	insteadof = https://gitlab.matrixport.com/
 

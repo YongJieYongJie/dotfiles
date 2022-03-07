@@ -156,6 +156,12 @@ Plug 'antoinemadec/coc-fzf'
 
 let g:coc_fzf_preview = 'up:77%'
 
+" Alternative to fzf
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-project.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
 " For better workflow when using Git in certain cases. For example, :Git blame
 " shows the output in two vertical splits, and the syntax highlight for the
 " source file remains.
@@ -185,6 +191,7 @@ Plug 'tpope/vim-unimpaired'
 
 " For showing changed lines based on git
 Plug 'airblade/vim-gitgutter'
+let g:gitgutter_map_keys = 0
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 
@@ -233,6 +240,7 @@ Plug 'inkarkat/vim-ingo-library' " dependency of vim-mark
 let g:mw_no_mappings=1
 nnoremap <leader>m :Mark =expand('<cword>')<cr><cr>
 nnoremap <leader>M :MarkClear<cr>
+
 call plug#end()
 
 
@@ -371,14 +379,14 @@ nmap <leader>a. <Plug>(coc-codeaction-line)
 vmap <leader>a <Plug>(coc-codeaction-selected)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
 " disable vim-go :GoDef short-cut (gd)
 " this is handled by LanguageClient [LC]
@@ -592,7 +600,7 @@ endfunction
 autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 
 " Enable syntax highlight and code folding using nvim_treesitter.
-nnoremap <silent> <Leader>t :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
+nnoremap <silent> <Leader>tt :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
 
 " Enable history for fzf
 let g:fzf_history_dir = '~/.local/share/fzf-history'
@@ -655,13 +663,31 @@ set showbreak=↪\
 " https://unix.stackexchange.com/questions/140898/vim-hide-status-line-in-the-bottom.
 let s:hidden_all = 0
 function! ToggleHiddenAll()
-    if s:hidden_all  == 0
+    if s:hidden_all == 0
         let s:hidden_all = 1
         set noshowmode
         set noruler
         set laststatus=0
         set noshowcmd
     else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+function! SetHiddenAll()
+    if s:hidden_all == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    endif
+endfunction
+function! UnsetHiddenAll()
+    if s:hidden_all == 1
         let s:hidden_all = 0
         set showmode
         set ruler

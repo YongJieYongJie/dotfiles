@@ -27,6 +27,10 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=99999
 export SAVEHIST=$HISTSIZE
 
+setopt INC_APPEND_HISTORY # Save history immediately (as opposed to only on shell exit)
+export HISTTIMEFORMAT="[%F %T] "
+setopt EXTENDED_HISTORY # Add timestamp to history
+
 # Use emacs style keybindings
 bindkey -e
 
@@ -45,8 +49,8 @@ PS1='
 [%Th] %F{green}%n@%m%f %F{yellow}%~%f%F{blue}$(__git_ps1)%f
 $ '
 
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] \
-  && source /usr/share/doc/fzf/examples/key-bindings.zsh
+#source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/local/Cellar/fzf/0.27.0/shell/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # configure fzf fuzzy finder to popup below
@@ -116,5 +120,13 @@ WORDCHARS=${WORDCHARS//[\/-]}
 # Case-insensitve completion. Copied from
 # https://stackoverflow.com/a/24237590/5821101.
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# Use LS_COLORS from https://github.com/trapd00r/LS_COLORS. Take note however
+# that the script from within that repository generates the code for bash and
+# csh only, and have to be tweak for zsh (by removing quotation marks etc.).
+if [[ -f ~/.local/share/lscolors ]]; then
+  export LS_COLORS=$(cat ~/.local/share/lscolors)
+  zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+fi
 
 [ -f ~/.profile ] && [ -z $PROFILE_LOADED ] && source ~/.profile

@@ -5,7 +5,7 @@ cmd + shift - s : yabai -m space --focus recent
 
 # Toggles to last visited space (similar to Vim's b#), if the last visited
 # space is on another display, brings it to the active display.
-cmd + shift - t : $HOME/.local/scripts/yabai-toggle.sh
+# cmd + shift - t : $HOME/.local/scripts/yabai-toggle.sh
 
 # Hardcoded quick toggels (much like <windows-key> + <number> on Windowns)
 cmd + ctrl - 1 : $HOME/.local/scripts/yabai-switch-to-app.sh "Emacs"
