@@ -194,8 +194,15 @@ Plug 'maxmellon/vim-jsx-pretty'
 
 " For auto-closing of parens and related features
 Plug 'jiangmiao/auto-pairs'
+autocmd FileType TelescopePrompt     let b:autopairs_enabled=0
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+
+" For exploring tree-sitter
+Plug 'nvim-treesitter/playground'
+
+" Provides context in longer functions by keeping the signature lines visible.
+" Plug 'romgrk/nvim-treesitter-context'
 
 Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
 " Modifies GBrowse command added by tpope/vim-fugitive to open bitbucket links
