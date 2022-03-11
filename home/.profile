@@ -107,6 +107,9 @@ alias rg='rg --smart-case'
 # commands like ls and lf
 [ -f ~/.local/share/lscolors.sh ] && source ~/.local/share/lscolors.sh
 
+# Load FZF Git helper funcions and keybindings
+[ -f ~/.local/scripts/fzf-helpers.sh ] && source ~/.local/scripts/fzf-helpers.sh
+
 #################################
 # Programming Lannguage Related #
 #################################

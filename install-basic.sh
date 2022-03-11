@@ -34,6 +34,9 @@ fi
 . "${DOTFILES_INSTALLERS_DIR}/lib/sh/helpers.sh"
 lnWithBackup "${DOTFILES_INSTALLERS_DIR}/home/.gitconfig" "${HOME}/.gitconfig"
 
+mkdir -p $HOME/.local/scripts
+lnWithBackup "${DOTFILES_INSTALLERS_DIR}/lib/sh/fzf-helpers.sh" "$HOME/.local/scripts/"
+
 # Install Git prompt for Git-related information in prompt shell.
 curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
      > ${HOME}/.git-prompt.sh
