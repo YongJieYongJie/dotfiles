@@ -51,7 +51,19 @@ $ '
 
 # configure fzf fuzzy finder to popup below
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse
---bind=ctrl-alt-f:page-down,ctrl-alt-b:page-up,ctrl-alt-n:preview-page-down,ctrl-alt-p:preview-page-up'
+--bind=ctrl-n:down,ctrl-p:up
+--bind=ctrl-v:page-down,alt-v:page-up
+--bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up
+--bind=alt-p:previous-history,alt-n:next-history
+--bind=ctrl-n:down,ctrl-p:up
+--bind=ctrl-k:kill-line
+--bind="ctrl-alt-c:preview(cat {})"
+--bind="ctrl-alt-l:preview(ls -lAh {})"
+--bind=ctrl-space:toggle-preview
+--bind=ctrl-alt-w:toggle-preview-wrap
+--preview-window hidden
+--history='$HOME'/.fzf-history'
+[ -f ~/.fzf-history ] || touch ~/.fzf-history
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
