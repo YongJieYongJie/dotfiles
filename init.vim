@@ -181,6 +181,8 @@ Plug 'tpope/vim-unimpaired'
 
 " For showing changed lines based on git
 Plug 'airblade/vim-gitgutter'
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 
 " For typescript development, based on excellent article at
 " https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim.
