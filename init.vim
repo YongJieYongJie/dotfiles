@@ -265,7 +265,7 @@ let g:coc_global_extensions = [ 'coc-explorer', 'coc-tsserver', 'coc-go', 'coc-j
 " Adapted from https://octetz.com/docs/2019/2019-04-24-vim-as-a-go-ide/.
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 " if hidden is not set, TextEdit might fail.
 set hidden
 " Better display for messages
