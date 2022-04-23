@@ -17,6 +17,7 @@ require('telescope').setup({
       },
       vertical = {
         results_title = false,
+        scroll_strategy = 'limit',
         width = { padding = 0 },
         height = { padding = 0 },
         preview_height = 0.6,
