@@ -238,21 +238,27 @@ call plug#end()
 
 nnoremap <leader>tb <cmd>lua require('telescope.builtin').builtin()<cr>
 
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').oldfiles()<cr>
-nnoremap <leader>z <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>g <cmd>lua require('telescope.builtin').git_files()<cr>
-nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <leader>ff <cmd>lua require('telescope.builtin').oldfiles()<cr>
+" nnoremap <leader>z <cmd>lua require('telescope.builtin').find_files()<cr>
+" nnoremap <leader>g <cmd>lua require('telescope.builtin').git_files()<cr>
+" nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap // <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-nnoremap ?? <cmd>lua require('telescope.builtin').live_grep()<cr>
+" nnoremap ?? <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>h <cmd>lua require('telescope.builtin').command_history()<cr>
 
-nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
-nnoremap gd <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
-nnoremap gy <cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>
-nnoremap gi <cmd>lua require('telescope.builtin').lsp_implementations()<cr>
-nnoremap <leader>ac <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
-nnoremap <space>o <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
-nnoremap <space>O <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
+" TODO: Move the lsp keymappings below to init.lua, and only set them
+" when lsp attaches (and only as buffer-local keymaps).
+"
+" TODO: Alternatively, use conditional mappings. E.g.,
+"     CocHasProvider('rename') ? <use coc.nvim> : use nvim-lsp
+"
+" nnoremap gr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+" nnoremap gd <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
+" nnoremap gy <cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>
+" nnoremap gi <cmd>lua require('telescope.builtin').lsp_implementations()<cr>
+" nnoremap <leader>ac <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
+" nnoremap <space>o <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
+" nnoremap <space>O <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
 
 nnoremap <space>p <cmd>lua require('telescope').extensions.project.project{}<cr>
 
@@ -287,39 +293,39 @@ set noshowmode
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-" if has('nvim-0.4.0') || has('patch-8.2.0750')
-"   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"   nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-"   inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-"   inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-"   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-" endif
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
 
 " Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use `[g` and `]g` to navigate diagnostics (e.g., errors)
-" nmap <silent> [g <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" Use `[d` and `]d` to navigate diagnostics (e.g., errors)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 " Modify coc.nvim's four commands above to use FZF using antoinemadec/coc-fzf,
 " and configuring the FZF to be fullscreen
 let g:coc_fzf_preview_fullscreen = 1
@@ -327,7 +333,7 @@ let g:coc_fzf_preview = 'up:77%'
 let g:coc_fzf_opts = ['--layout=reverse']
 
 " Remap for rename current word
-" nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
 vmap <leader>f  <Plug>(coc-format-selected)
@@ -343,9 +349,9 @@ nnoremap <silent> <leader>cl  :<C-u>CocFzfList<cr>
 " Show commands
 nnoremap <silent> <space>c  :<C-u>CocFzfList commands<cr>
 " Find symbol of current document
-" nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
+nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s  :<C-u>CocFzfList symbols<cr>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -354,7 +360,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Show code actions for current buffer
-" nmap <leader>ac <Plug>(coc-codeaction)
+nmap <leader>ac <Plug>(coc-codeaction)
 " Show code actions for current line
 nmap <leader>a. <Plug>(coc-codeaction-line)
 " Show code actions for current selection
@@ -487,16 +493,22 @@ noremap <silent> <Leader>n :set relativenumber!<CR>
 noremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Start fuzzy search for files, requires vim-fzf plugin.
-" nnoremap <silent> <Leader>z :Files!<CR>
+nnoremap <silent> <Leader>z :Files!<CR>
 
 " Start fuzzy search for files not excluded by .gitignore, requires vim-fzf plugin.
-" nnoremap <silent> <Leader>g :GFiles!<CR>
+nnoremap <silent> <Leader>g :GFiles!<CR>
+
+" Start fuzzy search for recent files.
+nnoremap <silent> <Leader>ff :History!<CR>
+
+" Start fuzzy search for buffers.
+nnoremap <silent> <Leader>b :Buffers!<CR>
 
 " Start fuzzy search lines in the current buffer, requires vim-fzf plugin.
 " nnoremap <silent> // :BLines!<CR>
 
 " Start fuzzy search for lines in all files, requires vim-fzf plugin.
-" nnoremap <silent> ?? :Rg!<CR>
+nnoremap <silent> ?? :Rg!<CR>
 
 " Start fuzzy search for lines in all files with words under cursor, requires vim-fzf plugin.
 nnoremap <silent> <Leader>* :Rg! \b<c-r><c-w>\b<CR>
