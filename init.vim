@@ -332,6 +332,10 @@ let g:coc_fzf_opts = ['--layout=reverse']
 " Remap for format selected region
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
+" Show list of coc lists
+nnoremap <silent> <leader>cl  :<C-u>CocFzfList<cr>
+
 " Show all diagnostics
 "nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
