@@ -45,3 +45,4 @@
   "coc.preferences.currentFunctionSymbolAutoUpdate": true
 
 }
+// vim:ft=jsonc
