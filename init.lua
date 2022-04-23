@@ -251,6 +251,18 @@ require'lspconfig'.sumneko_lua.setup {
 }
 ------------------------------------------------------------------------ lua ---}}}
 
+----------------------------------------------------------------- typescript ---{{{
+require('lspconfig').tsserver.setup({
+  capabilities = capabilities,
+
+  on_attach = on_attach,
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
+})
+----------------------------------------------------------------- typescript ---}}}
+
 ------------------------------------------------------------- nvim-lspconfig ---}}}
 ------------------------------------------------------------ nvim-treesitter ---{{{
 
@@ -282,3 +294,4 @@ require'nvim-treesitter.configs'.setup {
 
 ------------------------------------------------------------ nvim-treesitter ---}}}
 -- vim:fdm=marker
+
