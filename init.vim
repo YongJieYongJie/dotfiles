@@ -148,6 +148,7 @@ Plug 'junegunn/fzf.vim'
 
 " For "zen" mode
 Plug 'junegunn/goyo.vim'
+nnoremap <silent> <expr> <Leader>1 empty(get(t:, 'goyo_dim', '')) ? ':Goyo 62%<CR>' : ':Goyo!<CR>'
 
 " Allow opening some of CocList in fzf
 Plug 'antoinemadec/coc-fzf' 
@@ -156,6 +157,7 @@ Plug 'antoinemadec/coc-fzf'
 " shows the output in two vertical splits, and the syntax highlight for the
 " source file remains.
 Plug 'tpope/vim-fugitive'
+nnoremap <silent> <Leader>[ :Git<CR>
 " An extension to vim-fugitive for better viewing of branches (something like
 " git log --pretty=one-line --graph).
 Plug 'rbong/vim-flog'
