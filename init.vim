@@ -77,7 +77,8 @@ call plug#begin(yjPluginDir)
 " Enable running of Go commands directly from Vim (e.g., :GoRun, :GoBuild).
 " After installing the plugin, run :GoInstallBinaries to install the Go binaries.
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-let g:go_gopls_enabled = 1 " Disable gopls because we are using Neovim's builtin LSP.
+let g:go_gopls_enabled = 1 " Disable gopls because we are using Neovim's builtin LSP / coc.nvim.
+let g:go_fmt_experimental = 1 " Fixes issues where folds are reset on saving.
 
 " Add language server protocal support.
 " Individual language needs to be set up separately. Please google for the
