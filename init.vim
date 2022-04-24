@@ -502,7 +502,7 @@ nnoremap <silent> <Leader>g :GFiles!<CR>
 nnoremap <silent> <Leader>ff :History!<CR>
 
 " Start fuzzy search for buffers.
-nnoremap <silent> <Leader>b :Buffers!<CR>
+" nnoremap <silent> <Leader>b :Buffers!<CR>
 
 " Start fuzzy search lines in the current buffer, requires vim-fzf plugin.
 " nnoremap <silent> // :BLines!<CR>
@@ -681,4 +681,114 @@ if exists('+termguicolors') && ($TERM == "st-256color" || $TERM == "xterm-256col
     set termguicolors
 endif
 
+" -------------------------------------------------------- experimental --- {{{
+
+" FZF plugin extension guide:
+" 1. Find most similar existing command.
+"    - E.g.: the :Buffers command
+" 2. Find where the command is defined.
+"    - E.g., https://github.com/junegunn/fzf.vim/blob/66cb8b826477671fba81c2db5fbb080c7b89f955/plugin/fzf.vim#L51
+" 3. Pass in a dict containing or "sink", "sink*" to handle the response from
+"    fzf.
+"    - E.g.: { "sink*": s:myCustomFunction }
+"    - Note: If a dict is already being passed in, add the "sink" / "sink*" key
+"      to the existing dict.
+"    - Note: the first line returned by fzf indicates how it was terminated,
+"      empty string "" means the user pressed <Enter>, otherwise, it will be
+"      strings like "ctrl-x", "ctrl-v", etc.
+"
+"      The additional keys must be set up in the initial command used to start
+"      fzf, via the "--expect" command-line argument.
+" 4. Pass in a dict containing "options" for other options to be passed to fzf
+"    binary.
+"    - Note: If a dict is already being passed in, add the "options" key
+"      to the existing dict.
+" 5. General Notes:
+"    - When debugging, it may be possible to print out the intermediate results
+"      of various wrapping functions.
+"      - E.g.: echom fzf#wrap('ls')
+"
+" TODO: Modify a find referencees command to populate the quickfix list using
+"       'ctrl-q'.
+"       - For examples, refer to `s:fill_quickfix()` and how it is used, at
+"       https://github.com/junegunn/fzf.vim/blob/66cb8b826477671fba81c2db5fbb080c7b89f955/autoload/fzf/vim.vim#L333
+
+" An action can be a reference to a function that processes selected lines
+function! s:delete_buffers(lines)
+  " echom '[*] s:delete_buffers'
+  let bufIndices = []
+  for line in a:lines[1:]
+    " echom '[*] line: ' . line
+    let chunks = split(line, "\t", 1)
+    for chunk in chunks
+      " echom '[*] chuck: ' . chunk
+      let bn = matchstr(chunk, '\[\zs[0-9]\{-}\ze\]') " e.g., matchs the "12" in "[12]"
+      if !empty(bn)
+        call add(bufIndices, bn)
+      endif
+    endfor
+  endfor
+  for bufIndex in bufIndices
+    execute bufIndex . 'bd'
+  endfor
+endfunction
+
+let s:myBuffersActions = {
+  \ 'alt-enter' : function('s:delete_buffers'),
+  \ 'ctrl-t'    : 'tab split',
+  \ 'ctrl-x'    : 'split',
+  \ 'ctrl-v'    : 'vsplit' }
+let s:myBuffersExpect = ' --expect='.join(keys(s:myBuffersActions), ',')
+
+let s:TYPE = {
+      \ 'dict'    : type({}),
+      \ 'list'    : type([]),
+      \ 'funcref' : type(function('call')),
+      \ 'string'  : type(''),
+      \ }
+
+" First item in `a:lines` is a string indicating how fzf was terminated: an
+" empty string '' means fzf was terminated by pressing <Enter>; otherwise, it
+" will be a string like 'ctrl-x', 'ctrl-v', etc.
+"
+" Adapted from https://github.com/junegunn/fzf.vim/blob/66cb8b826477671fba81c2db5fbb080c7b89f955/autoload/fzf/vim.vim#L668
+function! s:bufopen(lines)
+  " echom '[*] s:bufopen'
+  echom a:lines
+  if len(a:lines) < 2
+    return
+  endif
+  let b = matchstr(a:lines[1], '\[\zs[0-9]*\ze\]')
+  if empty(a:lines[0]) && get(g:, 'fzf_buffers_jump')
+    let [t, w] = s:find_open_window(b)
+    if t
+      call s:jump(t, w)
+      return
+    endif
+  endif
+  let Cmd = get(s:myBuffersActions, a:lines[0], '')
+  if type(Cmd) == s:TYPE.string
+    " if Cmd is string, it must be "split", "vsplit", or "tab split"; we
+    " execute Cmd first, before changing buffer.
+    execute 'silent' Cmd
+    execute 'buffer' b
+  elseif type(Cmd) == s:TYPE.funcref
+    " if Cmd is a funcref, we only call the funcref, but don't change buffer.
+    call Cmd(a:lines)
+  endif
+endfunction
+
+" Start fuzzy search of existing buffers, press <Enter> to switch, or press
+" <Tab> to select multiple and press <Alt+Enter> to close multiple.
+command! -bar -bang -nargs=? -complete=buffer MyBuffers
+      \ call fzf#vim#buffers(<q-args>, fzf#vim#with_preview(
+      \     { "placeholder": "{1}",
+      \       "sink*": function("s:bufopen"),
+      \       "options": "--multi".s:myBuffersExpect}), <bang>0)
+  
+nnoremap <silent> <Leader>b :MyBuffers!<CR>
+" -------------------------------------------------------- experimental --- }}}
+
 lua require('init')
+
+" vim:fdm=marker
