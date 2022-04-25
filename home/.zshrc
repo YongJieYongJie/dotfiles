@@ -68,6 +68,7 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse
 --bind=ctrl-alt-w:toggle-preview-wrap
 --preview-window hidden
 --history='$HOME'/.fzf-history'
+# --history=/Users/yongjie/.fzf-history'
 [ -f ~/.fzf-history ] || touch ~/.fzf-history
 
 ### Added by Zinit's installer
@@ -107,7 +108,7 @@ zinit wait lucid light-mode for \
 
 # Set the autosuggestion color, actual color depends on color scheme and may
 # need testing different number.
-export TERM=xterm-256color
+TERM=xterm-256color
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -130,3 +131,7 @@ if [[ -f ~/.local/share/lscolors ]]; then
 fi
 
 [ -f ~/.profile ] && [ -z $PROFILE_LOADED ] && source ~/.profile
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

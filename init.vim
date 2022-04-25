@@ -77,7 +77,7 @@ call plug#begin(yjPluginDir)
 " Enable running of Go commands directly from Vim (e.g., :GoRun, :GoBuild).
 " After installing the plugin, run :GoInstallBinaries to install the Go binaries.
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-let g:go_gopls_enabled = 1 " Disable gopls because we are using Neovim's builtin LSP / coc.nvim.
+let g:go_gopls_enabled = 0 " Disable gopls because we are using Neovim's builtin LSP / coc.nvim.
 let g:go_fmt_experimental = 1 " Fixes issues where folds are reset on saving.
 
 " Add language server protocal support.
@@ -379,14 +379,14 @@ nmap <leader>a. <Plug>(coc-codeaction-line)
 vmap <leader>a <Plug>(coc-codeaction-selected)
 
 " Use K to show documentation in preview window.
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-" endfunction
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 " disable vim-go :GoDef short-cut (gd)
 " this is handled by LanguageClient [LC]
@@ -459,7 +459,7 @@ set lazyredraw
 set undofile
 
 " Highilght current line.
-highlight CursorLine cterm=NONE guifg=NONE
+highlight CursorLine cterm=NONE guifg=NONE guibg=#000000
 set cursorline
 
 " Allow buffer containing modified file to be hidden.

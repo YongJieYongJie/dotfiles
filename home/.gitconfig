@@ -1,5 +1,5 @@
 [user]
-    name = 邱勇捷 (Yongjie Khoo)
+    name = KhooYongjie
     email = yongjie.khoo@matrixport.com
 [push]
     default = simple
@@ -57,3 +57,5 @@
 [url "git@gitlab.matrixport.com:"]
 	insteadof = https://gitlab.matrixport.com/
 
+[url "https://"]
+	insteadOf = git://

@@ -5,10 +5,18 @@ require('telescope').setup({
   defaults = {
     mappings = {
       i = {
-        ["<c-space>"] = layout_actions.toggle_preview,
+        ['<C-space>'] = layout_actions.toggle_preview,
+        ['<C-S-w>'] = require('telescope.actions').delete_buffer,
       }
     },
     -- border = false, -- uncomment to turn off borders (current implementation is ugly)
+    results_title = 'false',
+    borderchars = {
+      prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+      results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+      preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    },
+    scroll_strategy = 'limit',
     layout_strategy = 'vertical',
     layout_config = {
       horizontal = {
@@ -68,7 +76,7 @@ cmp.setup({
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    -- ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ['<C-e>'] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
@@ -276,7 +284,7 @@ require'nvim-treesitter.configs'.setup {
   sync_install = false,
 
   -- List of parsers to ignore installing
-  -- ignore_install = { "javascript" },
+  ignore_install = { "pug" },
 
   highlight = {
     -- `false` will disable the whole extension
@@ -296,3 +304,27 @@ require'nvim-treesitter.configs'.setup {
 ------------------------------------------------------------ nvim-treesitter ---}}}
 -- vim:fdm=marker
 
+
+-- -- Experiments
+-- local ts_utils = require('nvim-treesitter.ts_utils')
+-- local utils = require('nvim-treesitter.utils')
+-- local parsers = require('nvim-treesitter.parsers')
+
+function _G.goreference()
+  if not require('nvim-treesitter.parsers').has_parser() then 
+    print('no parser')
+    return 
+  end
+
+  local current_node = require('nvim-treesitter.ts_utils').get_node_at_cursor()
+  if not current_node then 
+    print('no current_node')
+    return
+  end
+
+  print(current_node)
+end
+
+vim.api.nvim_buf_set_keymap(0, 'n', '<C-l>', ':lua goreference()<cr>', {})
+-- vim.api.nvim_buf_set_keymap(0, 'n', '<C-l>', ':echo "hello"<cr>', {})
+-- vim.api.nvim_win_set_cursor(0, { 2 ,1 })

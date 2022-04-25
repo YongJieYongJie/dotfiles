@@ -90,10 +90,10 @@ alias fgrep='grep --fixed-strings --ignore-case'
 
 # Misc
 alias j='jobs'
-alias n='nvim'
+alias n='/usr/local/Cellar/neovim/0.6.1/bin/nvim'
 
 # Set EDITOR to nvim if not already set
-[ -z "${EDITOR}" ] && export EDITOR='nvim'
+[ -z "${EDITOR}" ] && export EDITOR='/usr/local/Cellar/neovim/0.6.1/bin/nvim'
 
 
 #################
