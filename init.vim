@@ -76,14 +76,17 @@ call plug#begin(yjPluginDir)
 
 " Enable running of Go commands directly from Vim (e.g., :GoRun, :GoBuild).
 " After installing the plugin, run :GoInstallBinaries to install the Go binaries.
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-let g:go_gopls_enabled = 0 " Disable gopls because we are using Neovim's builtin LSP / coc.nvim.
-let g:go_fmt_experimental = 1 " Fixes issues where folds are reset on saving.
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"let g:go_gopls_enabled = 0 " Disable gopls because we are using Neovim's builtin LSP / coc.nvim.
+"let g:go_fmt_experimental = 1 " Fixes issues where folds are reset on saving.
 
 " Add language server protocal support.
 " Individual language needs to be set up separately. Please google for the
 " instructions as appropriate.
 Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
+
+Plug 'airblade/vim-rooter'
+let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'package.json']
 
 " General fuzzy finder with preview.
 Plug 'nvim-telescope/telescope.nvim'
@@ -166,7 +169,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 " shows the output in two vertical splits, and the syntax highlight for the
 " source file remains.
 Plug 'tpope/vim-fugitive'
-nnoremap <silent> <Leader>[ :Git<CR>
+nnoremap <silent> <Leader>[ :Git \| :only<CR>
 " An extension to vim-fugitive for better viewing of branches (something like
 " git log --pretty=one-line --graph).
 Plug 'rbong/vim-flog'
@@ -279,8 +282,21 @@ nnoremap <space>p <cmd>lua require('telescope').extensions.project.project{}<cr>
 " Additional coc extensions
 " -------------------------------------------------------------------------------------------------
 
-let g:coc_global_extensions = [ 'coc-explorer', 'coc-tsserver', 'coc-go', 'coc-java', 'coc-json' ]
+let g:coc_global_extensions = [
+      \ 'coc-explorer',
+      \ 'coc-git',
+      \ 'coc-tsserver',
+      \ 'coc-go',
+      \ 'coc-java',
+      \ 'coc-json'
+      \ ]
 
+" For coc-git
+highlight DiffAdd guifg=none guibg=#000000
+highlight DiffChange guifg=none guibg=#000000
+
+" For coc-go
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 " -----------------------------------------------------------------------------
 " coc.nvim default settings
