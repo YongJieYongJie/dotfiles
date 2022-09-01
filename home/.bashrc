@@ -59,3 +59,4 @@ ${YELLOW}[\t]${RESET} ${CYAN}\W${RESET}${GREEN}\$(__git_ps1 \" (%s)\")${RESET}
 [ -f ~/.git-completion.bash ] && source ~/.git-completion.bash
 command -v kubectl >> /dev/null && source <(kubectl completion bash)
 [ -f ~/.profile ] && [ -z $PROFILE_LOADED ] && source ~/.profile
+. "$HOME/.cargo/env"

@@ -90,7 +90,7 @@ alias fgrep='grep --fixed-strings --ignore-case'
 
 # Misc
 alias j='jobs'
-alias n='/usr/local/Cellar/neovim/0.6.1/bin/nvim'
+alias n='/opt/homebrew/bin/nvim'
 
 # Set EDITOR to nvim if not already set
 [ -z "${EDITOR}" ] && export EDITOR='/usr/local/Cellar/neovim/0.6.1/bin/nvim'
@@ -138,3 +138,4 @@ alias rg='rg --smart-case'
 if [ -f "$HOME/.local/profile" ]; then
   source "$HOME/.local/profile"
 fi
+. "$HOME/.cargo/env"

@@ -27,11 +27,11 @@ ${DOTFILES_INSTALLERS_DIR}/install-lf.sh
 printf "[*] Installing bat...\n"
 ${DOTFILES_INSTALLERS_DIR}/install-bat.sh
 printf "[*] Installing pistol...\n"
-${DOTFILES_INSTALLERS_DIR}/install-pistol.sh
+# ${DOTFILES_INSTALLERS_DIR}/install-pistol.sh
 printf "[*] Installing git-delta...\n"
 ${DOTFILES_INSTALLERS_DIR}/install-git-delta.sh
 printf "[*] Installing trapd00r/LS_COLORS...\n"
-${DOTFILES_INSTALLERS_DIR}/install-lscolors.sh
+# ${DOTFILES_INSTALLERS_DIR}/install-lscolors.sh
 
 printf "[*] Installing Emacs...\n"
 ${DOTFILES_INSTALLERS_DIR}/install-emacs.sh

@@ -278,7 +278,7 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 -- From https://github.com/nvim-treesitter/nvim-treesitter/tree/cada76c4901e2389c0f82ac11d0c9c61d5205e90
 require'nvim-treesitter.configs'.setup {
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = "maintained",
+  ensure_installed = { "go" },
 
   -- Install languages synchronously (only applied to `ensure_installed`)
   sync_install = false,

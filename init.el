@@ -234,19 +234,19 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 ;;
 ;; See GitHub issue:
 ;; https://github.com/company-mode/company-mode/issues/299
-;(add-to-list 'default-frame-alist
-;             '(font . "-outline-Courier New-normal-normal-normal-mono-23-*-*-*-c-*-iso8859-1"))
-(add-to-list 'default-frame-alist '(font . "Iosevka-24:weight=light"))
+(add-to-list 'default-frame-alist
+            '(font . "-outline-Courier New-normal-normal-normal-mono-23-*-*-*-c-*-iso8859-1"))
+(add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font-24:weight=light"))
 (add-to-list 'default-frame-alist '(height . 24))
 (add-to-list 'default-frame-alist '(width . 60))
-(set-frame-font "Iosevka-19:weight=light" nil t)
+(set-frame-font "Iosevka Nerd Font-19:weight=light" nil t)
 
 (defun yj/change-font-size (p)
   "Change font size for all buffers, windows and frames, based on prefix P."
   (interactive "p")
   (let* ((current-font-size 20)
          (new-font-size (+ current-font-size p)))
-   (set-frame-font (concat "Iosevka-" (number-to-string new-font-size) ":weight=light") nil t)))
+   (set-frame-font (concat "Iosevka Nerd Font-" (number-to-string new-font-size) ":weight=light") nil t)))
 
 (setq initial-scratch-message nil)
 (setq tab-stop-list (number-sequence 4 120 4))
@@ -458,9 +458,27 @@ This means that buffers like magit will be excluded."
         (window-divider-mode 1)
       (window-divider-mode -1))))
 
+;; yj/extract-highlight-pattern extracts the currently highlighted pattern by hi-lock mode.
+;;
+;; For example, if "my-word" is highlighted, the corresponding entry in 'hi-lock-interactive-patterns will be:
+;;
+;;     "(#[257 \"\\301\\302\\305\\300\\242\\306#*\\207\" [(\"\\\\_<my-word\\\\_>\") t nil search-spaces-regexp case-fold-search re-search-forward t] 5 \"
+;;
+;;     (fn LIMIT)\"] (0 'hi-yellow prepend))"
+;;
+;; and the extract string will be "\\_<my-word\\_>", which is of the correct
+;; format to be passed to unhighlight-regexp function to remove the highlight.
+(defun yj/extract-highlight-pattern (prin1-of-compile-function)
+  (string-match "<\\(.*\\)\\\\\\\\_>" prin1-of-compile-function)
+  (concat "\\_<" (string-replace "\\\\" "\\" (match-string 1 prin1-of-compile-function)) "\\_>"))
+
+;; (yj/extract-highlight-pattern (prin1-to-string (car hi-lock-interactive-patterns)))
+;; (mapcar 'yj/extract-highlight-pattern (mapcar 'prin1-to-string hi-lock-interactive-patterns))
+
 (defun yj/highlight (prefix)
   (interactive "P")
-  (let* ((highlighted-regexps (mapcar 'car hi-lock-interactive-patterns))
+  (let* ((highlighted-regexps (mapcar 'yj/extract-highlight-pattern (mapcar 'prin1-to-string hi-lock-interactive-patterns)))
+  ;; (let* ((highlighted-regexps (mapcar 'car hi-lock-interactive-patterns))
          (symbol-highlighted (seq-find
                               (lambda (pat) (string-match (symbol-name (symbol-at-point)) pat))
                               highlighted-regexps)))
@@ -767,8 +785,8 @@ save it in `ffap-file-at-point-line-number' variable."
   ;; Make the mode-line and header-line fonts smaller. Note: This code may need
   ;; to be called after the theme is loaded to prevent the theme from
   ;; overwritting the font size.
-  (set-face-attribute 'mode-line nil :font "Iosevka-17")
-  (set-face-attribute 'header-line nil :font "Iosevka-17"))
+  (set-face-attribute 'mode-line nil :font "Iosevka Nerd Font-17")
+  (set-face-attribute 'header-line nil :font "Iosevka Nerd Font-17"))
 
 ;; Use the zenburn theme, which is the default for the Prelude
 ;; distribution (https://github.com/bbatsov/prelude), which is the
@@ -1222,6 +1240,8 @@ save it in `ffap-file-at-point-line-number' variable."
   ;; Below is needed to apply the modified `org-emphasis-regexp-components'
   ;; settings from above.
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+
+  (require 'ox-md nil t)
 
   ;; https://emacs-china.org/t/orgmode/9740/12
   ;; 让中文也可以不加空格就使用行内格式

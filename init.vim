@@ -475,7 +475,7 @@ set lazyredraw
 set undofile
 
 " Highilght current line.
-highlight CursorLine cterm=NONE guifg=NONE guibg=#000000
+highlight CursorLine cterm=NONE ctermbg=black guifg=NONE guibg=#000000
 set cursorline
 
 " Allow buffer containing modified file to be hidden.
@@ -615,6 +615,8 @@ function! OnUIEnter(event)
 endfunction
 autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 
+set guifont=Iosevka\ Nerd\ Font:h20
+
 " Enable syntax highlight and code folding using nvim_treesitter.
 nnoremap <silent> <Leader>tt :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
 
@@ -685,12 +687,14 @@ function! ToggleHiddenAll()
         set noruler
         set laststatus=0
         set noshowcmd
+        set showtabline=0
     else
         let s:hidden_all = 0
         set showmode
         set ruler
         set laststatus=2
         set showcmd
+        set showtabline=1
     endif
 endfunction
 function! SetHiddenAll()
@@ -823,6 +827,20 @@ function! s:bufopen(lines)
     call Cmd(a:lines)
   endif
 endfunction
+
+function! FontSizeIncrease()
+  let curr_size = matchstr(&guifont, '\zs[0-9]\+\ze')
+  let &guifont='Iosevka Nerd Font:h' . (curr_size+1)
+endfunction
+
+function! FontSizeDecrease()
+  let curr_size = matchstr(&guifont, '\zs[0-9]\+\ze')
+  let &guifont='Iosevka Nerd Font:h' . (curr_size-1)
+endfunction
+
+" nnoremap <silent> <S-h> :call ToggleHiddenAll()<CR>
+nnoremap <silent><C-=> :call FontSizeIncrease()<CR>
+nnoremap <silent><C--> :call FontSizeDecrease()<CR>
 
 " Start fuzzy search of existing buffers, press <Enter> to switch, or press
 " <Tab> to select multiple and press <Alt+Enter> to close multiple.

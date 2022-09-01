@@ -50,7 +50,7 @@ PS1='
 $ '
 
 #source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/local/Cellar/fzf/0.27.0/shell/key-bindings.zsh
+source /opt/homebrew/Cellar/fzf/0.30.0/shell/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # configure fzf fuzzy finder to popup below
@@ -125,8 +125,8 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 # Use LS_COLORS from https://github.com/trapd00r/LS_COLORS. Take note however
 # that the script from within that repository generates the code for bash and
 # csh only, and have to be tweak for zsh (by removing quotation marks etc.).
-if [[ -f ~/.local/share/lscolors ]]; then
-  export LS_COLORS=$(cat ~/.local/share/lscolors)
+if [[ -f ~/LS_COLORS/lscolors.sh ]]; then
+  source ~/LS_COLORS/lscolors.sh
   zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 fi
 
