@@ -1505,6 +1505,26 @@ When repeatedly called we cycle through three states:
 ;;; END
 ;;;-----------------------------------------------------------------------------
 
+;; Ensure proper aligned of Chinese/Japanese characters and English characters
+;; (especially in org-mode tables)
+;;
+;; Steps:
+;; 1. Use <C-u><C-x>= to find the font of a Chinese character, and an English
+;;    character
+;; 2. Pass in the names of the two fonts, setting them to the same size.
+(eval-when-compile (require 'cl))
+(defun set-font (english chinese english-size chinese-size)
+  (set-face-attribute 'default nil :font
+		              (format "%s:pixelsize=%d" english english-size))
+  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font) charset
+		              (font-spec :family chinese :size chinese-size))))
+(ecase system-type
+       (gnu/linux
+        (set-face-bold-p 'bold nil)
+        (set-face-underline-p 'bold nil)
+        (set-font "Iosevka" "Noto Sans CJK KR"  22 22)))
+
 ;; Move the irritating custom-set-* to a seperate file outside of source
 ;; control.
 (setq custom-file (expand-file-name "custom-file.el" user-emacs-directory))
