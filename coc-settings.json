@@ -10,6 +10,23 @@
   "coc.preferences.extensionUpdateCheck": "never",
   // "explorer.icon.enableNerdfont": true,
 
+  "list.insertMappings": {
+    "<C-r>": "do:refresh",
+    "<C-f>": "feedkeys:\\<C-f>",
+    "<C-b>": "feedkeys:\\<C-b>",
+    "<C-n>": "normal:j",
+    "<C-p>": "normal:k",
+    "<C-t>": "action:tabe",
+    "<C-v>": "eval:@@"
+    // "<C-x>": "call:MyFunc", // Example of how to call custom function
+  },
+  // Note: eval:@@ paste yanked text
+
+  "list.normalMappings": {
+    "c": "expr:MyExprFunc",
+    "d": "action:delete"
+  },
+
     ///////////////
    // C-related //
   ///////////////
