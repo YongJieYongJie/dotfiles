@@ -179,6 +179,9 @@ Plug 'tpope/vim-surround'
 " argslist, [q ]q to move around quickfix list)
 Plug 'tpope/vim-unimpaired'
 
+Plug 'airblade/vim-rooter'
+let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'package.json']
+
 " For showing changed lines based on git
 Plug 'airblade/vim-gitgutter'
 nmap ]h <Plug>(GitGutterNextHunk)
