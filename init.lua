@@ -6,9 +6,11 @@ require('telescope').setup({
     mappings = {
       i = {
         ["<c-space>"] = layout_actions.toggle_preview,
+        ['<C-S-w>'] = require('telescope.actions').delete_buffer,
       }
     },
     -- border = false, -- uncomment to turn off borders (current implementation is ugly)
+    scroll_strategy = 'limit',
     layout_strategy = 'vertical',
     layout_config = {
       horizontal = {
