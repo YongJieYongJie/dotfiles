@@ -37,6 +37,7 @@ bindkey '^[[Z' reverse-menu-complete
 setopt MENU_COMPLETE
 setopt NO_LIST_BEEP
 setopt NO_BEEP
+setopt HIST_IGNORE_SPACE
 
 # prompt string
 #setopt PROMPT_SUBST;
