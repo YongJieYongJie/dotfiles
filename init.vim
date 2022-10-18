@@ -270,7 +270,14 @@ nnoremap <leader>p <cmd>lua require('telescope').extensions.project.project{}<cr
 " Additional coc extensions
 " -------------------------------------------------------------------------------------------------
 
-let g:coc_global_extensions = [ 'coc-explorer', 'coc-tsserver', 'coc-go', 'coc-java', 'coc-json' ]
+let g:coc_global_extensions = [ 
+      \ 'coc-git',
+      \ 'coc-explorer',
+      \ 'coc-tsserver',
+      \ 'coc-go',
+      \ 'coc-java',
+      \ 'coc-json',
+      \ ]
 
 
 " -----------------------------------------------------------------------------
