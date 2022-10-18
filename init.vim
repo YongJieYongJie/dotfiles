@@ -527,7 +527,8 @@ nnoremap <silent> <Leader>ff :History!<CR>
 nnoremap <silent> ?? :Rg!<CR>
 
 " Start fuzzy search for lines in all files with words under cursor, requires vim-fzf plugin.
-nnoremap <silent> <Leader>* :Rg! \b<c-r><c-w>\b<CR>
+" nnoremap <silent> <Leader>* :Rg! \b<c-r><c-w>\b<CR>
+nnoremap <silent> <Leader>* :Rg! <c-r><c-w><c-f>bi\b<c-[>A\b<c-[><CR>
 
 " Create folds by syntax.
 nnoremap <silent> <Leader>fs :set foldmethod=syntax<CR>
