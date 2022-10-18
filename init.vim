@@ -353,7 +353,7 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
 vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>fd  <Plug>(coc-format)
 
 " Show list of coc lists
 nnoremap <silent> <leader>cl  :<C-u>CocFzfList<cr>
