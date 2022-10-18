@@ -260,10 +260,10 @@ nnoremap <leader>h <cmd>lua require('telescope.builtin').command_history()<cr>
 " nnoremap gy <cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>
 " nnoremap gi <cmd>lua require('telescope.builtin').lsp_implementations()<cr>
 " nnoremap <leader>ac <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
-" nnoremap <space>o <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
-" nnoremap <space>O <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
+" nnoremap <leader>o <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
+" nnoremap <leader>O <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
 
-nnoremap <space>p <cmd>lua require('telescope').extensions.project.project{}<cr>
+nnoremap <leader>p <cmd>lua require('telescope').extensions.project.project{}<cr>
 
 
 " -------------------------------------------------------------------------------------------------
@@ -346,21 +346,21 @@ nmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <silent> <leader>cl  :<C-u>CocFzfList<cr>
 
 " Show all diagnostics
-"nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+"nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-"nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+"nnoremap <silent> <leader>e  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocFzfList commands<cr>
+nnoremap <silent> <leader>cm  :<C-u>CocFzfList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
+nnoremap <silent> <leader>o  :<C-u>CocFzfList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocFzfList symbols<cr>
+nnoremap <silent> <leader>s  :<C-u>CocFzfList symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
 " Show code actions for current buffer
 nmap <leader>ac <Plug>(coc-codeaction)
