@@ -795,6 +795,23 @@ function! s:bufopen(lines)
   endif
 endfunction
 
+set guifont=Iosevka\ Nerd\ Font\ Mono:h17
+
+function! FontSizeIncrease()
+  let curr_size = matchstr(&guifont, ':h\zs[0-9]\+\ze')
+  echom curr_size
+  let &guifont='Iosevka Nerd Font Mono:h' . (curr_size+1)
+endfunction
+
+function! FontSizeDecrease()
+  let curr_size = matchstr(&guifont, ':h\zs[0-9]\+\ze')
+  echom curr_size
+  let &guifont='Iosevka Nerd Font Mono:h' . (curr_size-1)
+endfunction
+
+nnoremap <c-=> :call FontSizeIncrease()<CR>
+nnoremap <c--> :call FontSizeDecrease()<CR>
+
 " Start fuzzy search of existing buffers, press <Enter> to switch, or press
 " <Tab> to select multiple and press <Alt+Enter> to close multiple.
 command! -bar -bang -nargs=? -complete=buffer MyBuffers
