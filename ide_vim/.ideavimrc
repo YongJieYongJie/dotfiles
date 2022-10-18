@@ -17,13 +17,28 @@ map <C-i> <Action>(Forward)
 map <leader>w <Action>(EditorToggleUseSoftWraps)
 map <S-h> <Action>(HideAllWindows)
 map <C-g> <Action>(SelectInProjectView)
+map <leader>e <Action>(ActivateProjectToolWindow)
+map <leader><leader> :b#<CR>
+map <leader>g <Action>(GotoFile)
 map <leader>b <Action>(RecentFiles)
 map <leader>n <Action>(EditorToggleShowLineNumbers)
 map <leader>o <Action>(FileStructurePopup)
+map <leader>O <Action>(GotoSymbol)
 map <leader>rn <Action>(RenameElement)
+map <leader>c <Action>(GotoAction)
+map <leader>a <Action>(GotoAction)
+map <leader>1 <Action>(ToggleZenMode)
+map <leader>rr <Action>(Refactorings.QuickListPopupAction)
+map ]d <Action>(GotoNextError)
+map [d <Action>(GotoPreviousError)
+map <C-y> <CR>
 
 " From https://wizone.solutions/2020/07/16/workaround-for-zr-expand-all-folds-not-working-in-ideavim-0-58-in-phpstorm-intellij-idea-etc/
 map zR :action ExpandAllRegions<CR>:action ExpandAllRegions<CR>
 
 " Turn of search highlighting
 map <leader><CR> :nohl<CR>
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+packadd matchit
