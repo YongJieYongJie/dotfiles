@@ -158,7 +158,7 @@ Plug 'antoinemadec/coc-fzf'
 " shows the output in two vertical splits, and the syntax highlight for the
 " source file remains.
 Plug 'tpope/vim-fugitive'
-nnoremap <silent> <Leader>[ :Git<CR>
+nnoremap <silent> <Leader>[ :tabnew<CR>:Git<CR><C-w><C-o>
 " An extension to vim-fugitive for better viewing of branches (something like
 " git log --pretty=one-line --graph).
 Plug 'rbong/vim-flog'
