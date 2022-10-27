@@ -232,6 +232,11 @@ Plug 'inkarkat/vim-ingo-library' " dependency of vim-mark
 let g:mw_no_mappings=1
 nnoremap <leader>m :Mark =expand('<cword>')<cr><cr>
 nnoremap <leader>M :MarkClear<cr>
+
+Plug 'nvim-orgmode/orgmode'
+
+Plug 'tpope/vim-repeat'
+
 call plug#end()
 
 
