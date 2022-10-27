@@ -32,6 +32,8 @@ map <leader>rr <Action>(Refactorings.QuickListPopupAction)
 map ]d <Action>(GotoNextError)
 map [d <Action>(GotoPreviousError)
 map <C-y> <CR>
+map ?? <Action>(FindInPath)
+map <leader>* viw<Action>(FindInPath)
 
 " From https://wizone.solutions/2020/07/16/workaround-for-zr-expand-all-folds-not-working-in-ideavim-0-58-in-phpstorm-intellij-idea-etc/
 map zR :action ExpandAllRegions<CR>:action ExpandAllRegions<CR>
