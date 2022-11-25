@@ -799,6 +799,26 @@ function! YJ_ToggleMaximized()
 endfunction
 let g:yj_cmd_to_restore_win_sizes = {}
 
+set guifont=Iosevka\ Nerd\ Font\ Mono:h17
+
+""
+" Increase font size when in GUI mode (e.g., in Neovide).
+function! YJ_FontSizeIncrease()
+  let curr_font = matchstr(&guifont, '\zs.\+\ze:h[0-9\+]')
+  let curr_size = matchstr(&guifont, ':h\zs[0-9]\+\ze')
+  let &guifont= curr_font . ':h' . (curr_size+1)
+endfunction
+
+" Decrease font size when in GUI mode (e.g., in Neovide).
+function! YJ_FontSizeDecrease()
+  let curr_font = matchstr(&guifont, '\zs.\+\ze:h[0-9\+]')
+  let curr_size = matchstr(&guifont, ':h\zs[0-9]\+\ze')
+  let &guifont= curr_font . ':h' . (curr_size-1)
+endfunction
+
+nnoremap <silent> <c-=> :call YJ_FontSizeIncrease()<CR>
+nnoremap <silent> <c--> :call YJ_FontSizeDecrease()<CR>
+
 " -------------------------------------------------------- experimental --- {{{
 
 " FZF plugin extension guide:
@@ -895,23 +915,6 @@ function! s:bufopen(lines)
     call Cmd(a:lines)
   endif
 endfunction
-
-set guifont=Iosevka\ Nerd\ Font\ Mono:h17
-
-function! FontSizeIncrease()
-  let curr_size = matchstr(&guifont, ':h\zs[0-9]\+\ze')
-  echom curr_size
-  let &guifont='Iosevka Nerd Font Mono:h' . (curr_size+1)
-endfunction
-
-function! FontSizeDecrease()
-  let curr_size = matchstr(&guifont, ':h\zs[0-9]\+\ze')
-  echom curr_size
-  let &guifont='Iosevka Nerd Font Mono:h' . (curr_size-1)
-endfunction
-
-nnoremap <c-=> :call FontSizeIncrease()<CR>
-nnoremap <c--> :call FontSizeDecrease()<CR>
 
 " Start fuzzy search of existing buffers, press <Enter> to switch, or press
 " <Tab> to select multiple and press <Alt+Enter> to close multiple.
