@@ -810,6 +810,13 @@ When repeatedly called we cycle through three states:
   :ensure t
   :commands git-link)
 
+;; rainbow-mode is used to display common color formats (e.g., #RRGGBB) with the
+;; actual colors being represented. This is useful when editing CSS / themes.
+;; (http://git.savannah.gnu.org/cgit/emacs/elpa.git/?h=externals/rainbow-mode)
+(use-package rainbow-mode
+  :ensure t
+  :commands rainbow-mode)
+
 ;; deadgrep is used for dwim grepping. Grepping is static (as opposed to live),
 ;; and the results are presented in a user-friendly buffer. Depending on use
 ;; case, I might choose between using this or counsel-rg.
