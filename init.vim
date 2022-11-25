@@ -258,6 +258,7 @@ nnoremap <leader>M :MarkClear<cr>
 Plug 'nvim-orgmode/orgmode'
 
 Plug 'tpope/vim-repeat'
+Plug 'chrisbra/NrrwRgn'
 
 call plug#end()
 
