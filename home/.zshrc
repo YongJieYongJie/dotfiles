@@ -102,6 +102,11 @@ zinit wait lucid light-mode for \
   blockf atpull'zinit creinstall -q .' \
       zsh-users/zsh-completions
 
+# From https://www.reddit.com/r/zinit/comments/rqlb8n/comment/hqe7k3w/?utm_source=share&utm_medium=web2x&context=3
+export NVM_COMPLETION=true
+export NVM_SYMLINK_CURRENT="true"
+zinit wait lucid light-mode for lukechilds/zsh-nvm
+
 # Set the autosuggestion color, actual color depends on color scheme and may
 # need testing different number.
 export TERM=xterm-256color
