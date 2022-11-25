@@ -527,7 +527,7 @@ nnoremap <silent> <leader>yf :let @* = expand("%:p")<cr>
 nnoremap <silent> <space>e  :<C-u>CocCommand explorer<cr>
 
 " Expand file browser to current buffer
-nmap <Leader>er <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
+nmap <Leader>E <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
 
 " Switch to previous buffer.
 nnoremap <silent> <Leader><Leader> :b#<CR>
