@@ -110,20 +110,32 @@ alias rg='rg --smart-case'
 # Load FZF Git helper funcions and keybindings
 [ -f ~/.local/scripts/fzf-helpers.sh ] && source ~/.local/scripts/fzf-helpers.sh
 
+export BAT_THEME=TwoDark
+
+. $HOME/.asdf/asdf.sh
+
+
 #################################
-# Programming Lannguage Related #
+# Programming Language Related #
 #################################
+
+# Note: The paths in this section are just default locations, use the local
+# override section to override as necessary.
 
 ## Go
-#export GOROOT="/usr/local/go"
-#export PATH="$GOROOT/bin:$PATH"
-#export GOPATH="$HOME/go"
-#export GOBIN="$GOPATH/bin"
-#export PATH="$GOBIN:$PATH"
+export GOROOT="/usr/local/go"
+export PATH="$GOROOT/bin:$PATH"
+export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
+export PATH="$GOBIN:$PATH"
 
 ## Rust
-#source "$HOME/.cargo/env"
-#export PATH="$HOME/.cargo/bin:$PATH"
+source "$HOME/.cargo/env"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+## Java
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 
 ###################
