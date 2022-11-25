@@ -1202,7 +1202,7 @@ When repeatedly called we cycle through three states:
 (add-hook 'org-mode-hook #'hl-line-mode)
 
 ;; Treat CamelCaseSubWords as separate words (affects keys like "M-b"/"M-f").
-(add-hook 'org-mode-hook #'subword-mode)
+;;(add-hook 'org-mode-hook #'subword-mode)
 
 ;;; Org-capture
 (setq org-directory yj-org-directory)
