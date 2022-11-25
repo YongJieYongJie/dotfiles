@@ -113,6 +113,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 # Remove the forward slash and hyphen characters from what is considered part
 # of a word so meta+f and meta+b will stop at directory boundaries.
 WORDCHARS=${WORDCHARS//[\/-]}
+WORDCHARS=${WORDCHARS//[?.&]}
 
 # Case-insensitve completion. Copied from
 # https://stackoverflow.com/a/24237590/5821101.
