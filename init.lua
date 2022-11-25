@@ -32,6 +32,9 @@ require('telescope').setup({
       i = {
         ["<c-space>"] = layout_actions.toggle_preview,
         ['<C-S-w>'] = require('telescope.actions').delete_buffer,
+      },
+      n = {
+        ['dd'] = require('telescope.actions').delete_buffer,
       }
     },
     -- border = false, -- uncomment to turn off borders (current implementation is ugly)
