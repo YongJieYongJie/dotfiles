@@ -29,6 +29,7 @@ map <leader>c <Action>(GotoAction)
 map <leader>a <Action>(GotoAction)
 map <leader>1 <Action>(ToggleZenMode)
 map <leader>rr <Action>(Refactorings.QuickListPopupAction)
+map <leader>fd <Action>(ReformatCode)
 map ]d <Action>(GotoNextError)
 map [d <Action>(GotoPreviousError)
 map <C-y> <CR>
