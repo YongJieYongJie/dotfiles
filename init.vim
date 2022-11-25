@@ -421,6 +421,8 @@ nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 
 " Show code actions for current buffer
 nmap <leader>ac <Plug>(coc-codeaction)
+" Show code actions at cursor
+nmap <leader>aa <Plug>(coc-codeaction-cursor)
 " Show code actions for current line
 nmap <leader>a. <Plug>(coc-codeaction-line)
 " Show code actions for current selection
