@@ -152,6 +152,24 @@ Plug 'junegunn/goyo.vim'
 let g:goyo_height='100%'
 nnoremap <silent> <expr> <Leader>1 empty(get(t:, 'goyo_dim', '')) ? ':Goyo 62%<CR>' : ':Goyo!<CR>'
 
+""
+" Returns the number of characters in the longest line in the current buffer.
+function! YJ_LongestLineWidth()
+  " Note: the plus two below is for the signcolumn.
+  " Adapted from https://superuser.com/a/255438/1021469
+  return max(map(range(1, line('$')), "col([v:val, '$'])")) - 1 + 2
+endfunction
+
+""
+" Returns the total number of lines in the current buffer.
+function! YJ_NumLines()
+  return line('$')
+endfunction
+
+" Centralize the current buffer (horizontally and vertically) and hides all
+" other windows. Useful for making presentations.
+nnoremap <silent> <expr> <Leader>! ':Goyo ' . YJ_LongestLineWidth() . 'x' . YJ_NumLines() . '<CR>'
+
 " Allow opening some of CocList in fzf
 Plug 'antoinemadec/coc-fzf' 
 
