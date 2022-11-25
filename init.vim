@@ -147,6 +147,28 @@ Plug 'google/vim-searchindex'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+autocmd! FileType fzf call YJ_BeforeFzf()
+  \| autocmd BufLeave <buffer> call YJ_AfterFzf()
+
+let s:prev_show_mode='showmode'
+let s:prev_last_status=2
+function! YJ_BeforeFzf()
+  let s:prev_show_mode=&showmode
+  let s:prev_last_status=&laststatus
+  set laststatus=0
+  set noshowmode
+  set noruler
+endfunction
+function! YJ_AfterFzf()
+  if s:prev_show_mode
+    set showmode
+  endif
+  if s:prev_last_status
+    set laststatus=2
+  endif
+  set ruler
+endfunction
+
 " For "zen" mode
 Plug 'junegunn/goyo.vim'
 let g:goyo_height='100%'
