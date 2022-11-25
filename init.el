@@ -1054,6 +1054,8 @@ When repeatedly called we cycle through three states:
          ;;("C-c F" . counsel-org-file)
          ))
 
+(use-package ivy-hydra
+  :ensure t)
 
 ;;; projectile
 (use-package projectile
