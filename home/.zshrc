@@ -61,6 +61,7 @@ export FZF_DEFAULT_OPTS='--height 40% --layout=reverse
 --bind=ctrl-k:kill-line
 --bind="ctrl-alt-c:preview(cat {})"
 --bind="ctrl-alt-l:preview(ls -lAh {})"
+--bind=alt-enter:print-query
 --bind=ctrl-space:toggle-preview
 --bind=ctrl-alt-w:toggle-preview-wrap
 --preview-window hidden
