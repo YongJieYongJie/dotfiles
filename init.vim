@@ -730,12 +730,14 @@ function! ToggleHiddenAll()
         set noruler
         set laststatus=0
         set noshowcmd
+        set showtabline=0
     else
         let s:hidden_all = 0
         set showmode
         set ruler
         set laststatus=2
         set showcmd
+        set showtabline=1
     endif
 endfunction
 nnoremap <silent> <S-h> :call ToggleHiddenAll()<CR>
