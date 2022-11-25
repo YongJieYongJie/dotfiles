@@ -1328,6 +1328,7 @@ When repeatedly called we cycle through three states:
   (setq lsp-keymap-prefix "C-c l")
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          (go-mode . lsp)
+         (java-mode . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
@@ -1485,6 +1486,15 @@ When repeatedly called we cycle through three states:
   :ensure t
   :hook ((c-mode c++-mode objc-mode cuda-mode) .
          (lambda () (require 'ccls) (lsp))))
+
+
+;;;-----------------------------------------------------------------------------
+;;; Programming Mode: Java
+;;;-----------------------------------------------------------------------------
+
+(use-package lsp-java
+  :ensure t)
+(add-hook 'java-mode-hook #'company-mode)
 
 
 ;;;-----------------------------------------------------------------------------
