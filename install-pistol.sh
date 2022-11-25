@@ -10,4 +10,4 @@ elif [ "$os" = "Darwin" ]; then
     brew install libmagic
 fi
 
-env CGO_ENABLED=1 GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
+env CGO_ENABLED=1 go install github.com/doronbehar/pistol/cmd/pistol@latest
