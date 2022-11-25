@@ -224,7 +224,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 
 " For auto-closing of parens and related features
 Plug 'jiangmiao/auto-pairs'
-autocmd FileType TelescopePrompt     let b:autopairs_enabled=0
+autocmd FileType TelescopePrompt,org let b:autopairs_enabled=0
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
