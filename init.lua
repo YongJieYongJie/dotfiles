@@ -18,6 +18,10 @@ require('orgmode').setup({
   org_default_notes_file ='~/coding-playground/java/aeron/notes.org',
   org_todo_keywords = {'TODO', 'NEXT', '|', 'DONE'},
   mappings = {
+    global = {
+      org_agenda = ',a',
+      org_capture = ',c',
+    },
     prefix = ','
   }
 })
