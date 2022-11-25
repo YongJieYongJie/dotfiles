@@ -756,6 +756,49 @@ if exists('+termguicolors') && ($TERM == "st-256color" || $TERM == "xterm-256col
     set termguicolors
 endif
 
+nnoremap <silent> <leader>z :call YJ_ToggleMaximized()<CR>
+
+""
+" Checks whether the current window is maximized by
+"  1. storing the current height and width
+"  2. maximizing the current window and recording the maximized height and width
+"  3. undo-ing the maximizing
+"  4. comparing the before and after height and width
+"  
+"  Credits: Inspired by reddit comment which mention the winrestcmd() builtin
+"  function:
+"  https://www.reddit.com/r/vim/comments/9e9bnh/comment/e5oix67/?utm_source=share&utm_medium=web2x&context=3
+function! YJ_IsMaximized()
+  let curr_width = winwidth(0)
+  let curr_height = winheight(0)
+  let yj_cmd_to_restore_win_sizes = winrestcmd()
+  resize
+  vertical resize
+  let maximized_width = winwidth(0)
+  let maximized_height = winheight(0)
+  exec yj_cmd_to_restore_win_sizes
+  return curr_width == maximized_width && curr_height == maximized_height
+endfunction
+
+""
+" Toggle the maximized status of the current window. Works across tabs.
+function! YJ_ToggleMaximized()
+  if YJ_IsMaximized()
+    if has_key(g:yj_cmd_to_restore_win_sizes, tabpagenr()-1)
+      let cmd = remove(g:yj_cmd_to_restore_win_sizes, tabpagenr()-1)
+      exec cmd
+    else
+      " If the restore command doesn't exst, we simply equalize all windows.
+      call feedkeys("\<C-w>=")
+    endif
+  else
+    let g:yj_cmd_to_restore_win_sizes[tabpagenr()-1] = winrestcmd()
+    resize
+    vertical resize
+  endif
+endfunction
+let g:yj_cmd_to_restore_win_sizes = {}
+
 " -------------------------------------------------------- experimental --- {{{
 
 " FZF plugin extension guide:
