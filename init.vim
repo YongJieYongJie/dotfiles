@@ -202,7 +202,14 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 Plug 'airblade/vim-rooter'
-let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'package.json']
+let g:rooter_patterns = [
+      \ '.git',
+      \ '_darcs',
+      \ '.hg',
+      \ '.bzr',
+      \ '.svn',
+      \ 'package.json',
+      \ 'Cargo.toml']
 
 " For showing changed lines based on git
 Plug 'airblade/vim-gitgutter'
