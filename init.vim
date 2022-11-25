@@ -598,6 +598,13 @@ nnoremap <silent> ?? :Rg!<CR>
 " nnoremap <silent> <Leader>* :Rg! \b<c-r><c-w>\b<CR>
 nnoremap <silent> <Leader>* :Rg! <c-r><c-w><c-f>bi\b<c-[>A\b<c-[><CR>
 
+xnoremap <silent> <Leader>* y<c-[>:Rg! <c-r>"<CR>
+
+" Start fuzzy search for lines in current file with words under cursor, requires vim-fzf plugin.
+nnoremap <silent> <Leader>/ :BLines! <c-r><c-w><CR>
+
+xnoremap <silent> <Leader>/ y<c-[>:BLines! '<c-r>"<CR>
+
 " Create folds by syntax.
 nnoremap <silent> <Leader>fs :set foldmethod=syntax<CR>
 
