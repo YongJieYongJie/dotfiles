@@ -149,6 +149,7 @@ Plug 'junegunn/fzf.vim'
 
 " For "zen" mode
 Plug 'junegunn/goyo.vim'
+let g:goyo_height='100%'
 nnoremap <silent> <expr> <Leader>1 empty(get(t:, 'goyo_dim', '')) ? ':Goyo 62%<CR>' : ':Goyo!<CR>'
 
 " Allow opening some of CocList in fzf
