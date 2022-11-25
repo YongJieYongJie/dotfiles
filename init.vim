@@ -539,8 +539,27 @@ noremap <silent> <Leader><CR> :nohlsearch<CR>
 " Toggle word wrap.
 noremap <silent> <Leader>w :set wrap!<CR>
 
-" Toggle relative number.
-noremap <silent> <Leader>n :set relativenumber!<CR>
+""
+" Cycle among no line number, only line number, and relative line number
+" modes.
+function! YJ_CycleLineNumber()
+  let isNumber = &number
+  let isRelativeNumber = &relativenumber
+
+  if isNumber && isRelativeNumber
+    set nonumber
+    set norelativenumber
+    return
+  endif
+
+  if isNumber
+    set relativenumber
+    return
+  endif
+
+  set number
+endfunction
+noremap <silent> <Leader>n :call YJ_CycleLineNumber()<CR>
 
 " Change to directory of current file.
 noremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
