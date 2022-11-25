@@ -693,6 +693,10 @@ set wildignore+=**/vendor/**
 " Remave target folder from wildcard (used in Maven projects).
 set wildignore+=**/target/**
 
+" Ignore case when auto-completing in command mode (e.g., when pressing
+" <TAB>)
+set wildignorecase
+
 set showtabline=1 " show tabline only when there are more than one tab
 set guioptions-=e " When in GUI mode, use GUI to add tabs
 set laststatus=2 " Always show status line
