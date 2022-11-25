@@ -313,6 +313,7 @@ let g:coc_global_extensions = [
       \ 'coc-go',
       \ 'coc-java',
       \ 'coc-json',
+      \ 'coc-rust-analyzer',
       \ ]
 let g:coc_global_extensions = [ 'coc-explorer', 'coc-tsserver', 'coc-go', 'coc-java', 'coc-json' ]
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
