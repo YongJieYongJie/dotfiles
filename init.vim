@@ -256,6 +256,7 @@ Plug 'jiangmiao/auto-pairs'
 autocmd FileType TelescopePrompt,org let b:autopairs_enabled=0
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " For exploring tree-sitter
 Plug 'nvim-treesitter/playground'
