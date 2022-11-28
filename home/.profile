@@ -110,9 +110,12 @@ alias rg='rg --smart-case'
 # Load FZF Git helper funcions and keybindings
 [ -f ~/.local/scripts/fzf-helpers.sh ] && source ~/.local/scripts/fzf-helpers.sh
 
+# Use TwoDark theme for bat (replacement for cat) to match Neovim's color
+# scheme.
 export BAT_THEME=TwoDark
 
-. $HOME/.asdf/asdf.sh
+# Source asdf cross-language version manager (something like nvm and rvm).
+[ -f ~/.asdf/asdf.sh ] && source ~/.asdf/asdf.sh
 
 
 #################################
