@@ -50,6 +50,10 @@ $ '
   && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Load utility script for handling huge number of tmux panes
+[ -f ~/.local/scripts/tmux-go-to-pane-install-widget.zsh ] \
+  && source ~/.local/scripts/tmux-go-to-pane-install-widget.zsh
+
 # configure fzf fuzzy finder to popup below
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse
 --bind=ctrl-n:down,ctrl-p:up
