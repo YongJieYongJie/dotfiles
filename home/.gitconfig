@@ -54,3 +54,5 @@
     diffFilter = delta --color-only
 [merge]
     conflictstyle = diff3
+[rerere]
+    enabled = true
