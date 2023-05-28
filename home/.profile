@@ -131,7 +131,7 @@ export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH" # add the binaries installed by Go to PATH
 
 ## Rust
-source "$HOME/.cargo/env"
+[[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 ## Java
