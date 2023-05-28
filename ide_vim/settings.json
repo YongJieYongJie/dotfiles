@@ -15,15 +15,24 @@
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         { "before": ["K"],             "commands": ["editor.action.showHover"] },
+
         { "before": ["?", "?"],        "commands": ["workbench.action.findInFiles"] },
         { "before": ["/", "/"],        "commands": ["actions.find"] },
+
         { "before": ["<leader>", "w"], "commands": ["editor.action.toggleWordWrap"] },
         { "before": ["<leader>", "o"], "commands": ["workbench.action.gotoSymbol"] },
         { "before": ["<leader>", "b"], "commands": ["workbench.action.showAllEditorsByMostRecentlyUsed"] },
         { "before": ["<leader>", "e"], "commands": ["workbench.view.explorer"] },
         { "before": ["<leader>", "g"], "commands": ["workbench.action.quickOpen"] },
-        { "before": ["]", "g"],        "commands": ["editor.action.marker.next"] },
-        { "before": ["[", "g"],        "commands": ["editor.action.marker.prev"] },
+
+        { "before": ["<leader>", "<leader>"], "commands": ["workbench.files.action.openPreviousWorkingFile"] },
+        { "before": ["<leader>", "m"],        "commands": ["highlightwords.addHighlight"] },
+
+        { "before": ["]", "h"],        "commands": ["workbench.action.editor.nextChange"] },
+        { "before": ["[", "h"],        "commands": ["workbench.action.editor.previousChange"] },
+        { "before": ["]", "d"],        "commands": ["editor.action.marker.next"] },
+        { "before": ["[", "d"],        "commands": ["editor.action.marker.prev"] },
+
         { "before": ["g", "i"],        "commands": ["editor.action.peekImplementation"] },
         { "before": ["g", "y"],        "commands": ["editor.action.peekTypeDefinition"] },
         { "before": ["g", "r"],        "commands": ["editor.action.referenceSearch.trigger"] }
@@ -134,6 +143,11 @@
     "workbench.editorAssociations": [
         { "viewType": "jupyter.notebook.ipynb", "filenamePattern": "*.ipynb" }
     ],
+
+    "highlightwords.box": {
+        "light": false,
+        "dark": false,
+    },
 
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false
