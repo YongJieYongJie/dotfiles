@@ -126,11 +126,9 @@ export BAT_THEME=TwoDark
 # override section to override as necessary.
 
 ## Go
-export GOROOT="/usr/local/go"
-export PATH="$GOROOT/bin:$PATH"
+export PATH="/usr/local/go/bin:$PATH" # add the Go binary itself to PATH
 export GOPATH="$HOME/go"
-export GOBIN="$GOPATH/bin"
-export PATH="$GOBIN:$PATH"
+export PATH="$GOPATH/bin:$PATH" # add the binaries installed by Go to PATH
 
 ## Rust
 source "$HOME/.cargo/env"
