@@ -23,7 +23,7 @@ map <leader>g <Action>(GotoFile)
 map <leader>b <Action>(RecentFiles)
 map <leader>n <Action>(EditorToggleShowLineNumbers)
 map <leader>o <Action>(FileStructurePopup)
-map <leader>O <Action>(GotoSymbol)
+map <leader>s <Action>(GotoSymbol)
 map <leader>rn <Action>(RenameElement)
 map <leader>c <Action>(GotoAction)
 map <leader>a <Action>(GotoAction)
@@ -32,11 +32,14 @@ map <leader>rr <Action>(Refactorings.QuickListPopupAction)
 map <leader>fd <Action>(ReformatCode)
 map ]d <Action>(GotoNextError)
 map [d <Action>(GotoPreviousError)
+map ]h <Action>(VcsShowNextChangeMarker)
+map [h <Action>(VcsShowPrevChangeMarker)
 map <C-y> <CR>
 map ?? <Action>(FindInPath)
 map <leader>* viw<Action>(FindInPath)
 map <leader>m <Action>(MultiHighlight)
 map <leader>M <Action>(MultiHighlight.ClearAction)
+map <leader>[ <Action>(Vcs.Show.Shelf)
 
 " From https://wizone.solutions/2020/07/16/workaround-for-zr-expand-all-folds-not-working-in-ideavim-0-58-in-phpstorm-intellij-idea-etc/
 map zR :action ExpandAllRegions<CR>:action ExpandAllRegions<CR>
