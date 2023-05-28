@@ -125,5 +125,19 @@ WORDCHARS=${WORDCHARS//[?.&]}
 # https://stackoverflow.com/a/24237590/5821101.
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
+# Restore ability to use meta-b to move backwards by a single word (and similar
+# functions) in IntelliJ and Neovim terminal. Adapted from
+# https://youtrack.jetbrains.com/issue/IDEA-165184/Add-Use-Option-as-Meta-key-support-to-terminal#focus=Comment-27-4882607.0-0
+if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]] || [[ -n "$$NVIM" ]]; then
+    bindkey "ƒ" forward-word
+    bindkey "∫" backward-word
+    bindkey "∂" kill-word
+    bindkey "¬" downcase-word
+    bindkey "ç" capitalize-word
+    bindkey "†" transpose-words
+    bindkey "≥" insert-last-word
+    # bindkey "¨ " upcase-word
+fi
+
 [ -f ~/.profile ] && [ -z $PROFILE_LOADED ] && source ~/.profile
 
