@@ -1508,6 +1508,16 @@ When repeatedly called we cycle through three states:
 
 
 ;;;-----------------------------------------------------------------------------
+;;; Programming Mode: Kotlin
+;;;-----------------------------------------------------------------------------
+
+;; Note: This is manually install by git cloning the repo to the local below
+(add-to-list 'load-path "/home/yongjie/git-repos/YongJieYongJie/emacs-kotlin-ts-mode")
+(require 'kotlin-ts-mode)
+(add-to-list 'auto-mode-alist '("\\.kt\\'" . kotlin-ts-mode))
+
+
+;;;-----------------------------------------------------------------------------
 ;;; Tools: Docker
 ;;;-----------------------------------------------------------------------------
 
