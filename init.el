@@ -1562,8 +1562,8 @@ When repeatedly called we cycle through three states:
 		              (font-spec :family chinese :size chinese-size))))
 (ecase system-type
        (gnu/linux
-        (set-face-bold-p 'bold nil)
-        (set-face-underline-p 'bold nil)
+        (set-face-bold 'bold nil)
+        (set-face-underline 'bold nil)
         (set-font "Iosevka" "Noto Sans CJK KR"  22 22)))
 
 ;; Move the irritating custom-set-* to a seperate file outside of source
