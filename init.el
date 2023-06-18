@@ -1402,6 +1402,25 @@ When repeatedly called we cycle through three states:
 
 
 ;;;-----------------------------------------------------------------------------
+;;; Programming Mode: Tree-sitter
+;;;-----------------------------------------------------------------------------
+
+(require 'treesit)
+
+;; Note: The parsers below must be manually built by cloning the repo and
+;; running the build script.
+(add-to-list 'treesit-extra-load-path "/home/yongjie/git-repos/casouri/tree-sitter-module/dist")
+
+(defun yj/find-function-references ()
+  "Find references of current function from any point within the function body."
+  (interactive)
+  (let* ((major-mode (buffer-local-value 'major-mode (current-buffer)))
+         (lang (string-remove-suffix "-mode" (symbol-name major-mode))))
+    (treesit-parser-create (intern lang))
+    (treesit-search-forward-goto (treesit-node-at (point)) "function" t t)
+    lsp-find-references))
+
+;;;-----------------------------------------------------------------------------
 ;;; Programming Mode: TypeScript
 ;;;-----------------------------------------------------------------------------
 
