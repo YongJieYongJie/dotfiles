@@ -459,13 +459,22 @@ This means that buffers like magit will be excluded."
 
 (defun yj/highlight (prefix)
   (interactive "P")
-  (let* ((highlighted-regexps (mapcar 'car hi-lock-interactive-patterns))
-         (symbol-highlighted (seq-find
-                              (lambda (pat) (string-match (symbol-name (symbol-at-point)) pat))
-                              highlighted-regexps)))
+  (let* ((highlighted-regexps (if (boundp 'hi-lock-interactive-lighters)
+                                  (mapcar 'car hi-lock-interactive-lighters)
+                                nil))
+         (selected-text (if (use-region-p)
+                            (buffer-substring (region-beginning) (region-end))))
+         (to-highlight-or-unhighlight
+          (or selected-text (symbol-name (symbol-at-point))))
+         (already-highlighted (seq-find
+                               (lambda (pat) (string-match to-highlight-or-unhighlight pat))
+                               highlighted-regexps)))
     (cond
      (prefix (unhighlight-regexp t)) ;; unhighlight all if prefix argument passed in
-     (symbol-highlighted (unhighlight-regexp symbol-highlighted)) ;; if symbol at point is already highlighted, remove it
+     (already-highlighted (unhighlight-regexp already-highlighted)) ;; if symbol at point is already highlighted, remove it
+     ((use-region-p)
+      (let ((selected-text (buffer-substring (region-beginning) (region-end))))
+        (hi-lock-face-buffer selected-text)))
      (t (hi-lock-face-symbol-at-point))))) ;; else, highlight the symbol
 
 (defun yj/counsel-rg (prefix)
