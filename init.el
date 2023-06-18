@@ -111,12 +111,18 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 ;;    files)
 (defun yj/find-file-at-point ()
   (interactive)
-  (let* ((filename-at-point (or (thing-at-point 'filename) ""))
+  (let* ((filename-at-point
+          (string-remove-prefix "file://" (or (thing-at-point 'filename) "")))
+         (is-absolute (string-match "^/" filename-at-point))
+         (without-line-col-suffix
+          (substring filename-at-point 0 (string-match ":" filename-at-point)))
          (line-no (if (string-match "\\w:\\([0-9]+\\)" filename-at-point)
                       (match-string 1 filename-at-point)))
          (col-no (if (string-match "\\w:[0-9]+:\\([0-9]+\\)" filename-at-point)
-                      (match-string 1 filename-at-point))))
-    (projectile-find-file-dwim)
+                     (match-string 1 filename-at-point))))
+    (if is-absolute
+        (find-file without-line-col-suffix)
+      (projectile-find-file-dwim))
     (if line-no
         (forward-line (- (string-to-number line-no) (line-number-at-pos))))
     (if col-no
