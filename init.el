@@ -1392,7 +1392,7 @@ When repeatedly called we cycle through three states:
   :commands lsp-treemacs-errors-list
   :init
   (setq treemacs-no-delete-other-windows nil)
-  (setq treemacs-fringe-indicator-mode 'only-when-focused)
+  (setq-default treemacs-fringe-indicator-mode 'only-when-focused)
   :config
   (treemacs-resize-icons 16))
 
