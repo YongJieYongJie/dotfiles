@@ -217,7 +217,8 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 ;; without printing a message to the minibuffer, based on stackechange answer:
 ;; https://emacs.stackexchange.com/a/45700/23895
 (run-at-time nil (* 5 60) (lambda ()
-                            (let ((save-silently t))
+                            (let ((save-silently t)
+                                  (inhibit-message t))
                               (recentf-save-list))))
 
 ;; don't print message when auto-saving
