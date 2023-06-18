@@ -57,10 +57,12 @@
    // Misc //
   //////////
 
+  // Only show diagnostic pop-up when explicily jumping to them.
+  "diagnostic.enableMesasge": "jump",
   // Use virtual text to display errors by default.
   "diagnostic.virtualText": true,
-  "diagnostic.virtualTextCurrentLineOnly": false,
-  "diagnostic.virtualTextPrefix": "❖ ",
+  "diagnostic.virtualTextCurrentLineOnly": true,
+  "diagnostic.virtualTextPrefix": " ❖ ",
 
   // Enable auto-update of detecting current function, so
   // get(b:,'coc_current_function','') correctly returns the current function
