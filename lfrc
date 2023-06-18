@@ -14,3 +14,6 @@ set ratios 2:3
 # Use pistol as previewer.
 set previewer ~/go/bin/pistol
 
+# Use bat to open file
+map I !batcat "$f"
+
