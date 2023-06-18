@@ -1372,7 +1372,8 @@ When repeatedly called we cycle through three states:
   :commands lsp-ui-mode
   :config
   (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-doc-enable nil))
+  (setq lsp-ui-doc-enable nil)
+  (setq lsp-lens-enable nil))
 ;; if you are helm user
 ;;(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 ;; if you are ivy user
