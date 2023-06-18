@@ -603,7 +603,7 @@ noremap <silent> <Leader>n :call YJ_CycleLineNumber()<CR>
 noremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Start fuzzy search for files, requires vim-fzf plugin.
-nnoremap <silent> <Leader>z :Files!<CR>
+nnoremap <silent> <Leader>F :Files!<CR>
 
 " Start fuzzy search for files not excluded by .gitignore, requires vim-fzf plugin.
 nnoremap <silent> <Leader>g :GFiles!<CR>
