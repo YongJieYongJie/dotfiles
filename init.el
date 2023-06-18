@@ -1494,7 +1494,7 @@ When repeatedly called we cycle through three states:
 ;; Copied from https://github.com/MaskRay/ccls/wiki/lsp-mode#use-package
 (use-package ccls
   :ensure t
-  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+  :hook ((c-mode c-ts-mode c++-mode objc-mode cuda-mode) .
          (lambda () (require 'ccls) (lsp))))
 
 
