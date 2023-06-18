@@ -26,7 +26,11 @@ fi
 ######################################
 
 # Customize default behavior of less command.
-LESS='--ignore-case --LONG-PROMPT --RAW-CONTROL-CHARS --chop-long-lines'
+
+LESS='--ignore-case --incsearch --mouse --use-color --hilite-unread'
+LESS="$LESS --no-histdup --LONG-PROMPT --RAW-CONTROL-CHARS --chop-long-lines"
+# LESS="$LESS --wordwrap" # Enable this if version of less is sufficiently new
+export LESS
 
 # Asks before deleting/overwriting files / directories.
 alias rm='rm -i -v'
