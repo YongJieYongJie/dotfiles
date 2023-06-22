@@ -399,7 +399,7 @@ This means that buffers like magit will be excluded."
       (switch-to-buffer (yj/other-org-buffer))
     (switch-to-buffer (yj/other-editing-buffer))))
 
-;; We need to unboudn "C-[" from ESC first, before we can bind it to anything
+;; We need to unbound "C-[" from ESC first, before we can bind it to anything
 ;; else. From https://emacs.stackexchange.com/a/10273/23895
 (define-key input-decode-map [?\C-\[] (kbd "<C-[>"))
 (global-set-key (kbd "<C-[>") 'magit)
