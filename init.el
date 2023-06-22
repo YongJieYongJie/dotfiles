@@ -484,13 +484,22 @@ This means that buffers like magit will be excluded."
         (counsel-rg symbol-name-at-point (counsel--git-root) nil nil)
       (counsel-rg))))
 
+(defun yj/imenu (prefix)
+  (interactive "p")
+  (cond ((= prefix 1) ;; single prefix
+         (counsel-imenu))
+        ((= prefix 16) ;; double prefix
+         (lsp-ui-imenu))
+        (t
+         (imenu (imenu-choose-buffer-index)))))
+
 (global-set-key (kbd "C-0") 'yj/delete-window-or-kill-buffer)
 (global-set-key (kbd "C-1") 'yj/delete-other-windows-dwim)
 (global-set-key (kbd "C-2") 'yj/counsel-rg)
 (global-set-key (kbd "C-3") 'yj/switch-to-previous-editing-buffer)
 (global-set-key (kbd "C-5") 'yj/highlight)
 (global-set-key (kbd "C-7") 'swiper)
-(global-set-key (kbd "C-8") 'imenu)
+(global-set-key (kbd "C-8") 'yj/imenu)
 ;; (global-set-key (kbd "C-9") 'projectile-find-file-dwim)
 (global-set-key (kbd "C-9") 'yj/find-file-at-point)
 (global-set-key (kbd "C-x C-j") 'dired-jump)
