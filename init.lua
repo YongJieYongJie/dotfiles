@@ -200,6 +200,7 @@ local calc_size_and_spacing = function(cur_size, max_size, bs, w_num, b_num, s_n
   return cur_size, spacing
 end
 
+-- YJ: Currently this layout strategy is only properly configured for prompt_position == bottom
 layout_strategies.yj_vertical_no_gap = make_documented_layout(
   "yj_vertical_no_gap",
   vim.tbl_extend("error", shared_options, {
@@ -237,8 +238,9 @@ layout_strategies.yj_vertical_no_gap = make_documented_layout(
       -- Cap over/undersized height (with previewer)
       height, h_space = calc_size_and_spacing(height, max_lines, bs, 3, 6, 1)
 
+      -- YJ: Add 1 to preview.height because we are allocating one of the lines we saved to it
       preview.height =
-        resolve.resolve_height(vim.F.if_nil(layout_config.preview_height, 0.5))(self, max_columns, height)
+        resolve.resolve_height(vim.F.if_nil(layout_config.preview_height, 0.5))(self, max_columns, height) + 1
     else
       -- Cap over/undersized height (without previewer)
       height, h_space = calc_size_and_spacing(height, max_lines, bs, 2, 4, 1)
@@ -246,7 +248,8 @@ layout_strategies.yj_vertical_no_gap = make_documented_layout(
       preview.height = 0
     end
     prompt.height = 1
-    results.height = height - preview.height - prompt.height - h_space
+    -- YJ: Add 1 to results.height to fix alignment?
+    results.height = height - preview.height - prompt.height - h_space + 1
 
     local width_padding = math.floor((max_columns - width) / 2) + bs + 1
     results.col, preview.col, prompt.col = width_padding, width_padding, width_padding
@@ -258,7 +261,8 @@ layout_strategies.yj_vertical_no_gap = make_documented_layout(
         prompt.line = (preview.height == 0) and preview.line or preview.line + preview.height + (1 + bs)
         results.line = prompt.line + prompt.height + (1 + bs)
       elseif layout_config.prompt_position == "bottom" then
-        results.line = (preview.height == 0) and (preview.line + 1) or preview.line + preview.height + (1 + bs)
+        -- YJ: Subtract 1 from results.line (both the `and` and `or` branch) to move it up one line
+        results.line = (preview.height == 0) and (preview.line + 1 - 1) or preview.line + preview.height + (1 + bs) - 1
         prompt.line = results.line + results.height + (1 + bs)
       else
         error(string.format("Unknown prompt_position: %s\n%s", self.window.prompt_position, vim.inspect(layout_config)))
