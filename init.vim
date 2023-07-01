@@ -282,9 +282,9 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'inkarkat/vim-mark'
 Plug 'inkarkat/vim-ingo-library' " dependency of vim-mark
 let g:mw_no_mappings=1
-nnoremap <leader>m :Mark =expand('<cword>')<cr><cr>
-nnoremap <leader>M :MarkClear<cr>
-xnoremap <leader>m y:Mark /"/<cr>
+nnoremap <silent> <leader>m :silent Mark =expand('<cword>')<cr><cr>
+nnoremap <silent> <leader>M :silent MarkClear<cr>
+xnoremap <silent> <leader>m y:silent Mark /"/<cr>
 
 Plug 'nvim-orgmode/orgmode'
 
