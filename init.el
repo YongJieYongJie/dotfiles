@@ -1096,7 +1096,9 @@ When repeatedly called we cycle through three states:
     ;; https://github.com/Alexander-Miller/treemacs#installation
     :ensure t
     :config
-    (setq-default treemacs-fringe-indicator-mode 'only-when-focused)))
+    (setq-default treemacs-fringe-indicator-mode 'only-when-focused))
+  (use-package counsel-projectile
+    :ensure t))
 
 (def-projectile-commander-method ?2
   "Call counsel-rg in project."
