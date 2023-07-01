@@ -135,6 +135,8 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
 (add-to-list 'default-frame-alist
              '(vertical-scroll-bars . nil))
 
+(pixel-scroll-precision-mode t)
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Package Management
