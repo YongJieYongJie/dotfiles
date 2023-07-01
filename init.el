@@ -508,6 +508,8 @@ This means that buffers like magit will be excluded."
           (lambda () (define-key ibuffer-mode-map (kbd "M-o") nil)))
 (global-set-key (kbd "M-O") 'yj/other-window-reversed)
 
+(global-set-key (kbd "C-M-`") 'tab-next)
+
 ;; Bound to "C-z" because tmux uses prefix-z for similar functionality.
 (global-set-key (kbd "C-z") 'yj/toggle-maximize-buffer)
 
