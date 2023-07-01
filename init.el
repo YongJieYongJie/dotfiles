@@ -1281,6 +1281,11 @@ When repeatedly called we cycle through three states:
 ;; from https://emacs.stackexchange.com/a/52691/23895.
 (setq org-agenda-clockreport-parameter-plist '(:stepskip0 t :link t :maxlevel 4 :fileskip0 t))
 
+;; org-download allows pasting of images from clipboard into org files using
+;; org-download-yank.
+(use-package org-download
+  :ensure t)
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Text Mode: markdown-mode
