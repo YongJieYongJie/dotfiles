@@ -1353,6 +1353,7 @@ When repeatedly called we cycle through three states:
          (go-mode . lsp)
          (java-mode . lsp)
          (kotlin-ts-mode . lsp)
+         (typescript-ts-mode . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
@@ -1439,14 +1440,16 @@ When repeatedly called we cycle through three states:
 ;;; Programming Mode: TypeScript
 ;;;-----------------------------------------------------------------------------
 
-(use-package typescript-mode
-  :ensure t
+;; (require 'typescript-ts-mode)
+
+(use-package typescript-ts-mode
   :mode "\\.ts\\'"
   :config
-  (add-hook 'typescript-mode-hook #'yj/typescript-mode-hook))
-(defun yj/typescript-mode-hook ()
-  "Custom configurations for typescript-mode."
-  (setq typescript-indent-level 2)
+  (add-hook 'typescript-ts-mode-hook #'yj/typescript-ts-mode-hook))
+
+(defun yj/typescript-ts-mode-hook ()
+  "Custom configurations for typescript-ts-mode."
+  (hs-minor-mode)
   (setq tab-width 2)
   (setq tab-stop-list (number-sequence 2 120 2)))
 
