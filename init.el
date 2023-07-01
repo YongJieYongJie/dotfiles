@@ -1131,6 +1131,9 @@ When repeatedly called we cycle through three states:
   (setq-local show-trailing-whitespace t))
 (add-hook 'text-mode-hook #'yj/show-whitespace-local)
 
+;; When in artist-mode-hook, don't show trailing whitespace.
+(add-hook 'artist-mode-hook (setq-local show-trailing-whitespace nil))
+
 (defun toggle-company-ispell ()
   (interactive)
   (cond
