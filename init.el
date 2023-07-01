@@ -1352,6 +1352,7 @@ When repeatedly called we cycle through three states:
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          (go-mode . lsp)
          (java-mode . lsp)
+         (kotlin-ts-mode . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp
@@ -1448,6 +1449,38 @@ When repeatedly called we cycle through three states:
   (setq typescript-indent-level 2)
   (setq tab-width 2)
   (setq tab-stop-list (number-sequence 2 120 2)))
+
+
+;;;-----------------------------------------------------------------------------
+;;; Programming Mode: Kotlin
+;;;-----------------------------------------------------------------------------
+
+(use-package kotlin-ts-mode
+  :ensure t
+  :mode "\\.kt\\'")
+
+;; (use-package flycheck-kotlin)
+
+(add-hook 'kotlin-ts-mode-hook #'hs-minor-mode)
+
+(defun yj/kotlin-mode-hook ()
+  "Custom configurations for kotlin-mode."
+  (add-to-list 'company-dabbrev-code-modes 'kotlin-ts-mode)
+  (setq-local company-dabbrev-downcase nil)
+  (setq-local lsp-enable-imenu nil) ;; Use kotlin-ts-mode's imenu
+  (set-fill-column 120)
+
+  ;; From official instructions at
+  ;; https://github.com/whirm/flycheck-kotlin/tree/a2a6abb9a7f85c6fb15ce327459ec3c8ff780188#installation
+  ;;
+  ;; Note also that this Emacs package is recommended by ktlint itself
+  ;; https://pinterest.github.io/ktlint/install/integrations/#gnu-emacs-integration
+  ;; (eval-after-load 'flycheck
+  ;;   '(progn
+  ;;      (require 'flycheck-kotlin)
+  ;;      (flycheck-kotlin-setup)))
+  )
+(add-hook 'kotlin-ts-mode-hook 'yj/kotlin-mode-hook)
 
 
 ;;;-----------------------------------------------------------------------------
