@@ -635,7 +635,8 @@ When repeatedly called we cycle through three states:
   (local-set-key (kbd "C-<tab>") 'yj/next-or-new-eshell)
   (local-set-key (kbd "M-N") 'yj/next-go-source-file-name)
   (local-set-key (kbd "M-P") 'yj/prev-go-source-file-name)
-  (local-set-key (kbd "M-R") 'eshell-insert-history))
+  (local-set-key (kbd "M-R") 'eshell-insert-history)
+  (local-set-key (kbd "C-c o") 'org-open-at-point))
 
 (defun eshell-insert-history ()
   "Displays the eshell history to select and insert back into your eshell."
