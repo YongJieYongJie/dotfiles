@@ -639,6 +639,7 @@ nnoremap <silent> <Leader>F :Files!<CR>
 
 " Start fuzzy search for files not excluded by .gitignore, requires vim-fzf plugin.
 nnoremap <silent> <Leader>g :GFiles!<CR>
+nnoremap <silent> <Leader>G :GFiles!<CR> <c-r><c-w><c-f>bi\b<c-[>A\b<c-[><CR>
 
 " Start fuzzy search for recent files.
 nnoremap <silent> <Leader>ff :History!<CR>
