@@ -673,6 +673,9 @@ nnoremap <silent> <Leader>fs :set foldmethod=syntax<CR>
 " Create folds by indent.
 nnoremap <silent> <Leader>fi :set foldmethod=indent<CR>
 
+" Use <c-[> to enter normal mode in terminal
+tnoremap <expr> <c-[> (&filetype == "fzf") ? "<c-[>" : "<c-\><c-n>"
+
 " Open splits to the right (if horizontal) and to below (if vertical).
 set splitright
 set splitbelow
