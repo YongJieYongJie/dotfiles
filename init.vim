@@ -517,8 +517,12 @@ if (empty($TMUX))
   endif
 endif
 
-colorscheme onedark
-" colorscheme darcula
+" colorscheme onedark
+colorscheme darcula
+
+" Color tweak for darcula theme because the hover pop-up for error diagnostic
+" doesn't have enough contrast.
+highlight FgCocErrorFloatBgCocFloating ctermfg=1 ctermbg=238 guifg='LightRed' guibg=#46484a
 
 " Link the CocHighlightText highlight group to the built-in DiffAdd highlight
 " group. CocHighlightText group is used by coc.nvim for, among other things,
@@ -679,9 +683,9 @@ endfunction
 
 " To switch back to darcula, change the colorscheme config back to the
 " following:
-     " \ 'colorscheme': 'darculaOriginal',
+     " \ 'colorscheme': 'onedark',
 let g:lightline = {
-     \ 'colorscheme': 'onedark',
+     \ 'colorscheme': 'darculaOriginal',
      \ 'active': {
        \ 'left': [ [ 'mode', 'paste' ],
                  \ [ 'gitBranch', 'readonly', 'filename', 'modified' ],
