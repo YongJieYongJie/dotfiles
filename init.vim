@@ -745,7 +745,7 @@ endfunction
 autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 
 " Enable syntax highlight and code folding using nvim_treesitter.
-nnoremap <silent> <Leader>t :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
+nnoremap <silent> <Leader>ts :TSEnable highlight<CR>:set foldmethod=expr \| :set foldexpr=nvim_treesitter#foldexpr()<CR>:e<CR>
 
 " Enable history for fzf
 let g:fzf_history_dir = '~/.local/share/fzf-history'
