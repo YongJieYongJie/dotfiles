@@ -297,6 +297,13 @@ Plug 'tpope/vim-repeat'
 Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 nnoremap <Leader>ll :call CocAction("toggleExtension", "lsp_lines")<CR>
 
+" For running tests
+Plug 'vim-test/vim-test'
+" Run tests in a neovim terminal
+let test#strategy = "neovim"
+" Keep terminal around even with pressing keys
+let g:test#neovim#start_normal = 1
+
 call plug#end()
 
 
