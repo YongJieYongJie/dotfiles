@@ -326,6 +326,7 @@ nnoremap <leader>tb <cmd>lua require('telescope.builtin').builtin()<cr>
 " nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap // <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 " nnoremap ?? <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap ?/ <cmd>lua require('telescope.builtin').grep_string()<cr>
 nnoremap <leader>h <cmd>lua require('telescope.builtin').command_history()<cr>
 
 " TODO: Move the lsp keymappings below to init.lua, and only set them
