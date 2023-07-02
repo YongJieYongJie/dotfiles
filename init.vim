@@ -940,7 +940,11 @@ function! s:delete_buffers(lines)
     endfor
   endfor
   for bufIndex in bufIndices
-    execute bufIndex . 'bd'
+    try
+      execute 'try | ' . bufIndex . 'bd' . '| catch | | endtry'
+    catch
+      " do nothing
+    endtry
   endfor
 endfunction
 
