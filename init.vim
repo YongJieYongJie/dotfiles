@@ -644,6 +644,9 @@ nnoremap <silent> <Leader>G :GFiles!<CR> <c-r><c-w><c-f>bi\b<c-[>A\b<c-[><CR>
 " Start fuzzy search for recent files.
 nnoremap <silent> <Leader>ff :History!<CR>
 
+" Start fuzzy search for all commands
+nnoremap <silent> <Leader>cc :Commands!<CR>
+
 " Start fuzzy search for buffers.
 " nnoremap <silent> <Leader>b :Buffers!<CR>
 
