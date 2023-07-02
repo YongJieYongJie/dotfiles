@@ -292,7 +292,7 @@ xnoremap <silent> <leader>m y:silent Mark /"/<cr>
 Plug 'nvim-orgmode/orgmode'
 
 Plug 'tpope/vim-repeat'
-Plug 'chrisbra/NrrwRgn'
+" Plug 'chrisbra/NrrwRgn'
 
 call plug#end()
 
