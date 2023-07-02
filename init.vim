@@ -297,6 +297,13 @@ Plug 'tpope/vim-repeat'
 Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 nnoremap <Leader>ll :call CocAction("toggleExtension", "lsp_lines")<CR>
 
+" For general linting
+Plug 'dense-analysis/ale'
+let g:ale_linters = {'kotlin': ['ktlint']}
+let g:ale_fixers = {'kotlin': ['ktlint']}
+let g:ale_use_neovim_diagnostics_api = 0
+let g:ale_virtualtext_cursor = 0
+
 " For running tests
 Plug 'vim-test/vim-test'
 " Run tests in a neovim terminal
