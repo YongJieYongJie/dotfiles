@@ -203,6 +203,9 @@ Plug 'chengzeyi/fzf-preview.vim'
 " source file remains.
 Plug 'tpope/vim-fugitive'
 nnoremap <silent> <Leader>[ :tabnew<CR>:Git<CR><C-w><C-o>
+nnoremap <silent> <Leader>{ :Git<CR>
+autocmd FileType gitcommit,git set foldmethod=syntax
+
 " An extension to vim-fugitive for better viewing of branches (something like
 " git log --pretty=one-line --graph).
 Plug 'rbong/vim-flog'
