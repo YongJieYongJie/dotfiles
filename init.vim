@@ -1024,6 +1024,23 @@ command! -bar -bang -nargs=? -complete=buffer MyBuffers
       \       "options": "--multi".s:myBuffersExpect}), <bang>0)
   
 nnoremap <silent> <Leader>b :MyBuffers!<CR>
+
+" Show syntax highlighting groups for word under cursor
+" From: https://stackoverflow.com/a/9464929
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+" From: https://stackoverflow.com/a/37040415
+function! SynGroup()
+  let l:s = synID(line('.'), col('.'), 1)
+  echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+
+
 " -------------------------------------------------------- experimental --- }}}
 
 lua require('init')
