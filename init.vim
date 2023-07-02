@@ -573,6 +573,10 @@ set cursorline
 " Allow buffer containing modified file to be hidden.
 set hidden
 
+" Make sure key combinations like <M-CR> works in Neovide. From
+" https://github.com/neovide/neovide/discussions/1270#discussioncomment-5850851
+let g:neovide_input_macos_alt_is_meta = v:true
+
 
 " -----------------------------------------------------------------------------
 " Keymappings
