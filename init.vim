@@ -311,6 +311,13 @@ let test#strategy = "neovim"
 " Keep terminal around even with pressing keys
 let g:test#neovim#start_normal = 1
 
+" For lf integration
+Plug 'ptzz/lf.vim'
+Plug 'voldikss/vim-floaterm'
+let g:lf_width=1.0
+let g:lf_height=1.0
+let g:lf_map_keys = 0
+
 call plug#end()
 
 
