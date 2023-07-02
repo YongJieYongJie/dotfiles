@@ -294,6 +294,9 @@ Plug 'nvim-orgmode/orgmode'
 Plug 'tpope/vim-repeat'
 " Plug 'chrisbra/NrrwRgn'
 
+Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+nnoremap <Leader>ll :call CocAction("toggleExtension", "lsp_lines")<CR>
+
 call plug#end()
 
 
