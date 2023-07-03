@@ -212,9 +212,9 @@ layout_strategies.yj_vertical_no_gap = make_documented_layout(
     local results = initial_options.results
     local prompt = initial_options.prompt
 
-    local tbln
-    max_lines, tbln = calc_tabline(max_lines)
-    max_lines = max_lines + 1
+    if vim.opt.laststatus:get() == 2 then
+      max_lines = max_lines + 1
+    end
 
     local width_opt = layout_config.width
     local width = resolve.resolve_width(width_opt)(self, max_columns, max_lines)
@@ -280,10 +280,10 @@ layout_strategies.yj_vertical_no_gap = make_documented_layout(
     local anchor_pos = resolve.resolve_anchor_pos(layout_config.anchor or "", width, height, max_columns, max_lines)
     adjust_pos(anchor_pos, prompt, results, preview)
 
-    if tbln then
-      prompt.line = prompt.line + 1
-      results.line = results.line + 1
-      preview.line = preview.line + 1
+    results.line = results.line - 1
+    results.height = results.height + 1
+    if vim.fn.has("gui_running") == 1 or vim.fn.exists("g:neovide") == 1 then
+      prompt.line = prompt.line - 1
     end
 
     return {
