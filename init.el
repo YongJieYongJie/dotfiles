@@ -133,7 +133,8 @@ Info-window is defined in the list `yj/info-window-buffer-name'."
   (tool-bar-mode -1))
 (menu-bar-mode -1)
 (add-to-list 'default-frame-alist
-             '(vertical-scroll-bars . nil))
+             '(vertical-scroll-bars . nil)
+             '(undecorated . t)) ;; Hide title bar
 
 (pixel-scroll-precision-mode t)
 
