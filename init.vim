@@ -914,6 +914,24 @@ endfunction
 nnoremap <silent> <c-=> :call YJ_FontSizeIncrease()<CR>
 nnoremap <silent> <c--> :call YJ_FontSizeDecrease()<CR>
 
+" Separate function for fixing Neovide copying and pasting. This
+" function needs to be manually called when Neovide attaches to a
+" Neovim server because when the server is launched,
+" exist("g:neovide") is false, and the code further below will not be
+" executed.
+function! YJ_NeovideCopyPasteFix()
+  map <D-v> "+p<CR>
+  map! <D-v> <C-R>+
+  tmap <D-v> <C-R>+
+  vmap <D-c> "+y<CR>
+endfunction
+
+" Fixes copying and pasting with command key in macOS + Neovide
+" Copied from https://github.com/neovide/neovide/issues/1263#issuecomment-1292801824
+if exists("g:neovide")
+  call YJ_NeovideCopyPasteFix()
+endif
+
 " -------------------------------------------------------- experimental --- {{{
 
 " FZF plugin extension guide:
