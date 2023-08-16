@@ -1040,6 +1040,8 @@ function! SynGroup()
   echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
 
+" Replaces escaped line breaks and tabs with actual line breaks and tabs
+nnoremap <leader>N :%s/\\n/\r/g:%s/\\t/\t/g
 
 " -------------------------------------------------------- experimental --- }}}
 
