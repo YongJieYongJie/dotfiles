@@ -25,6 +25,8 @@
     "d": "action:delete"
   },
 
+  "list.floatPreview": true,
+
     ///////////////
    // C-related //
   ///////////////
