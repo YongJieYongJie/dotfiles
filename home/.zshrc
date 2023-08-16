@@ -39,6 +39,9 @@ setopt NO_LIST_BEEP
 setopt NO_BEEP
 setopt HIST_IGNORE_SPACE
 
+# Don't highlight pasted text (makes it difficult to see cursor)
+zle_highlight+=(paste:none)
+
 # prompt string
 #setopt PROMPT_SUBST;
 #
