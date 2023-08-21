@@ -183,6 +183,13 @@ function! YJ_LongestLineWidth()
 endfunction
 
 ""
+" Returns the number of characters in the longest visible line in the current buffer.
+function! YJ_LongestVisibleLineWidth()
+  " Adapted from https://superuser.com/a/255438/1021469
+  return max(map(range(line('w0'), line('w$')), "col([v:val, '$'])")) - 1
+endfunction
+
+""
 " Returns the total number of lines in the current buffer.
 function! YJ_NumLines()
   return line('$')
@@ -190,7 +197,7 @@ endfunction
 
 " Centralize the current buffer (horizontally and vertically) and hides all
 " other windows. Useful for making presentations.
-nnoremap <silent> <expr> <Leader>! ':Goyo ' . YJ_LongestLineWidth() . 'x' . YJ_NumLines() . '<CR>'
+nnoremap <silent> <expr> <Leader>! ':Goyo ' . YJ_LongestVisibleLineWidth() . 'x' . YJ_NumLines() . '<CR>'
 
 " Allow opening some of CocList in fzf
 Plug 'antoinemadec/coc-fzf' 
