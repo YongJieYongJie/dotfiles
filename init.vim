@@ -301,8 +301,9 @@ Plug 'nvim-orgmode/orgmode'
 Plug 'tpope/vim-repeat'
 " Plug 'chrisbra/NrrwRgn'
 
-Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
-nnoremap <Leader>ll :call CocAction("toggleExtension", "lsp_lines")<CR>
+" Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+Plug 'YongJieYongJie/lsp_lines.nvim', { 'branch': 'feature--coc-current-line-only' }
+nnoremap <leader>ll :call CocAction('toggleExtension', 'lsp_lines')
 
 " For general linting
 Plug 'dense-analysis/ale'
