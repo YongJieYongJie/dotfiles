@@ -1154,6 +1154,9 @@ function! YJ_FoldTextStartLine()
   return str
 endfunction
 
+let &grepprg = 'rg --vimgrep'
+let &grepformat = '%f:%l:%c:%m,%f:%l:%m'
+
 " -------------------------------------------------------- experimental --- }}}
 
 lua require('init')
