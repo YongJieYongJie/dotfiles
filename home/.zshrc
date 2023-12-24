@@ -148,7 +148,7 @@ if [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]] || [[ -n "$$NVIM" ]]; then
     bindkey "ƒ" forward-word
     bindkey "∫" backward-word
     bindkey "∂" kill-word
-    bindkey "¬" downcase-word
+    # bindkey "¬" downcase-word
     bindkey "ç" capitalize-word
     bindkey "†" transpose-words
     bindkey "≥" insert-last-word
