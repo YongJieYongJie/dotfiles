@@ -58,9 +58,11 @@
   //////////
 
   // Only show diagnostic pop-up when explicily jumping to them.
-  "diagnostic.enableMesasge": "jump",
+  "diagnostic.enableMessage": "jump",
+
   // Use virtual text to display errors by default.
-  "diagnostic.virtualText": true,
+  "diagnostic.virtualText": false,
+  "diagnostic.messageTarget": "echo",
   "diagnostic.virtualTextCurrentLineOnly": true,
   "diagnostic.virtualTextPrefix": " ❖ ",
 
