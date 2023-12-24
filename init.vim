@@ -211,7 +211,7 @@ Plug 'chengzeyi/fzf-preview.vim'
 " shows the output in two vertical splits, and the syntax highlight for the
 " source file remains.
 Plug 'tpope/vim-fugitive'
-nnoremap <silent> <Leader>[ :tabnew<CR>:Git<CR><C-w><C-o>
+" nnoremap <silent> <Leader>[ :tabnew<CR>:Git<CR><C-w><C-o>
 nnoremap <silent> <Leader>{ :Git<CR>
 autocmd FileType gitcommit,git set foldmethod=syntax
 
@@ -265,7 +265,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 
 " For auto-closing of parens and related features
 Plug 'jiangmiao/auto-pairs'
-autocmd FileType TelescopePrompt,org let b:autopairs_enabled=0
+autocmd FileType TelescopePrompt,org,NeogitStatus let b:autopairs_enabled=0
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -344,6 +344,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'sindrets/diffview.nvim'
 Plug 'ibhagwan/fzf-lua'
+Plug 'nvim-tree/nvim-web-devicons'
+nnoremap <silent> <Leader>[ :Neogit<CR><C-w><C-o>
 
 call plug#end()
 
