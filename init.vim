@@ -330,6 +330,10 @@ let g:lf_map_keys = 0
 
 Plug 'chimay/organ'
 
+Plug 'aklt/plantuml-syntax'
+Plug 'weirongxu/plantuml-previewer.vim'
+Plug 'tyru/open-browser.vim'
+
 " Neogit depends on the following:
 "   nvim-lua/plenary.nvim
 "   nvim-telescope/telescope.nvim
