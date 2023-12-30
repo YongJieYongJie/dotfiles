@@ -65,9 +65,11 @@
   "diagnostic.messageTarget": "float",
   "diagnostic.virtualTextCurrentLineOnly": true,
   "diagnostic.virtualTextPrefix": " ❖ ",
-  "explorer.file.reveal.whenOpen": false,
 
+  "explorer.file.reveal.whenOpen": false,
   "explorer.file.showHiddenFiles": true,
+
+  "lsp_lines.currentLineOnly": true,
 
   // Enable auto-update of detecting current function, so
   // get(b:,'coc_current_function','') correctly returns the current function
