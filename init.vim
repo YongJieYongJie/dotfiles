@@ -410,6 +410,10 @@ endif
 " -----------------------------------------------------------------------------
 " Adapted from https://octetz.com/docs/2019/2019-04-24-vim-as-a-go-ide/.
 
+" Fix issue where status line does not update when coc-related information changes
+" https://github.com/neoclide/coc.nvim/issues/2993#issuecomment-1250717402
+autocmd User CocStatusChange redrawstatus
+
 " Highlight the symbol and its references when holding the cursor.
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 " if hidden is not set, TextEdit might fail.
