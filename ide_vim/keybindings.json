@@ -1,10 +1,43 @@
 // Place your key bindings in this file to override the defaults
 [
     {
-        "key": "up",
-        "command": "cursorUp",
-        "when": "editorTextFocus && vim.active && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+        "key": "cmd+shift+0",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.zoomReset",
+                "editor.action.fontZoomReset"
+            ]
+        }
     },
+
+    {
+        "key": "ctrl+b",
+        "command": "editor.action.pageUpHover"
+        // "when": "editorTextFocus && vim.active && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "editor.action.pageDownHover"
+        // "when": "editorTextFocus && vim.active && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+
+    {
+        "key": "cmd+=",
+        "command": "editor.action.fontZoomIn"
+        // "when": "editorTextFocus && vim.active && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
+        "key": "cmd+-",
+        "command": "editor.action.fontZoomOut",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+0",
+        "command": "editor.action.fontZoomReset",
+        "when": "editorTextFocus"
+    },
+
     {
         "key": "down",
         "command": "cursorDown",
@@ -22,7 +55,28 @@
     },
     {
         "key": "shift+h",
-        "command": "workbench.action.toggleZenMode",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.toggleZenMode"
+            ]
+        },
+        "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Normal' && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
+        "key": "shift+h",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                "workbench.action.toggleZenMode",
+                "workbench.action.toggleCenteredLayout"
+            ]
+        },
+        "when": "!inZenMode && editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Normal' && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+g",
+        "command": "workbench.files.action.showActiveFileInExplorer",
         "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Normal' && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
     },
     //#region terminal-related
