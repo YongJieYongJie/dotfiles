@@ -62,7 +62,7 @@
 
   // Use virtual text to display errors by default.
   "diagnostic.virtualText": false,
-  "diagnostic.messageTarget": "echo",
+  "diagnostic.messageTarget": "float",
   "diagnostic.virtualTextCurrentLineOnly": true,
   "diagnostic.virtualTextPrefix": " ❖ ",
   "explorer.file.reveal.whenOpen": false,
