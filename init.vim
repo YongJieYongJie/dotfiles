@@ -326,6 +326,19 @@ let g:lf_width=1.0
 let g:lf_height=1.0
 let g:lf_map_keys = 0
 
+Plug 'chimay/organ'
+
+" Neogit depends on the following:
+"   nvim-lua/plenary.nvim
+"   nvim-telescope/telescope.nvim
+"   sindrets/diffview.nvim
+"   ibhagwan/fzf-lua
+Plug 'NeogitOrg/neogit'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'sindrets/diffview.nvim'
+Plug 'ibhagwan/fzf-lua'
+
 call plug#end()
 
 

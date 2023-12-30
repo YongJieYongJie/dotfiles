@@ -690,5 +690,7 @@ require'nvim-treesitter.configs'.setup {
 }
 
 ------------------------------------------------------------ nvim-treesitter ---}}}
+local neogit = require('neogit')
+neogit.setup {}
 -- vim:fdm=marker
 
