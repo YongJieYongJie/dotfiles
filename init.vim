@@ -1159,6 +1159,14 @@ endfunction
 let &grepprg = 'rg --vimgrep'
 let &grepformat = '%f:%l:%c:%m,%f:%l:%m'
 
+" Remember folds
+" Copied from https://stackoverflow.com/a/54739345/5821101
+" augroup remember_folds
+"   autocmd!
+"   autocmd BufWinLeave * mkview
+"   autocmd BufWinEnter * silent! loadview
+" augroup END
+
 " -------------------------------------------------------- experimental --- }}}
 
 lua require('init')
