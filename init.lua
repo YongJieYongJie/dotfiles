@@ -287,6 +287,14 @@ layout_strategies.yj_vertical_no_gap = make_documented_layout(
       prompt.line = prompt.line - 1
     end
 
+    -- YJ: Fix bug (seems to only appear on Linux Mint, and in certain screen
+    -- sizez) where bottom-most results line is behind the prompt and hence
+    -- can't be seen.
+    if not self.previewer then
+      results.line = results.line - 1
+      results.height = results.height - 1
+    end
+
     return {
       preview = self.previewer and preview.height > 0 and preview,
       results = results,
