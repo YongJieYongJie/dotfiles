@@ -67,6 +67,8 @@
   "diagnostic.virtualTextPrefix": " ❖ ",
   "explorer.file.reveal.whenOpen": false,
 
+  "explorer.file.showHiddenFiles": true,
+
   // Enable auto-update of detecting current function, so
   // get(b:,'coc_current_function','') correctly returns the current function
   // for use in status line.
