@@ -1,17 +1,17 @@
--------------------------------------------------------------------- orgmode ---{{{
+--- orgmode
 
 -- Load custom tree-sitter grammar for org filetype
 require('orgmode').setup_ts_grammar()
 
 -- Tree-sitter configuration
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup({
   -- If TS highlights are not enabled at all, or disabled via `disable` prop, highlighting will fallback to default Vim syntax highlighting
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = {'org'}, -- Required for spellcheck, some LaTex highlights and code block highlights that do not have ts grammar
   },
   ensure_installed = {'org'}, -- Or run :TSUpdate org
-}
+})
 
 require('orgmode').setup({
   org_agenda_files = {'~/coding-playground/java/aeron/README.org'},
@@ -26,10 +26,9 @@ require('orgmode').setup({
   }
 })
 
--------------------------------------------------------------------- orgmode ---}}}
-------------------------------------------------------------- telescope.nvim ---{{{
+--- telescope.nvim 
 
---------------------------- Adapted from telescope.pickers.layout_strategies --{{{{
+---- telescope.nvim: layout_strategies
 
 -- This code section belows defines a custom Telescope layout with the
 -- following properties:
@@ -302,7 +301,8 @@ layout_strategies.yj_vertical_no_gap = make_documented_layout(
     }
   end
 )
---------------------------- Adapted from telescope.pickers.layout_strategies --}}}}}
+
+---- telescope.nvim: general configurations
 
 local layout_actions = require "telescope.actions.layout"
 require('telescope').setup({
@@ -367,8 +367,7 @@ require('telescope').setup({
 
 require('telescope').load_extension('fzf')
 
-------------------------------------------------------------- telescope.nvim ---}}}
-------------------------------------------------------------------- nvim-cmp ---{{{
+--- nvim-cmp
 
 -- -- From https://github.com/hrsh7th/nvim-cmp/tree/1001683bee3a52a7b7e07ba9d391472961739c7b#recommended-configuration
 -- -- and https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion#nvim-cmp
@@ -459,8 +458,7 @@ require('telescope').load_extension('fzf')
 -- -- capabilities offered by nvim-cmp.
 -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-------------------------------------------------------------------- nvim-cmp ---}}}
--- ------------------------------------------------------------- nvim-lspconfig ---{{{
+--- nvim-lspconfig
 
 -- -- From https://github.com/neovim/nvim-lspconfig/tree/cdc2ec53e028d32f06c51ef8b2837ebb8460ef45#suggested-configuration
 -- -- Mappings.
@@ -495,7 +493,7 @@ require('telescope').load_extension('fzf')
 --   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 -- end
 
--- ------------------------------------------------------------------------- go ---{{{
+---- nvim-lspconfig: go
 -- -- From https://github.com/neovim/nvim-lspconfig/blob/cdc2ec53e028d32f06c51ef8b2837ebb8460ef45/doc/server_configurations.md#gopls
 -- require('lspconfig').gopls.setup({
 --   capabilities = capabilities,
@@ -506,9 +504,9 @@ require('telescope').load_extension('fzf')
 --     debounce_text_changes = 150,
 --   },
 -- })
--- ------------------------------------------------------------------------- go ---}}}
 
--- ---------------------------------------------------------------------- c/c++ ---{{{
+
+---- nvim-lspconfig: c/c++
 -- -- From https://github.com/neovim/nvim-lspconfig/blob/cdc2ec53e028d32f06c51ef8b2837ebb8460ef45/doc/server_configurations.md#clangd
 -- require('lspconfig').clangd.setup({
 --   capabilities = capabilities,
@@ -519,9 +517,8 @@ require('telescope').load_extension('fzf')
 --     debounce_text_changes = 150,
 --   },
 -- })
--- ---------------------------------------------------------------------- c/c++ ---}}}
 
--- ----------------------------------------------------------------------- rust ---{{{
+---- nvim-lspconfig: rust
 -- -- From https://github.com/neovim/nvim-lspconfig/blob/cdc2ec53e028d32f06c51ef8b2837ebb8460ef45/doc/server_configurations.md#rust_analyzer
 -- require('lspconfig').rust_analyzer.setup({
 --   capabilities = capabilities,
@@ -532,9 +529,8 @@ require('telescope').load_extension('fzf')
 --     debounce_text_changes = 150,
 --   },
 -- })
--- ----------------------------------------------------------------------- rust ---}}}
 
--- ------------------------------------------------------------------------ lua ---{{{
+---- nvim-lspconfig: lua
 -- -- From https://github.com/neovim/nvim-lspconfig/blob/b01782a673f52f68762b2f910e97a186c16af01c/doc/server_configurations.md#sumneko_lua
 -- local runtime_path = vim.split(package.path, ';')
 -- table.insert(runtime_path, "lua/?.lua")
@@ -572,9 +568,8 @@ require('telescope').load_extension('fzf')
 --     },
 --   },
 -- }
--- ------------------------------------------------------------------------ lua ---}}}
 
--- ----------------------------------------------------------------- typescript ---{{{
+---- nvim-lspconfig: typescript
 -- require('lspconfig').tsserver.setup({
 --   capabilities = capabilities,
 
@@ -584,10 +579,8 @@ require('telescope').load_extension('fzf')
 --     debounce_text_changes = 150,
 --   },
 -- })
--- ----------------------------------------------------------------- typescript ---}}}
 
--- ------------------------------------------------------------- nvim-lspconfig ---}}}
------------------------------------------------------------- nvim-treesitter ---{{{
+--- nvim-treesitter 
 
 -- From https://github.com/nvim-treesitter/nvim-treesitter/tree/cada76c4901e2389c0f82ac11d0c9c61d5205e90
 require'nvim-treesitter.configs'.setup {
@@ -616,7 +609,7 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- From https://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/f27f22053d210191e0a267ca15ec80a10a226a97#text-objects-select
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup({
   textobjects = {
     select = {
       enable = true,
@@ -657,10 +650,10 @@ require'nvim-treesitter.configs'.setup {
       include_surrounding_whitespace = true,
     },
   },
-}
+})
 
 -- From https://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/f27f22053d210191e0a267ca15ec80a10a226a97#text-objects-swap
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup({
   textobjects = {
     swap = {
       enable = true,
@@ -672,10 +665,10 @@ require'nvim-treesitter.configs'.setup {
       },
     },
   },
-}
+})
 
 -- From https://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/f27f22053d210191e0a267ca15ec80a10a226a97#text-objects-move
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup({
   textobjects = {
     move = {
       enable = true,
@@ -698,10 +691,11 @@ require'nvim-treesitter.configs'.setup {
       },
     },
   },
-}
+})
 
------------------------------------------------------------- nvim-treesitter ---}}}
-local neogit = require('neogit')
-neogit.setup {}
--- vim:fdm=marker
+--- neogit
+
+require('neogit').setup {}
+
+-- vim: foldmethod=expr foldexpr=YJ_InitLuaFoldExpr()
 
