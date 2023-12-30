@@ -354,7 +354,7 @@ call plug#end()
 " Telescope
 " -------------------------------------------------------------------------------------------------
 
-nnoremap <leader>tb <cmd>lua require('telescope.builtin').builtin()<cr>
+nnoremap <leader>tb <cmd>lua require('telescope.builtin').builtin({previewer=false})<cr>
 
 " nnoremap <leader>ff <cmd>lua require('telescope.builtin').oldfiles()<cr>
 " nnoremap <leader>z <cmd>lua require('telescope.builtin').find_files()<cr>
