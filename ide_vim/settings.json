@@ -11,7 +11,11 @@
     },
     "vim.visualModeKeyBindingsNonRecursive": [
         { "before": ["j"], "after": ["g", "j"] },
-        { "before": ["k"], "after": ["g", "k"] }
+        { "before": ["k"], "after": ["g", "k"] },
+
+        // Mappings below corresponds to some in normalModeKeyBindngsNonRecursive
+        { "before": ["<leader>", "r", "r"],  "commands": ["editor.action.refactor"]},
+        { "before": ["<leader>", "a"],       "commands": ["editor.action.codeAction"]},
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         { "before": ["K"],             "commands": ["editor.action.showHover"] },
@@ -19,14 +23,21 @@
         { "before": ["?", "?"],        "commands": ["workbench.action.findInFiles"] },
         { "before": ["/", "/"],        "commands": ["actions.find"] },
 
+        { "before": ["<leader>", "n"], "commands": ["settings.cycle.lineNumbers"] },
         { "before": ["<leader>", "w"], "commands": ["editor.action.toggleWordWrap"] },
         { "before": ["<leader>", "o"], "commands": ["workbench.action.gotoSymbol"] },
+        { "before": ["<leader>", "s"], "commands": ["workbench.action.showAllSymbols"] },
         { "before": ["<leader>", "b"], "commands": ["workbench.action.showAllEditorsByMostRecentlyUsed"] },
         { "before": ["<leader>", "e"], "commands": ["workbench.view.explorer"] },
         { "before": ["<leader>", "g"], "commands": ["workbench.action.quickOpen"] },
 
-        { "before": ["<leader>", "<leader>"], "commands": ["workbench.files.action.openPreviousWorkingFile"] },
-        { "before": ["<leader>", "m"],        "commands": ["highlightwords.addHighlight"] },
+        { "before": ["<leader>", "<leader>"], "commands": ["workbench.action.quickOpenPreviousRecentlyUsedEditor"]},
+        { "before": ["<leader>", "m"],        "commands": ["highlightwords.addHighlight"]},
+        { "before": ["<leader>", "M"],        "commands": ["highlightwords.removeAllHighlights"]},
+
+        { "before": ["<leader>", "r", "r"],  "commands": ["editor.action.refactor"]},
+        { "before": ["<leader>", "r", "n"],  "commands": ["editor.action.rename"]},
+        { "before": ["<leader>", "a"],       "commands": ["editor.action.codeAction"]},
 
         { "before": ["]", "h"],        "commands": ["workbench.action.editor.nextChange"] },
         { "before": ["[", "h"],        "commands": ["workbench.action.editor.previousChange"] },
@@ -86,7 +97,23 @@
     "breadcrumbs.enabled": true,
     "liveshare.showInStatusBar": "whileCollaborating",
     "diffEditor.ignoreTrimWhitespace": false,
-    "window.zoomLevel": 1,
+
+    "settings.cycle": [
+        {
+            "id": "lineNumbers",
+            "values": [
+                {
+                    "editor.lineNumbers": "off"
+                },
+                {
+                    "editor.lineNumbers": "on"
+                },
+                {
+                    "editor.lineNumbers": "relative"
+                },
+            ]
+        }
+    ],
     //#endregion
 
     //#region Quality-of-Life Improvements
