@@ -1094,6 +1094,66 @@ endfun
 " Replaces escaped line breaks and tabs with actual line breaks and tabs
 nnoremap <leader>N :%s/\\n/\r/g:%s/\\t/\t/g
 
+" Alternative foldtext implementation to display first line of folded text
+" exactly as it would appear (i.e., same indentation) so it would be easy to
+" see the first line of folded text within the context of the surrounding
+" code.
+"
+" So instead of the default:
+"   +--42 lines folded.........................................................
+"
+" we get something like:
+"   const myTypescriptObject = {...};
+"
+" Might not work for languages like Python.
+"
+" Adapted from https://github.com/nvim-treesitter/nvim-treesitter/pull/390#issuecomment-709666989
+function! YJ_EmacsLikeFoldText()
+  let startLineText = getline(v:foldstart)
+  let endLineText = trim(getline(v:foldend))
+  let indentation = GetSpaces(foldlevel("."))
+  let spaces = repeat(" ", 200)
+  let str = indentation . startLineText . "..." . endLineText . spaces
+  return str
+endfunction
+function! GetSpaces(foldLevel)
+  if &expandtab == 1
+    " Indenting with spaces
+    let str = repeat(" ", a:foldLevel / (&shiftwidth + 1) - 1)
+    return str
+  elseif &expandtab == 0
+    " Indenting with tabs
+    return repeat(" ", indent(v:foldstart) - (indent(v:foldstart) / &shiftwidth))
+  endif
+endfunction
+
+" Custom display for text when folding
+set foldtext=YJ_EmacsLikeFoldText()
+
+" Alternative foldexpr implementation for folding vimrc file by headings.
+"
+" Headings are defined by leading double quotes: heading 1 begins with two
+" double quotes, heading 2 begins with three double quotes, etc.
+function! YJ_VimrcFoldExpr()
+  let currLine = getline(v:lnum)
+  if '""' != currLine[0:1]
+    return '='
+  endif
+  let leadingQuotes = substitute(currLine, '^\("\+\).*', "\\1", "") 
+  let calculatedFoldLevel = len(leadingQuotes) - 1
+  return ">" . calculatedFoldLevel
+endfunction
+
+" Generate fold text using only the starting line. For use with
+" 'YJ_VimrcFoldExpr'
+function! YJ_FoldTextStartLine()
+  let startLineText = getline(v:foldstart)
+  let indentation = GetSpaces(foldlevel("."))
+  let spaces = repeat(" ", 200)
+  let str = indentation . startLineText . "..." . spaces
+  return str
+endfunction
+
 " -------------------------------------------------------- experimental --- }}}
 
 lua require('init')
