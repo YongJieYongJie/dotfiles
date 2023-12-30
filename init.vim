@@ -426,8 +426,8 @@ set cmdheight=2
 set updatetime=300
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
-" hide signcolumns by default
-set signcolumn=no
+" set signcolumns to auto by default
+set signcolumn=auto
 " Remove the "-- INSERT --" text in the command area because the status line
 " already shows this information.
 set noshowmode
