@@ -87,11 +87,11 @@
     "editor.minimap.enabled": false,
     "editor.rulers": [ 80, 120 ],
     "editor.tabSize": 2,
-
-    "workbench.activityBar.visible": false,
-    "workbench.statusBar.visible": true,
+    "workbench.editor.showTabs": "none",
+    "workbench.activityBar.location": "hidden",
+    "workbench.statusBar.visible": false,
     "workbench.editor.highlightModifiedTabs": true,
-    "workbench.editor.tabCloseButton": "off",
+    "workbench.editor.tabActionCloseVisibility": false,
     "workbench.iconTheme": "material-icon-theme",
 
     "breadcrumbs.enabled": true,
@@ -114,6 +114,10 @@
             ]
         }
     ],
+
+    // macOS related
+    "window.titleBarStyle": "native",
+    "window.nativeFullScreen": false,
     //#endregion
 
     //#region Quality-of-Life Improvements
@@ -122,6 +126,7 @@
     "editor.tabCompletion": "off",
     "editor.suggestSelection": "first",
     "explorer.confirmDelete": false,
+    "terminal.integrated.macOptionIsMeta": true,
     //#endregion
 
     //#region Other Programming Languages
