@@ -128,6 +128,8 @@ Plug 'neovim/nvim-lspconfig'
 " Basic modern theme.
 Plug 'joshdick/onedark.vim'
 
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
 Plug 'NovaDev94/lightline-onedark'
 
 " IntelliJ's default dark theme (Darcula), so people think I'm using IntelliJ.
@@ -547,7 +549,8 @@ if (empty($TMUX))
 endif
 
 " colorscheme onedark
-colorscheme darcula
+" colorscheme darcula
+colorscheme catppuccin-mocha
 
 " Color tweak for darcula theme because the hover pop-up for error diagnostic
 " doesn't have enough contrast.
@@ -727,8 +730,9 @@ endfunction
 " To switch back to darcula, change the colorscheme config back to the
 " following:
      " \ 'colorscheme': 'onedark',
+     " \ 'colorscheme': 'darculaOriginal',
 let g:lightline = {
-     \ 'colorscheme': 'darculaOriginal',
+     \ 'colorscheme': 'catppuccin',
      \ 'active': {
        \ 'left': [ [ 'mode', 'paste' ],
                  \ [ 'gitBranch', 'readonly', 'filename', 'modified' ],
