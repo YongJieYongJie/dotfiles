@@ -302,7 +302,10 @@ require('telescope').setup({
     mappings = {
       i = {
         ["<c-space>"] = layout_actions.toggle_preview,
-        ['<C-S-w>'] = require('telescope.actions').delete_buffer,
+        ['<C-S-w>']   = require('telescope.actions').delete_buffer,
+        ["<c-u>"]     = false,
+        ["<c-a>"]     = { "<home>", type = "command" },
+        ["<c-e>"]     = { "<end>" , type = "command" },
       },
       n = {
         ['dd'] = require('telescope.actions').delete_buffer,
