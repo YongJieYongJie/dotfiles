@@ -744,6 +744,13 @@ function! OnUIEnter(event)
 endfunction
 autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 
+""" Plugins: organ - improved navigation for markdown and org files
+" Enable organ with :Organ
+
+let g:organ_config = {}
+let g:organ_config.speedkeys = 1
+let g:organ_config.previous = '<M-p>'
+
 "" Colors and Theme
 
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
