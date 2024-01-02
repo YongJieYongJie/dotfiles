@@ -57,6 +57,9 @@
   "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
 
+  "git.enableGutters": false,
+  "git.enableGlobalStatus": false,
+
   "lsp_lines.currentLineOnly": true,
 }
 // vim: ft=jsonc foldmethod=syntax foldtext=YJ_EmacsLikeFoldText()

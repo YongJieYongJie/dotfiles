@@ -74,7 +74,7 @@ call plug#begin(yjPluginDir)
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/plenary.nvim' " Dependency of telescope.nvim
@@ -281,16 +281,17 @@ let g:go_fmt_command = "goimports"
 "
 " Additional extension that coc.nvim can install for us.
 let g:coc_global_extensions = [ 
-      \ 'coc-git',
+      \ 'coc-json',
+      \ 'coc-lists',
       \ 'coc-explorer',
+      \ 'coc-git',
+      \ 'coc-vimlsp',
+      \ 'coc-sumneko-lua',
       \ 'coc-tsserver',
       \ 'coc-go',
       \ 'coc-java',
-      \ 'coc-json',
       \ 'coc-rust-analyzer',
       \ 'coc-pyright',
-      \ 'coc-vimlsp',
-      \ 'coc-sumneko-lua',
       \ ]
 
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
