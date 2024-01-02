@@ -1323,7 +1323,7 @@ augroup END
 
 augroup initlua
   autocmd!
-  autocmd BufReadPost init.lua set modelineexpr
+  autocmd BufReadPost init.lua,coc-settings.json set modelineexpr
 augroup END
 
 "" After

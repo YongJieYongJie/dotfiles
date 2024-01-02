@@ -1,12 +1,9 @@
 {
-  // Access this file from Vim by running :CocConfig
-
-
-    //////////////////////////
-   // General COC settings //
-  //////////////////////////
   "coc.preferences.extensionUpdateCheck": "never",
-  // "explorer.icon.enableNerdfont": true,
+  // Enable auto-update of detecting current function, so
+  // get(b:,'coc_current_function','') correctly returns the current function
+  // for use in status line.
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
 
   "list.insertMappings": {
     "<C-r>": "do:refresh",
@@ -16,21 +13,15 @@
     "<C-p>": "normal:k",
     "<C-t>": "action:tabe",
     "<C-v>": "eval:@@"
-    // "<C-x>": "call:MyFunc", // Example of how to call custom function
   },
-  // Note: eval:@@ paste yanked text
-
   "list.normalMappings": {
     "c": "expr:MyExprFunc",
     "d": "action:delete"
   },
-
   "list.floatPreview": true,
 
-    ///////////////
-   // C-related //
-  ///////////////
   "languageserver": {
+
     "ccls": {
       "command": "ccls",
       "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
@@ -44,22 +35,18 @@
         }
       }
     },
+
     "solc": {
       "command": "solc",
       "args": ["--lsp"],
       "filetypes": ["solidity", "sol"],
       "rootPatterns": [".git"]
     }
+
   },
-
-
-    //////////
-   // Misc //
-  //////////
 
   // Only show diagnostic pop-up when explicily jumping to them.
   "diagnostic.enableMessage": "jump",
-
   // Use virtual text to display errors by default.
   "diagnostic.virtualText": false,
   "diagnostic.messageTarget": "float",
@@ -68,13 +55,9 @@
 
   "explorer.file.reveal.whenOpen": false,
   "explorer.file.showHiddenFiles": true,
+  "explorer.icon.enableNerdfont": true,
 
   "lsp_lines.currentLineOnly": true,
-
-  // Enable auto-update of detecting current function, so
-  // get(b:,'coc_current_function','') correctly returns the current function
-  // for use in status line.
-  "coc.preferences.currentFunctionSymbolAutoUpdate": true
-
 }
-// vim:ft=jsonc
+// vim: ft=jsonc foldmethod=syntax foldtext=YJ_EmacsLikeFoldText()
+
