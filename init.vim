@@ -302,7 +302,7 @@ if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
   let g:coc_global_extensions += ['coc-eslint']
 endif
 
-"""" coc.nvim default settings
+"""" Plugins: coc.nvim: default settings
 "
 " Adapted from https://octetz.com/docs/2019/2019-04-24-vim-as-a-go-ide/.
 
@@ -359,11 +359,6 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 " Modify coc.nvim's four commands above to use FZF using antoinemadec/coc-fzf,
 " and configuring the FZF to be fullscreen
 let g:coc_fzf_preview_fullscreen = 1
@@ -415,6 +410,60 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+"""" Plugins: coc.nvim: enable both default and FZF pickers
+
+" Set up and keymappings to use coc built-in picker when using lowercase
+" binding, and FZF when using uppercase binding.
+"
+" The way these group of bindings work is that coc will populate the
+" g:coc_jump_locations variable with the list of target locations, and trigger
+" the CocLocationsChange event.
+"
+" However, the coc-fzf plugin has an augroup CocFzfLocation that forcibly
+" overrides all CocLocationsChange event to handle the locations with FZF.
+" 
+" We are working around this by using timer_start to schedule a function to
+" clear the augroup set by coc-fzf plugin, and replace it with our augroup
+" that handles CocLocationsChange with our custom function which decides which
+" picker to use based on g:use_fzf variable.
+"
+" Note: It seems possible to instead manually populate g:coc_jump_locations
+" using somthing like:
+"   nmap <silent> gr :let g:coc_jump_locations=CocAction('references') \| :call coc_fzf#location#fzf_run()<cr>
+"
+" however, the output of CocAction('references') is subtly different from that
+" populated when calling CocAction('jumpReferences'), and coc-fzf only works
+" with the latter.
+
+eval timer_start(1000, 'YJ_DisableCocFzfAugroup')
+function! YJ_DisableCocFzfAugroup(id)
+  let g:coc_enable_locationlist = 0
+  autocmd! CocFzfLocation
+  augroup YjCocFzfLocation
+    autocmd! User CocLocationsChange nested call YJ_HandleCocLocationsChange()
+  augroup END
+endfunction
+
+function! YJ_HandleCocLocationsChange()
+  if g:use_fzf
+    call coc_fzf#location#fzf_run()
+  else
+    CocList --auto-preview location
+  endif
+endfunction
+
+nmap <silent> gR :let g:use_fzf=1 \| :call CocAction('jumpReferences')<cr>
+nmap <silent> gr :let g:use_fzf=0 \| :call CocAction('jumpReferences')<cr>
+
+nmap <silent> gD :let g:use_fzf=1 \| :call CocAction('jumpDefinition')<cr>
+nmap <silent> gd :let g:use_fzf=0 \| :call CocAction('jumpDefinition')<cr>
+
+nmap <silent> gY :let g:use_fzf=1 \| :call CocAction('jumpTypeDefinition')<cr>
+nmap <silent> gy :let g:use_fzf=0 \| :call CocAction('jumpTypeDefinition')<cr>
+
+nmap <silent> gI :let g:use_fzf=1 \| :call CocAction('jumpImplementation')<cr>
+nmap <silent> gi :let g:use_fzf=0 \| :call CocAction('jumpImplementation')<cr>
 
 """ Plugins: telescope.nvim
 "
