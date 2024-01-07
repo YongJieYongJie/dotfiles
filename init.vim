@@ -834,6 +834,18 @@ highlight link CocHighlightText  DiffAdd
 
 "" Quality-of-Life
 
+" Navigate jump help file links using <Tab> and <S-Tab>
+" Copied from https://github.com/joeytwiddle/rc_files/blob/master/.vim/ftplugin/help/navigate.vim
+augroup YJ_Help
+  autocmd!
+  autocmd filetype help call YJ_HelpKeymaps()
+augroup END
+
+function! YJ_HelpKeymaps()
+  nnoremap <silent> <buffer>   <Tab> /\('\zs\k\+'\\|[<Bar>]\zs\k\+[<Bar>]\)<CR>:set nohlsearch<CR>
+  nnoremap <silent> <buffer> <S-Tab> ?\('\zs\k\+'\\|[<Bar>]\zs\k\+[<Bar>]\)<CR>:set nohlsearch<CR>
+endfunction
+
 " Expand folds by default
 set foldlevel=99
 
