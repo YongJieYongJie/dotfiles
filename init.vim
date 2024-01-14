@@ -448,17 +448,43 @@ function! YJ_HandleCocLocationsChange()
   endif
 endfunction
 
-nmap <silent> gR :let g:use_fzf=1 \| :call CocAction('jumpReferences')<cr>
-nmap <silent> gr :let g:use_fzf=0 \| :call CocAction('jumpReferences')<cr>
+"""" Plugins: coc.nvim: conditionally setup LSP related keymappinngs
 
-nmap <silent> gD :let g:use_fzf=1 \| :call CocAction('jumpDefinition')<cr>
-nmap <silent> gd :let g:use_fzf=0 \| :call CocAction('jumpDefinition')<cr>
+augroup CocKeyBindings
+  autocmd!
+  autocmd User CocNvimInit execute 'autocmd BufReadPost * call YJCocFakeAutocmds()'
+augroup END
 
-nmap <silent> gY :let g:use_fzf=1 \| :call CocAction('jumpTypeDefinition')<cr>
-nmap <silent> gy :let g:use_fzf=0 \| :call CocAction('jumpTypeDefinition')<cr>
+" YJCocFakeAutocmds uses `timer_start` to emulate a "CocReady" autocmd, where
+" coc is considered ready and LSP has registered their capabilities (and can
+" be tested with functions like CocHasProvider('references')).
+"
+" This is needed because autocmds like BufReadPost and BufAdd are generally
+" too early to detect whether there is an LSP for the particular buffer.
+function! YJCocFakeAutocmds() abort
+  call timer_start(1000, 'YJCocSetupKeymaps')
+endfunction
 
-nmap <silent> gI :let g:use_fzf=1 \| :call CocAction('jumpImplementation')<cr>
-nmap <silent> gi :let g:use_fzf=0 \| :call CocAction('jumpImplementation')<cr>
+" YJCocSetupKeymaps sets up LSP keymapping for coc only if an LSP is
+" available. The `_timerId` is needed because this method is intended to be
+" called by `timer_start`, which always passes one argument.
+function! YJCocSetupKeymaps(_timerId) abort
+  if !CocHasProvider('reference')
+    return
+  endif
+
+  nmap <silent><buffer> gR :let g:use_fzf=1 \| :call CocAction('jumpReferences')<cr>
+  nmap <silent><buffer> gr :let g:use_fzf=0 \| :call CocAction('jumpReferences')<cr>
+
+  nmap <silent><buffer> gD :let g:use_fzf=1 \| :call CocAction('jumpDefinition')<cr>
+  nmap <silent><buffer> gd :let g:use_fzf=0 \| :call CocAction('jumpDefinition')<cr>
+
+  nmap <silent><buffer> gY :let g:use_fzf=1 \| :call CocAction('jumpTypeDefinition')<cr>
+  nmap <silent><buffer> gy :let g:use_fzf=0 \| :call CocAction('jumpTypeDefinition')<cr>
+
+  nmap <silent><buffer> gI :let g:use_fzf=1 \| :call CocAction('jumpImplementation')<cr>
+  nmap <silent><buffer> gi :let g:use_fzf=0 \| :call CocAction('jumpImplementation')<cr>
+endfunction
 
 """" Plugins: coc.nvim: configure prefix window size
 
