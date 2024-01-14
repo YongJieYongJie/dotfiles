@@ -460,6 +460,11 @@ nmap <silent> gy :let g:use_fzf=0 \| :call CocAction('jumpTypeDefinition')<cr>
 nmap <silent> gI :let g:use_fzf=1 \| :call CocAction('jumpImplementation')<cr>
 nmap <silent> gi :let g:use_fzf=0 \| :call CocAction('jumpImplementation')<cr>
 
+"""" Plugins: coc.nvim: configure prefix window size
+
+call coc#config('list.height', &lines * 3 / 10)
+call coc#config('list.maxPreviewHeight', &lines * 6 / 10)
+
 """" Plugins: coc.nvim: disable on certain filetypes
 
 autocmd Filetype lua let b:coc_enabled=0
