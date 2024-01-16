@@ -771,7 +771,7 @@ let g:lf_map_keys = 0
 
 """ Plugins: neogit
 
-nnoremap <silent> <Leader>[ :Neogit<CR><C-w><C-o>
+nnoremap <silent> <Leader>[ :Neogit<CR>
 
 """ Plugins: lightline.vim
 
