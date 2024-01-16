@@ -734,6 +734,10 @@ nmap [h <Plug>(GitGutterPrevHunk)
 
 autocmd FileType TelescopePrompt,org,NeogitStatus let b:autopairs_enabled=0
 
+let g:AutoPairsShortcutToggle = ''
+let g:AutoPairsShortcutFastWrap = ''
+let g:AutoPairsShortcutJump = ''
+
 """ Plugins: vim-mark
 
 let g:mw_no_mappings=1
