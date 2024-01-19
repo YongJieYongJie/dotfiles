@@ -861,7 +861,9 @@ colorscheme catppuccin-mocha
 
 " Color tweak for darcula theme because the hover pop-up for error diagnostic
 " doesn't have enough contrast.
-highlight FgCocErrorFloatBgCocFloating ctermfg=1 ctermbg=238 guifg='LightRed' guibg=#46484a
+if (g:colors_name == 'darcula')
+  highlight FgCocErrorFloatBgCocFloating ctermfg=1 ctermbg=238 guifg='LightRed' guibg=#46484a
+endif
 
 " Link the CocHighlightText highlight group to the built-in DiffAdd highlight
 " group. CocHighlightText group is used by coc.nvim for, among other things,
