@@ -873,6 +873,14 @@ highlight link CocHighlightText  DiffAdd
 
 "" Quality-of-Life
 
+" Using <C-n> and <C-p> to move up and down quickfix list while opening the
+" file location.
+augroup YJQuickFix
+  autocmd!
+  autocmd FileType qf nnoremap <silent><buffer> <C-n> j<CR><C-w>p
+  autocmd FileType qf nnoremap <silent><buffer> <C-p> k<CR><C-w>p
+augroup END
+
 " Navigate jump help file links using <Tab> and <S-Tab>
 " Copied from https://github.com/joeytwiddle/rc_files/blob/master/.vim/ftplugin/help/navigate.vim
 augroup YJ_Help
