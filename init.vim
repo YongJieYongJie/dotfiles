@@ -488,8 +488,10 @@ endfunction
 
 """" Plugins: coc.nvim: configure prefix window size
 
-call coc#config('list.height', &lines * 3 / 10)
-call coc#config('list.maxPreviewHeight', &lines * 6 / 10)
+let coc_preview_lines = &lines * 7 / 10
+let coc_list_lines = &lines - coc_preview_lines
+call coc#config('list.maxPreviewHeight', coc_preview_lines)
+call coc#config('list.height', coc_list_lines)
 
 """" Plugins: coc.nvim: disable on certain filetypes
 
