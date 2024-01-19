@@ -881,6 +881,9 @@ augroup YJQuickFix
   autocmd FileType qf nnoremap <silent><buffer> <C-p> k<CR><C-w>p
 augroup END
 
+" Default to using 'syntax' for foldmethod
+set foldmethod=syntax
+
 " Navigate jump help file links using <Tab> and <S-Tab>
 " Copied from https://github.com/joeytwiddle/rc_files/blob/master/.vim/ftplugin/help/navigate.vim
 augroup YJ_Help
