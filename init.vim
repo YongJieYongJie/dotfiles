@@ -869,7 +869,7 @@ endif
 " group. CocHighlightText group is used by coc.nvim for, among other things,
 " highlight occurrences of symbol under cursor. See :help coc-highlight for
 " more details.
-highlight link CocHighlightText  DiffAdd
+" highlight link CocHighlightText  DiffAdd
 
 "" Quality-of-Life
 
@@ -920,7 +920,7 @@ set lazyredraw
 set undofile
 
 " Highilght current line.
-highlight CursorLine cterm=NONE guifg=NONE
+" highlight CursorLine cterm=NONE guifg=NONE
 set cursorline
 set cursorcolumn
 
