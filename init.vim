@@ -687,7 +687,7 @@ nnoremap <silent> <expr> <Leader>1 empty(get(t:, 'goyo_dim', '')) ? ':Goyo 62%<C
 function! YJ_LongestLineWidth()
   " Note: the plus two below is for the signcolumn.
   " Adapted from https://superuser.com/a/255438/1021469
-  return max(map(range(1, line('$')), "col(["v:val, '$'])")) - 1 + 2
+  return max(map(range(1, line('$')), "col([v:val, '$'])")) - 1 + 2
 endfunction
 
 " Returns the number of characters in the longest visible line in the current buffer.
