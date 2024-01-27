@@ -360,15 +360,8 @@ let g:coc_fzf_preview_fullscreen = 1
 let g:coc_fzf_preview = 'up:77%'
 let g:coc_fzf_opts = ['--layout=reverse']
 
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>fd  <Plug>(coc-format)
-
-" Show list of coc lists
 nnoremap <silent> <leader>cl  :<C-u>CocFzfList<cr>
+nnoremap <silent> <leader>cL  :<C-u>CocListResume<cr>
 
 " Show all diagnostics
 "nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
@@ -376,35 +369,10 @@ nnoremap <silent> <leader>cl  :<C-u>CocFzfList<cr>
 "nnoremap <silent> <leader>e  :<C-u>CocList extensions<cr>
 " Show commands
 nnoremap <silent> <leader>cm  :<C-u>CocFzfList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <leader>o  :<C-u>CocFzfList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <leader>s  :<C-u>CocFzfList symbols<cr>
 " Do default action for next item.
 nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-" nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
-
-" Show code actions for current buffer
-nmap <leader>ac <Plug>(coc-codeaction)
-" Show code actions at cursor
-nmap <leader>aa <Plug>(coc-codeaction-cursor)
-" Show code actions for current line
-nmap <leader>a. <Plug>(coc-codeaction-line)
-" Show code actions for current selection
-vmap <leader>a <Plug>(coc-codeaction-selected)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
 
 """" Plugins: coc.nvim: enable both default and FZF pickers
 
@@ -473,17 +441,32 @@ function! YJCocSetupKeymaps(_timerId) abort
     return
   endif
 
-  nmap <silent><buffer> gR :let g:use_fzf=1 \| :call CocAction('jumpReferences')<cr>
-  nmap <silent><buffer> gr :let g:use_fzf=0 \| :call CocAction('jumpReferences')<cr>
+  nnoremap <silent> <leader>co  :<C-u>CocFzfList outline<cr>
+  nnoremap <silent> <leader>cs  :<C-u>CocFzfList symbols<cr>
 
-  nmap <silent><buffer> gD :let g:use_fzf=1 \| :call CocAction('jumpDefinition')<cr>
-  nmap <silent><buffer> gd :let g:use_fzf=0 \| :call CocAction('jumpDefinition')<cr>
+  nnoremap <silent><buffer> gR :let g:use_fzf=1 \| :call CocAction('jumpReferences')<cr>
+  nnoremap <silent><buffer> gr :let g:use_fzf=0 \| :call CocAction('jumpReferences')<cr>
 
-  nmap <silent><buffer> gY :let g:use_fzf=1 \| :call CocAction('jumpTypeDefinition')<cr>
-  nmap <silent><buffer> gy :let g:use_fzf=0 \| :call CocAction('jumpTypeDefinition')<cr>
+  nnoremap <silent><buffer> gD :let g:use_fzf=1 \| :call CocAction('jumpDefinition')<cr>
+  nnoremap <silent><buffer> gd :let g:use_fzf=0 \| :call CocAction('jumpDefinition')<cr>
 
-  nmap <silent><buffer> gI :let g:use_fzf=1 \| :call CocAction('jumpImplementation')<cr>
-  nmap <silent><buffer> gi :let g:use_fzf=0 \| :call CocAction('jumpImplementation')<cr>
+  nnoremap <silent><buffer> gY :let g:use_fzf=1 \| :call CocAction('jumpTypeDefinition')<cr>
+  nnoremap <silent><buffer> gy :let g:use_fzf=0 \| :call CocAction('jumpTypeDefinition')<cr>
+
+  nnoremap <silent><buffer> gI :let g:use_fzf=1 \| :call CocAction('jumpImplementation')<cr>
+  nnoremap <silent><buffer> gi :let g:use_fzf=0 \| :call CocAction('jumpImplementation')<cr>
+
+  nnoremap <silent><buffer> <leader>rn <Plug>(coc-rename)
+
+  vnoremap <silent><buffer> <leader>f  <Plug>(coc-format-selected)
+  nnoremap <silent><buffer> <leader>fd  <Plug>(coc-format)
+
+  nnoremap <silent><buffer> <leader>ac <Plug>(coc-codeaction)
+  nnoremap <silent><buffer> <leader>aa <Plug>(coc-codeaction-cursor)
+  nnoremap <silent><buffer> <leader>a. <Plug>(coc-codeaction-line)
+  vnoremap <silent><buffer> <leader>a <Plug>(coc-codeaction-selected)
+
+  nnoremap <silent><buffer> K :call CocAction('doHover')<CR>
 endfunction
 
 """" Plugins: coc.nvim: configure prefix window size
@@ -1118,6 +1101,12 @@ function! YJ_InitLuaFoldExpr()
 endfunction
 
 "" Keymappings
+
+" Use K to just to Vim document based on word at cursor
+augroup vimhelp
+  autocmd!
+  autocmd FileType vim,help nnoremap <buffer><silent> K :h =expand('<cword>')<cr><cr>
+augroup END
 
 " Copy file path to clipboard
 nnoremap <silent> <leader>yf :let @* = expand("%:p")<cr>
