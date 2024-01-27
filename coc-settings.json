@@ -6,19 +6,29 @@
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
 
   "list.insertMappings": {
-    "<C-r>": "do:refresh",
-    "<C-f>": "feedkeys:\\<C-f>",
-    "<C-b>": "feedkeys:\\<C-b>",
+    "<C-_>": "do:help",
+
+    "<C-space>": "do:previewtoggle",
+    "<C-d>":     "do:previewdown",
+    "<C-u>":     "do:previewup",
+
+    "<C-f>": "prompt:right",
+    "<C-b>": "prompt:left",
+    "<C-k>": "prompt:removetail",
+    "<A-f>": "prompt:rightword",
+    "<A-b>": "prompt:leftword",
+    "<A-n>": "prompt:previous",
+    "<A-p>": "prompt:next",
     "<C-n>": "normal:j",
     "<C-p>": "normal:k",
+
+    "<C-s>": "do:selectall",
+
+    "<C-r>": "prompt:insertregister",
+
     "<C-t>": "action:tabe",
-    "<C-v>": "eval:@@"
+    "<A-q>": "action:quickfix",
   },
-  "list.normalMappings": {
-    "c": "expr:MyExprFunc",
-    "d": "action:delete"
-  },
-  "list.floatPreview": true,
 
   "languageserver": {
 
