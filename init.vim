@@ -1112,10 +1112,24 @@ augroup END
 nnoremap <silent> <leader>yf :let @* = expand("%:p")<cr>
 
 " Open file browser
-nnoremap <silent> <space>e  :<C-u>CocCommand explorer<cr>
+
+let g:coc_explorer_global_presets = {
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   },
+\   'buffer': {
+\     'sources': [{'name': 'buffer', 'expand': v:true}]
+\   },
+\ }
 
 " Expand file browser to current buffer
-nmap <Leader>E <Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
+nnoremap <silent><Leader>e <Cmd>CocCommand explorer --preset simplify<CR>
+nnoremap <silent><Leader>E :CocCommand explorer --preset simplify --reveal =expand('%:p')<CR><CR>
+nnoremap <silent><Leader>fb :CocCommand explorer --preset floating<CR><CR>
 
 " Switch to previous buffer.
 nnoremap <silent> <Leader><Leader> :b#<CR>
