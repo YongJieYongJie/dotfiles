@@ -86,32 +86,23 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-project.nvim'
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/lsp-status.nvim'
 
-" " nvim-cmp for auto-completion
-" " From https://github.com/hrsh7th/nvim-cmp/tree/1001683bee3a52a7b7e07ba9d391472961739c7b#recommended-configuration
-" Plug 'hrsh7th/cmp-nvim-lsp'
-" Plug 'hrsh7th/cmp-buffer'
-" Plug 'hrsh7th/cmp-path'
-" Plug 'hrsh7th/cmp-cmdline'
-" Plug 'hrsh7th/nvim-cmp'
+" nvim-cmp for auto-completion
+" From https://github.com/hrsh7th/nvim-cmp/tree/1001683bee3a52a7b7e07ba9d391472961739c7b#recommended-configuration
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
-" " For vsnip users.
-" Plug 'hrsh7th/cmp-vsnip'
-" Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 
-" For luasnip users.
 " Plug 'L3MON4D3/LuaSnip'
 " Plug 'saadparwaiz1/cmp_luasnip'
 
-" For ultisnips users.
-" Plug 'SirVer/ultisnips'
-" Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-
-" For snippy users.
-" Plug 'dcampos/nvim-snippy'
-" Plug 'dcampos/cmp-snippy'
-
-" set completeopt=menu,menuone,noselect
+set completeopt=menu,menuone,noselect
 
 " End from https://github.com/hrsh7th/nvim-cmp/tree/1001683bee3a52a7b7e07ba9d391472961739c7b#recommended-configuration
 
@@ -247,6 +238,8 @@ Plug 'nvim-telescope/telescope.nvim' " dependency of neogit
 Plug 'sindrets/diffview.nvim'        " dependency of neogit
 Plug 'ibhagwan/fzf-lua'              " dependency of neogit
 Plug 'nvim-tree/nvim-web-devicons'   " dependency of neogit
+
+Plug 'rose-pine/neovim'
 
 call plug#end()
 
@@ -768,6 +761,13 @@ function! CocCurrentFunction()
   return get(b:,'coc_current_function','')
 endfunction
 
+function! LspStatus() abort
+  if luaeval('#vim.lsp.buf_get_clients() > 0')
+    return luaeval("require('lsp-status').status()")
+  endif
+  return ''
+endfunction
+
 " To switch back to darcula, change the colorscheme config back to the
 " following:
      " \ 'colorscheme': 'onedark',
@@ -778,12 +778,13 @@ let g:lightline = {
        \ 'left': [ [ 'mode', 'paste' ],
                  \ [ 'gitBranch', 'readonly', 'filename', 'modified' ],
                  \ [ 'currentFunction' ]],
-       \ 'right': [ [ 'lineinfo' ], [ 'cocStatus' ] ],
+       \ 'right': [ [ 'lineinfo' ], [ 'cocStatus' ], [ 'lspStatus' ] ],
      \ },
      \ 'component_function': {
        \ 'gitBranch': 'FugitiveHead',
        \ 'currentFunction': 'CocCurrentFunction',
-       \ 'cocStatus': 'coc#status'
+       \ 'cocStatus': 'coc#status',
+       \ 'lspStatus': 'LspStatus',
      \ },
      \ 'mode_map': {
        \ 'n' : 'N',

@@ -55,6 +55,8 @@
 
   },
 
+  "Lua.diagnostics.globals": ["vim"],
+
   // Only show diagnostic pop-up when explicily jumping to them.
   "diagnostic.enableMessage": "jump",
   // Use virtual text to display errors by default.
