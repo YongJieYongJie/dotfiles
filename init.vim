@@ -241,6 +241,9 @@ Plug 'nvim-tree/nvim-web-devicons'   " dependency of neogit
 
 Plug 'rose-pine/neovim'
 
+Plug 'kevinhwang91/promise-async'
+Plug 'kevinhwang91/nvim-ufo'
+
 call plug#end()
 
 """ Plugins: vim-go
@@ -819,6 +822,28 @@ autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 let g:organ_config = {}
 let g:organ_config.speedkeys = 1
 let g:organ_config.previous = '<M-p>'
+
+""" Plugins: ufo
+
+lua << EOF 
+  require('ufo').setup()
+  vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+  vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+EOF
+
+" Update the ellipsis(...) to blend better, by removing background, and using
+" theme color via `synIDattr(synIDTrans(hlID('...')))`.
+"
+" Note: we are usin autocmd because the highlighting group seem to be
+" overridden if we set it directly in this file.
+augroup YJUFO
+  autocmd!
+  autocmd BufReadPost * exec 'highlight UfoFoldedEllipsis' ..
+        \ ' guifg=' .. synIDattr(synIDtrans(hlID('CurSearch')), 'bg', 'gui')
+        \ ' guibg=none'
+  autocmd BufReadPost * exec 'highlight Folded' ..
+        \ ' guibg=' .. synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
+augroup END
 
 "" Colors and Theme
 
