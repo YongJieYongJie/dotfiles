@@ -343,10 +343,6 @@ endif
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use `[d` and `]d` to navigate diagnostics (e.g., errors)
-nmap <silent> [d <Plug>(coc-diagnostic-prev)
-nmap <silent> ]d <Plug>(coc-diagnostic-next)
-
 " Modify coc.nvim's four commands above to use FZF using antoinemadec/coc-fzf,
 " and configuring the FZF to be fullscreen
 let g:coc_fzf_preview_fullscreen = 1
@@ -448,6 +444,9 @@ function! YJCocSetupKeymaps(_timerId) abort
 
   nnoremap <silent><buffer> gI :let g:use_fzf=1 \| :call CocAction('jumpImplementation')<cr>
   nnoremap <silent><buffer> gi :let g:use_fzf=0 \| :call CocAction('jumpImplementation')<cr>
+
+  nnoremap <silent><buffer> [d <Plug>(coc-diagnostic-prev)
+  nnoremap <silent><buffer> ]d <Plug>(coc-diagnostic-next)
 
   nnoremap <silent><buffer> <leader>rn <Plug>(coc-rename)
 
