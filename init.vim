@@ -906,7 +906,7 @@ set undofile
 " Highilght current line.
 " highlight CursorLine cterm=NONE guifg=NONE
 set cursorline
-set cursorcolumn
+set nocursorcolumn
 
 " Allow buffer containing modified file to be hidden.
 set hidden
