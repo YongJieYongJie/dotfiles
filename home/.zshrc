@@ -38,6 +38,9 @@ setopt MENU_COMPLETE
 setopt NO_LIST_BEEP
 setopt NO_BEEP
 setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS
 
 # Don't highlight pasted text (makes it difficult to see cursor)
 zle_highlight+=(paste:none)
