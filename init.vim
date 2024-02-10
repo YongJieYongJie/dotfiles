@@ -1289,6 +1289,10 @@ set textwidth=0
 " Use '↪ ' to indicate soft-wrap
 set showbreak=↪\ 
 
+" Indent soft-wrapped lines by additional 4 spaces from original indentation
+set breakindent
+set breakindentopt=shift:4
+
 " Backups
 set backup
 set writebackup
